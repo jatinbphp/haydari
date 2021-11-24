@@ -8,7 +8,7 @@
         <ion-list id="inbox-list">
           <ion-list-header>
             <h2>the <br>haydari <br>project</h2>
-            <ion-icon name="close-outline"></ion-icon>
+            <ion-icon name="close-outline" (click)="closeMenu()"></ion-icon>
           </ion-list-header>
           <div class="menu-list">
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">

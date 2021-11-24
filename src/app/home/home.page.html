@@ -6,11 +6,15 @@
     <ion-title>Home</ion-title>    
   </ion-toolbar> -->
 	<ion-toolbar class="header-top-box">
-		<ion-buttons slot="start" (click)="menu()">
-			<ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
+		<ion-buttons slot="start">
+			<ion-menu-button>
+				<ion-icon name="menu"></ion-icon>
+			</ion-menu-button>
 		</ion-buttons>
 		<ion-title class="ion-text-center"></ion-title>
-		<ion-chip slot="end"><ion-img src="../assets/images/user-icon1.png"></ion-img></ion-chip>
+		<ion-chip slot="end" routerLink="/login">
+			<ion-img src="../assets/images/user-icon1.png"></ion-img>
+		</ion-chip>
 	</ion-toolbar>
 </ion-header>
 

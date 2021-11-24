@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,6 +16,12 @@ export class AppComponent
     { title: 'Profile', url: '/cart', icon: 'bag', categories: []},//[5]
     { title: 'Settings', url: '/cart', icon: 'bag', categories: []},//[6]
   ];
-  constructor()
+  constructor(public menu: MenuController)
   {}
+
+  closeMenu()
+  {
+    //this.menu.enable(true);
+    this.menu.close();
+  }
 }
