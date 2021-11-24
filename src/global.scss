@@ -32,7 +32,7 @@
 }
 
 :root {
-    --font-Poppins-Reguler:'Poppins-Regular' ;
+    --font-Poppins-Regular:'Poppins-Regular' ;
     --font-Poppins-Medium:'Poppins-Medium' ;
     --font-Poppins-Light:'Poppins-Light' ;
     --font-Poppins-Thin:'Poppins-Thin' ;
@@ -93,6 +93,8 @@ ion-searchbar {
         width: 100% !important;
         height: 100% !important;
         input {
+            width: 100% !important;
+            height: 100% !important;
             background-color: var(--White) !important;
             border-radius: 30px !important;
             box-shadow: none !important;
@@ -135,4 +137,8 @@ ion-searchbar {
             padding-left: 50px !important;
         }
 	}
+}
+
+ion-app {
+    background-color: #041f1e;
 }

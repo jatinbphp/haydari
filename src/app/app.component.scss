@@ -15,6 +15,7 @@ ion-menu {
 				position: relative;
 				overflow: initial;
 				padding-bottom: 65px;
+				padding-bottom: 0px;
 				h2 {
 					width: calc(100% - 40px);
 					font-size: 48px;
@@ -58,16 +59,40 @@ ion-menu {
 					}
 				}
 			}
+			.menu-list {
+				width: 100%;
+				display: flex;
+				flex-flow: column;
+				justify-content: flex-start;
+				ion-menu-toggle {
+					width: 100%;
+					ion-item {
+						ion-label {
+							width: 100%;
+							font-size: 28px;
+							line-height: 30px;
+							color: var(--Black);
+							font-family: var(--font-Poppins-Medium);
+						}
+					}
+					padding: 15px 0px;
+					border-bottom: 1px solid #768268;
+					&:last-child {
+						border-bottom: 0px;
+					}
+				}
+			}
 			ion-item {
 				&.btm-cpr-cnt {
+					width: 96%;
 					display: flex;
 				    justify-content: flex-start;
 				    align-items: flex-end;
 					padding-bottom: 20px;
 					font-family: var(--font-Poppins-Reguler);
 					color: rgba(0,0,0,0.7);
-					font-size: 17px;
-					line-height: 19px;
+					font-size: 16px;
+					line-height: 18px;
 				}
 			}
 		}

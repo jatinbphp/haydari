@@ -1,9 +1,57 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>login</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
-
+<ion-content fullscreen>
+	<div class="login-main">
+		<ion-grid class="ion-no-padding">
+			<ion-row>
+				<ion-col size="12" class="ion-text-left ion-no-padding">
+					<h1>the <br>haydari <br>project</h1>
+				</ion-col>
+				<ion-col size="12" class="ion-text-left ion-no-padding">
+					<h2>Salāmun 'Alaykum</h2>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<form>
+			<ion-grid class="ion-no-padding">
+				<ion-row>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-45">
+						<h3>Login</h3>
+					</ion-col>
+					<ion-col size="6" class="ion-text-left ion-no-padding">
+						<ion-button class="border-btn"><img src="../assets/images/fb-icon1.png"></ion-button>
+					</ion-col>
+					<ion-col size="6" class="ion-text-right ion-no-padding">
+						<ion-button class="border-btn"><img src="../assets/images/twt-icon1.png"></ion-button>
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20 mt-60">
+						<ion-label position="stacked">Email Address</ion-label>
+	  					<ion-input type="email" placeholder=""></ion-input>
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20">
+						<ion-label position="stacked">Password</ion-label>
+	  					<ion-input type="password" placeholder=""></ion-input>
+	  					<ion-icon name="eye-outline"></ion-icon>
+					</ion-col>
+					<ion-col size="6" class="ion-text-left align-center ion-no-padding">
+						<ion-checkbox></ion-checkbox>
+						<p>Remember me</p>
+					</ion-col>
+					<ion-col size="6" class="ion-text-right ion-no-padding">
+						<ion-router-link href="Javascript:;" class="">Forgot password?</ion-router-link>
+					</ion-col>
+					<ion-col size="12" class="ion-text-center ion-no-padding mt-60">
+						<ion-button class="log-btn">LOG IN</ion-button>
+					</ion-col>
+					<ion-col size="12" class="ion-text-center ion-no-padding mt-25">
+						<p>Don’t have a account? <ion-router-link href="Javascript:;" class="">Sign up</ion-router-link></p>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
 </ion-content>
