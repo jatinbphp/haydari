@@ -1,12 +1,174 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>      
     </ion-buttons>
     <ion-title>Search</ion-title>    
-  </ion-toolbar>
+  </ion-toolbar> -->
+  	<ion-toolbar class="header-top-box">
+		<ion-buttons slot="start">
+			<ion-menu-button>
+				<ion-icon name="menu"></ion-icon>
+			</ion-menu-button>
+		</ion-buttons>
+		<ion-title class="ion-text-center"></ion-title>
+		<ion-chip slot="end" routerLink="/login">
+			<ion-img src="../assets/images/user-icon1.png"></ion-img>
+		</ion-chip>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+	<ion-header no-border class="ion-no-border">
+		<ion-toolbar class="src-box">
+			<img src="../assets/images/src-icon1.png">
+			<ion-searchbar placeholder="Search Now"></ion-searchbar>
+		</ion-toolbar>
+	</ion-header>
+	<div class="mainContent">
+		<div class="update-filter-main">
+			<div class="update-sec">
+				<img src="../assets/images/sort-icon1.png">
+				<h6>Recently updated</h6>
+			</div>
+			<div class="filter-sec">
+				<img class="grid-icon1" src="../../assets/images/grid-icon1.png">
+        		<img class="list-icon1" src="../../assets/images/list-icon1.png">
+			</div>
+		</div>
+		<ion-list class="list-boxes-main">
+			<ion-item class="item-box-main clr-red">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item class="item-box-main clr-green">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item class="item-box-main clr-red">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item class="item-box-main clr-green">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item class="item-box-main clr-red">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+			<ion-item class="item-box-main clr-green">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+	</div>
 </ion-content>

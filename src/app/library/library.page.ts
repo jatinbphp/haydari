@@ -13,8 +13,8 @@ export class LibraryPage implements OnInit {
   ngOnInit() {
   }
 
-  menu() {
-  	this.router.navigateByUrl('/home');
+  typeViews() {
+  	this.router.navigateByUrl('/type-views');
   }
 
 }

@@ -5,6 +5,9 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
+	<div class="bck-img-sec">
+		<img src="../assets/images/bck-img1.png">
+	</div>
 	<ion-header no-border class="ion-no-border">
 		<ion-toolbar class="header-top-box">
 			<ion-button slot="start">
@@ -15,64 +18,20 @@
 		</ion-toolbar>
 		<ion-toolbar class="src-box">
 			<img src="../assets/images/src-icon1.png">
-			<ion-searchbar placeholder="Search Now"></ion-searchbar>
+			<ion-searchbar placeholder="Search"></ion-searchbar>
 		</ion-toolbar>
 	</ion-header>
 	<div class="mainContent">
-		<ion-grid class="img-cnt-sec">
-			<ion-row class="title-main">
-				<ion-col>
-					<h2>Poem Type</h2>
-				</ion-col>
-			</ion-row>
-			<ion-row class="img-nm-box-list">
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/type-img1.png">
-					<h3>Nauha</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/type-img2.png">
-					<h3>Marsiya</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/type-img3.png">
-					<h3>Qasida</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/type-img4.png">
-					<h3>Ghadeer</h3>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
-		<ion-grid class="img-cnt-sec">
-			<ion-row class="title-main">
-				<ion-col>
-					<h2>Subject/Occasion</h2>
-				</ion-col>
-			</ion-row>
-			<ion-row class="img-nm-box-list">
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/suboc-img1.png">
-					<h3>Nauha</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/suboc-img2.png">
-					<h3>Marsiya</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/suboc-img3.png">
-					<h3>Qasida</h3>
-				</ion-col>
-				<ion-col class="img-nm-box-item">
-					<img src="../assets/images/suboc-img4.png">
-					<h3>Ghadeer</h3>
-				</ion-col>
-			</ion-row>
-			<ion-row class="btns-sec">
-				<ion-col class="ion-text-center">
-					<ion-button class="more-btn">see more</ion-button>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
+		<ion-row class="btns-sec">
+			<ion-col size="12" class="ion-text-center">
+				<ion-button class="more-btn" (click)="typeViews()">New Releases</ion-button>
+			</ion-col>
+			<ion-col size="12" class="ion-text-center">
+				<ion-button class="more-btn" (click)="typeViews()">Trending Now</ion-button>
+			</ion-col>
+			<ion-col size="12" class="ion-text-center">
+				<ion-button class="more-btn" (click)="typeViews()">Recently Viewed</ion-button>
+			</ion-col>
+		</ion-row>
 	</div>
 </ion-content>

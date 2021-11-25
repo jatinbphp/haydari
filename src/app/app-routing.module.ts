@@ -16,6 +16,14 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'type-views',
+    loadChildren: () => import('./type-views/type-views.module').then( m => m.TypeViewsPageModule)
+  },
+  {
+    path: 'sub-list-page',
+    loadChildren: () => import('./sub-list-page/sub-list-page.module').then( m => m.SubListPagePageModule)
   }
 
 ];

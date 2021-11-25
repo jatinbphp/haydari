@@ -51,8 +51,26 @@
 	display: unset !important;
 }
 
+::slotted(ion-avatar) {
+    width: unset;
+    height: unset;
+    margin: 0px;
+}
+
 ion-grid, ion-col {
 	padding: 0px;
+}
+
+ion-list {
+    --ion-item-background: transparent;
+    --ion-background-color: transparent;
+    --border: 0px;
+}
+
+ion-list-header {
+    padding: 0px;
+    min-height: fit-content;
+    font-weight: normal;
 }
 
 ion-item {
@@ -119,24 +137,72 @@ ion-searchbar {
 .searchbar-has-value.searchbar-should-show-clear.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios {
     display: none !important;
 }
-.src-box {
-	position: relative;
-	img {
-		position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 14px;
-        z-index: 9;
-        width: 25px;
-        height: 25px;
-        object-fit: contain;
-        margin: auto 0px;
-    }
-	ion-searchbar {
-		input {
-            padding-left: 50px !important;
+
+app-home {
+    .src-box {
+    	position: relative;
+    	img {
+    		position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            z-index: 9;
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin: auto 0px;
         }
-	}
+    	ion-searchbar {
+    		input {
+                padding-left: 50px !important;
+            }
+    	}
+    }
+}
+
+app-search {
+    .src-box {
+        position: relative;
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            z-index: 9;
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin: auto 0px;
+        }
+        ion-searchbar {
+            input {
+                padding-left: 50px !important;
+            }
+        }
+    }
+}
+
+app-library {
+    .src-box {
+        position: relative;
+        img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 20px;
+            z-index: 9;
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin: auto 0px;
+        }
+        ion-searchbar {
+            input {
+                padding-right: 50px !important;
+                padding-left: 20px !important;
+            }
+        }
+    }
 }
 
 ion-app {

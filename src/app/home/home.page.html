@@ -25,7 +25,7 @@
 			<ion-searchbar placeholder="Search Now"></ion-searchbar>
 		</ion-toolbar>
 	</ion-header>
-  <div class="mainContent">
+  	<div class="mainContent">
 		<ion-grid class="img-cnt-sec">
 			<ion-row class="title-main">
 				<ion-col>
@@ -37,7 +37,7 @@
 					<img src="../assets/images/type-img1.png">
 					<h3>Nauha</h3>
 				</ion-col>
-				<ion-col class="img-nm-box-item">
+				<ion-col class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/type-img2.png">
 					<h3>Marsiya</h3>
 				</ion-col>
@@ -77,7 +77,7 @@
 			</ion-row>
 			<ion-row class="btns-sec">
 				<ion-col class="ion-text-center">
-					<ion-button class="more-btn">see more</ion-button>
+					<ion-button class="more-btn" (click)="library()">see more</ion-button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
