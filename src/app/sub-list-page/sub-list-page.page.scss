@@ -105,10 +105,18 @@ ion-content {
 					color: #9f9f9f;
 					padding: 0px 6px 0px 0px;
 					margin: 0px;
+					text-overflow: ellipsis;
+				    overflow: hidden;
+				    white-space: nowrap;
 				}
 			}
 			.filter-sec {
 				width: 90px;
+				height: fit-content;
+				height: -webkit-fit-content;
+				height: -moz-fit-content;
+				height: -ms-fit-content;
+				height: -o-fit-content;
 			    background-color: rgba(255, 255, 255, 0.1);
 			    border-radius: 3px;
 			    text-align: center;
