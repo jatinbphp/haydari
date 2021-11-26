@@ -32,11 +32,11 @@
 				<h6>Recently updated</h6>
 			</div>
 			<div class="filter-sec">
-				<img class="grid-icon1" src="../../assets/images/grid-icon1.png">
-        		<img class="list-icon1" src="../../assets/images/list-icon1.png">
+				<img class="grid-icon1" src="../../assets/images/grid-icon1.png" (click)="showGridView()">
+        		<img class="list-icon1" src="../../assets/images/list-icon1.png" (click)="showListView()">
 			</div>
 		</div>
-		<ion-row class="list-boxes-main">
+		<ion-row class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">
 			<ion-col class="item-box-main clr-red">
 				<ion-avatar>
 					<img src="../assets/images/icon1.png">

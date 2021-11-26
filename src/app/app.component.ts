@@ -8,13 +8,13 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent 
 {
   public appPages = [
-    { title: 'Manqabat', url: '/home', icon: 'home', categories: []},//[0]
-    { title: 'Marsiya', url: '/shop', icon: 'search', categories: []},//[1]
-    { title: 'Nauha', url: '/cart', icon: 'bag', categories: []},//[2]
-    { title: 'Offline', url: '/cart', icon: 'bag', categories: []},//[3]
-    { title: 'About', url: '/cart', icon: 'bag', categories: []},//[4]
-    { title: 'Profile', url: '/cart', icon: 'bag', categories: []},//[5]
-    { title: 'Settings', url: '/cart', icon: 'bag', categories: []},//[6]
+    { title: 'Manqabat', url: '/tabs/home', icon: 'home', categories: []},//[0]
+    { title: 'Marsiya', url: '/tabs/home', icon: 'search', categories: []},//[1]
+    { title: 'Nauha', url: '/tabs/home', icon: 'bag', categories: []},//[2]
+    { title: 'Offline', url: '/tabs/home', icon: 'bag', categories: []},//[3]
+    { title: 'About', url: '/tabs/home', icon: 'bag', categories: []},//[4]
+    { title: 'Profile', url: '/tabs/home', icon: 'bag', categories: []},//[5]
+    { title: 'Settings', url: '/tabs/home', icon: 'bag', categories: []},//[6]
   ];
   constructor(public menu: MenuController)
   {}

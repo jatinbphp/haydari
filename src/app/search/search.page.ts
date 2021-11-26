@@ -6,7 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['search.page.scss']
 })
 export class SearchPage {
-
+  public show_in_view: any = 'list';
   constructor() {}
+  showGridView()
+  {
+    this.show_in_view='grid';
+  }
 
+  showListView()
+  {
+    this.show_in_view='list';
+  }
 }

@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sub-list-page.page.scss'],
 })
 export class SubListPagePage implements OnInit {
-
+  public show_in_view: any = 'list';
   constructor() { }
 
   ngOnInit() {
   }
+  showGridView()
+  {
+    this.show_in_view='grid';
+  }
 
+  showListView()
+  {
+    this.show_in_view='list';
+  }
 }
