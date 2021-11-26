@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+html {
+    //--ion-default-font: 'Poppins-Regular', BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
+}
+
 :host(.item-label-stacked) .input-wrapper, 
 :host(.item-label-floating) .input-wrapper {
     flex: 1 1 0% !important;
@@ -86,6 +90,10 @@ ion-item {
 ion-label {
 	margin: 0px;
 	border: none;
+}
+
+ion-button {
+    --box-shadow: none;
 }
 
 ion-searchbar {

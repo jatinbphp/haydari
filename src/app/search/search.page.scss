@@ -111,35 +111,30 @@ ion-content {
 				}
 			}
 		}
-		ion-list {
+		img.grid-icon1 {
+		    opacity: 0.7;
+		}
+		ion-row {
 			&.list-boxes-main {
 				margin: 0px 0px 30px;
-				ion-list-header {
-					--background: var(--Black);
-					color: var(--White);
-					width: 100%;
-					text-align: center;
-					margin: 0px 0px 12px;
-					ion-label {
-						white-space: break-spaces;
-						padding: 10px 0px;
-						text-transform: capitalize;
-						font-size: 24px;
-						line-height: 26px;
-						font-family: var(--font-Poppins-Medium);
-						color: var(--White);
-					}
-				}
-				ion-item {
+				ion-col {
 					padding: 16px 0px;
 					margin: 0px;
-					align-items: flex-start;
+					display: flex;
+					flex-flow: row;
+				    align-items: flex-start;
+				    max-width: 100%;
+				    min-width: 100%;
+				    width: 100%;
 					&.btns-sec {
 						margin: 14px 0px;
 						padding: 0px;
 					}
 					&.item-box-main {
 						border-bottom: 1px solid rgba(255,255,255,0.3);
+						&:nth-last-child(1) {
+							border-bottom: 0px;
+						}
 						ion-avatar {
 							width: 55px;
 							height: 55px;
@@ -154,6 +149,7 @@ ion-content {
 							}
 						}
 						ion-label {
+							width: calc(100% - 55px);
 							padding-left: 16px;
 							white-space: break-spaces;
 							h6 {
@@ -216,9 +212,6 @@ ion-content {
 								}
 							}
 						}
-						&:nth-last-child(1) {
-							border-bottom: 0px;
-						}
 					}
 					&.clr-red {
 						ion-avatar {
@@ -241,6 +234,53 @@ ion-content {
 						ion-label {
 							h6 {
 								color: #7ea16b;
+							}
+						}
+					}
+				}
+				&.grid-view {
+					ion-col {
+						flex-flow: column;
+						width: 48%;
+						max-width: 48%;
+						min-width: 48%;
+						padding: 22px 0px;
+						&:nth-child(odd) {
+							margin-right: auto;
+						}
+						&:nth-child(even) {
+							margin-left: auto;
+						}
+						&.item-box-main {
+							&:nth-last-child(1) {
+								border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+							}
+							ion-avatar {
+								width: fit-content;
+								width: -webkit-fit-content;
+								width: -moz-fit-content;
+								width: -ms-fit-content;
+								width: -o-fit-content;
+								height: 60px;
+								object-fit: contain;
+							}
+							ion-label {
+								width: 100%;
+								padding: 12px 0px 0px;
+								.nm-icon-list {
+									flex-flow: column;
+									align-items: flex-start;
+									@media (min-height:768px) and (max-height:2000px) {
+										flex-flow: unset;
+										flex-wrap: wrap;
+									}
+									.nm-icon-item {
+										padding: 0px 0px 6px 0px;
+										@media (min-height:768px) and (max-height:2000px) {
+											padding: 0px 16px 6px 0px;
+										}
+									}
+								}
 							}
 						}
 					}

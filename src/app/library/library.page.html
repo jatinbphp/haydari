@@ -3,12 +3,27 @@
     <ion-title>library</ion-title>
   </ion-toolbar>
 </ion-header> -->
+<ion-header no-border class="ion-no-border">
+	<ion-toolbar class="header-top-box">
+		<ion-buttons slot="start">
+			<ion-menu-button>
+				<ion-icon name="menu"></ion-icon>
+			</ion-menu-button>
+		</ion-buttons>
+		<ion-title class="ion-text-center"></ion-title>
+		<ion-chip slot="end"><ion-img src="../assets/images/user-icon1.png"></ion-img></ion-chip>
+	</ion-toolbar>
+	<ion-toolbar class="src-box">
+		<img src="../assets/images/src-icon1.png">
+		<ion-searchbar placeholder="Search"></ion-searchbar>
+	</ion-toolbar>
+</ion-header>
 
 <ion-content [fullscreen]="true">
 	<div class="bck-img-sec">
 		<img src="../assets/images/bck-img1.png">
 	</div>
-	<ion-header no-border class="ion-no-border">
+	<!-- <ion-header no-border class="ion-no-border">
 		<ion-toolbar class="header-top-box">
 			<ion-button slot="start">
 				<ion-icon name="menu"></ion-icon>
@@ -20,7 +35,7 @@
 			<img src="../assets/images/src-icon1.png">
 			<ion-searchbar placeholder="Search"></ion-searchbar>
 		</ion-toolbar>
-	</ion-header>
+	</ion-header> -->
 	<div class="mainContent">
 		<ion-row class="btns-sec">
 			<ion-col size="12" class="ion-text-center">

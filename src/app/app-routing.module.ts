@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'sub-list-page',
     loadChildren: () => import('./sub-list-page/sub-list-page.module').then( m => m.SubListPagePageModule)
+  },
+  {
+    path: 'short-detail-modal',
+    loadChildren: () => import('./short-detail-modal/short-detail-modal.module').then( m => m.ShortDetailModalPageModule)
   }
 
 ];
