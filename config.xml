@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.haydari.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>The Haydari Project</name>
-    <description>An awesome application.</description>
+    <description>The Haydari Project mobile application was developed for those who hold religious poetry close to their hearts.</description>
     <author email="info@haydari.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
