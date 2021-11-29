@@ -9,6 +9,9 @@ ion-header {
 		&.header-top-box {
 			padding: 34px 24px;
 			--min-height: fit-content;
+			@media(max-width:374px) {
+				padding: 24px;
+			}
 		}
 		ion-buttons {
 			--background: transparent;
@@ -80,8 +83,8 @@ ion-content {
 						white-space: break-spaces;
 						padding: 10px 0px;
 						text-transform: capitalize;
-						font-size: 24px;
-						line-height: 26px;
+						font-size: 19px;
+						line-height: 21px;
 						font-family: var(--font-Poppins-Medium);
 						color: var(--White);
 					}
@@ -113,8 +116,8 @@ ion-content {
 							padding-left: 16px;
 							white-space: break-spaces;
 							h6 {
-								font-size: 21px;
-								line-height: 23px;
+								font-size: 18px;
+								line-height: 20px;
 								font-family: var(--font-Poppins-Medium);
 								color: var(--White);
 								margin: 0px 0px 8px;
@@ -123,8 +126,8 @@ ion-content {
 							    word-break: break-word;
 							}
 							p {
-							    font-size: 15px;
-							    line-height: 23px;
+							    font-size: 13px;
+							    line-height: 20px;
 							    font-family: var(--font-Poppins-Regular);
 							    color: #9f9f9f;
 							    margin: 0px 0px 6px;
@@ -177,7 +180,7 @@ ion-content {
 				height: 44px;
 			    --background: rgba(126,161,107,0.2);
 			    color: var(--White);
-			    font-size: 18px;
+			    font-size: 16.5px;
 			    font-family: var(--font-Poppins-Light);
 			    --border-radius: 30px;
 			    --padding-start: 40px;

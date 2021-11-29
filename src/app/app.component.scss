@@ -1,8 +1,8 @@
 ion-menu {
-	--background: transparent;
+	--background: rgba(152,168,134);
+	opacity: 0.95;
 	ion-content {
-		--background: rgba(152,168,134);
-		--opacity: 0.9;
+		--background: transparent;
 		ion-list {
 			--background: transparent;
     		background: transparent;
@@ -57,7 +57,7 @@ ion-menu {
 						ion-item {
 							ion-label {
 								width: 100%;
-								font-size: 24px;
+								font-size: 22px;
 								line-height: 26px;
 								color: var(--Black);
 								font-family: var(--font-Poppins-Medium);
@@ -85,7 +85,7 @@ ion-menu {
 						ion-label {
 							width: 100%;
 							font-size: 22px;
-							line-height: 24px;
+							line-height: 26px;
 							color: var(--Black);
 							font-family: var(--font-Poppins-Medium);
 							@media(max-width:374px) {

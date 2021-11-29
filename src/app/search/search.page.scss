@@ -9,6 +9,9 @@ ion-header {
 		&.header-top-box {
 			padding: 34px 24px;
 			--min-height: fit-content;
+			@media(max-width:374px) {
+				padding: 24px;
+			}
 		}
 		ion-buttons {
 			--background: transparent;

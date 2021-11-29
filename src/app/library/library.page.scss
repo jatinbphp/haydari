@@ -5,6 +5,9 @@ ion-header {
 		padding: 0px 24px;
 		&.header-top-box {
 			padding: 34px 24px;
+			@media(max-width:374px) {
+				padding: 24px;
+			}
 		}
 		ion-buttons {
 			--background: transparent;
