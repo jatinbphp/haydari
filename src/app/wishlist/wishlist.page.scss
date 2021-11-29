@@ -146,11 +146,11 @@ ion-content {
 			    align-items: flex-start;
 			    margin: 0px 0px 25px;
 			    .wish-btn-sec {
-				    width: 32px;
+				    width: 27px;
 				    height: auto;
 				    display: flex;
 				    @media(max-width:374px) {
-				    	width: 26px;
+				    	width: 24px;
 				    }
 				    ion-button {
 					    &.wish-icon {
@@ -166,15 +166,15 @@ ion-content {
 						    --background: transparent;
 						    --color: var(--Black);
 						    --border-radius: 0;
-						    width: 32px;
-						    height: 32px;
+						    width: 27px;
+						    height: 27px;
 						    margin: 0px;
 						    padding: 0;
 						    --padding-start: 0;
 						    --padding-end: 0;
 						    @media(max-width:374px) {
-						    	width: 26px;
-						    	height: 26px;
+						    	width: 24px;
+						    	height: 24px;
 						    }
 						    img {
 						    	max-width: 100%;
@@ -186,14 +186,14 @@ ion-content {
 					}
 				}
 				.lines-sec {
-				    width: calc(100% - 32px);
+				    width: calc(100% - 27px);
 				    display: flex;
 				    flex-flow: column;
 				    justify-content: flex-start;
 				    align-items: flex-start;
 				    padding: 0px 0px 0px 12px;
 				    @media(max-width:374px) {
-				    	width: calc(100% - 26px);
+				    	width: calc(100% - 24px);
 				    }
 				    h6 {
 				    	width: 100%;
