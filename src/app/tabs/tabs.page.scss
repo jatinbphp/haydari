@@ -22,7 +22,7 @@ ion-tabs {
     	border-radius: 0px;
     	--border: 0px;
     	--background: rgba(84,83,83,0.7);
-    	padding: 10px 5px;
+    	padding: 7px 5px;
 		ion-tab-button {
 			--background: transparent;
 			--color: var(--White);
@@ -31,16 +31,16 @@ ion-tabs {
 			img {
 				max-width: 100%;
 				max-height: 100%;
-				width: 28px;
-				height: 28px;
-				line-height: 28px;
+				width: 25px;
+				height: 25px;
+				line-height: 25px;
 				object-fit: contain;
 				object-position: center;
 			}
 			ion-label {
 				color: #fff;
 				margin-top: 5px;
-				font-size: 16px;
+				font-size: 14px;
     			text-transform: capitalize;
 			}
 			&.tab-selected {

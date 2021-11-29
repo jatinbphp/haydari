@@ -127,7 +127,7 @@ ion-searchbar {
             color: var(--Black) !important;
             padding-right: 40px !important;
             padding-left: 18px !important;
-            font-size: 20px !important;
+            font-size: 18px !important;
             font-family: var(--font-Poppins-Medium) !important;
             font-weight: normal !important;
             --placeholder-color: var(--Black);
@@ -155,8 +155,8 @@ app-home {
             bottom: 0;
             left: 20px;
             z-index: 9;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             margin: auto 0px;
         }
@@ -177,8 +177,8 @@ app-search {
             bottom: 0;
             left: 20px;
             z-index: 9;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             margin: auto 0px;
         }
@@ -199,8 +199,8 @@ app-library {
             bottom: 0;
             right: 20px;
             z-index: 9;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
             margin: auto 0px;
         }

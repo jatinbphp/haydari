@@ -64,6 +64,8 @@ ion-header {
 }
 ion-content {
 	--background: #041f1e;
+	border: 0px;
+    --border: 0px;
 	.mainContent {
 		padding: 0px 24px 70px;
 		.img-cnt-sec {
@@ -82,8 +84,8 @@ ion-content {
 					width: 100%;
 					margin: 0px;
 					padding: 0px;
-					font-size: 26px;
-					line-height: 28px;
+					font-size: 21px;
+					line-height: 23px;
 					font-family: var(--font-Poppins-SemiBold);
 					color: var(--White);
 					text-transform: capitalize;
@@ -157,8 +159,8 @@ ion-content {
 						width: -o-fit-content;
 						margin: 0px;
 						padding: 0px;
-						font-size: 24px;
-						line-height: 26px;
+						font-size: 21px;
+						line-height: 23px;
 						font-family: var(--font-Poppins-SemiBold);
 						color: var(--White);
 						text-transform: capitalize;
@@ -179,7 +181,7 @@ ion-content {
 					height: 44px;
 				    --background: rgba(126,161,107,0.2);
 				    color: var(--White);
-				    font-size: 18px;
+				    font-size: 16.6px;
 				    font-family: var(--font-Poppins-Light);
 				    --border-radius: 30px;
 				    --padding-start: 40px;

@@ -1,6 +1,8 @@
 ion-menu {
+	--background: transparent;
 	ion-content {
-		--background: rgba(152,168,134,0.9);
+		--background: rgba(152,168,134);
+		--opacity: 0.9;
 		ion-list {
 			--background: transparent;
     		background: transparent;
@@ -23,8 +25,8 @@ ion-menu {
 				padding-bottom: 0px;
 				h2 {
 					width: calc(100% - 40px);
-					font-size: 48px;
-					line-height: 40px;
+					font-size: 44px;
+					line-height: 36px;
 					font-family: var(--font-LTC-Californian);
 					color: var(--Black);
 					margin: 0px;
@@ -55,8 +57,8 @@ ion-menu {
 						ion-item {
 							ion-label {
 								width: 100%;
-								font-size: 28px;
-								line-height: 30px;
+								font-size: 24px;
+								line-height: 26px;
 								color: var(--Black);
 								font-family: var(--font-Poppins-Medium);
 								border-bottom: 1px solid #768268;
@@ -73,23 +75,26 @@ ion-menu {
 				display: flex;
 				flex-flow: column;
 				justify-content: flex-start;
-				padding: 32px 0px;
+				padding: 70px 0px;
+				@media(max-width:374px) {
+					padding: 45px 0px;
+				}
 				ion-menu-toggle {
 					width: 100%;
 					ion-item {
 						ion-label {
 							width: 100%;
-							font-size: 28px;
-							line-height: 30px;
+							font-size: 22px;
+							line-height: 24px;
 							color: var(--Black);
 							font-family: var(--font-Poppins-Medium);
 							@media(max-width:374px) {
-								font-size: 24px;
-    							line-height: 26px;
+								font-size: 20px;
+    							line-height: 22px;
 							}
 						}
 					}
-					padding: 15px 0px;
+					padding: 24px 0px;
 					border-bottom: 1px solid #768268;
 					@media(max-width:374px) {
 						padding: 10px 0px;
@@ -108,10 +113,10 @@ ion-menu {
 					padding-bottom: 20px;
 					font-family: var(--font-Poppins-Reguler);
 					color: rgba(0,0,0,0.7);
-					font-size: 16px;
-					line-height: 18px;
+					font-size: 14px;
+					line-height: 16px;
 					@media(max-width:374px) {
-						font-size: 15px;
+						font-size: 13px;
 					}
 				}
 			}
