@@ -81,7 +81,8 @@ ion-content {
 			align-content: flex-start;
 			h2 {
 				width: 100%;
-				font-size: 25px;
+				font-size: 22px;
+				font-weight: 600;
 				line-height: 28px;
 				font-family: var(--font-Poppins-SemiBold);
 				color: var(--White);
@@ -197,7 +198,7 @@ ion-content {
 				    h6 {
 				    	width: 100%;
 				    	margin: 0px;
-				    	font-size: 18px;
+				    	font-size: 15px;
 				    	line-height: 28px;
 				    	font-family: var(--font-Poppins-Regular);
 				    	color: #9f9f9f;
@@ -274,7 +275,7 @@ ion-footer {
 						width: 100%;
 						margin: 0px;
 						padding: 0px 0px 4px;
-						font-size: 18px;
+						font-size: 17px;
 						line-height: 20px;
 						color: var(--Black);
 						font-family: var(--font-Poppins-SemiBold);
@@ -287,7 +288,7 @@ ion-footer {
 						width: 100%;
 						margin: 0px;
 						padding: 0px;
-						font-size: 15px;
+						font-size: 14px;
 						line-height: 17px;
 						color: var(--Black);
 						font-family: var(--font-Poppins-Regular);
