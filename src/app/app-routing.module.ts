@@ -25,7 +25,12 @@ const routes: Routes = [
   {
     path: 'sub-list-page',
     loadChildren: () => import('./sub-list-page/sub-list-page.module').then( m => m.SubListPagePageModule)
-  }/*,
+  },
+  {
+    path: 'subject-occasion-detail',
+    loadChildren: () => import('./subject-occasion-detail/subject-occasion-detail.module').then( m => m.SubjectOccasionDetailPageModule)
+  }/*
+  ,
   {
     path: 'short-detail-modal',
     loadChildren: () => import('./short-detail-modal/short-detail-modal.module').then( m => m.ShortDetailModalPageModule)

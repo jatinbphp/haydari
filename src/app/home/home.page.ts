@@ -11,10 +11,10 @@ export class HomePage {
   constructor(private router: Router) { }
 
   library() {
-  	this.router.navigateByUrl('/library');
+  	this.router.navigateByUrl('/tabs/type-views');
   }
   subList() {
-  	this.router.navigateByUrl('/sub-list-page');
+  	this.router.navigateByUrl('/tabs/sub-list-page');
   }
 
 }

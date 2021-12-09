@@ -213,6 +213,13 @@ app-library {
     }
 }
 
+.subject-occassion-detail{
+    .modal-wrapper{
+        background: transparent !important;
+        --background: transparent !important;
+    }
+}
+
 ion-app {
     background-color: #041f1e;
 }

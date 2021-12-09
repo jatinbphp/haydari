@@ -24,6 +24,14 @@ const routes: Routes = [
         loadChildren: () => import('../notifications/notifications.module').then(m => m.NotificationsPageModule)
       },
       {
+        path: 'type-views',
+        loadChildren: () => import('../type-views/type-views.module').then( m => m.TypeViewsPageModule)
+      },
+      {
+        path: 'sub-list-page',
+        loadChildren: () => import('../sub-list-page/sub-list-page.module').then(m => m.SubListPagePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
