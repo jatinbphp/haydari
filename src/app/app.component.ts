@@ -8,9 +8,9 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent 
 {
   public appPages = [
-    { title: 'Manqabat', url: '/tabs/home', icon: 'home', categories: []},//[0]
-    { title: 'Marsiya', url: '/tabs/home', icon: 'search', categories: []},//[1]
-    { title: 'Nauha', url: '/tabs/home', icon: 'bag', categories: []},//[2]
+    { title: 'Manqabat', url: '/tabs/sub-list-page', icon: 'home', categories: []},//[0]
+    { title: 'Marsiya', url: '/tabs/sub-list-page', icon: 'search', categories: []},//[1]
+    { title: 'Nauha', url: '/tabs/sub-list-page', icon: 'bag', categories: []},//[2]
     { title: 'Offline', url: '/tabs/home', icon: 'bag', categories: []},//[3]
     { title: 'About', url: '/tabs/home', icon: 'bag', categories: []},//[4]
     { title: 'Profile', url: '/tabs/home', icon: 'bag', categories: []},//[5]
