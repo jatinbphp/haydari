@@ -22,7 +22,12 @@
 	<div class="mainContent">
 		<div class="pg-title-main">
 			<h2>Ab To Ajaao Shehnshah-e-Wafa</h2>
-			<ion-button class="play-btn"><ion-icon name="pause-outline"></ion-icon></ion-button>
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
+				<ion-icon name="pause-outline"></ion-icon>
+			</ion-button>
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false" (click)="playAudio()">
+				<ion-icon name="play-outline"></ion-icon>
+			</ion-button>
 		</div>
 		<div class="list-of-lines">
 			<div class="item-of-line">
@@ -126,7 +131,12 @@
 			<p class="maker-nm">- Omar Hisham</p>
 		</ion-col>
 		<ion-col class="icon">
-			<ion-button class="play-btn"><ion-icon name="pause-outline"></ion-icon></ion-button>
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
+				<ion-icon name="pause-outline"></ion-icon>
+			</ion-button>
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false" (click)="playAudio()">
+				<ion-icon name="play-outline"></ion-icon>
+			</ion-button>
 		</ion-col>
 	</ion-row>
 </ion-footer>

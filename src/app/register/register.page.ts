@@ -4,24 +4,34 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage implements OnInit 
+
+export class RegisterPage implements OnInit 
 {
 	public resultData:any={};
-	public postData:any=[];
 	public passwordType: string = 'password';
 	public passwordIcon: string = 'eye-off';
 
-	public loginForm = this.fb.group({
+	public signUpForm = this.fb.group({
+		firstname: ['', Validators.required],
+		lastname: ['', Validators.required],
 		username: ['', Validators.required],
-		password: ['', Validators.required]
+		password: ['', Validators.required]		
 	});
 
 	validation_messages = 
-	{		
+	{	
+		'firstname': 
+		[
+			{ type: 'required', message: 'First name is required.' },
+		],
+		'lastname': 
+		[
+			{ type: 'required', message: 'Last name is required.' },
+		],	
 		'username': 
 		[
 			{ type: 'required', message: 'Email is required.' },
@@ -30,21 +40,16 @@ export class LoginPage implements OnInit
 		'password': 
 		[
 			{ type: 'required', message: 'Password is required.' }
-		]
+		],
 	};
 
 	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
 	{ }
 
-	ngOnInit() 
+  	ngOnInit() 
 	{ }
 
-	home() 
-	{
-		this.client.router.navigateByUrl('/home');
-	}
-
-  	async makeMeLoggedin(form)
+	async makeMeSignUp(form)
 	{
 		//LOADER
 		const loading = await this.loadingCtrl.create({
@@ -59,17 +64,18 @@ export class LoginPage implements OnInit
 
 		let data=
 		{
+			firstname:form.firstname,
+			lastname:form.lastname,
 			username:form.username, 
 			password:form.password,
 		}
-		await this.client.makeMeLoggedin(data).then(result => 
+		await this.client.makeMeSignUp(data).then(result => 
 		{	
 			loading.dismiss();//DISMISS LOADER			
 			this.resultData=result;
 			if(this.resultData.status==true)
 			{
-				localStorage.setItem('token',this.resultData.token);
-				this.client.router.navigate(['/tabs/home']);
+				this.client.router.navigate(['/login']);
 			}
 			console.log(this.resultData);
 						
@@ -79,11 +85,5 @@ export class LoginPage implements OnInit
 			loading.dismiss();//DISMISS LOADER
 			console.log();
 		});
-	}
-
-  	hideShowPassword()
-	{
-		this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-    	this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
 	}
 }

@@ -29,8 +29,11 @@ const routes: Routes = [
   {
     path: 'subject-occasion-detail',
     loadChildren: () => import('./subject-occasion-detail/subject-occasion-detail.module').then( m => m.SubjectOccasionDetailPageModule)
-  }/*
-  ,
+  },{
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  }
+  /*,
   {
     path: 'short-detail-modal',
     loadChildren: () => import('./short-detail-modal/short-detail-modal.module').then( m => m.ShortDetailModalPageModule)
