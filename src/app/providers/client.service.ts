@@ -84,6 +84,119 @@ export class ClientService
 		});
 	}
 
+	getUserDetailById(data)
+	{	
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("user_id",data.user_id);
+			this.http.post(this.api_url + "getUserDetailById",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					this.serverResponse=res.data;
+					resolve(this.serverResponse);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	updateProfile(data)
+	{	
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("user_id",data.user_id).set("firstname",data.firstname).set("lastname",data.lastname).set("password",data.password);
+			this.http.post(this.api_url + "updateProfile",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					this.showMessage("Profile updated!!");
+					this.serverResponse=res.data;
+					resolve(this.serverResponse);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getPoemTypes()
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			this.http.get(this.api_url + "getPoemTypes",headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getSubject()
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			this.http.get(this.api_url + "getSubject",headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	getErrorMessage(err)
 	{	
 		if(err.error == null)

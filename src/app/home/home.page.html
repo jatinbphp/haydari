@@ -12,7 +12,7 @@
 			</ion-menu-button>
 		</ion-buttons>
 		<ion-title class="ion-text-center"></ion-title>
-		<ion-chip slot="end" routerLink="/login">
+		<ion-chip slot="end" routerLink="/profile">
 			<ion-img src="../assets/images/user-icon1.png"></ion-img>
 		</ion-chip>
 	</ion-toolbar>
@@ -33,11 +33,11 @@
 				</ion-col>
 			</ion-row>
 			<ion-row class="img-nm-box-list">
-				<ion-col class="img-nm-box-item" (click)="subList()">
+				<ion-col *ngFor="let PoemTypes of resultPoemTypes;" class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/type-img1.png">
-					<h3>Nauha</h3>
+					<h3>{{PoemTypes.PoemTypeName}}</h3>
 				</ion-col>
-				<ion-col class="img-nm-box-item" (click)="subList()">
+				<!--<ion-col class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/type-img2.png">
 					<h3>Marsiya</h3>
 				</ion-col>
@@ -48,7 +48,7 @@
 				<ion-col class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/type-img4.png">
 					<h3>Ghadeer</h3>
-				</ion-col>
+				</ion-col>-->
 			</ion-row>
 		</ion-grid>
 		<ion-grid class="img-cnt-sec">
@@ -58,11 +58,11 @@
 				</ion-col>
 			</ion-row>
 			<ion-row class="img-nm-box-list">
-				<ion-col class="img-nm-box-item" (click)="subList()">
+				<ion-col *ngFor="let SubjectOccasion of resultSubjectOccasion;" class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/suboc-img1.png">
-					<h3>Nauha</h3>
+					<h3>{{SubjectOccasion.subjectName}}</h3>
 				</ion-col>
-				<ion-col class="img-nm-box-item" (click)="subList()">
+				<!--<ion-col class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/suboc-img2.png">
 					<h3>Marsiya</h3>
 				</ion-col>
@@ -73,7 +73,7 @@
 				<ion-col class="img-nm-box-item" (click)="subList()">
 					<img src="../assets/images/suboc-img4.png">
 					<h3>Ghadeer</h3>
-				</ion-col>
+				</ion-col>-->
 			</ion-row>
 			<ion-row class="btns-sec">
 				<ion-col class="ion-text-center">

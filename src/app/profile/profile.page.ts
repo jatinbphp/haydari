@@ -4,22 +4,23 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
 })
 
-export class RegisterPage implements OnInit 
+export class ProfilePage implements OnInit 
 {
-	public resultData:any={};
+  	public id:any='';
+	public resultData:any=[];
 	public passwordType: string = 'password';
 	public passwordIcon: string = 'eye-off';
 
-	public signUpForm = this.fb.group({
+  	public profileForm = this.fb.group({
 		firstname: ['', Validators.required],
 		lastname: ['', Validators.required],
 		username: ['', Validators.required],
-		password: ['', Validators.required]		
+		password: ['']		
 	});
 
 	validation_messages = 
@@ -46,10 +47,44 @@ export class RegisterPage implements OnInit
 	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
 	{ }
 
-  	ngOnInit() 
-	{ }
+	async ngOnInit() 
+	{ 
+		//LOADER
+		const loading = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loading.present();
+		//LOADER
+		this.id=localStorage.getItem('id');
+		let data = {
+			user_id:this.id
+		}
+		await this.client.getUserDetailById(data).then(result => 
+		{	
+			loading.dismiss();//DISMISS LOADER			
+			this.resultData=result;
+			console.log(this.resultData);
+			let firstname = (this.resultData.firstname) ? this.resultData.firstname : "";
+			let lastname = (this.resultData.lastname) ? this.resultData.lastname : "";
+			let email = (this.resultData.email) ? this.resultData.email : "";
 
-	async makeMeSignUp(form)
+			this.profileForm.controls['firstname'].setValue(firstname);
+			this.profileForm.controls['lastname'].setValue(lastname);
+			this.profileForm.controls['username'].setValue(email);
+						
+		},
+		error => 
+		{
+			loading.dismiss();//DISMISS LOADER
+			console.log();
+		});
+	}
+
+	async updateProfile(form)
 	{
 		//LOADER
 		const loading = await this.loadingCtrl.create({
@@ -64,20 +99,17 @@ export class RegisterPage implements OnInit
 
 		let data=
 		{
+			user_id:this.id,
 			firstname:form.firstname,
 			lastname:form.lastname,
 			username:form.username, 
 			password:form.password,
 		}
-		await this.client.makeMeSignUp(data).then(result => 
+		await this.client.updateProfile(data).then(result => 
 		{	
+			this.profileForm.controls['password'].setValue("");
 			loading.dismiss();//DISMISS LOADER			
-			this.resultData=result;
-			if(this.resultData.status==true)
-			{
-				this.client.router.navigate(['/login']);
-			}
-			console.log(this.resultData);
+			this.ngOnInit();
 						
 		},
 		error => 
@@ -87,9 +119,10 @@ export class RegisterPage implements OnInit
 		});
 	}
 
-	hideShowPassword()
+  	hideShowPassword()
 	{
 		this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     	this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
 	}
+
 }

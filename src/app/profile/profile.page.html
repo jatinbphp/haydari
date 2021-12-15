@@ -1,0 +1,82 @@
+<ion-content fullscreen>
+  <div class="login-main">
+		<ion-grid class="ion-no-padding">
+			<ion-row>
+				<ion-col size="12" class="ion-text-left ion-no-padding">					
+          <h1>the <br>haydari <br>project</h1>
+				</ion-col>        
+				<ion-col size="12" class="ion-text-left ion-no-padding">
+					<h2>Salāmun 'Alaykum</h2>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<form [formGroup]="profileForm" (ngSubmit)="updateProfile(profileForm.value)">
+			<ion-grid class="ion-no-padding">
+				<ion-row>
+					<ion-col size="12" class="ion-text-left ion-no-padding">
+						<h3>Profile</h3>
+					</ion-col>					
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20 mt-60">
+						<ion-label position="stacked">First name</ion-label>
+	  					<ion-input type="text" placeholder="" formControlName="firstname"></ion-input>
+						<!--VALIDATION-->
+						<div *ngFor="let validation of validation_messages.firstname">                
+							<div class="validation-errors">
+								<ng-container>
+									<div class="error-message" *ngIf="profileForm.get('firstname').hasError(validation.type) && (profileForm.get('firstname').dirty || profileForm.get('firstname').touched)">{{ validation.message }}</div>
+								</ng-container>
+							</div>								
+						</div>
+						<!--VALIDATION-->		  
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20">
+						<ion-label position="stacked">Last name</ion-label>
+	  					<ion-input type="text" placeholder="" formControlName="lastname"></ion-input>
+						<!--VALIDATION-->
+						<div *ngFor="let validation of validation_messages.lastname">                
+							<div class="validation-errors">
+								<ng-container>
+									<div class="error-message" *ngIf="profileForm.get('lastname').hasError(validation.type) && (profileForm.get('lastname').dirty || profileForm.get('lastname').touched)">{{ validation.message }}</div>
+								</ng-container>
+							</div>								
+						</div>
+						<!--VALIDATION-->		  
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20">
+						<ion-label position="stacked">Email Address</ion-label>
+	  					<ion-input type="text" placeholder="" formControlName="username" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
+						<!--VALIDATION-->
+						<div *ngFor="let validation of validation_messages.username">                
+							<div class="validation-errors">
+								<ng-container>
+									<div class="error-message" *ngIf="profileForm.get('username').hasError(validation.type) && (profileForm.get('username').dirty || profileForm.get('username').touched)">{{ validation.message }}</div>
+								</ng-container>
+							</div>								
+						</div>
+						<!--VALIDATION-->		  
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20">
+						<ion-label position="stacked">Password</ion-label>
+	  					<ion-input [type]="passwordType" placeholder="" formControlName="password"></ion-input>
+						<ion-icon [name]="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+						<!--VALIDATION-->
+						<div *ngFor="let validation of validation_messages.password">                
+							<div class="validation-errors">
+								<ng-container>
+								<div class="error-message" *ngIf="profileForm.get('password').hasError(validation.type) && (profileForm.get('password').dirty || profileForm.get('password').touched)">{{ validation.message }}</div>
+								</ng-container>
+							</div>								
+						</div>
+						<!--VALIDATION-->
+					</ion-col>
+					<ion-col size="12" class="ion-text-left ion-no-padding">
+						<ion-text color="danger">Leave password field blank if you not wish to change.</ion-text>
+					</ion-col>
+					<ion-col size="12" class="ion-text-center ion-no-padding mt-60">
+						<ion-button type="submit" class="log-btn" [disabled]="!profileForm.valid">Save</ion-button>
+					</ion-col>					
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
