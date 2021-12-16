@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { Media } from '@awesome-cordova-plugins/media/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
   imports: 
   [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule, 
     IonicModule.forRoot(), 
     AppRoutingModule

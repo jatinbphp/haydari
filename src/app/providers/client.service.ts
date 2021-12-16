@@ -170,6 +170,34 @@ export class ClientService
 		});
 	}
 
+	getPoemsByPoemType(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("poemTypeID",data.poem_subject_occassion_id);
+			this.http.post(this.api_url + "getPoemsByPoemType",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	getSubject()
 	{
 		let headers = this.getHeaderOptions();
@@ -192,6 +220,34 @@ export class ClientService
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
 				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getPoemsBySubject(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("subjectID",data.poem_subject_occassion_id);
+			this.http.post(this.api_url + "getPoemsBySubject",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});

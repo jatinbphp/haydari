@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-occasion-detail.page'
+import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
+import { ClientService } from '../providers/client.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-sub-list-page',
@@ -10,13 +14,87 @@ import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-oc
 
 export class SubListPagePage implements OnInit 
 {
+  public queryStringData: any=[];
   public show_in_view: any = 'list';
-  constructor(public modalCtrl: ModalController)
+  public poem_subject_occassion_id:any = '';
+  public poem_subject_occassion_nm:any = '';
+  public poem_or_subject_occassion:any = '';
+  public resultPoemsByTypeORSubject:any=[];
+
+  constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { }
 
   ngOnInit()
   { }
   
+  async ionViewWillEnter()
+  {
+    this.poem_subject_occassion_id='';
+    this.poem_subject_occassion_nm='';
+    this.poem_or_subject_occassion='';
+    this.resultPoemsByTypeORSubject = [];
+    
+    this.route.queryParams.subscribe(params => 
+    {
+      if(params && params.special)
+      {
+        this.queryStringData = JSON.parse(params.special);        
+      }
+    });
+    this.poem_subject_occassion_id=this.queryStringData['poem_subject_occassion_id'];
+    this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'];
+    this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
+
+    /*POEM TYPE*/
+    //LOADER
+		const loadingPoemType = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingPoemType.present();
+		//LOADER
+    if(this.poem_or_subject_occassion=="by_poem_type")
+    {
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id
+      }
+      await this.client.getPoemsByPoemType(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    if(this.poem_or_subject_occassion=="by_subject_occassion")
+    {
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id
+      }
+      await this.client.getPoemsBySubject(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    /*POEM TYPE*/
+  }
+
   showGridView()
   {
     this.show_in_view='grid';
@@ -42,4 +120,13 @@ export class SubListPagePage implements OnInit
 		return await modal.present();
   }
   
+  async showMyProfile()
+  {
+    const modal = await this.modalCtrl.create({
+			component: ProfilePage,
+		});
+
+		return await modal.present();
+  }
+
 }

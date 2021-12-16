@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
 
@@ -44,7 +44,7 @@ export class ProfilePage implements OnInit
 		],
 	};
 
-	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
 	{ }
 
 	async ngOnInit() 
@@ -125,4 +125,10 @@ export class ProfilePage implements OnInit
     	this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
 	}
 
+	dismissModal()
+	{
+		this.modalCtrl.dismiss({
+			'dismissed': true
+		});
+  	}
 }

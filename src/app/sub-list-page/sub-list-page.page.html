@@ -9,7 +9,7 @@
 			</ion-menu-button>
 		</ion-buttons>
 		<ion-title class="ion-text-center"></ion-title>
-		<ion-chip slot="end" routerLink="/profile">
+		<ion-chip slot="end" (click)="showMyProfile()">
 			<ion-img src="../assets/images/user-icon1.png"></ion-img>
 		</ion-chip>
 	</ion-toolbar>
@@ -18,7 +18,7 @@
 <ion-content>
 	<div class="mainContent">
 		<div class="pg-title-main">
-			<h2>Marsiya</h2>
+			<h2 [innerHTML]="poem_subject_occassion_nm"></h2>
 		</div>
 		<div class="update-filter-main">
 			<div class="update-sec">
@@ -30,74 +30,34 @@
         		<img class="list-icon1" src="../../assets/images/list-icon1.png" (click)="showListView()">
 			</div>
 		</div>
-		<ion-row class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">
-			<ion-col class="item-box-main clr-red" (click)="showSubjectOccasionDetail()">
+		<p class="no-records" *ngIf="resultPoemsByTypeORSubject.length == 0">No records available</p>
+		<ion-row *ngIf="resultPoemsByTypeORSubject.length > 0" class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">
+			<ion-col *ngFor="let poems of resultPoemsByTypeORSubject; let p = index;" [ngClass]="{'clr-green' : p % 2 == 0}" class="item-box-main clr-red" (click)="showSubjectOccasionDetail()">
 				<ion-avatar>
 					<img src="../assets/images/icon1.png">
 				</ion-avatar>
 				<ion-label>
-					<h6>Headline Goes Here</h6>
+					<h6 [innerHTML]="poems.PoemName"></h6>
 					<div class="nm-icon-list">
 						<div class="nm-icon-item">
 							<img src="../assets/images/microphone-icon1.png">
-							<p>Mir Hasan Mir</p>
+							<p [innerHTML]="poems.PoetName" *ngIf="poems.PoetName!=null"></p>
+							<p *ngIf="poems.PoetName==null">unknown</p>
 						</div>
 						<div class="nm-icon-item">
 							<img src="../assets/images/language-icon1.png">
-							<p>Urdu</p>
+							<p [innerHTML]="poems.LanguageName" *ngIf="poems.LanguageName!=null"></p>
+							<p *ngIf="poems.LanguageName==null">unknown</p>
 						</div>
 						<div class="nm-icon-item">
 							<img src="../assets/images/pen-icon1.png">
-							<p>Rehan</p>
+							<p [innerHTML]="poems.ReciterName" *ngIf="poems.ReciterName!=null"></p>
+							<p *ngIf="poems.ReciterName==null">unknown</p>
 						</div>
 					</div>
 				</ion-label>
 			</ion-col>
-			<ion-col class="item-box-main clr-green" (click)="showSubjectOccasionDetail()">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<div class="nm-icon-list">
-						<div class="nm-icon-item">
-							<img src="../assets/images/microphone-icon1.png">
-							<p>Mir Hasan Mir</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/language-icon1.png">
-							<p>Urdu</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/pen-icon1.png">
-							<p>Rehan</p>
-						</div>
-					</div>
-				</ion-label>
-			</ion-col>
-			<ion-col class="item-box-main clr-red" (click)="showSubjectOccasionDetail()">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<div class="nm-icon-list">
-						<div class="nm-icon-item">
-							<img src="../assets/images/microphone-icon1.png">
-							<p>Mir Hasan Mir</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/language-icon1.png">
-							<p>Urdu</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/pen-icon1.png">
-							<p>Rehan</p>
-						</div>
-					</div>
-				</ion-label>
-			</ion-col>
-			<ion-col class="item-box-main clr-green" (click)="showSubjectOccasionDetail()">
+			<!--<ion-col class="item-box-main clr-green" (click)="showSubjectOccasionDetail()">
 				<ion-avatar>
 					<img src="../assets/images/icon1.png">
 				</ion-avatar>
@@ -163,6 +123,50 @@
 					</div>
 				</ion-label>
 			</ion-col>
+			<ion-col class="item-box-main clr-red" (click)="showSubjectOccasionDetail()">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-col>
+			<ion-col class="item-box-main clr-green" (click)="showSubjectOccasionDetail()">
+				<ion-avatar>
+					<img src="../assets/images/icon1.png">
+				</ion-avatar>
+				<ion-label>
+					<h6>Headline Goes Here</h6>
+					<div class="nm-icon-list">
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p>Mir Hasan Mir</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/language-icon1.png">
+							<p>Urdu</p>
+						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p>Rehan</p>
+						</div>
+					</div>
+				</ion-label>
+			</ion-col>-->
 		</ion-row>
 	</div>
 </ion-content>

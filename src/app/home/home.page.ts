@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { MenuController, LoadingController, ModalController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
 import { ClientService } from '../providers/client.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +13,15 @@ import { ClientService } from '../providers/client.service';
 
 export class HomePage 
 {
+  public queryString: any=[];
   public resultPoemTypes:any=[];
   public resultSubjectOccasion:any=[];
-  constructor(public client: ClientService, public loadingCtrl: LoadingController) 
+  constructor(public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { }
 
   async ngOnInit() 
 	{ 
+    this.menu.enable(true);
     /*POEM TYPE*/
     //LOADER
 		const loadingPoemType = await this.loadingCtrl.create({
@@ -70,9 +75,37 @@ export class HomePage
     this.client.router.navigateByUrl('/tabs/type-views');
   }
   
-  subList()
+  showPoemByPoemTypeORSubjectOccassion(id,poem_subject_occassion,type)
   {
-    this.client.router.navigateByUrl('/tabs/sub-list-page');
+    this.queryString = 
+    {
+      poem_subject_occassion_id:id,
+      poem_subject_occassion_nm:poem_subject_occassion,
+      poem_or_subject_occassion:type
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
+    /*
+    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras).then(() => 
+    {
+      window.location.reload();
+    });
+    */
   }
 
+  async showMyProfile()
+  {
+    const modal = await this.modalCtrl.create({
+			component: ProfilePage,
+		});
+
+		return await modal.present();
+  }
 }

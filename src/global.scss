@@ -223,7 +223,12 @@ app-library {
 ion-app {
     background-color: #041f1e;
 }
-
+.no-records{
+    font-size: 15px;
+    line-height: 19px;
+    color: #eb445a;
+    text-align: center;
+}
 .validation-errors {
     font-size: 15px;
     line-height: 19px;

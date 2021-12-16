@@ -26,6 +26,10 @@ ion-content {
 			ion-row {
 				ion-col {
 					position: relative;
+					&.close-icon{
+						justify-content: center;
+						align-items: center;
+					}
 					&.align-center {
 						display: flex;
 					    flex-wrap: wrap;
