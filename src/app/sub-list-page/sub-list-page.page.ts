@@ -41,6 +41,7 @@ export class SubListPagePage implements OnInit
         this.queryStringData = JSON.parse(params.special);        
       }
     });
+    
     this.poem_subject_occassion_id=this.queryStringData['poem_subject_occassion_id'];
     this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'];
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];

@@ -97,7 +97,7 @@ export class AppComponent
     if(this.token!='' && this.token!='null' && this.token!=null && this.token!=undefined && this.token!='undefined')
     {
       this.menu.enable(true);
-      this.client.router.navigate(['tabs/home']);
+      //this.client.router.navigate(['tabs/home']);
     }
     else 
     {
@@ -128,8 +128,8 @@ export class AppComponent
         special: JSON.stringify(this.queryString)
       }
     };
-    //this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
     
+    //this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
     this.client.router.navigate(['tabs/sub-list-page'], navigationExtras).then(() => 
     {
       window.location.reload();
