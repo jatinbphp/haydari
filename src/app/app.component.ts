@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, ModalController } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 import { ClientService } from './providers/client.service';
 import { NavigationExtras } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -27,8 +27,12 @@ export class AppComponent
     { title: 'Settings', url: '/tabs/home', icon: 'bag', categories: []},//[6]
   ];
   */
-  constructor(public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
+  constructor(private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
   {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      console.log('Handler was called!');
+    });
+    
     this.token=localStorage.getItem('token');
     /*POEM TYPE*/
     this.client.getPoemTypes().then(result => 
@@ -97,7 +101,7 @@ export class AppComponent
     if(this.token!='' && this.token!='null' && this.token!=null && this.token!=undefined && this.token!='undefined')
     {
       this.menu.enable(true);
-      //this.client.router.navigate(['tabs/home']);
+      this.client.router.navigate(['tabs/home']);
     }
     else 
     {
@@ -114,6 +118,12 @@ export class AppComponent
 
   showPoemByPoemTypeORSubjectOccassion(id,poem_subject_occassion,type)
   {
+    this.client.publishSomeDataWhenPoemTypeClickedFromMenu({
+      poem_subject_occassion_id:id,
+      poem_subject_occassion_nm:poem_subject_occassion,
+      poem_or_subject_occassion:type
+    });//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
+    
     this.queryString = 
     {
       poem_subject_occassion_id:id,
@@ -129,12 +139,13 @@ export class AppComponent
       }
     };
     
-    //this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
+    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);    
+    /*
     this.client.router.navigate(['tabs/sub-list-page'], navigationExtras).then(() => 
     {
       window.location.reload();
     });
-    
+    */
   }
 
   async showMyProfile()

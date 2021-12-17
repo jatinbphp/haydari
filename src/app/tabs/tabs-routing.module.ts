@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../sub-list-page/sub-list-page.module').then(m => m.SubListPagePageModule)
       },
       {
+        path: 'poem-detail',
+        loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+      },
+      {
         path: '',
         //redirectTo: '/tabs/home',
         redirectTo: '/login',

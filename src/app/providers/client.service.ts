@@ -14,9 +14,20 @@ export class ClientService
 	public api_url: string = "https://haydari.ecnetsolutions.dev/api/";
 	public token: string;
 	public serverResponse: any=[];
+	private fooSubjectWhenPoemTypeClickedFromMenu = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
 
 	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router) 
 	{ }
+
+	publishSomeDataWhenPoemTypeClickedFromMenu(data: any) 
+	{
+		this.fooSubjectWhenPoemTypeClickedFromMenu.next(data);
+	}//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
+
+	getObservableWhenPoemTypeClickedFromMenu(): Subject<any> 
+	{
+		return this.fooSubjectWhenPoemTypeClickedFromMenu;
+	}//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
 
   	getHeaderOptions(): any 
 	{	
@@ -181,6 +192,62 @@ export class ClientService
 				if(res.status == true)
 				{
 					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getPoemsDetailById(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("poemID",data.poem_id).set("user_id",data.user_id);
+			this.http.post(this.api_url + "getPoemsDetailById",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	poemLineWishlist(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("poem_id",data.poem_id).set("poem_line_id",data.poem_line_id).set("user_id",data.user_id);
+			this.http.post(this.api_url + "poemLineWishlist",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res);					
 				}
 				else
 				{

@@ -14,6 +14,7 @@ import { ProfilePage } from '../profile/profile.page';
 
 export class SubListPagePage implements OnInit 
 {
+  public queryString: any=[];
   public queryStringData: any=[];
   public show_in_view: any = 'list';
   public poem_subject_occassion_id:any = '';
@@ -22,7 +23,64 @@ export class SubListPagePage implements OnInit
   public resultPoemsByTypeORSubject:any=[];
 
   constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
-  { }
+  { 
+    this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
+    {
+      console.log(data);
+      this.poem_subject_occassion_id=data.poem_subject_occassion_id;
+      this.poem_subject_occassion_nm=data.poem_subject_occassion_nm;
+      this.poem_or_subject_occassion=data.poem_or_subject_occassion;
+      this.resultPoemsByTypeORSubject = [];
+      /*POEM TYPE*/
+      //LOADER
+      const loadingPoemType = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemType.present();
+      //LOADER
+      if(this.poem_or_subject_occassion=="by_poem_type")
+      {
+        let objData = 
+        {
+          poem_subject_occassion_id:this.poem_subject_occassion_id
+        }
+        await this.client.getPoemsByPoemType(objData).then(result => 
+        {	
+          loadingPoemType.dismiss();//DISMISS LOADER
+          this.resultPoemsByTypeORSubject=result;      
+          console.log(this.resultPoemsByTypeORSubject);
+        },
+        error => 
+        {
+          loadingPoemType.dismiss();//DISMISS LOADER
+          console.log();
+        });
+      }
+      if(this.poem_or_subject_occassion=="by_subject_occassion")
+      {
+        let objData = 
+        {
+          poem_subject_occassion_id:this.poem_subject_occassion_id
+        }
+        await this.client.getPoemsBySubject(objData).then(result => 
+        {	
+          loadingPoemType.dismiss();//DISMISS LOADER
+          this.resultPoemsByTypeORSubject=result;      
+          console.log(this.resultPoemsByTypeORSubject);
+        },
+        error => 
+        {
+          loadingPoemType.dismiss();//DISMISS LOADER
+          console.log();
+        });
+      }
+      /*POEM TYPE*/
+    });//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
+  }
 
   ngOnInit()
   { }
@@ -130,4 +188,20 @@ export class SubListPagePage implements OnInit
 		return await modal.present();
   }
 
+  getPoemsDetail(id)
+  {
+    this.queryString = 
+    {
+      poem_id:id
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+  }
 }

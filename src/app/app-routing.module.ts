@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'poem-detail',
+    loadChildren: () => import('./poem-detail/poem-detail.module').then( m => m.PoemDetailPageModule)
   }
   /*,
   {
