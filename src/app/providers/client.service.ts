@@ -95,6 +95,36 @@ export class ClientService
 		});
 	}
 
+	updateMyPassword(data)
+	{	
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("email",data.username);
+			this.http.post(this.api_url + "resetPassword",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					this.showMessage(res.message);
+					this.serverResponse=res;
+					resolve(this.serverResponse);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	getUserDetailById(data)
 	{	
 		let headers = this.getHeaderOptions();
@@ -315,6 +345,60 @@ export class ClientService
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
 				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getReciters()
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			this.http.get(this.api_url + "getReciters",headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	getLanguages()
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			this.http.get(this.api_url + "getLanguages",headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});

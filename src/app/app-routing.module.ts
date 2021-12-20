@@ -40,6 +40,10 @@ const routes: Routes = [
   {
     path: 'poem-detail',
     loadChildren: () => import('./poem-detail/poem-detail.module').then( m => m.PoemDetailPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
   /*,
   {

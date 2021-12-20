@@ -98,6 +98,7 @@ export class AppComponent
 
   ngOnInit() 
   {
+    /*
     if(this.token!='' && this.token!='null' && this.token!=null && this.token!=undefined && this.token!='undefined')
     {
       this.menu.enable(true);
@@ -108,6 +109,7 @@ export class AppComponent
       this.menu.enable(false);
       this.client.router.navigate(['login']);
     }
+    */
   }
 
   closeMenu()
@@ -150,11 +152,19 @@ export class AppComponent
 
   async showMyProfile()
   {
-    const modal = await this.modalCtrl.create({
-			component: ProfilePage,
-		});
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      const modal = await this.modalCtrl.create({
+        component: ProfilePage,
+      });
 
-		return await modal.present();
+      return await modal.present();
+    }
+    else 
+    {
+      this.client.router.navigate(['login']);  
+    }
   }
 
   Logout()

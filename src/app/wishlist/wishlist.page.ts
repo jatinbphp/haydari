@@ -3,6 +3,7 @@ import { Media, MediaObject } from '@awesome-cordova-plugins/media/ngx';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { ClientService } from '../providers/client.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -15,7 +16,7 @@ export class WishlistPage
   private mediaFile: MediaObject;
   private mediaFileCurrentPosition:any='';
   public isAudioPlayed: boolean = false;
-  constructor(private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
+  constructor(public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
   {
     this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
@@ -50,11 +51,19 @@ export class WishlistPage
 
   async showMyProfile()
   {
-    const modal = await this.modalCtrl.create({
-			component: ProfilePage,
-		});
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      const modal = await this.modalCtrl.create({
+        component: ProfilePage,
+      });
 
-		return await modal.present();
+      return await modal.present();
+    }
+    else 
+    {
+      this.client.router.navigate(['login']);  
+    }
   }
   
   ionViewDidLeave()

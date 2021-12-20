@@ -16,6 +16,8 @@ export class HomePage
   public queryString: any=[];
   public resultPoemTypes:any=[];
   public resultSubjectOccasion:any=[];
+  public resultReciters:any=[];
+  public resultLanguages:any=[];
   constructor(public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { }
 
@@ -68,6 +70,52 @@ export class HomePage
       console.log();
     });
     /*SUBJECT/OCCASION*/
+    /*RECIETERS*/
+    //LOADER
+		const loadingReceiters = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingReceiters.present();
+		//LOADER
+    await this.client.getReciters().then(result => 
+    {	
+      loadingReceiters.dismiss();//DISMISS LOADER
+      this.resultReciters=result;      
+      console.log(this.resultReciters);
+    },
+    error => 
+    {
+      loadingReceiters.dismiss();//DISMISS LOADER
+      console.log();
+    });
+    /*RECIETERS*/
+    /*LANGUAGES*/
+    //LOADER
+		const loadingLanguages = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingLanguages.present();
+		//LOADER
+    await this.client.getLanguages().then(result => 
+    {	
+      loadingLanguages.dismiss();//DISMISS LOADER
+      this.resultLanguages=result;      
+      console.log(this.resultLanguages);
+    },
+    error => 
+    {
+      loadingLanguages.dismiss();//DISMISS LOADER
+      console.log();
+    });
+    /*LANGUAGES*/
   }
 
   library()
@@ -102,10 +150,18 @@ export class HomePage
 
   async showMyProfile()
   {
-    const modal = await this.modalCtrl.create({
-			component: ProfilePage,
-		});
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      const modal = await this.modalCtrl.create({
+        component: ProfilePage,
+      });
 
-		return await modal.present();
+      return await modal.present();
+    }
+    else 
+    {
+      this.client.router.navigate(['login']);  
+    }
   }
 }

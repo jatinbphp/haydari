@@ -120,47 +120,63 @@ export class PoemDetailPage
 
   async showMyProfile()
   {
-    const modal = await this.modalCtrl.create({
-			component: ProfilePage,
-		});
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      const modal = await this.modalCtrl.create({
+        component: ProfilePage,
+      });
 
-		return await modal.present();
+      return await modal.present();
+    }
+    else 
+    {
+      this.client.router.navigate(['login']);  
+    }
   }
   
   async makeBookMarkAtRow(poem_id,poem_line_id,user_id)
   {
-    //LOADER
-    const loadingPoemBookmark = await this.loadingCtrl.create({
-      spinner: null,
-      //duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    await loadingPoemBookmark.present();
-    //LOADER
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      //LOADER
+      const loadingPoemBookmark = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemBookmark.present();
+      //LOADER
 
-    let objData = {
-      poem_id:poem_id,
-      poem_line_id:poem_line_id,
-      user_id:user_id
-    }
-    await this.client.poemLineWishlist(objData).then(result => 
-    {
-      loadingPoemBookmark.dismiss();//DISMISS LOADER
-      this.resultPoemsForBookmark=result;	
-      if(this.resultPoemsForBookmark.status==true)
-      {
-        this.client.showMessage(this.resultPoemsForBookmark.message);
+      let objData = {
+        poem_id:poem_id,
+        poem_line_id:poem_line_id,
+        user_id:user_id
       }
-      this.ionViewWillEnter();
-      console.log(result);
-    },
-    error => 
+      await this.client.poemLineWishlist(objData).then(result => 
+      {
+        loadingPoemBookmark.dismiss();//DISMISS LOADER
+        this.resultPoemsForBookmark=result;	
+        if(this.resultPoemsForBookmark.status==true)
+        {
+          this.client.showMessage(this.resultPoemsForBookmark.message);
+        }
+        this.ionViewWillEnter();
+        console.log(result);
+      },
+      error => 
+      {
+        loadingPoemBookmark.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    else 
     {
-      loadingPoemBookmark.dismiss();//DISMISS LOADER
-      console.log();
-    });
+      this.client.router.navigate(['login']);  
+    }
   }
 
   ionViewDidLeave()

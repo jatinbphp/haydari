@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-occasion-detail.page'
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { ClientService } from '../providers/client.service';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,7 @@ export class SearchPage
 {
   public show_in_view: any = 'list';
 
-  constructor(public modalCtrl: ModalController, public fb: FormBuilder) {}
+  constructor(public client: ClientService, public modalCtrl: ModalController, public fb: FormBuilder) {}
   
   showGridView()
   {
@@ -43,10 +44,18 @@ export class SearchPage
 
   async showMyProfile()
   {
-    const modal = await this.modalCtrl.create({
-			component: ProfilePage,
-		});
+    let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
+    {
+      const modal = await this.modalCtrl.create({
+        component: ProfilePage,
+      });
 
-		return await modal.present();
+      return await modal.present();
+    }
+    else 
+    {
+      this.client.router.navigate(['login']);  
+    }
   }
 }
