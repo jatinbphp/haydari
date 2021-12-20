@@ -157,20 +157,17 @@ ion-content {
 					h3 {
 						position: absolute;
 						top: 15px;
-						left: 12px;
-						width: fit-content;
-						width: -webkit-fit-content;
-						width: -moz-fit-content;
-						width: -ms-fit-content;
-						width: -o-fit-content;
+						left: 0px;
+						width: 100%;
 						margin: 0px;
-						padding: 0px;
+						padding: 0px 12px;
 						font-size: 20px;
 						line-height: 22px;
 						font-family: var(--font-Poppins-SemiBold);
 						color: var(--White);
 						text-transform: capitalize;
 						text-shadow: 2px 2px 1px rgba(0,0,0,0.45);
+						word-break: break-word;
 						@media(max-width:374px) {
 							font-size: 18px;
 							line-height: 20px;
