@@ -14,10 +14,19 @@ export class ClientService
 	public api_url: string = "https://haydari.ecnetsolutions.dev/api/";
 	public token: string;
 	public serverResponse: any=[];
+	private fooSubjectWhenlOGIN = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 	private fooSubjectWhenPoemTypeClickedFromMenu = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
 
 	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router) 
 	{ }
+
+	publishSomeDataWhenLogin(data: any) {
+        this.fooSubjectWhenlOGIN.next(data);
+    }//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+
+    getObservableWhenLogin(): Subject<any> {
+        return this.fooSubjectWhenlOGIN;
+	}//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 
 	publishSomeDataWhenPoemTypeClickedFromMenu(data: any) 
 	{

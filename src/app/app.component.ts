@@ -16,6 +16,7 @@ export class AppComponent
   public resultPoemTypes:any=[];
   public appPages:any=[];
   public token: string;
+  public is_user_login: boolean = false;
   /*
   public appPages = [
     { title: 'Manqabat', url: '/tabs/sub-list-page', icon: 'home', categories: []},//[0]
@@ -29,9 +30,14 @@ export class AppComponent
   */
   constructor(private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
   {
+    this.client.getObservableWhenLogin().subscribe((data) => {
+      this.is_user_login = data.is_user_login;      
+      console.log('Data received', data);
+    });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+
     this.platform.backButton.subscribeWithPriority(10, () => {
       console.log('Handler was called!');
-    });
+    });//PREVENT BACK BUTTON
     
     this.token=localStorage.getItem('token');
     /*POEM TYPE*/
@@ -169,8 +175,11 @@ export class AppComponent
 
   Logout()
   {
+    this.client.publishSomeDataWhenLogin({
+      is_user_login: false
+    });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
     localStorage.clear();
-    this.menu.enable(false);
-    this.client.router.navigate(['login']);
+    //this.menu.enable(false);
+    this.client.router.navigate(['tabs/home']);
   }
 }

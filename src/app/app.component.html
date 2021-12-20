@@ -24,7 +24,7 @@
                 <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.title=='Logout'" lines="full" lines="none" detail="false" (click)="Logout()">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.title=='Logout' && is_user_login==true" lines="full" lines="none" detail="false" (click)="Logout()">
                 <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>            

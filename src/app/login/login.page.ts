@@ -66,6 +66,9 @@ export class LoginPage implements OnInit
 		{	
 			loading.dismiss();//DISMISS LOADER			
 			this.resultData=result;
+			this.client.publishSomeDataWhenLogin({
+				is_user_login: true
+			});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 			if(this.resultData.status==true)
 			{
 				localStorage.setItem('token',this.resultData.token);
