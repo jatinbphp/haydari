@@ -25,7 +25,10 @@ export class SearchPage
   constructor(public client: ClientService, public modalCtrl: ModalController, public fb: FormBuilder, public loadingCtrl: LoadingController, private route: ActivatedRoute, private router: Router) 
   {}
   
-  async ngOnInit() 
+  ngOnInit()
+  {}
+
+  async ionViewWillEnter() 
 	{
     this.user_id = (localStorage.getItem('id')) ? localStorage.getItem('id') : 0;
     //LOADER

@@ -30,11 +30,6 @@ export class AppComponent
   */
   constructor(private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
   {
-    this.client.getObservableWhenLogin().subscribe((data) => {
-      this.is_user_login = data.is_user_login;      
-      console.log('Data received', data);
-    });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
-
     this.platform.backButton.subscribeWithPriority(10, () => {
       console.log('Handler was called!');
     });//PREVENT BACK BUTTON
@@ -100,6 +95,11 @@ export class AppComponent
       console.log();
     });
     /*POEM TYPE*/
+
+    this.client.getObservableWhenLogin().subscribe((data) => {
+      this.is_user_login = data.is_user_login;      
+      console.log('Data received', data);
+    });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
   }
 
   ngOnInit() 
