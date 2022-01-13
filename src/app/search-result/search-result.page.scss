@@ -104,10 +104,19 @@ ion-content {
 				img {}
 			}
 			.src-box {
-				width: 100%;
-				transition: 0.4s all ease-in-out;
-				// margin-top: 10px;
-				margin-top: -50%;
+				position: absolute;
+			    top: 0;
+			    right: 0px;
+			    width: 0px;
+			    height: 0px;
+			    transition: 0.4s all ease-in-out;
+			    overflow: hidden;
+			    &.show-src-box {
+			    	left: 0px !important;
+				    right: unset !important;
+				    width: calc(100% - 30px) !important;
+				    height: 36px !important;
+			    }
 			}
 		}
 		.update-filter-main {

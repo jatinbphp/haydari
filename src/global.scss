@@ -213,6 +213,18 @@ app-library {
     }
 }
 
+app-search-result {
+    ion-searchbar {
+        height: 36px !important;
+    }
+}
+
+app-sub-list-page {
+    ion-searchbar {
+        height: 36px !important;
+    }
+}
+
 .subject-occassion-detail{
     .modal-wrapper{
         background: transparent !important;
