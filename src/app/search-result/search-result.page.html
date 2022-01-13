@@ -23,7 +23,9 @@
 				<img src="../assets/images/search-icon1.png">
 			</ion-button>
 			<div class="src-box" [ngClass]="{'show-src-box' : is_search_icon_clicked == true}">
-				<ion-searchbar placeholder="Search.."></ion-searchbar>
+				<form #searchPoemForm="ngForm" novalidate class="search-form">
+				<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="search_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
+				</form>
 			</div>
 		</div>
 		<div class="update-filter-main">

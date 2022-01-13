@@ -225,7 +225,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("poemTypeID",data.poem_subject_occassion_id).set("orderType",data.order);
+			let dataToPost = new HttpParams().set("poemTypeID",data.poem_subject_occassion_id).set("orderType",data.order).set("keyword",(data.searched_text) ? data.searched_text : '');
 			this.http.post(this.api_url + "getPoemsByPoemType",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)
@@ -336,7 +336,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("subjectID",data.poem_subject_occassion_id).set("orderType",data.order);
+			let dataToPost = new HttpParams().set("subjectID",data.poem_subject_occassion_id).set("orderType",data.order).set("keyword",(data.searched_text) ? data.searched_text : '');
 			this.http.post(this.api_url + "getPoemsBySubject",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)

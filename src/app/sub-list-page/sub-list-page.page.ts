@@ -23,6 +23,9 @@ export class SubListPagePage implements OnInit
   public resultPoemsByTypeORSubject:any=[];
   public order:any='desc';
   public is_search_icon_clicked:boolean=false;
+  public is_searched:boolean=false;
+  public searched_text:any='';
+  
   constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
     this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
@@ -244,7 +247,8 @@ export class SubListPagePage implements OnInit
       let objData = 
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
-        order:this.order
+        order:this.order,
+        searched_text:this.searched_text
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -274,7 +278,8 @@ export class SubListPagePage implements OnInit
       let objData = 
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
-        order:this.order
+        order:this.order,
+        searched_text:this.searched_text
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -293,5 +298,72 @@ export class SubListPagePage implements OnInit
   showHideSearchBar()
   {
     this.is_search_icon_clicked = !this.is_search_icon_clicked;    
+  }
+
+  async searchPoem(form)
+  {
+    let searched_text = form.controls.search_text.value; 
+    this.searched_text = (searched_text) ? searched_text : '';   
+    this.is_searched = true;
+    this.resultPoemsByTypeORSubject=[];
+    /*POEM TYPE*/
+    //LOADER
+		const loadingPoemType = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingPoemType.present();
+		//LOADER
+    if(this.poem_or_subject_occassion=="by_poem_type")
+    {
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order,
+        searched_text:searched_text
+      }
+      await this.client.getPoemsByPoemType(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    if(this.poem_or_subject_occassion=="by_subject_occassion")
+    {
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order,
+        searched_text:searched_text
+      }
+      await this.client.getPoemsBySubject(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    /*POEM TYPE*/
+  }
+
+  resetSearch()
+  {
+    this.searched_text='';
+    this.is_searched=false;
+    this.ionViewWillEnter();
   }
 }
