@@ -224,16 +224,18 @@ ion-app {
     background-color: #041f1e;
 }
 .no-records{
-    font-size: 15px;
-    line-height: 19px;
+    font-size: 16px;
+    line-height: 18px;
     color: #eb445a;
     text-align: center;
+    font-family: var(--font-Poppins-Medium);
 }
 .validation-errors {
-    font-size: 15px;
-    line-height: 19px;
+    font-size: 16px;
+    line-height: 18px;
     color: #eb445a;
     padding-top: 5px;
+    font-family: var(--font-Poppins-Medium);
 
     .error-message {
         display: flex;

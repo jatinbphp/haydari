@@ -34,8 +34,10 @@
 			</ion-row>
 			<ion-row class="img-nm-box-list">
 				<ion-col *ngFor="let PoemTypes of resultPoemTypes;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(PoemTypes.id,PoemTypes.PoemTypeName,'by_poem_type')">
-					<img src="../assets/images/type-img1.png">
-					<h3>{{PoemTypes.PoemTypeName}}</h3>
+					<div class="img-nm-box-inner">
+						<img src="../assets/images/type-img1.png">
+						<h3>{{PoemTypes.PoemTypeName}}</h3>
+					</div>
 				</ion-col>
 			</ion-row>
 		</ion-grid>
@@ -47,8 +49,10 @@
 			</ion-row>
 			<ion-row class="img-nm-box-list">
 				<ion-col *ngFor="let SubjectOccasion of resultSubjectOccasion;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(SubjectOccasion.id,SubjectOccasion.subjectName,'by_subject_occassion')">
-					<img src="../assets/images/suboc-img1.png">
-					<h3>{{SubjectOccasion.subjectName}}</h3>
+					<div class="img-nm-box-inner grey-overlay">
+						<img src="../assets/images/suboc-img1.png">
+						<h3>{{SubjectOccasion.subjectName}}</h3>
+					</div>
 				</ion-col>				
 			</ion-row>
 			<ion-row class="btns-sec">

@@ -29,14 +29,40 @@
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>
 		</div>
+		<div class="nm-icon-list">
+			<div class="nm-icon-item">
+				<img src="../assets/images/microphone-icon1.png">
+				<p>Mir Hasan Mir</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/language-icon1.png">
+				<p>Urdu</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/pen-icon1.png">
+				<p>Rehan</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/verify-icon1.png">
+				<p>Verified</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/youtube-icon1.png">
+				<p>youtube</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/feedback-icon1.png">
+				<p>feedback</p>
+			</div>
+		</div>
 		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
 			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">
-				<div class="wish-btn-sec" (click)="makeBookMarkAtRow(resultPoemsDetail.id,line.id,user_id)">
+				<!-- <div class="wish-btn-sec" (click)="makeBookMarkAtRow(resultPoemsDetail.id,line.id,user_id)">
 					<ion-button class="wish-icon">
 						<img src="../assets/images/wishlist-icon1.png" *ngIf="line.PoemBookmark==0">
 						<img src="../assets/images/wishlist-icon2.png" *ngIf="line.PoemBookmark==1">
 					</ion-button>
-				</div>
+				</div> -->
 				<div class="lines-sec">
 					<h6 [innerHTML]="line.PoemText" [style.color]="line.colorCode"></h6>
 					<div class="trans-lines">

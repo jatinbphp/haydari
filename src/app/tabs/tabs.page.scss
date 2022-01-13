@@ -21,10 +21,12 @@ ion-tabs {
     	right: 0px;
     	border-radius: 0px;
     	--border: 0px;
-    	--background: rgba(84,83,83,0.7);
+    	--background: rgba(84,83,83,0.9);
     	padding: 7px 5px;
+    	padding-bottom: calc(env(safe-area-inset-bottom) + 7px);
     	@media(max-width:374px) {
     		padding: 5px 5px;
+    		padding-bottom: calc(env(safe-area-inset-bottom) + 5px);
     	}
 		ion-tab-button {
 			--background: transparent;
