@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
-import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-occasion-detail.page'
+import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-occasion-detail.page';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { ClientService } from '../providers/client.service';
@@ -20,7 +20,7 @@ export class SearchPage
   public resultDataTrendingNow:any=[];
   public resultDataRecentlyViewed:any=[];
   public user_id:any='';
-  public queryString: any=[];
+  public queryString: any=[];  
   
   constructor(public client: ClientService, public modalCtrl: ModalController, public fb: FormBuilder, public loadingCtrl: LoadingController, private route: ActivatedRoute, private router: Router) 
   {}
@@ -120,4 +120,5 @@ export class SearchPage
     };
     this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
   }
+  
 }

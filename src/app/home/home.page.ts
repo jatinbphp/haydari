@@ -164,4 +164,23 @@ export class HomePage
       this.client.router.navigate(['login']);  
     }
   }
+
+  async searchPoem(form)
+  {
+    let searched_text = form.controls.search_text.value;    
+    this.queryString = 
+    {
+      searched_text:searched_text
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/search-result'], navigationExtras);
+  }
+  
 }

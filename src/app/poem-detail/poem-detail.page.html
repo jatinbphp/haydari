@@ -21,7 +21,7 @@
 <ion-content>
 	<div class="mainContent">
 		<div class="pg-title-main">
-			<h2>{{resultPoemsDetail.PoemName}}</h2>
+			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
@@ -32,21 +32,22 @@
 		<div class="nm-icon-list">
 			<div class="nm-icon-item">
 				<img src="../assets/images/microphone-icon1.png">
-				<p>Mir Hasan Mir</p>
+				<p [innerHTML]="resultPoemsDetail.PoetName"></p>
 			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/language-icon1.png">
-				<p>Urdu</p>
+				<p [innerHTML]="resultPoemsDetail.LanguageName"></p>
 			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/pen-icon1.png">
-				<p>Rehan</p>
+				<p [innerHTML]="resultPoemsDetail.ReciterName"></p>
 			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/verify-icon1.png">
-				<p>Verified</p>
+				<p *ngIf="resultPoemsDetail.isVerified==1">Verified</p>
+				<p *ngIf="resultPoemsDetail.isVerified==0">Not Verified</p>
 			</div>
-			<div class="nm-icon-item">
+			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''">
 				<img src="../assets/images/youtube-icon1.png">
 				<p>youtube</p>
 			</div>

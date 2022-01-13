@@ -21,7 +21,8 @@ export class SubListPagePage implements OnInit
   public poem_subject_occassion_nm:any = '';
   public poem_or_subject_occassion:any = '';
   public resultPoemsByTypeORSubject:any=[];
-
+  public order:any='desc';
+  public is_search_icon_clicked:boolean=false;
   constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
     this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
@@ -119,7 +120,8 @@ export class SubListPagePage implements OnInit
     {
       let objData = 
       {
-        poem_subject_occassion_id:this.poem_subject_occassion_id
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -137,7 +139,8 @@ export class SubListPagePage implements OnInit
     {
       let objData = 
       {
-        poem_subject_occassion_id:this.poem_subject_occassion_id
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -211,5 +214,84 @@ export class SubListPagePage implements OnInit
       }
     };
     this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+  }
+
+  async changeOrder(order,poem_or_subject_occassion)
+  {
+    //this.order = order;
+    if(order=="desc")
+    {
+      this.order="asc";
+    }
+    if(order=="asc")
+    {
+      this.order="desc";
+    }
+    console.log(this.order);
+    if(poem_or_subject_occassion=="by_poem_type")
+    {
+      //LOADER
+      const loadingPoemType = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemType.present();
+      //LOADER
+
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order
+      }
+      await this.client.getPoemsByPoemType(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    if(poem_or_subject_occassion=="by_subject_occassion")
+    {
+      //LOADER
+      const loadingPoemType = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemType.present();
+      //LOADER
+
+      let objData = 
+      {
+        poem_subject_occassion_id:this.poem_subject_occassion_id,
+        order:this.order
+      }
+      await this.client.getPoemsBySubject(objData).then(result => 
+      {	
+        loadingPoemType.dismiss();//DISMISS LOADER
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        loadingPoemType.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+  }
+  
+  showHideSearchBar()
+  {
+    this.is_search_icon_clicked = !this.is_search_icon_clicked;    
   }
 }

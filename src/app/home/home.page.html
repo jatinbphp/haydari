@@ -22,7 +22,9 @@
 	<ion-header no-border class="ion-no-border">
 		<ion-toolbar class="src-box">
 			<img src="../assets/images/src-icon1.png">
-			<ion-searchbar placeholder="Search Poem"></ion-searchbar>
+			<form #searchPoemForm="ngForm" novalidate class="search-form">
+			<ion-searchbar placeholder="Search Poem" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="search_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
+			</form>
 		</ion-toolbar>
 	</ion-header>
   	<div class="mainContent">

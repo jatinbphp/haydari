@@ -225,7 +225,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("poemTypeID",data.poem_subject_occassion_id);
+			let dataToPost = new HttpParams().set("poemTypeID",data.poem_subject_occassion_id).set("orderType",data.order);
 			this.http.post(this.api_url + "getPoemsByPoemType",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)
@@ -336,7 +336,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("subjectID",data.poem_subject_occassion_id);
+			let dataToPost = new HttpParams().set("subjectID",data.poem_subject_occassion_id).set("orderType",data.order);
 			this.http.post(this.api_url + "getPoemsBySubject",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)
@@ -420,6 +420,34 @@ export class ClientService
 		{
 			let dataToPost = new HttpParams().set("user_id",data.user_id);
 			this.http.post(this.api_url + "getNewReleasePoems",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
+	searchPoems(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("keyword",data.keyword);
+			this.http.post(this.api_url + "searchPoems",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)
 				{
