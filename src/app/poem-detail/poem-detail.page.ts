@@ -16,6 +16,7 @@ export class PoemDetailPage
 {
   public user_id:any='';
   public poem_id:any='';
+  public from_page:any='';
   public queryStringData: any=[];
   private mediaFile: MediaObject;
   private mediaFileCurrentPosition:any='';
@@ -39,6 +40,7 @@ export class PoemDetailPage
   {
     this.user_id=localStorage.getItem('id');
     this.poem_id='';
+    this.from_page='';
     this.resultPoemsDetailObject=[];
     this.resultPoemsDetail=[];
     this.poemsLine=[];
@@ -52,6 +54,7 @@ export class PoemDetailPage
       });
       
       this.poem_id=this.queryStringData['poem_id'];
+      this.from_page=this.queryStringData['from_page'];
       //LOADER
       const loadingPoemDetail = await this.loadingCtrl.create({
         spinner: null,

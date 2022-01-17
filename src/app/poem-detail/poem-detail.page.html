@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
 	<ion-toolbar class="header-top-box">
-		<ion-buttons slot="start">
+		<ion-buttons slot="start" *ngIf="from_page!='wishlist'">
 			<ion-back-button defaultHref="/tabs/sub-list-page" icon="arrow-back"></ion-back-button>
+		</ion-buttons>
+		<ion-buttons slot="start" *ngIf="from_page=='wishlist'">
+			<ion-back-button defaultHref="/tabs/wishlist" icon="arrow-back"></ion-back-button>
 		</ion-buttons>
 		<ion-title class="ion-text-center"></ion-title>
 		<ion-chip slot="end" (click)="showMyProfile()">

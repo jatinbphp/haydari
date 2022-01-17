@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Media, MediaObject } from '@awesome-cordova-plugins/media/ngx';
 import { LoadingController, ModalController } from '@ionic/angular';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ProfilePage } from '../profile/profile.page';
 import { ClientService } from '../providers/client.service';
+import { ProfilePage } from '../profile/profile.page';
+import { NavigationExtras } from "@angular/router";
 
 @Component({
   selector: 'app-wishlist',
@@ -13,42 +12,44 @@ import { ClientService } from '../providers/client.service';
 
 export class WishlistPage 
 {
-  private mediaFile: MediaObject;
-  private mediaFileCurrentPosition:any='';
-  public isAudioPlayed: boolean = false;
-  constructor(public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
+  public id: any = '';
+  public show_in_view: any = 'list';
+  public resultDataBookMark: any=[];
+  public queryString: any=[];
+  constructor(public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
   {
-    this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
 
-  playAudio()
+  async ionViewWillEnter()
   {
-    if(this.mediaFileCurrentPosition > 0)
-    {
-      //console.log("SEEK");
-      this.mediaFile.seekTo(this.mediaFileCurrentPosition);
-      this.mediaFile.play();
-      this.isAudioPlayed=true;
-    }
-    else 
-    {
-      //console.log("PLAY");
-      this.mediaFile.play();
-      this.isAudioPlayed=true;
-    }
-  }
-
-  pauseAudio()
-  {
-    //console.log("PAUSE");
-    this.mediaFile.pause();    
-    this.isAudioPlayed=false;
-    this.mediaFile.getCurrentPosition().then((position) => {
-      this.mediaFileCurrentPosition = position;
-      console.log(this.mediaFileCurrentPosition);
+    this.id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
+    //LOADER
+    const loadingPoemType = await this.loadingCtrl.create({
+      spinner: null,
+      //duration: 5000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
     });
+    await loadingPoemType.present();
+    //LOADER
+    let objData = 
+    {
+      user_id:this.id
+    }
+    await this.client.getBookmarkPoems(objData).then(result => 
+    {	
+      loadingPoemType.dismiss();//DISMISS LOADER
+      this.resultDataBookMark=result;      
+      console.log(this.resultDataBookMark);
+    },
+    error => 
+    {
+      loadingPoemType.dismiss();//DISMISS LOADER
+      console.log();
+    }); 
   }
-
+  
   async showMyProfile()
   {
     let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
@@ -66,9 +67,21 @@ export class WishlistPage
     }
   }
   
-  ionViewDidLeave()
+  getPoemsDetail(id)
   {
-    this.mediaFile.release();
+    this.queryString = 
+    {
+      poem_id:id,
+      from_page:'wishlist'
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
   }
-  
 }
