@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 @Component({
   selector: 'app-register',
@@ -43,8 +44,10 @@ export class RegisterPage implements OnInit
 		],
 	};
 
-	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
-	{ }
+	constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	{ 
+		this.keyboard.hideFormAccessoryBar(false);
+	}
 
   	ngOnInit() 
 	{ }

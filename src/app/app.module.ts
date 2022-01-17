@@ -5,6 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Media } from '@awesome-cordova-plugins/media/ngx';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   [
     HttpClient,
     Media,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],

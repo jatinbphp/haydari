@@ -35,6 +35,15 @@ ion-header {
 					color: #98a886;
 				}
 			}
+			ion-back-button {
+				--padding-start: 0px;
+				--padding-end: 20px;
+				--border-radius: 0px;
+				width: 40px;
+				height: 40px;
+				--color: #98a886;
+				color: #98a886;
+			}
 		}
 		ion-button {
 			--background: transparent;

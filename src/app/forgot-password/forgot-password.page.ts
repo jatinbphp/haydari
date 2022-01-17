@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,41 +25,43 @@ export class ForgotPasswordPage implements OnInit
 		]
 	};
 
-	constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
-	{ }
+	constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	{ 
+		this.keyboard.hideFormAccessoryBar(false);
+	}
 
-  ngOnInit()
-  {}
+	ngOnInit()
+	{}
 
-  async updateMyPassword(form)
-  {
-    //LOADER
-		const loading = await this.loadingCtrl.create({
-			spinner: null,
-			//duration: 5000,
-			message: 'Please wait...',
-			translucent: true,
-			cssClass: 'custom-class custom-loading'
-		});
-		await loading.present();
+	async updateMyPassword(form)
+	{
 		//LOADER
+			const loading = await this.loadingCtrl.create({
+				spinner: null,
+				//duration: 5000,
+				message: 'Please wait...',
+				translucent: true,
+				cssClass: 'custom-class custom-loading'
+			});
+			await loading.present();
+			//LOADER
 
-		let data=
-		{
-			username:form.username
-		}
-		await this.client.updateMyPassword(data).then(result => 
-		{	
-			loading.dismiss();//DISMISS LOADER			
-			this.resultData=result;
-			this.client.router.navigate(['/login']);
-			console.log(this.resultData);
-						
-		},
-		error => 
-		{
-			loading.dismiss();//DISMISS LOADER
-			console.log();
-		});
-  }
+			let data=
+			{
+				username:form.username
+			}
+			await this.client.updateMyPassword(data).then(result => 
+			{	
+				loading.dismiss();//DISMISS LOADER			
+				this.resultData=result;
+				this.client.router.navigate(['/login']);
+				console.log(this.resultData);
+							
+			},
+			error => 
+			{
+				loading.dismiss();//DISMISS LOADER
+				console.log();
+			});
+	}
 }

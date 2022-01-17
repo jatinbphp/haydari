@@ -32,7 +32,7 @@ export class AppComponent
   {
     this.platform.backButton.subscribeWithPriority(10, () => {
       console.log('Handler was called!');
-    });//PREVENT BACK BUTTON
+    });//PREVENT BACK BUTTON    
     
     this.token=localStorage.getItem('token');
     /*POEM TYPE*/
@@ -53,12 +53,12 @@ export class AppComponent
         }
       }
       let objOtherAction=[
-        {
+        /*{
           id:0,
           title:'Offline',
           shouldFunction:0,
           url: '/tabs/home'
-        },
+        },*/
         {
           id:0,
           title:'About',
@@ -71,12 +71,12 @@ export class AppComponent
           shouldFunction:1,
           url: ''
         },
-        {
+        /*{
           id:0,
           title:'Settings',
           shouldFunction:0,
           url: '/tabs/home'
-        },
+        },*/
         {
           id:0,
           title:'Logout',

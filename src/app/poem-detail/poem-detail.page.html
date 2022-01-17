@@ -1,11 +1,14 @@
 <ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>      
-    </ion-buttons>
-    <ion-title>Wishlist</ion-title>    
-  </ion-toolbar> -->
-  	<ion-toolbar class="header-top-box">
+	<ion-toolbar class="header-top-box">
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/tabs/sub-list-page" icon="arrow-back"></ion-back-button>
+		</ion-buttons>
+		<ion-title class="ion-text-center"></ion-title>
+		<ion-chip slot="end" (click)="showMyProfile()">
+			<ion-img src="../assets/images/user-icon1.png"></ion-img>
+		</ion-chip>
+	</ion-toolbar>
+  	<!--<ion-toolbar class="header-top-box">
 		<ion-buttons slot="start">
 			<ion-menu-button>
 				<ion-icon name="menu"></ion-icon>
@@ -15,7 +18,7 @@
 		<ion-chip slot="end" (click)="showMyProfile()">
 			<ion-img src="../assets/images/user-icon1.png"></ion-img>
 		</ion-chip>
-	</ion-toolbar>
+	</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
@@ -166,7 +169,7 @@
 		<!--REFERENCE::HTML::ENDS-->
 	</div>
 </ion-content>
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border" *ngIf="isAudioPlayed == false && MP3Link!=''">
 	<ion-row class="btm-play-box clr-red">
 		<ion-col class="img">
 			<img src="../assets/images/icon1.png">

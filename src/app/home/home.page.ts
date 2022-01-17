@@ -4,6 +4,7 @@ import { NavigationExtras } from '@angular/router';
 import { ClientService } from '../providers/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,10 @@ export class HomePage
   public resultSubjectOccasion:any=[];
   public resultReciters:any=[];
   public resultLanguages:any=[];
-  constructor(public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
-  { }
+  constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
+  { 
+    this.keyboard.hideFormAccessoryBar(false);
+  }
 
   async ngOnInit() 
 	{ 

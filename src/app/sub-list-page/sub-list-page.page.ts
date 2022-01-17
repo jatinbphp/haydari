@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 @Component({
   selector: 'app-sub-list-page',
@@ -26,8 +27,9 @@ export class SubListPagePage implements OnInit
   public is_searched:boolean=false;
   public searched_text:any='';
   
-  constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
+  constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
+    this.keyboard.hideFormAccessoryBar(false);
     this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
     {
       console.log(data);
