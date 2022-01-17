@@ -53,7 +53,7 @@
 				<p *ngIf="resultPoemsDetail.isVerified==1">Verified</p>
 				<p *ngIf="resultPoemsDetail.isVerified==0">Not Verified</p>
 			</div>
-			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''">
+			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''" (click)="openYouTubeURL(resultPoemsDetail.YouTubeURL)">
 				<img src="../assets/images/youtube-icon1.png">
 				<p>youtube</p>
 			</div>

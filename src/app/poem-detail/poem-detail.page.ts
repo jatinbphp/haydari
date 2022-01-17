@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
+import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-poem-detail',
@@ -28,7 +29,7 @@ export class PoemDetailPage
   public resultPoem
   public MP3Link:string='';
 
-  constructor(public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
+  constructor(private inAppBrowser: InAppBrowser, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
@@ -180,6 +181,29 @@ export class PoemDetailPage
     {
       this.client.router.navigate(['login']);  
     }
+  }
+
+  openYouTubeURL(targetURL)
+  {
+    const options : InAppBrowserOptions = {
+      location : 'yes',//Or 'no' 
+      hidden : 'no', //Or  'yes'
+      clearcache : 'yes',
+      clearsessioncache : 'yes',
+      zoom : 'yes',//Android only ,shows browser zoom controls 
+      hardwareback : 'yes',
+      mediaPlaybackRequiresUserAction : 'no',
+      shouldPauseOnSuspend : 'no', //Android only 
+      closebuttoncaption : 'Close', //iOS only
+      disallowoverscroll : 'no', //iOS only 
+      toolbar : 'yes', //iOS only 
+      enableViewportScale : 'no', //iOS only 
+      allowInlineMediaPlayback : 'no',//iOS only 
+      presentationstyle : 'pagesheet',//iOS only 
+      fullscreen : 'yes',//Windows only    
+    };
+    let target = "_system";
+    this.inAppBrowser.create(targetURL,target,options);
   }
 
   ionViewDidLeave()

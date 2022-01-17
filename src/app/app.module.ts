@@ -9,6 +9,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClient,
     Media,
     Keyboard,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],
