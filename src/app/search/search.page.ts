@@ -108,7 +108,8 @@ export class SearchPage
   {
     this.queryString = 
     {
-      poem_id:id
+      poem_id:id,
+      from_page:'search'
     };
 
     let navigationExtras: NavigationExtras = 
