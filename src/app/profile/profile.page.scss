@@ -29,6 +29,11 @@ ion-content {
 					&.close-icon{
 						justify-content: center;
 						align-items: center;
+						ion-icon {
+							position: unset;
+						    background: unset;
+						    color: rgba(255, 255, 255, 0.6);;
+						}
 					}
 					&.align-center {
 						display: flex;

@@ -6,10 +6,15 @@
 		<ion-buttons slot="start" *ngIf="from_page=='search'">
 			<ion-back-button defaultHref="/tabs/search" icon="arrow-back"></ion-back-button>
 		</ion-buttons>
-		<ion-buttons slot="start" *ngIf="from_page=='wishlist'">
+		<!-- <ion-buttons slot="start" *ngIf="from_page=='wishlist'">
 			<ion-back-button defaultHref="/tabs/wishlist" icon="arrow-back"></ion-back-button>
-		</ion-buttons>
+		</ion-buttons> -->
 		<ion-title class="ion-text-center"></ion-title>
+		<ion-chip slot="end">
+			<ion-icon name="heart-sharp"></ion-icon>
+			<!-- <ion-img src="../assets/images/wishlist-icon1.png"></ion-img> -->
+			<!-- <ion-button class="wish-icon"><img src="../assets/images/wishlist-icon1.png"></ion-button> -->
+		</ion-chip>
 		<ion-chip slot="end" (click)="showMyProfile()">
 			<ion-img src="../assets/images/user-icon1.png"></ion-img>
 		</ion-chip>
@@ -67,12 +72,6 @@
 		</div>
 		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
 			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">
-				<div class="wish-btn-sec" (click)="makeBookMarkAtRow(resultPoemsDetail.id,line.id,user_id)">
-					<ion-button class="wish-icon">
-						<img src="../assets/images/wishlist-icon1.png" *ngIf="line.PoemBookmark==0">
-						<img src="../assets/images/wishlist-icon2.png" *ngIf="line.PoemBookmark==1">
-					</ion-button>
-				</div>
 				<div class="lines-sec">
 					<h6 [innerHTML]="line.PoemText" [style.color]="line.colorCode"></h6>
 					<div class="trans-lines">

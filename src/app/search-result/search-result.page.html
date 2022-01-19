@@ -16,17 +16,22 @@
 </ion-header>
 
 <ion-content>
-	<div class="mainContent">		
+	<div class="mainContent">	
+		<div class="src-box">
+			<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
+			<ion-button class="src-icon-btn"><img src="../assets/images/src-icon1.png"></ion-button>
+			<ion-button class="reset-icon-btn"><ion-icon name="refresh-circle"></ion-icon></ion-button>
+		</div>	
 		<div class="pg-title-main">
 			<h2 [innerHTML]="searched_text"></h2>
-			<ion-button (click)="showHideSearchBar()">
+			<!-- <ion-button (click)="showHideSearchBar()">
 				<img src="../assets/images/search-icon1.png">
-			</ion-button>
-			<div class="src-box" [ngClass]="{'show-src-box' : is_search_icon_clicked == true}">
+			</ion-button> -->
+			<!-- <div class="src-box" [ngClass]="{'show-src-box' : is_search_icon_clicked == true}">
 				<form #searchPoemForm="ngForm" novalidate class="search-form">
 				<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="search_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<div class="update-filter-main">
 			<div class="update-sec">

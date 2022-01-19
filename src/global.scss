@@ -150,21 +150,45 @@ app-home {
     .src-box {
     	position: relative;
     	img {
-    		position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 20px;
-            z-index: 9;
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-            margin: auto 0px;
+    		// position: absolute;
+      //       top: 0;
+      //       bottom: 0;
+      //       left: 20px;
+      //       z-index: 9;
+      //       width: 22px;
+      //       height: 22px;
+      //       object-fit: contain;
+      //       margin: auto 0px;
         }
     	ion-searchbar {
     		input {
-                padding-left: 50px !important;
+                padding-right: 60px !important;
+                padding-left: 20px !important;
             }
     	}
+        ion-button {
+            &.src-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
+            }
+            &.reset-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                ion-icon {
+                    color: #000;
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
+            }
+        }
     }
 }
 
@@ -172,19 +196,43 @@ app-search {
     .src-box {
         position: relative;
         img {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 20px;
-            z-index: 9;
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-            margin: auto 0px;
+            // position: absolute;
+            // top: 0;
+            // bottom: 0;
+            // left: 20px;
+            // z-index: 9;
+            // width: 22px;
+            // height: 22px;
+            // object-fit: contain;
+            // margin: auto 0px;
         }
         ion-searchbar {
             input {
-                padding-left: 50px !important;
+                padding-right: 60px !important;
+                padding-left: 20px !important;
+            }
+        }
+        ion-button {
+            &.src-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
+            }
+            &.reset-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                ion-icon {
+                    color: #000;
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
             }
         }
     }
@@ -194,20 +242,43 @@ app-library {
     .src-box {
         position: relative;
         img {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 20px;
-            z-index: 9;
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-            margin: auto 0px;
+            // position: absolute;
+            // top: 0;
+            // bottom: 0;
+            // right: 20px;
+            // z-index: 9;
+            // width: 22px;
+            // height: 22px;
+            // object-fit: contain;
+            // margin: auto 0px;
         }
         ion-searchbar {
             input {
-                padding-right: 50px !important;
+                padding-right: 60px !important;
                 padding-left: 20px !important;
+            }
+        }
+        ion-button {
+            &.src-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
+            }
+            &.reset-icon-btn {
+                position: absolute;
+                top: 13px;
+                right: 28px;
+                ion-icon {
+                    color: #000;
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                }
             }
         }
     }
@@ -215,13 +286,21 @@ app-library {
 
 app-search-result {
     ion-searchbar {
-        height: 36px !important;
+        // height: 36px !important;
+        input {
+            padding-right: 60px !important;
+            padding-left: 20px !important;
+        }
     }
 }
 
 app-sub-list-page {
     ion-searchbar {
-        height: 36px !important;
+        // height: 36px !important;
+        input {
+            padding-right: 60px !important;
+            padding-left: 20px !important;
+        }
     }
 }
 

@@ -69,6 +69,54 @@ ion-content {
 	--background: #041f1e;
 	.mainContent {
 		padding: 0px 24px 70px;
+		.src-box {
+			width: 100%;
+			position: relative;
+			padding: 0px 0px 20px;
+			ion-button {
+	            &.src-icon-btn {
+	            	--background: transparent;
+					--background-hover: transparent;
+		            --background-activated: transparent;
+		            --background-focused: transparent;
+			        --color: #98a886;
+			        --padding-start: 0;
+			        --padding-end: 0;
+			        margin: 0;
+			        font-size: 25px;
+			        height: fit-content;
+	                position: absolute;
+	                top: 13px;
+	                right: 28px;
+	                img {
+	                    width: 25px;
+	                    height: 25px;
+	                    object-fit: contain;
+	                }
+	            }
+	            &.reset-icon-btn {
+	            	--background: transparent;
+					--background-hover: transparent;
+		            --background-activated: transparent;
+		            --background-focused: transparent;
+			        --color: #98a886;
+			        --padding-start: 0;
+			        --padding-end: 0;
+			        margin: 0;
+			        font-size: 25px;
+			        height: fit-content;
+	                position: absolute;
+	                top: 13px;
+	                right: 28px;
+	                ion-icon {
+	                    color: #000;
+	                    width: 25px;
+	                    height: 25px;
+	                    object-fit: contain;
+	                }
+	            }
+	        }
+		}
 		.pg-title-main {
 			width: 100%;
 			padding: 0px 0px 32px;

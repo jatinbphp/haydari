@@ -24,8 +24,22 @@ ion-content {
 		}
 		ion-grid {
 			ion-row {
+				position: relative;
 				ion-col {
 					position: relative;
+					&.close-icon{
+						justify-content: center;
+						align-items: center;
+						position: absolute;
+						top: 0px;
+						right: -20px;
+						ion-icon {
+							position: unset;
+						    background: unset;
+						    color: rgba(255, 255, 255, 0.6);
+						    margin: 0px;
+						}
+					}
 					&.align-center {
 						display: flex;
 					    flex-wrap: wrap;

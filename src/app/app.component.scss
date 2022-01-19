@@ -37,7 +37,8 @@ ion-menu {
 				}
 				ion-icon {
 					position: absolute;
-					top: -35px;
+					// top: -35px;
+					top: calc(env(safe-area-inset-top) + -35px);
 					right: 10px;
 					color: rgba(0,0,0,0.3);
 					width: 40px;
