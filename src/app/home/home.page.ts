@@ -19,6 +19,7 @@ export class HomePage
   public resultSubjectOccasion:any=[];
   public resultReciters:any=[];
   public resultLanguages:any=[];
+  public searched_text:string='';
   constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { 
     this.keyboard.hideFormAccessoryBar(false);
@@ -26,6 +27,7 @@ export class HomePage
 
   async ngOnInit() 
 	{ 
+    this.searched_text = '';
     this.menu.enable(true);
     /*POEM TYPE*/
     //LOADER
@@ -123,7 +125,7 @@ export class HomePage
 
   library()
   {
-    this.client.router.navigateByUrl('/tabs/type-views');
+    this.client.router.navigateByUrl('/tabs/search');
   }
   
   showPoemByPoemTypeORSubjectOccassion(id,poem_subject_occassion,type)
@@ -170,10 +172,10 @@ export class HomePage
 
   async searchPoem(form)
   {
-    let searched_text = form.controls.search_text.value;    
+    this.searched_text = form.controls.search_text.value;    
     this.queryString = 
     {
-      searched_text:searched_text
+      searched_text:this.searched_text
     };
 
     let navigationExtras: NavigationExtras = 
@@ -183,6 +185,7 @@ export class HomePage
         special: JSON.stringify(this.queryString)
       }
     };
+    this.searched_text = '';
     this.client.router.navigate(['tabs/search-result'], navigationExtras);
   }
   

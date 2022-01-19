@@ -41,6 +41,7 @@ export class AppComponent
       this.resultPoemTypes=result; 
       if(this.resultPoemTypes.length > 0)
       {
+        this.appPages.push({id:0,title:'Home',shouldFunction:0,url: '/tabs/home'});
         for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
         {
           let objPoemType = {
@@ -53,12 +54,12 @@ export class AppComponent
         }
       }
       let objOtherAction=[
-        /*{
+        {
           id:0,
-          title:'Offline',
+          title:'My Bookmarks',
           shouldFunction:0,
-          url: '/tabs/home'
-        },*/
+          url: '/tabs/wishlist'
+        },
         {
           id:0,
           title:'About',

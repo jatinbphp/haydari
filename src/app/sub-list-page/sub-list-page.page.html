@@ -18,9 +18,15 @@
 <ion-content>
 	<div class="mainContent">
 		<div class="src-box">
-			<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
-			<ion-button class="src-icon-btn"><img src="../assets/images/src-icon1.png"></ion-button>
-			<ion-button class="reset-icon-btn"><ion-icon name="refresh-circle"></ion-icon></ion-button>
+			<form #searchPoemForm="ngForm" novalidate class="search-form">
+				<ion-searchbar placeholder="Search Poem" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}"></ion-searchbar>
+				<ion-button class="src-icon-btn" (click)="searchPoem(searchPoemForm)" *ngIf="searched_text=='' || is_searched == false">
+					<img src="../assets/images/src-icon1.png">
+				</ion-button>
+				<ion-button class="reset-icon-btn" *ngIf="searched_text!='' && is_searched == true" (click)="resetSearch()">
+					<ion-icon name="refresh-circle"></ion-icon>
+				</ion-button>
+			</form>
 		</div>
 		<div class="pg-title-main">
 			<h2 [innerHTML]="poem_subject_occassion_nm"></h2>
@@ -89,20 +95,20 @@
 					<h6 [innerHTML]="poems.PoemName" [style.color]="poems.colorCode"></h6>
 					<div class="nm-icon-list">
 						<div class="nm-icon-item">
-							<img src="../assets/images/pen-icon1.png">
-							<p [innerHTML]="poems.ReciterName" *ngIf="poems.ReciterName!=null"></p>
-							<p *ngIf="poems.ReciterName==null">unknown</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/microphone-icon1.png">
-							<p [innerHTML]="poems.PoetName" *ngIf="poems.PoetName!=null"></p>
-							<p *ngIf="poems.PoetName==null">unknown</p>
-						</div>
-						<div class="nm-icon-item">
 							<img src="../assets/images/language-icon1.png">
 							<p [innerHTML]="poems.LanguageName" *ngIf="poems.LanguageName!=null"></p>
 							<p *ngIf="poems.LanguageName==null">unknown</p>
 						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p [innerHTML]="poems.ReciterName" *ngIf="poems.ReciterName!=null"></p>
+							<p *ngIf="poems.ReciterName==null">unknown</p>
+						</div>
+						<!--<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p [innerHTML]="poems.PoetName" *ngIf="poems.PoetName!=null"></p>
+							<p *ngIf="poems.PoetName==null">unknown</p>
+						</div>-->						
 					</div>
 				</ion-label>
 			</ion-col>			

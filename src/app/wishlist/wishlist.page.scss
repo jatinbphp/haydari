@@ -69,6 +69,18 @@ ion-content {
 	--background: #041f1e;
 	.mainContent {
 		padding: 0px 24px 70px;
+		h3 {
+			width: 100%;
+			font-size: 24px;
+			line-height: 26px;
+			font-family: var(--font-Poppins-Regular);
+			color: var(--White);
+			margin: 0px 0px;
+			@media(max-width:374px) {
+				font-size: 21px;
+				line-height: 23px;
+			}
+		}
 		.pg-title-main {
 			width: 100%;
 			padding: 0px 0px 32px;

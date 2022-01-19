@@ -166,7 +166,8 @@ export class PoemDetailPage
         this.resultPoemsForBookmark=result;	
         if(this.resultPoemsForBookmark.status==true)
         {
-          this.client.showMessage(this.resultPoemsForBookmark.message);
+          //this.client.showMessage(this.resultPoemsForBookmark.message);
+          this.client.showMessage("Poem is bookmarked.<br />\nYou will see this poem on wishlist screen.");
         }
         this.ionViewWillEnter();
         console.log(result);

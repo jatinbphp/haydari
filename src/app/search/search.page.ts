@@ -21,7 +21,7 @@ export class SearchPage
   public resultDataRecentlyViewed:any=[];
   public user_id:any='';
   public queryString: any=[];  
-  
+  public searched_text:string='';
   constructor(public client: ClientService, public modalCtrl: ModalController, public fb: FormBuilder, public loadingCtrl: LoadingController, private route: ActivatedRoute, private router: Router) 
   {}
   
@@ -30,6 +30,7 @@ export class SearchPage
 
   async ionViewWillEnter() 
 	{
+    this.searched_text='';
     this.user_id = (localStorage.getItem('id')) ? localStorage.getItem('id') : 0;
     //LOADER
 		const loading = await this.loadingCtrl.create({
@@ -122,4 +123,22 @@ export class SearchPage
     this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
   }
   
+  async searchPoem(form)
+  {
+    this.searched_text = form.controls.search_text.value;    
+    this.queryString = 
+    {
+      searched_text:this.searched_text
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.searched_text = '';
+    this.client.router.navigate(['tabs/search-result'], navigationExtras);
+  }
 }
