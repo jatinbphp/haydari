@@ -21,7 +21,7 @@
 <ion-content>
 	<p *ngIf="id == undefined" class="no-records">You must be <ion-router-link routerDirection="root" routerLink="/login" color="danger">login</ion-router-link> to see your bookmarks.</p>	
 	<div class="mainContent">
-		<h3>My Bookmarks</h3>
+		<h3 *ngIf="resultDataBookMark.length > 0 && id != undefined">My Bookmarks</h3>
 		<p class="no-records" *ngIf="resultDataBookMark.length == 0 && id != undefined">No records available</p>
 		<ion-row *ngIf="resultDataBookMark.length > 0" class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">
 			<ion-col *ngFor="let poems of resultDataBookMark; let p = index;" [ngClass]="{'clr-green' : p % 2 == 0}" class="item-box-main clr-red" (click)="getPoemsDetail(poems.id)">
@@ -65,20 +65,20 @@
 					<h6 [innerHTML]="poems.PoemName" [style.color]="poems.colorCode"></h6>
 					<div class="nm-icon-list">
 						<div class="nm-icon-item">
-							<img src="../assets/images/pen-icon1.png">
-							<p [innerHTML]="poems.ReciterName" *ngIf="poems.ReciterName!=null"></p>
-							<p *ngIf="poems.ReciterName==null">unknown</p>
-						</div>
-						<div class="nm-icon-item">
-							<img src="../assets/images/microphone-icon1.png">
-							<p [innerHTML]="poems.PoetName" *ngIf="poems.PoetName!=null"></p>
-							<p *ngIf="poems.PoetName==null">unknown</p>
-						</div>
-						<div class="nm-icon-item">
 							<img src="../assets/images/language-icon1.png">
 							<p [innerHTML]="poems.LanguageName" *ngIf="poems.LanguageName!=null"></p>
 							<p *ngIf="poems.LanguageName==null">unknown</p>
 						</div>
+						<div class="nm-icon-item">
+							<img src="../assets/images/microphone-icon1.png">
+							<p [innerHTML]="poems.ReciterName" *ngIf="poems.ReciterName!=null"></p>
+							<p *ngIf="poems.ReciterName==null">unknown</p>
+						</div>
+						<!--<div class="nm-icon-item">
+							<img src="../assets/images/pen-icon1.png">
+							<p [innerHTML]="poems.PoetName" *ngIf="poems.PoetName!=null"></p>
+							<p *ngIf="poems.PoetName==null">unknown</p>
+						</div>-->
 					</div>
 				</ion-label>
 			</ion-col>			

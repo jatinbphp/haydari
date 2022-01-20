@@ -34,7 +34,7 @@ export class SubListPagePage implements OnInit
     {
       console.log(data);
       this.poem_subject_occassion_id=data.poem_subject_occassion_id;
-      this.poem_subject_occassion_nm=data.poem_subject_occassion_nm;
+      this.poem_subject_occassion_nm=data.poem_subject_occassion_nm.replace("/ ", "/");
       this.poem_or_subject_occassion=data.poem_or_subject_occassion;
       this.resultPoemsByTypeORSubject = [];
       /*POEM TYPE*/
@@ -93,6 +93,8 @@ export class SubListPagePage implements OnInit
   
   async ionViewWillEnter()
   {
+    this.searched_text='';
+    this.is_searched=false;
     this.poem_subject_occassion_id='';
     this.poem_subject_occassion_nm='';
     this.poem_or_subject_occassion='';
@@ -107,7 +109,7 @@ export class SubListPagePage implements OnInit
     });
     
     this.poem_subject_occassion_id=this.queryStringData['poem_subject_occassion_id'];
-    this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'];
+    this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'].replace("/ ", "/");
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
 
     /*POEM TYPE*/
@@ -367,5 +369,11 @@ export class SubListPagePage implements OnInit
     this.searched_text='';
     this.is_searched=false;
     this.ionViewWillEnter();
+  }
+
+  ionViewDidLeave()
+  {
+    this.searched_text='';
+    this.is_searched=false;
   }
 }

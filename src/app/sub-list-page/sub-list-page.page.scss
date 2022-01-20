@@ -69,6 +69,7 @@ ion-content {
 	--background: #041f1e;
 	.mainContent {
 		padding: 0px 24px 70px;
+		/*
 		.src-box {
 			width: 100%;
 			position: relative;
@@ -116,16 +117,20 @@ ion-content {
 	                }
 	            }
 	        }
-		}
+		}*/
 		.pg-title-main {
 			width: 100%;
-			padding: 0px 0px 32px;
+			padding: 0px 0px 32px 5px;/*BEFORE::0px 0px 32px;*/
+			align-items: flex-end !important;/*MAULIK::ADDED*/
 			display: flex;
 		    flex-wrap: wrap;
 		    align-items: center;
 		    position: relative;
 		    transition: 0.4s all ease-in-out;
 		    overflow: hidden;
+			ion-searchbar {
+				height: 50px !important;
+			}/*MAULIK::ADDED*/
 			h2 {
 				width: calc(100% - 22px);
 				font-size: 22px;
@@ -163,7 +168,7 @@ ion-content {
 			    	left: 0px !important;
 				    right: unset !important;
 				    width: calc(100% - 30px) !important;
-				    height: 36px !important;
+				    height: 50px !important;/*36px !important;*/
 			    }
 			}
 		}
@@ -303,6 +308,7 @@ ion-content {
 									width: -moz-fit-content;
 									width: -ms-fit-content;
 									width: -o-fit-content;
+									min-width: 90px;
 									display: flex;
 									flex-flow: row;
 									align-items: center;

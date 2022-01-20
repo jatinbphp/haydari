@@ -43,7 +43,16 @@ export class HomePage
     await this.client.getPoemTypes().then(result => 
     {	
       loadingPoemType.dismiss();//DISMISS LOADER
-      this.resultPoemTypes=result;      
+      this.resultPoemTypes=result;
+      if(this.resultPoemTypes.length > 0)
+      {
+        for(let p = 0; p < this.resultPoemTypes.length; p ++)
+        {
+          let PoemTypeName = this.resultPoemTypes[p].PoemTypeName.replace("/ ", "/<br>");
+          this.resultPoemTypes[p]['PoemTypeName']=PoemTypeName;
+          console.log(PoemTypeName);
+        }
+      }      
       console.log(this.resultPoemTypes);
     },
     error => 

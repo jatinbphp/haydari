@@ -281,7 +281,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("poem_id",data.poem_id).set("poem_line_id",data.poem_line_id).set("user_id",data.user_id);
+			let dataToPost = new HttpParams().set("poem_id",data.poem_id).set("poem_line_id",data.poem_line_id).set("user_id",data.user_id).set("is_to_insert",data.is_to_insert);
 			this.http.post(this.api_url + "poemLineWishlist",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)

@@ -44,9 +44,10 @@ export class AppComponent
         this.appPages.push({id:0,title:'Home',shouldFunction:0,url: '/tabs/home'});
         for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
         {
+          let checkSlashInString = this.resultPoemTypes[p]['PoemTypeName'].replace("/ ", "/");
           let objPoemType = {
             id:this.resultPoemTypes[p]['id'],
-            title:this.resultPoemTypes[p]['PoemTypeName'],
+            title:checkSlashInString,
             shouldFunction:1,
             url:''
           }

@@ -10,10 +10,15 @@
 			<ion-back-button defaultHref="/tabs/wishlist" icon="arrow-back" text=""></ion-back-button>
 		</ion-buttons>
 		<ion-title class="ion-text-center"></ion-title>
-		<ion-chip slot="end" (click)="makeBookMarkAtRow(resultPoemsDetail.id,0,user_id)">
-			<ion-icon name="heart-sharp"></ion-icon>
-			<!-- <ion-img src="../assets/images/wishlist-icon1.png"></ion-img> -->
-			<!-- <ion-button class="wish-icon"><img src="../assets/images/wishlist-icon1.png"></ion-button> -->
+		<ion-chip slot="end" (click)="makeBookMarkAtRow(resultPoemsDetail.id,0,user_id,1)" *ngIf="resultPoemsDetail.bookmarkStatus == 0">
+			<ion-button class="wish-icon">
+				<img src="../assets/images/wishlist-icon1.png">
+			</ion-button>
+		</ion-chip>
+		<ion-chip slot="end" (click)="makeBookMarkAtRow(resultPoemsDetail.id,0,user_id,0)" *ngIf="resultPoemsDetail.bookmarkStatus == 1">
+			<ion-button class="wish-icon">
+				<img src="../assets/images/wishlist-icon2.png">
+			</ion-button>
 		</ion-chip>
 		<ion-chip slot="end" (click)="showMyProfile()">
 			<ion-img src="../assets/images/user-icon1.png"></ion-img>
@@ -39,9 +44,45 @@
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()">
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playMediaInPOPUP(resultPoemsDetail.id)"><!--BEFORE::playAudio()-->
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>
+		</div>
+		<!--<div class="nm-icon-list">
+			<div class="nm-icon-item">
+				<img src="../assets/images/language-icon1.png">
+				<p [innerHTML]="resultPoemsDetail.LanguageName"></p>
+			</div>						
+			<div class="nm-icon-item">
+				<img src="../assets/images/microphone-icon1.png">
+				<p [innerHTML]="resultPoemsDetail.ReciterName"></p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/pen-icon1.png">
+				<p [innerHTML]="resultPoemsDetail.PoetName"></p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/verify-icon1.png">
+				<p [innerHTML]="resultPoemsDetail.SubjectName"></p>
+			</div>			
+			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''" (click)="openYouTubeURL(resultPoemsDetail.YouTubeURL)">
+				<img src="../assets/images/youtube-icon1.png">
+				<p>youtube</p>
+			</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/feedback-icon1.png">
+				<p>feedback</p>
+			</div>
+		</div>-->
+		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
+			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">
+				<div class="lines-sec">
+					<h6 [innerHTML]="line.PoemText" [style.color]="line.colorCode"></h6>
+					<div class="trans-lines" *ngIf="line.TranslatedText!=''">
+						<h6 [innerHTML]="line.TranslatedText"></h6>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="nm-icon-list">
 			<div class="nm-icon-item">
@@ -52,15 +93,14 @@
 				<img src="../assets/images/microphone-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.ReciterName"></p>
 			</div>
-			<!--<div class="nm-icon-item">
+			<div class="nm-icon-item">
 				<img src="../assets/images/pen-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.PoetName"></p>
-			</div>-->
+			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/verify-icon1.png">
-				<p *ngIf="resultPoemsDetail.isVerified==1">Verified</p>
-				<p *ngIf="resultPoemsDetail.isVerified==0">Not Verified</p>
-			</div>
+				<p [innerHTML]="resultPoemsDetail.SubjectName"></p>
+			</div>			
 			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''" (click)="openYouTubeURL(resultPoemsDetail.YouTubeURL)">
 				<img src="../assets/images/youtube-icon1.png">
 				<p>youtube</p>
@@ -68,16 +108,6 @@
 			<div class="nm-icon-item">
 				<img src="../assets/images/feedback-icon1.png">
 				<p>feedback</p>
-			</div>
-		</div>
-		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
-			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">
-				<div class="lines-sec">
-					<h6 [innerHTML]="line.PoemText" [style.color]="line.colorCode"></h6>
-					<div class="trans-lines" *ngIf="line.TranslatedText!=''">
-						<h6 [innerHTML]="line.TranslatedText"></h6>
-					</div>
-				</div>
 			</div>
 		</div>		
 	</div>
@@ -95,7 +125,7 @@
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()">
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playMediaInPOPUP(resultPoemsDetail.id)"><!--BEFORE::playAudio()-->
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>
 		</ion-col>

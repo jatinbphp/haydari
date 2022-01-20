@@ -48,6 +48,10 @@ const routes: Routes = [
   {
     path: 'search-result',
     loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
+  },
+  {
+    path: 'play-media',
+    loadChildren: () => import('./play-media/play-media.module').then( m => m.PlayMediaPageModule)
   }
   /*,
   {

@@ -158,9 +158,10 @@ ion-content {
 			display: flex;
 			flex-flow: row;
 			align-items: center;
-			padding: 2px 0px 16px;
-		    margin: 0px 0px 20px;
-			border-bottom: 1px solid rgba(255,255,255,0.5);
+			padding: 20px 0px 16px;/*BEFORE::2px 0px 16px*/
+		    /*margin: 0px 0px 20px;*//*BEFORE IT WAS NOT COMMENTED*/
+			/*border-bottom: 1px solid rgba(255,255,255,0.5);*/
+			border-top: 1px solid rgba(255,255,255,0.5);
 			@media(max-width:480px) {
 				flex-flow: unset;
 				flex-wrap: wrap;
@@ -290,7 +291,7 @@ ion-content {
 }
 ion-footer {
 	position: fixed;
-    bottom: 80px;
+    bottom: 50px;/*BEFORE::80px*/
     left: 0;
     right: 0;
     width: calc(100% - 24px - 24px);

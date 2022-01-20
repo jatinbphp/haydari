@@ -6,6 +6,7 @@ import { ProfilePage } from '../profile/profile.page';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { PlayMediaPage } from '../play-media/play-media.page';
 
 @Component({
   selector: 'app-poem-detail',
@@ -139,7 +140,7 @@ export class PoemDetailPage
     }
   }
   
-  async makeBookMarkAtRow(poem_id,poem_line_id,user_id)
+  async makeBookMarkAtRow(poem_id,poem_line_id,user_id,is_to_insert)
   {
     let id = (localStorage.getItem('id')) ? localStorage.getItem('id') : undefined;
     if(id!='' && id!='null' && id!=null && id!=undefined && id!='undefined')
@@ -158,8 +159,10 @@ export class PoemDetailPage
       let objData = {
         poem_id:poem_id,
         poem_line_id:poem_line_id,
-        user_id:user_id
+        user_id:user_id,
+        is_to_insert:is_to_insert
       }
+      
       await this.client.poemLineWishlist(objData).then(result => 
       {
         loadingPoemBookmark.dismiss();//DISMISS LOADER
@@ -167,7 +170,14 @@ export class PoemDetailPage
         if(this.resultPoemsForBookmark.status==true)
         {
           //this.client.showMessage(this.resultPoemsForBookmark.message);
-          this.client.showMessage("Poem is bookmarked.<br />\nYou will see this poem on wishlist screen.");
+          if(is_to_insert == 1)
+          {
+            this.client.showMessage("Poem is bookmarked.<br />\nYou can access your bookmarked poems under My Bookmarks.");
+          }
+          if(is_to_insert == 0)
+          {
+            this.client.showMessage("Poem is removed from bookmark!");
+          }
         }
         this.ionViewWillEnter();
         console.log(result);
@@ -212,4 +222,18 @@ export class PoemDetailPage
     this.mediaFile.release();
   }
   
+  async playMediaInPOPUP(poem_id)
+  {
+    const modal = await this.modalCtrl.create({
+			component: PlayMediaPage,
+      cssClass: 'subject-occassion-detail',
+      showBackdrop: false,
+			componentProps: 
+			{ 
+        poem_id: poem_id
+			}
+		});
+
+		return await modal.present();
+  }
 }

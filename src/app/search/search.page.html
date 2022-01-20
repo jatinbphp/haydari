@@ -19,19 +19,19 @@
 </ion-header>
 
 <ion-content>
-	<ion-header no-border class="ion-no-border">
+	<!--<ion-header no-border class="ion-no-border">
 		<ion-toolbar class="src-box">
 			<form #searchPoemForm="ngForm" novalidate class="search-form">
 				<ion-searchbar placeholder="Search Poem" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
 				<ion-button class="src-icon-btn" (click)="searchPoem(searchPoemForm)">
 					<img src="../assets/images/src-icon1.png">
 				</ion-button>
-				<!--<ion-button class="reset-icon-btn">
+				<ion-button class="reset-icon-btn">
 					<ion-icon name="refresh-circle"></ion-icon>
-				</ion-button>-->
+				</ion-button>
 			</form>
 		</ion-toolbar>
-	</ion-header>
+	</ion-header>-->
 	<div class="mainContent">
 		<ion-list class="list-boxes-main">
 			<ion-list-header>
@@ -39,8 +39,7 @@
 			</ion-list-header>
 			<p class="item-box-main no-records" *ngIf="resultDataNewRelease.length == 0">No records available</p>
 			<ion-item class="item-box-main" [style.color]="newrelease.colorCode" *ngFor="let newrelease of resultDataNewRelease;let n=index;" (click)="getPoemsDetail(newrelease.id)">
-				<ion-avatar>
-					<!--<img src="../assets/images/icon1.png">-->
+				<!--<ion-avatar>
 					<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="62.000000pt" height="62.000000pt" viewBox="0 0 62.000000 62.000000" preserveAspectRatio="xMidYMid meet">
 						<g transform="translate(0.000000,62.000000) scale(0.100000,-0.100000)"
 						fill="#000000" [style.fill]="newrelease.colorCode" stroke="none">
@@ -75,40 +74,21 @@
 						-44 -45 -44 -45 -43 42 -43 42 57 58 c58 59 68 65 77 50z"/>
 						</g>
 					</svg>
-				</ion-avatar>
+				</ion-avatar>-->
 				<ion-label>
 					<h6 [style.color]="newrelease.colorCode" [innerHTML]="newrelease.PoemName"></h6>
 					<p [innerHTML]="newrelease.PoemText"></p>
 				</ion-label>
-			</ion-item>
-			<!--<ion-item class="item-box-main clr-red">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>
-			<ion-item class="item-box-main clr-green">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>-->
-			<ion-item class="ion-text-center btns-sec" *ngIf="resultDataNewRelease.length > 0">
+			</ion-item>			
+			<!--<ion-item class="ion-text-center btns-sec" *ngIf="resultDataNewRelease.length > 0">
 				<ion-button class="more-btn">see more</ion-button>
-			</ion-item>
+			</ion-item>-->
 		</ion-list>
 		<ion-list class="list-boxes-main">
 			<ion-list-header><ion-label>Trending Now</ion-label></ion-list-header>
 			<p class="item-box-main no-records" *ngIf="resultDataTrendingNow.length == 0">No records available</p>
 			<ion-item class="item-box-main" [style.color]="trending.colorCode" *ngFor="let trending of resultDataTrendingNow;let t=index;" (click)="getPoemsDetail(trending.id)">
-				<ion-avatar>
-					<!-- <img src="../assets/images/icon1.png"> -->
+				<!--<ion-avatar>
 					<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="62.000000pt" height="62.000000pt" viewBox="0 0 62.000000 62.000000" preserveAspectRatio="xMidYMid meet">
 						<g transform="translate(0.000000,62.000000) scale(0.100000,-0.100000)"
 						fill="#000000" [style.fill]="trending.colorCode" stroke="none">
@@ -143,40 +123,21 @@
 						-44 -45 -44 -45 -43 42 -43 42 57 58 c58 59 68 65 77 50z"/>
 						</g>
 					</svg>
-				</ion-avatar>
+				</ion-avatar>-->
 				<ion-label>
 					<h6 [style.color]="trending.colorCode" [innerHTML]="trending.PoemName">Headline Goes Here</h6>
 					<p [innerHTML]="trending.PoemText"></p>
 				</ion-label>
-			</ion-item>
-			<!--<ion-item class="item-box-main clr-red">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>
-			<ion-item class="item-box-main clr-green">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>-->
-			<ion-item class="ion-text-center btns-sec" *ngIf="resultDataTrendingNow.length > 0">
+			</ion-item>			
+			<!--<ion-item class="ion-text-center btns-sec" *ngIf="resultDataTrendingNow.length > 0">
 				<ion-button class="more-btn">see more</ion-button>
-			</ion-item>
+			</ion-item>-->
 		</ion-list>
 		<ion-list class="list-boxes-main">
 			<ion-list-header><ion-label>Recently Viewed</ion-label></ion-list-header>
 			<p class="item-box-main no-records" *ngIf="resultDataRecentlyViewed.length == 0">No records available</p>
 			<ion-item class="item-box-main" *ngFor="let recent of resultDataRecentlyViewed;let r=index;" (click)="getPoemsDetail(recent.id)">
-				<ion-avatar>
-					<!--<img src="../assets/images/icon1.png">-->
+				<!--<ion-avatar>
 					<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="62.000000pt" height="62.000000pt" viewBox="0 0 62.000000 62.000000" preserveAspectRatio="xMidYMid meet">
 						<g transform="translate(0.000000,62.000000) scale(0.100000,-0.100000)"
 						fill="#000000" [style.fill]="recent.colorCode" stroke="none">
@@ -211,33 +172,15 @@
 						-44 -45 -44 -45 -43 42 -43 42 57 58 c58 59 68 65 77 50z"/>
 						</g>
 					</svg>
-				</ion-avatar>
+				</ion-avatar>-->
 				<ion-label>
 					<h6 [style.color]="recent.colorCode" [innerHTML]="recent.PoemName">Headline Goes Here</h6>
 					<p [innerHTML]="recent.PoemText"></p>
 				</ion-label>
-			</ion-item>
-			<!--<ion-item class="item-box-main clr-red">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>
-			<ion-item class="item-box-main clr-green">
-				<ion-avatar>
-					<img src="../assets/images/icon1.png">
-				</ion-avatar>
-				<ion-label>
-					<h6>Headline Goes Here</h6>
-					<p>Lorem ipsum dolor sit amet ipsumed, ipsum onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...</p>
-				</ion-label>
-			</ion-item>-->
-			<ion-item class="ion-text-center btns-sec" *ngIf="resultDataRecentlyViewed.length > 0">
+			</ion-item>			
+			<!--<ion-item class="ion-text-center btns-sec" *ngIf="resultDataRecentlyViewed.length > 0">
 				<ion-button class="more-btn">see more</ion-button>
-			</ion-item>
+			</ion-item>-->
 		</ion-list>
 	</div>
 	<!--BEFORE::STARTS-->
