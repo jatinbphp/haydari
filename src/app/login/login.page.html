@@ -22,7 +22,7 @@
 		<form [formGroup]="loginForm" (ngSubmit)="makeMeLoggedin(loginForm.value)">
 			<ion-grid class="ion-no-padding">
 				<ion-row>
-					<ion-col size="12" class="ion-text-left ion-no-padding mb-45">
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-30">
 						<h3>Login</h3>
 					</ion-col>
 					<ion-col size="6" class="ion-text-left ion-no-padding">
@@ -31,7 +31,7 @@
 					<ion-col size="6" class="ion-text-right ion-no-padding">
 						<ion-button class="border-btn"><img src="../assets/images/twt-icon1.png"></ion-button>
 					</ion-col>
-					<ion-col size="12" class="ion-text-left ion-no-padding mb-20 mt-60">
+					<ion-col size="12" class="ion-text-left ion-no-padding mb-20 mt-30">
 						<ion-label position="stacked">Email Address</ion-label>
 	  					<ion-input type="text" placeholder="" formControlName="username" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
 						<!--VALIDATION-->
