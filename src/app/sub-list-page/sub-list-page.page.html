@@ -19,7 +19,7 @@
 	<div class="mainContent">
 		<!--<div class="src-box">
 			<form #searchPoemForm="ngForm" novalidate class="search-form">
-				<ion-searchbar placeholder="Search Poem" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keyup.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
+				<ion-searchbar placeholder="Search Poem" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keydown.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
 				<ion-button class="src-icon-btn" (click)="searchPoem(searchPoemForm)" *ngIf="searched_text=='' || is_searched == false">
 					<img src="../assets/images/src-icon1.png">
 				</ion-button>
@@ -38,7 +38,7 @@
 			</ion-button>
 			<div class="src-box" [ngClass]="{'show-src-box' : is_search_icon_clicked == true}">
 				<form #searchPoemForm="ngForm" novalidate class="search-form">
-				<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keydown.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
+					<ion-searchbar placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false" name="search_text" [(ngModel)]="searched_text" [ngModelOptions]="{standalone: false}" (keydown.enter)="searchPoem(searchPoemForm)"></ion-searchbar>
 				</form>
 			</div>
 		</div>

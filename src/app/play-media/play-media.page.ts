@@ -69,12 +69,12 @@ export class PlayMediaPage implements OnInit
       console.log();
     });
     this.mediaFile.play();
+    this.isAudioPlayed=true;
     this.mediaFile.onSuccess.subscribe(() => 
     { 
-      this.mediaFile.release();
+      this.pauseAudio();
       console.log("Media completed to play.");
     });
-    this.isAudioPlayed=true;
   }
 
   playAudio()
