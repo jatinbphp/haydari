@@ -267,6 +267,7 @@ ion-content {
 									width: -moz-fit-content;
 									width: -ms-fit-content;
 									width: -o-fit-content;
+									min-width: 90px;
 									display: flex;
 									flex-flow: row;
 									align-items: center;

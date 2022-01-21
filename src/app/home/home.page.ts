@@ -146,6 +146,8 @@ export class HomePage
       poem_or_subject_occassion:type
     };
 
+    localStorage.setItem('choosen_option',JSON.stringify(this.queryString));
+
     let navigationExtras: NavigationExtras = 
     {
       queryParams: 

@@ -29,6 +29,7 @@ export class PoemDetailPage
   public resultPoemsForBookmark:any=[];
   public resultPoem
   public MP3Link:string='';
+  public queryString: any=[];
 
   constructor(private inAppBrowser: InAppBrowser, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
@@ -235,5 +236,25 @@ export class PoemDetailPage
 		});
 
 		return await modal.present();
+  }
+
+  BackAsQueryString()
+  {
+    let choosen_option = JSON.parse(localStorage.getItem('choosen_option'));
+    this.queryString = 
+    {
+      poem_subject_occassion_id:choosen_option.poem_subject_occassion_id,
+      poem_subject_occassion_nm:choosen_option.poem_subject_occassion_nm,
+      poem_or_subject_occassion:choosen_option.poem_or_subject_occassion
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
   }
 }

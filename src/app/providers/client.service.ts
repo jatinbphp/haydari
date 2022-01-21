@@ -497,6 +497,26 @@ export class ClientService
 		});
 	}
 
+	GoogleLoginORSignup(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("FirstName",data.firstname).set("LastName",data.lastname).set("Email",data.username);
+			this.http.post(this.api_url + "socialLogin",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				resolve(res);
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	getErrorMessage(err)
 	{	
 		if(err.error == null)

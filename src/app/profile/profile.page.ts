@@ -131,4 +131,17 @@ export class ProfilePage implements OnInit
 			'dismissed': true
 		});
   	}
+
+	Logout()
+	{
+		this.modalCtrl.dismiss({
+			'dismissed': true
+		});
+		this.client.publishSomeDataWhenLogin({
+			is_user_login: false
+		});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+		localStorage.clear();
+		//this.menu.enable(false);
+		this.client.router.navigate(['tabs/home']);
+	}
 }

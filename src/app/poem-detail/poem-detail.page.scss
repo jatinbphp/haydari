@@ -89,7 +89,13 @@ ion-header {
 ion-content {
 	--background: #041f1e;
 	.mainContent {
-		padding: 0px 24px calc(70px + 100px);
+		/*ORG::padding: 0px 24px calc(70px + 100px);*/
+		&.has-not-mp3{
+			padding: 0px 24px 10px;
+		}
+		&.has-mp3{
+			padding: 0px 24px calc(70px + 90px);
+		}
 		.pg-title-main {
 			width: 100%;
 			padding: 2px 0px 16px;
@@ -294,7 +300,7 @@ ion-content {
 }
 ion-footer {
 	position: fixed;
-    bottom: 50px;/*BEFORE::80px*/
+    bottom: 50px;/*BEFORE::80px;*/
     left: 0;
     right: 0;
     width: calc(100% - 24px - 24px);

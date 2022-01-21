@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,9 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({
+      swipeBackEnabled: true // A better spot to set swipe enabled also…
+    }), 
     AppRoutingModule
   ],
   providers: 
@@ -28,6 +31,7 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
     Media,
     Keyboard,
     InAppBrowser,
+    GooglePlus,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
 	<ion-toolbar class="header-top-box">
-		<ion-buttons slot="start" *ngIf="from_page!='wishlist' && from_page!='search'">
-			<ion-back-button defaultHref="/tabs/sub-list-page" icon="arrow-back" text=""></ion-back-button>
+		<ion-buttons slot="start" *ngIf="from_page!='wishlist' && from_page!='search'" (click)="BackAsQueryString()">
+			<ion-back-button defaultHref="" icon="arrow-back" text=""></ion-back-button>
 		</ion-buttons>
 		<ion-buttons slot="start" *ngIf="from_page=='search'">
 			<ion-back-button defaultHref="/tabs/search" icon="arrow-back" text=""></ion-back-button>
@@ -38,7 +38,7 @@
 </ion-header>
 
 <ion-content>
-	<div class="mainContent">
+	<div class="mainContent" [ngClass]="{'has-mp3' : isAudioPlayed == false && MP3Link!='', 'has-not-mp3' : isAudioPlayed == false && MP3Link==''}">
 		<div class="pg-title-main">
 			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
@@ -86,28 +86,30 @@
 		</div>
 		<div class="nm-icon-list">
 			<div class="nm-icon-item">
-				<img src="../assets/images/language-icon1.png">
-				<p [innerHTML]="resultPoemsDetail.LanguageName"></p>
-			</div>						
-			<div class="nm-icon-item">
 				<img src="../assets/images/microphone-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.ReciterName"></p>
 			</div>
+			<div class="nm-icon-item">&nbsp;</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/pen-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.PoetName"></p>
 			</div>
+			<div class="nm-icon-item">&nbsp;</div>
+			<div class="nm-icon-item">
+				<img src="../assets/images/language-icon1.png">
+				<p [innerHTML]="resultPoemsDetail.LanguageName"></p>
+			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/verify-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.SubjectName"></p>
-			</div>			
+			</div>
 			<div class="nm-icon-item" *ngIf="resultPoemsDetail.YouTubeURL!=''" (click)="openYouTubeURL(resultPoemsDetail.YouTubeURL)">
 				<img src="../assets/images/youtube-icon1.png">
-				<p>youtube</p>
+				<p>YouTube</p>
 			</div>
 			<div class="nm-icon-item">
 				<img src="../assets/images/feedback-icon1.png">
-				<p>feedback</p>
+				<p>Feedback</p>
 			</div>
 		</div>		
 	</div>
