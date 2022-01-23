@@ -120,7 +120,7 @@ export class SearchPage
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    this.client.router.navigate(['tabs/home/search/poem-detail'], navigationExtras);
   }
   
   async searchPoem(form)

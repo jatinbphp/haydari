@@ -82,6 +82,6 @@ export class WishlistPage
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    this.client.router.navigate(['tabs/wishlist/poem-detail'], navigationExtras);
   }
 }

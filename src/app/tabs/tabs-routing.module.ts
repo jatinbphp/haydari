@@ -75,17 +75,44 @@ const routes: Routes = [
           },
           {
             path: 'search',
-            loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
+            children:[
+              {
+                path:'',
+                loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
+              },
+              {
+                path: 'poem-detail',
+                loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+              }
+            ]
+          },
+          {
+            path: 'search-result',
+            children:[
+              {
+                path:'',
+                loadChildren: () => import('../search-result/search-result.module').then(m => m.SearchResultPageModule)
+              },
+              {
+                path: 'poem-detail',
+                loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+              }
+            ]
           }
         ]
       },
       {
-        path: 'search-result',
-        loadChildren: () => import('../search-result/search-result.module').then(m => m.SearchResultPageModule)
-      },
-      {
         path: 'wishlist',
-        loadChildren: () => import('../wishlist/wishlist.module').then(m => m.WishlistPageModule)
+        children:[
+          {
+            path:'',
+            loadChildren: () => import('../wishlist/wishlist.module').then(m => m.WishlistPageModule)
+          },
+          {
+            path: 'poem-detail',
+            loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+          }
+        ]
       },
       {
         path: 'notifications',

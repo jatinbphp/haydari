@@ -82,7 +82,7 @@ export class SearchResultPage implements OnInit
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/search-result'], navigationExtras).then(()=>{
+    this.client.router.navigate(['tabs/home/search-result'], navigationExtras).then(()=>{
       window.location.reload();
     });
   }
@@ -143,7 +143,8 @@ export class SearchResultPage implements OnInit
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    //BEFORE::this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    this.client.router.navigate(['tabs/home/search-result/poem-detail'], navigationExtras);
   }
 
   showHideSearchBar()

@@ -193,7 +193,8 @@ export class HomePage
       }
     };
     this.searched_text = '';
-    this.client.router.navigate(['tabs/search-result'], navigationExtras);
+    //BEFORE::this.client.router.navigate(['tabs/search-result'], navigationExtras);
+    this.client.router.navigate(['tabs/home/search-result'], navigationExtras);
   }
   
 }
