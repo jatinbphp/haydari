@@ -30,10 +30,11 @@ export class AppComponent
   */
   constructor(private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
   {
+    /*
     this.platform.backButton.subscribeWithPriority(10, () => {
       console.log('Handler was called!');
     });//PREVENT BACK BUTTON    
-    
+    */
     this.token=localStorage.getItem('token');
     /*POEM TYPE*/
     this.client.getPoemTypes().then(result => 
