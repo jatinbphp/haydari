@@ -134,7 +134,8 @@ export class HomePage
 
   library()
   {
-    this.client.router.navigateByUrl('/tabs/search');
+    //BEFORE::this.client.router.navigateByUrl('/tabs/search');
+    this.client.router.navigateByUrl('/tabs/home/search');
   }
   
   showPoemByPoemTypeORSubjectOccassion(id,poem_subject_occassion,type)
@@ -155,13 +156,8 @@ export class HomePage
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
-    /*
-    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras).then(() => 
-    {
-      window.location.reload();
-    });
-    */
+    //BEFORE::this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
+    this.client.router.navigate(['tabs/home/sub-list-page'], navigationExtras);
   }
 
   async showMyProfile()

@@ -220,7 +220,8 @@ export class SubListPagePage implements OnInit
         special: JSON.stringify(this.queryString)
       }
     };
-    this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    //BEFORE::this.client.router.navigate(['tabs/poem-detail'], navigationExtras);
+    this.client.router.navigate(['tabs/home/sub-list-page/poem-detail'], navigationExtras);
   }
 
   async changeOrder(order,poem_or_subject_occassion)

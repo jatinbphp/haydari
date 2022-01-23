@@ -151,13 +151,8 @@ export class AppComponent
       }
     };
     
-    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);    
-    /*
-    this.client.router.navigate(['tabs/sub-list-page'], navigationExtras).then(() => 
-    {
-      window.location.reload();
-    });
-    */
+    //BEFORE::this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);    
+    this.client.router.navigate(['tabs/home/sub-list-page'], navigationExtras);
   }
 
   async showMyProfile()

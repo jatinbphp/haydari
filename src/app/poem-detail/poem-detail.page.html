@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
 	<ion-toolbar class="header-top-box">
-		<ion-buttons slot="start" *ngIf="from_page!='wishlist' && from_page!='search'" (click)="BackAsQueryString()">
+		<ion-buttons slot="start">
+			<ion-back-button text=""></ion-back-button>
+		</ion-buttons>
+		<!--<ion-buttons slot="start" *ngIf="from_page!='wishlist' && from_page!='search'" (click)="BackAsQueryString()">
 			<ion-back-button defaultHref="" icon="arrow-back" text=""></ion-back-button>
 		</ion-buttons>
 		<ion-buttons slot="start" *ngIf="from_page=='search'">
@@ -8,7 +11,7 @@
 		</ion-buttons>
 		<ion-buttons slot="start" *ngIf="from_page=='wishlist'">
 			<ion-back-button defaultHref="/tabs/wishlist" icon="arrow-back" text=""></ion-back-button>
-		</ion-buttons>
+		</ion-buttons>-->
 		<ion-title class="ion-text-center"></ion-title>
 		<ion-chip slot="end" (click)="makeBookMarkAtRow(resultPoemsDetail.id,0,user_id,1)" *ngIf="resultPoemsDetail.bookmarkStatus == 0">
 			<ion-button class="wish-icon">
@@ -85,16 +88,14 @@
 			</div>
 		</div>
 		<div class="nm-icon-list">
-			<div class="nm-icon-item">
+			<div class="nm-icon-item w-100">
 				<img src="../assets/images/microphone-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.ReciterName"></p>
 			</div>
-			<div class="nm-icon-item">&nbsp;</div>
-			<div class="nm-icon-item">
+			<div class="nm-icon-item w-100">
 				<img src="../assets/images/pen-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.PoetName"></p>
-			</div>
-			<div class="nm-icon-item">&nbsp;</div>
+			</div>			
 			<div class="nm-icon-item">
 				<img src="../assets/images/language-icon1.png">
 				<p [innerHTML]="resultPoemsDetail.LanguageName"></p>
