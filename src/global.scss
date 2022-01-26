@@ -337,9 +337,9 @@ ion-app {
 ion-header {
     ion-toolbar {
         &.header-top-box {
-            padding: calc(env(safe-area-inset-top) + 35px) 24px 34px;
+            padding: calc(env(safe-area-inset-top) + 44px) 24px 34px !important;
             @media(max-width:374px) {
-                padding: calc(env(safe-area-inset-top) + 26px) 24px 24px;
+                padding: calc(env(safe-area-inset-top) + 33px) 24px 24px !important;
             }
         }
     }
