@@ -94,7 +94,8 @@ ion-content {
 			padding: 0px 24px 10px;
 		}
 		&.has-mp3{
-			padding: 0px 24px calc(70px + 90px);
+			//padding: 0px 24px calc(70px + 90px);
+			padding: 0px 24px calc(70px + 70px);
 		}
 		.pg-title-main {
 			width: 100%;

@@ -1,5 +1,6 @@
 ion-content {
-	--background: #041f1e;
+	//--background: #041f1e;
+	--background: #c5cfba;
 	.mt-25 {
 		margin-top: 25px;
 	}
@@ -18,6 +19,9 @@ ion-content {
 		flex-flow: column;
 		justify-content: flex-start;
 		padding: 50px 30px;		
+		height: fit-content;
+	    max-height: fit-content;
+	    min-height: -webkit-fill-available;
 		ion-grid {
 			ion-row {
 				position: relative;
@@ -33,18 +37,33 @@ ion-content {
 							min-height: 270px;
 						}
 					}
+					img{
+						margin-top: 0px;
+						&.add-radius{
+							border-radius: 12px !important;
+							overflow: hidden;
+							max-width: 100%;
+							max-height: 100%;
+							width: 100%;
+							height: 260px;
+						    object-fit: cover;
+						    object-position: center;
+						    box-shadow: 0px 4px 40px 4px rgba(0,0,0,0.1);
+						}
+					}
 					&.close-icon{
 						justify-content: center;
 						align-items: center;
 						position: absolute;
-						top: 0px;
+						top: -10px;
 						right: -20px;
 						ion-icon {
 							position: unset;
 						    background: unset;
-						    color: rgba(255, 255, 255, 0.6);
+						    //color: rgba(255, 255, 255, 0.6);
+						    color: rgba(0,0,0,.6);
 						    margin: 0px;
-							font-size:50px;
+							font-size:40px;
 						}
 					}
 					&.align-center {
@@ -75,8 +94,9 @@ ion-content {
 						font-size: 48px;
 						line-height: 40px;
 						font-family: var(--font-LTC-Californian);
-						color: var(--White);
-						margin: 0px 0px 40px;
+						//color: var(--White);
+						color: var(--Black);
+						margin: 0px 0px 33px;
 						@media(max-width:374px) {
 							font-size: 45px;
 							line-height: 38px;
@@ -88,7 +108,7 @@ ion-content {
 						line-height: 30px;
 						font-family: var(--font-Poppins-SemiBold);
 						color: #7ea16b;
-						margin: 0px 0px 35px;
+						margin: 0px 0px 20px;
 						@media(max-width:374px) {
 							font-size: 25px;
 							line-height: 27px;
@@ -113,14 +133,15 @@ ion-content {
 }
 ion-footer {
 	position: fixed;
-    bottom: 80px;
+    bottom: 26px;
     left: 0;
     right: 0;
     width: calc(100% - 24px - 24px);
     margin: 0px auto;
 	ion-row {
 		&.btm-play-box {
-			background: #c5cfba;
+			//background: #c5cfba;
+			background: #041f1e;
     		border-radius: 20px;
     		padding: 12px 15px;
     		@media(max-width:400px) {
@@ -168,7 +189,8 @@ ion-footer {
 						padding: 0px 0px 4px;
 						font-size: 17px;
 						line-height: 20px;
-						color: var(--Black);
+						// color: var(--Black);
+						color: var(--White);
 						font-family: var(--font-Poppins-SemiBold);
 						@media(max-width:400px) {
 							font-size: 16px;
@@ -181,7 +203,8 @@ ion-footer {
 						padding: 0px;
 						font-size: 14px;
 						line-height: 17px;
-						color: var(--Black);
+						// color: var(--Black);
+						color: var(--White);
 						font-family: var(--font-Poppins-Regular);
 						text-transform: capitalize;
 						@media(max-width:400px) {
@@ -230,6 +253,7 @@ ion-footer {
 							    min-height: 100%;
 							    max-width: 100%;
 							    max-height: 100%;
+							    color: var(--White);
 							}
 						}
 					}
