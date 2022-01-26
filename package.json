@@ -93,8 +93,7 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.haydari.app",
-        "WEB_APPLICATION_CLIENT_ID": "471452795402-92fmshstflp04eheg4r4sps4kuhdfrua.apps.googleusercontent.com",
-        "PLAY_SERVICES_VERSION": "15.0.1"
+        "WEB_APPLICATION_CLIENT_ID": "471452795402-92fmshstflp04eheg4r4sps4kuhdfrua.apps.googleusercontent.com"
       }
     },
     "platforms": [

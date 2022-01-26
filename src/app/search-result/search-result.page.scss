@@ -229,7 +229,7 @@ ion-content {
 			&.list-boxes-main {
 				margin: 0px 0px 30px;
 				ion-col {
-					padding: 16px 0px;
+					padding: 16px 0px 10px;
 					margin: 0px;
 					display: flex;
 					flex-flow: row;
@@ -293,6 +293,7 @@ ion-content {
 								display: flex;
 								flex-flow: row;
 								align-items: center;
+								justify-content: flex-start;
 								@media(max-width:480px) {
 									flex-flow: unset;
 									flex-wrap: wrap;
@@ -307,10 +308,11 @@ ion-content {
 									display: flex;
 									flex-flow: row;
 									align-items: center;
+									justify-content: flex-start;
 									padding: 0px 14px 0px 0px;
-									&:last-child {
-										padding: 0px;
-									}
+									// &:last-child {
+									// 	padding: 0px;
+									// }
 									@media(max-width:410px) {
 										padding-bottom: 6px;
 									}

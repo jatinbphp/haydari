@@ -178,16 +178,16 @@ ion-content {
 				width: -moz-fit-content;
 				width: -ms-fit-content;
 				width: -o-fit-content;
-				width: 50%;//MAULIK::ADDED
+				min-width: 80px;
+				//width: 50%;//MAULIK::ADDED
 				justify-content:flex-start;//MAULIK::ADDED
-				align-items: center;//MAULIK::ADDED
 				display: flex;
 				flex-flow: row;
 				align-items: center;
-				padding: 0px 5px 5px 0px;/*BEFORE::0px 14px 0px 0px;*/
-				&:last-child {
-					padding: 0px;
-				}
+				padding: 0px 20px 6px 0px;/*BEFORE::0px 14px 0px 0px;*/
+				// &:last-child {
+				// 	padding: 0px;
+				// }
 				@media(max-width:410px) {
 					padding-bottom: 6px;
 				}
