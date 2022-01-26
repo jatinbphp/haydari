@@ -133,7 +133,7 @@ ion-content {
 }
 ion-footer {
 	position: fixed;
-    bottom: 26px;
+    bottom: 12px;/*BEFORE::26px;*/
     left: 0;
     right: 0;
     width: calc(100% - 24px - 24px);
