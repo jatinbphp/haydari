@@ -20,6 +20,7 @@ export class HomePage
   public resultReciters:any=[];
   public resultLanguages:any=[];
   public searched_text:string='';
+  public showAllSubjects:boolean=false;
   constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { 
     this.keyboard.hideFormAccessoryBar(false);
@@ -197,4 +198,9 @@ export class HomePage
     this.client.router.navigate(['tabs/home/search-result'], navigationExtras);
   }
   
+  showHide()
+  {
+    this.showAllSubjects = !this.showAllSubjects;
+    console.log(this.showAllSubjects);
+  }
 }
