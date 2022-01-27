@@ -33,7 +33,7 @@
 		</ion-toolbar>
 	</ion-header>
   	<div class="mainContent">
-		<ion-grid class="img-cnt-sec">
+		<ion-grid class="img-cnt-sec poem-main">
 			<ion-row class="title-main">
 				<ion-col>
 					<h2>Poem Type</h2>
@@ -48,16 +48,16 @@
 				</ion-col>
 			</ion-row>
 		</ion-grid>
-		<ion-grid class="img-cnt-sec">
+		<ion-grid class="img-cnt-sec subject-main">
 			<ion-row class="title-main">
 				<ion-col>
 					<h2>Subject/Occasion</h2>
 				</ion-col>
 			</ion-row>
-			<ion-row class="img-nm-box-list">
+			<ion-row class="img-nm-box-list hide">
 				<ion-col *ngFor="let SubjectOccasion of resultSubjectOccasion;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(SubjectOccasion.id,SubjectOccasion.subjectName,'by_subject_occassion')">
-					<div class="img-nm-box-inner grey-overlay">
-						<img src="../assets/images/suboc-img1.png">
+					<div class="img-nm-box-inner">
+						<!-- <img src="../assets/images/suboc-img1.png"> -->
 						<h3 [innerHTML]="SubjectOccasion.subjectName"></h3>
 					</div>
 				</ion-col>				

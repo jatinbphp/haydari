@@ -193,6 +193,13 @@ ion-content {
 					object-fit: contain;
 					margin: 0px 8px 0px 0px;
 				}
+				svg {
+					max-width: 100%;
+					width: auto;
+					height: 26px;
+					object-fit: contain;
+					margin: 0px 8px 0px 0px;
+				}
 				h6 {
 					width: calc(100% - 26px);
 					font-size: 15px;
@@ -314,7 +321,7 @@ ion-content {
 									flex-flow: row;
 									align-items: center;
 									justify-content: flex-start;
-									padding: 0px 14px 0px 0px;
+									padding: 0px 20px 0px 0px;
 									// &:last-child {
 									// 	padding: 0px;
 									// }
