@@ -57,7 +57,7 @@
 			</ion-row>
 			<ion-row class="img-nm-box-list hide" [ngClass]="{'show' : showAllSubjects==true}">
 				<ion-col *ngFor="let SubjectOccasion of resultSubjectOccasion;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(SubjectOccasion.id,SubjectOccasion.subjectName,'by_subject_occassion')">
-					<div class="img-nm-box-inner" [style.background-color]="PoemTypes.colorCode">
+					<div class="img-nm-box-inner">
 						<!-- <img src="../assets/images/suboc-img1.png"> -->
 						<h3 [innerHTML]="SubjectOccasion.subjectName"></h3>
 					</div>

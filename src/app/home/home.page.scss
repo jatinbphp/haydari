@@ -184,8 +184,8 @@ ion-content {
 					// 	opacity: 0.6;
 					// }
 					.img-nm-box-inner.grey-overlay::before {
-						// background-color: #3c4343 !important;
-						// opacity: 0.6;
+						background-color: #3c4343 !important;
+						opacity: 0.6;
 					}
 				}
 			}
@@ -258,8 +258,8 @@ ion-content {
 						.img-nm-box-inner {
 							margin: 0px 8px 0px;
 							&::before {
-								// background-color: #3c4343 !important;
-    							// opacity: 0.6;
+								background-color: #3c4343 !important;
+    							opacity: 0.6;
 							}
 							img {}
 							h3 {
