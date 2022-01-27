@@ -41,7 +41,7 @@
 			</ion-row>
 			<ion-row class="img-nm-box-list">
 				<ion-col *ngFor="let PoemTypes of resultPoemTypes;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(PoemTypes.id,PoemTypes.PoemTypeName,'by_poem_type')">
-					<div class="img-nm-box-inner">
+					<div class="img-nm-box-inner" [style.background-color]="PoemTypes.colorCode">
 						<!--<img src="../assets/images/type-img1.png">-->
 						<img src="{{PoemTypes.Image}}">
 						<h3 [innerHTML]="PoemTypes.PoemTypeName"></h3>
@@ -57,7 +57,7 @@
 			</ion-row>
 			<ion-row class="img-nm-box-list hide" [ngClass]="{'show' : showAllSubjects==true}">
 				<ion-col *ngFor="let SubjectOccasion of resultSubjectOccasion;" class="img-nm-box-item" (click)="showPoemByPoemTypeORSubjectOccassion(SubjectOccasion.id,SubjectOccasion.subjectName,'by_subject_occassion')">
-					<div class="img-nm-box-inner">
+					<div class="img-nm-box-inner" [style.background-color]="PoemTypes.colorCode">
 						<!-- <img src="../assets/images/suboc-img1.png"> -->
 						<h3 [innerHTML]="SubjectOccasion.subjectName"></h3>
 					</div>
