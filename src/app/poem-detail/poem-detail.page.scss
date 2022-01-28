@@ -33,6 +33,7 @@ ion-header {
 					height: 40px;
 					--color: #98a886;
 					color: #98a886;
+					opacity: 0.8;
 				}
 			}
 			ion-back-button {
@@ -44,6 +45,7 @@ ion-header {
 				// height: 40px;
 				--color: #98a886;
 				color: #98a886;
+				opacity: 0.8;
 			}
 		}
 		ion-button {
@@ -71,6 +73,7 @@ ion-header {
 				height: 40px;
 				object-fit: contain;
 				object-position: center;
+				opacity: 0.8;
 			}
 			ion-icon {
 				max-width: 100%;
@@ -81,6 +84,16 @@ ion-header {
 				object-position: center;
 				color: rgba(255,255,255,0.8);
 				margin: 0px;
+			}
+			svg {
+				max-width: 100%;
+				max-height: 100%;
+				width: auto;
+				height: 34px;
+				object-fit: contain;
+				object-position: center;
+				fill: rgba(255,255,255,0.8);
+				margin: 0px 2px 0px;
 			}
 		}
 	}
@@ -95,7 +108,7 @@ ion-content {
 		}
 		&.has-mp3{
 			//padding: 0px 24px calc(70px + 90px);
-			padding: 0px 24px calc(70px + 70px);
+			padding: 0px 24px calc(70px + 0px);
 		}
 		.pg-title-main {
 			width: 100%;
@@ -203,6 +216,7 @@ ion-content {
 					height: 22px;
 					object-fit: contain;
 					margin: 0px 5px 0px 0px;
+					opacity: 0.6;
 				}
 				p {
 					font-size: 13px;

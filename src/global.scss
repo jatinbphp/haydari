@@ -169,7 +169,7 @@ app-home {
         ion-button {
             &.src-icon-btn {
                 position: absolute;
-                top: 13px;
+                top: 15px;
                 right: 28px;
                 img {
                     width: 25px;
@@ -179,7 +179,7 @@ app-home {
             }
             &.reset-icon-btn {
                 position: absolute;
-                top: 13px;
+                top: 15px;
                 right: 28px;
                 ion-icon {
                     color: #000;
@@ -321,9 +321,9 @@ ion-app {
     text-align: center;
     font-family: var(--font-Poppins-Medium);
 }
-.validation-errors {
-    font-size: 16px;
-    line-height: 18px;
+.validation-errors, ion-text {
+    font-size: 14px;
+    line-height: 16px;
     color: #eb445a;
     padding-top: 5px;
     font-family: var(--font-Poppins-Medium);
@@ -335,7 +335,17 @@ ion-app {
 }
 
 ion-header {
+    border: 0px !important;
+    --border-width: 0px !important;
+    --border-color: transparent !important;
+    --ion-border-color: transparent !important;
+    --ion-border-width: 0px !important;
     ion-toolbar {
+        border: 0px !important;
+        --border-width: 0px !important;
+        --border-color: transparent !important;
+        --ion-border-color: transparent !important;
+        --ion-border-width: 0px !important;
         &.header-top-box {
             --padding-top: 0px;
             --padding-bottom: 0px;
@@ -363,3 +373,20 @@ ion-header {
         }
     }
 }
+
+.header-md::after {
+    background: none !important;
+    background-image: none !important;
+}
+
+// ion-header {
+//     ion-toolbar {
+//         ion-back-button, ion-menu-button {
+//             .button-native {
+//                 .button-inner {
+//                     justify-content: flex-start !important;
+//                 }
+//             }
+//         }
+//     }
+// }
