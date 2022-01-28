@@ -326,6 +326,7 @@ ion-content {
 										height: 22px;
 										object-fit: contain;
 										margin: 0px 5px 0px 0px;
+										opacity: 0.6;
 									}
 									svg {
 										max-width: 100%;
@@ -335,6 +336,7 @@ ion-content {
 										object-fit: contain;
 										margin: 0px 5px 0px 0px;
 										fill: #fff;
+										opacity: 0.6;
 									}
 									p {}
 								}
@@ -407,6 +409,7 @@ ion-content {
 									}
 									.nm-icon-item {
 										padding: 0px 0px 6px 0px;
+										align-items: flex-start;
 										@media (min-height:768px) and (max-height:2000px) {
 											padding: 0px 16px 6px 0px;
 										}
