@@ -133,16 +133,16 @@ ion-content {
 }
 ion-footer {
 	position: fixed;
-    bottom: 12px;/*BEFORE::26px;*/
+    bottom: 0px;/*BEFORE::12px;*/
     left: 0;
     right: 0;
-    width: calc(100% - 24px - 24px);
+    width: 100%;/*BEFORE::calc(100% - 24px - 24px);*/
     margin: 0px auto;
 	ion-row {
 		&.btm-play-box {
 			//background: #c5cfba;
 			background: #041f1e;
-    		border-radius: 20px;
+    		/*BEFORE::border-radius: 20px;*/
     		padding: 12px 15px;
     		@media(max-width:400px) {
     			padding: 9px 11px;
