@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ClientService 
 {
 	public site_url: string ="https://haydari.ecnetsolutions.dev/";
-	public api_url: string = "https://haydari.ecnetsolutions.dev/api/";
+	public api_url: string = "https://app.thehaydariproject.com/api/";//https://haydari.ecnetsolutions.dev/api/
 	public token: string;
 	public serverResponse: any=[];
 	private fooSubjectWhenlOGIN = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN

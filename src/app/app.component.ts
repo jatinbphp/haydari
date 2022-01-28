@@ -66,7 +66,7 @@ export class AppComponent
           id:0,
           title:'About',
           shouldFunction:0,
-          url: '/tabs/home'
+          url: '/about-haydari'
         },
         {
           id:0,

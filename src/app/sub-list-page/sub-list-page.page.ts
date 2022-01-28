@@ -22,7 +22,7 @@ export class SubListPagePage implements OnInit
   public poem_subject_occassion_nm:any = '';
   public poem_or_subject_occassion:any = '';
   public resultPoemsByTypeORSubject:any=[];
-  public order:any='desc';
+  public order:any='asc';
   public is_search_icon_clicked:boolean=false;
   public is_searched:boolean=false;
   public searched_text:any='';
@@ -109,7 +109,7 @@ export class SubListPagePage implements OnInit
     });
     
     this.poem_subject_occassion_id=this.queryStringData['poem_subject_occassion_id'];
-    this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'].replace("/ ", "/");
+    this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'].replace("<br>", "");
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
 
     /*POEM TYPE*/

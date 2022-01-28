@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'play-media',
     loadChildren: () => import('./play-media/play-media.module').then( m => m.PlayMediaPageModule)
+  },
+  {
+    path: 'about-haydari',
+    loadChildren: () => import('./about-haydari/about-haydari.module').then( m => m.AboutHaydariPageModule)
   }
   /*,
   {
