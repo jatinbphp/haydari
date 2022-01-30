@@ -45,10 +45,10 @@
 				<h6>Recently updated</h6>-->
 				<h6 [innerHTML]="searched_text"></h6>
 			</div>
-			<div class="filter-sec">
+			<!--<div class="filter-sec">
 				<img class="grid-icon1" src="../../assets/images/grid-icon1.png" (click)="showGridView()">
         		<img class="list-icon1" src="../../assets/images/list-icon1.png" (click)="showListView()">
-			</div>
+			</div>-->
 		</div>		
 		<p class="no-records" *ngIf="resultSearchResult.length == 0">No records available</p>
 		<ion-row *ngIf="resultSearchResult.length > 0" class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">

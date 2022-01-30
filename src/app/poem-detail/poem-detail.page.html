@@ -43,13 +43,13 @@
 </ion-header>
 
 <ion-content>
-	<div class="mainContent" [ngClass]="{'has-mp3' : isAudioPlayed == false && MP3Link!='', 'has-not-mp3' : isAudioPlayed == false && MP3Link==''}">
+	<div class="mainContent" [ngClass]="{'has-mp3' : has_mp3 == true, 'has-not-mp3' : has_mp3 == false}">
 		<div class="pg-title-main">
 			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playMediaInPOPUP(resultPoemsDetail.id)"><!--BEFORE::playAudio()-->
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()"><!--BEFORE::playMediaInPOPUP(resultPoemsDetail.id)-->
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>
 		</div>
@@ -117,12 +117,12 @@
 		</div>		
 	</div>
 </ion-content>
-<ion-footer class="ion-no-border" *ngIf="isAudioPlayed == false && MP3Link!=''">
+<ion-footer class="ion-no-border" [ngClass]="{'make-in-full-height' : togglePlayerInFullHeight == true}" *ngIf="isAudioPlayed == true && has_mp3 == true">
 	<ion-row class="btm-play-box clr-red">
 		<ion-col class="img">
 			<img src="../assets/images/icon1.png">
 		</ion-col>
-		<ion-col class="nms">
+		<ion-col class="nms" (click)="togglePlayerHeight()">
 			<h5 class="pm-nm">{{resultPoemsDetail.PoemName}}</h5>
 			<p class="maker-nm">- {{resultPoemsDetail.PoetName}}</p>
 		</ion-col>
@@ -130,7 +130,7 @@
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playMediaInPOPUP(resultPoemsDetail.id)"><!--BEFORE::playAudio()-->
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()"><!--BEFORE::playMediaInPOPUP(resultPoemsDetail.id)-->
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>
 		</ion-col>

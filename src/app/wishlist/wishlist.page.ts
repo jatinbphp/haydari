@@ -16,6 +16,7 @@ export class WishlistPage
   public show_in_view: any = 'list';
   public resultDataBookMark: any=[];
   public queryString: any=[];
+  public order:any='asc';
   constructor(public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
   {
   }

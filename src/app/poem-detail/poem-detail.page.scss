@@ -325,6 +325,23 @@ ion-footer {
     right: 0;
     width: 100%;/*BEFORE::calc(100% - 24px - 24px);*/
     margin: 0px auto;
+	&.make-in-full-height{
+		
+		left: 0;
+    	right: 0;
+		background: #c5cfba;
+		width: 100%;
+		margin: 0px auto;
+		height:100%;
+		ion-row {
+			&.btm-play-box {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			}
+		}
+	}
 	ion-row {
 		&.btm-play-box {
 			background: #c5cfba;

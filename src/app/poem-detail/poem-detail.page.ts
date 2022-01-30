@@ -23,6 +23,8 @@ export class PoemDetailPage
   private mediaFile: MediaObject;
   private mediaFileCurrentPosition:any='';
   public isAudioPlayed: boolean = false;
+  public togglePlayerInFullHeight:boolean = false;
+  public has_mp3:boolean=false;
   public resultPoemsDetailObject:any=[];
   public resultPoemsDetail:any=[];
   public poemsLine:any=[];
@@ -47,6 +49,7 @@ export class PoemDetailPage
     this.resultPoemsDetailObject=[];
     this.resultPoemsDetail=[];
     this.poemsLine=[];
+    this.has_mp3=false;
     
     this.route.queryParams.subscribe(params => 
       {
@@ -85,9 +88,10 @@ export class PoemDetailPage
           this.mediaFile = this.media.create(this.MP3Link);
         }      
         //console.log("MP3Link",this.MP3Link);
-        console.log("Object",this.resultPoemsDetailObject);
-        console.log("Detail",this.resultPoemsDetail);
-        console.log("Lines",this.poemsLine);
+        //console.log("Object",this.resultPoemsDetailObject);
+        //console.log("Detail",this.resultPoemsDetail);
+        //console.log("Lines",this.poemsLine);
+        this.has_mp3=(this.MP3Link!="") ? true : false;
       },
       error => 
       {
@@ -118,6 +122,7 @@ export class PoemDetailPage
     //console.log("PAUSE");
     this.mediaFile.pause();    
     this.isAudioPlayed=false;
+    this.togglePlayerInFullHeight=false;
     this.mediaFile.getCurrentPosition().then((position) => {
       this.mediaFileCurrentPosition = position;
       console.log(this.mediaFileCurrentPosition);
@@ -256,5 +261,10 @@ export class PoemDetailPage
       }
     };
     this.client.router.navigate(['tabs/sub-list-page'], navigationExtras);
+  }
+
+  togglePlayerHeight()
+  {
+    this.togglePlayerInFullHeight = this.togglePlayerInFullHeight = !this.togglePlayerInFullHeight;
   }
 }
