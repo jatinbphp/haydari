@@ -45,6 +45,7 @@ export class SearchFiltersPage implements OnInit
     {	
       loadingPoemType.dismiss();//DISMISS LOADER
       this.resultPoemTypes=result;
+      console.log(this.resultPoemTypes);
     },
     error => 
     {
@@ -240,6 +241,7 @@ export class SearchFiltersPage implements OnInit
     let dataToSearch = {
       poem_or_subject_occassion:poem_or_subject_occassion,
       poem_subject_occassion_id:poem_subject_occassion_id,
+      selectedPoemType:this.selectedPoemType.join(","),
       selectedSubjectOccassion:this.selectedSubjectOccassion.join(","),
       selectedLanguage:this.selectedLanguage.join(","),
       selectedReciters:this.selectedReciters.join(","),
@@ -261,6 +263,7 @@ export class SearchFiltersPage implements OnInit
     let dataToSearch = {
       poem_or_subject_occassion:poem_or_subject_occassion,
       poem_subject_occassion_id:poem_subject_occassion_id,
+      selectedPoemType:this.selectedPoemType.join(","),
       selectedSubjectOccassion:this.selectedSubjectOccassion.join(","),
       selectedLanguage:this.selectedLanguage.join(","),
       selectedReciters:this.selectedReciters.join(","),

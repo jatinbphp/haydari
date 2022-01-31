@@ -53,7 +53,14 @@ export class SubListPagePage implements OnInit
       {
         let objData = 
         {
-          poem_subject_occassion_id:this.poem_subject_occassion_id
+          poem_subject_occassion_id:this.poem_subject_occassion_id,
+          order:this.order,
+          searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         }
         await this.client.getPoemsByPoemType(objData).then(result => 
         {	
@@ -71,7 +78,14 @@ export class SubListPagePage implements OnInit
       {
         let objData = 
         {
-          poem_subject_occassion_id:this.poem_subject_occassion_id
+          poem_subject_occassion_id:this.poem_subject_occassion_id,
+          order:this.order,
+          searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+          selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         }
         await this.client.getPoemsBySubject(objData).then(result => 
         {	
@@ -129,7 +143,14 @@ export class SubListPagePage implements OnInit
       let objData = 
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
-        order:this.order
+        order:this.order,
+        searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -148,7 +169,13 @@ export class SubListPagePage implements OnInit
       let objData = 
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
-        order:this.order
+        order:this.order,
+        searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -254,7 +281,12 @@ export class SubListPagePage implements OnInit
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
-        searched_text:this.searched_text
+        searched_text:this.searched_text,
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -285,7 +317,12 @@ export class SubListPagePage implements OnInit
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
-        searched_text:this.searched_text
+        searched_text:this.searched_text,
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -329,7 +366,12 @@ export class SubListPagePage implements OnInit
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
-        searched_text:searched_text
+        searched_text:searched_text,
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -349,7 +391,12 @@ export class SubListPagePage implements OnInit
       {
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
-        searched_text:searched_text
+        searched_text:searched_text,
+        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -399,20 +446,70 @@ export class SubListPagePage implements OnInit
       let selectedLanguage = data.data.searched.selectedLanguage;
       let selectedPoets = data.data.searched.selectedPoets;
       let selectedReciters = data.data.searched.selectedReciters;
+      let selectedPoemType = data.data.searched.selectedPoemType;
       let selectedSubjectOccassion = data.data.searched.selectedSubjectOccassion;
-      let advanceSearchObj = {
-        searched_text:this.searched_text,
-        order:this.order,
-        poem_or_subject_occassion:poem_or_subject_occassion,
-        poem_subject_occassion_id:poem_subject_occassion_id,
-        selectedLanguage:selectedLanguage,
-        selectedPoets:selectedPoets,
-        selectedReciters:selectedReciters,
-        selectedSubjectOccassion:selectedSubjectOccassion
+      let advanceSearchObj = {};
+      if(poem_or_subject_occassion=="by_poem_type")
+      {
+        advanceSearchObj = 
+        {
+          searched_text:this.searched_text,
+          order:this.order,
+          poem_or_subject_occassion:poem_or_subject_occassion,
+          poem_subject_occassion_id:poem_subject_occassion_id,
+          selectedLanguage:selectedLanguage,
+          selectedPoets:selectedPoets,
+          selectedReciters:selectedReciters,
+          selectedPoemType:selectedPoemType,
+          selectedSubjectOccassion:selectedSubjectOccassion
+        }
       }
-      console.log(advanceSearchObj);
+      if(poem_or_subject_occassion=="by_subject_occassion")
+      {
+        advanceSearchObj = 
+        {
+          searched_text:this.searched_text,
+          order:this.order,
+          poem_or_subject_occassion:poem_or_subject_occassion,
+          poem_subject_occassion_id:poem_subject_occassion_id,
+          selectedLanguage:selectedLanguage,
+          selectedPoets:selectedPoets,
+          selectedReciters:selectedReciters,
+          selectedPoemType:selectedPoemType,
+          selectedSubjectOccassion:selectedSubjectOccassion
+        }
+      }
+      this.searchWithAdvanceFilters(advanceSearchObj);
+      //console.log(advanceSearchObj);
     });
-
 		return await modal.present();
+  }
+
+  async searchWithAdvanceFilters(advanceSearchObj)
+  {
+    if(advanceSearchObj.poem_or_subject_occassion=="by_poem_type")
+    {
+      await this.client.getPoemsByPoemType(advanceSearchObj).then(result => 
+      {	
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        console.log();
+      });
+    }
+    if(advanceSearchObj.poem_or_subject_occassion=="by_subject_occassion")
+    {
+      await this.client.getPoemsBySubject(advanceSearchObj).then(result => 
+      {	
+        this.resultPoemsByTypeORSubject=result;      
+        console.log(this.resultPoemsByTypeORSubject);
+      },
+      error => 
+      {
+        console.log();
+      });
+    }
   }
 }
