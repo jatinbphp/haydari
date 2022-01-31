@@ -390,3 +390,13 @@ ion-header {
 //         }
 //     }
 // }
+
+// model-src-filter-for
+ion-modal.advance-search-filter .modal-wrapper {
+    --background: rgba(0,0,0,0.5) !important;
+}
+ion-modal.advance-search-filter .modal-wrapper app-search-filters {
+    --background: transparent !important;
+    width: 90% !important;
+    margin-left: auto !important;
+}
