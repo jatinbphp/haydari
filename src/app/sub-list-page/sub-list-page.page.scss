@@ -166,7 +166,7 @@ ion-content {
 			}
 			.src-box {
 				position: absolute;
-			    top: 8px;
+			    top: 0px;
 			    right: 0px;
 			    width: 0px;
 			    height: 0px;
@@ -223,7 +223,8 @@ ion-content {
 				}
 			}
 			.filter-sec {
-				width: 90px;
+				// width: 90px;
+				width: auto;
 				height: fit-content;
 				height: -webkit-fit-content;
 				height: -moz-fit-content;
@@ -232,13 +233,14 @@ ion-content {
 			    background-color: rgba(255, 255, 255, 0.1);
 			    border-radius: 3px;
 			    text-align: center;
-			    padding: 6px 0px;
+			    padding: 6px 3px;
 			    display: flex;
-			    justify-content: space-evenly;
+			    //justify-content: space-evenly;
+			    justify-content: flex-end;
 				img {
 					max-width: 100%;
-					width: 26px;
-					height: auto;
+					width: auto;
+					height: 20px;
 					object-fit: contain;
 					margin: 0px 4px 0px;
 				}

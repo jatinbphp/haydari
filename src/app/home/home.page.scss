@@ -212,6 +212,8 @@ ion-content {
 			}
 			&.subject-main {
 				.img-nm-box-list {
+					// max-width: 100%;
+					min-width: 100%;
 					width: auto;
 					margin-left: -8px;
 					margin-right: -8px;
