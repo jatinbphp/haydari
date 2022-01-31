@@ -120,7 +120,7 @@
 <ion-footer class="ion-no-border" [ngClass]="{'make-in-full-height' : togglePlayerInFullHeight == true}" *ngIf="isAudioPlayed == true && has_mp3 == true">
 	<div class="login-main">
 		<ion-grid class="ion-no-padding">
-			<ion-row>
+			<ion-row (click)="togglePlayerHeight()">
 				<!-- <ion-col size="12" class="ion-text-left ion-no-padding">
 					<h1>the <br>haydari <br>project</h1>
 				</ion-col> -->

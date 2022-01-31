@@ -266,5 +266,6 @@ export class PoemDetailPage
   togglePlayerHeight()
   {
     this.togglePlayerInFullHeight = this.togglePlayerInFullHeight = !this.togglePlayerInFullHeight;
+    console.log(this.togglePlayerInFullHeight);
   }
 }
