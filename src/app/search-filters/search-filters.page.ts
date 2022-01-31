@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { ClientService } from '../providers/client.service';
 
 @Component({
@@ -14,17 +14,44 @@ export class SearchFiltersPage implements OnInit
   public resultReciters:any=[];
   public resultPoets:any=[];
   public resultLanguages:any=[];
+  public resultPoemTypes:any=[];
 
+  public selectedPoemType:any=[];
   public selectedSubjectOccassion:any=[];
   public selectedLanguage:any=[];
   public selectedReciters:any=[];
   public selectedPoets:any=[];
 
-  constructor(public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
+  public poem_or_subject_occassion:any='';
+  public poem_subject_occassion_id:any='';
+
+  constructor(public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public navParams: NavParams)
   { }
 
   async ngOnInit()
   { 
+    /*POEM TYPE*/
+    //LOADER
+		const loadingPoemType = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingPoemType.present();
+		//LOADER
+    await this.client.getPoemTypes().then(result => 
+    {	
+      loadingPoemType.dismiss();//DISMISS LOADER
+      this.resultPoemTypes=result;
+    },
+    error => 
+    {
+      loadingPoemType.dismiss();//DISMISS LOADER
+      console.log();
+    });
+    /*POEM TYPE*/
     /*SUBJECT/OCCASION*/
     //LOADER
 		const loadingSubjectOccasion = await this.loadingCtrl.create({
@@ -117,6 +144,25 @@ export class SearchFiltersPage implements OnInit
       console.log();
     });
     /*LANGUAGES*/
+  }
+
+  ionViewWillEnter()
+  {
+    this.poem_or_subject_occassion=this.navParams.get('poem_or_subject_occassion');
+    this.poem_subject_occassion_id=this.navParams.get('poem_subject_occassion_id');
+  }
+
+  SelectedPoemType(ev)
+  {
+    if(ev.detail.checked == true)
+    {
+      this.selectedPoemType.push(ev.detail.value);      
+    }
+    if(ev.detail.checked == false)
+    {
+      this.selectedPoemType=this.removeA(this.selectedPoemType,ev.detail.value);
+    }
+    console.log(this.selectedPoemType);
   }
 
   SelectedSubOccassion(ev)

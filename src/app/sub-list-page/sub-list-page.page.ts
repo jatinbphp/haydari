@@ -387,7 +387,8 @@ export class SubListPagePage implements OnInit
       showBackdrop: false,
 			componentProps: 
 			{ 
-        id: 1
+        poem_or_subject_occassion:this.poem_or_subject_occassion,
+        poem_subject_occassion_id:this.poem_subject_occassion_id
 			}
 		});
 

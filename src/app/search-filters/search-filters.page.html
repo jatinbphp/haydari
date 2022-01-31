@@ -10,12 +10,21 @@
 			<h2>Filter</h2>
 			<ion-icon name="close" (click)="dismissModal()"></ion-icon>
 		</div>		
-		<div class="filter-topics-list">
+		<div class="filter-topics-list" *ngIf="poem_or_subject_occassion == 'by_poem_type'">
 			<ion-list class="filter-topic-item">
 				<ion-item class="filter-topic-title"><h3>Subject/Occasion</h3></ion-item>
 				<ion-item class="filter-topic" *ngFor="let SubjectOccasion of resultSubjectOccasion;">
 					<ion-checkbox value="{{SubjectOccasion.id}}" (ionChange)="SelectedSubOccassion($event)"></ion-checkbox>
 					<ion-label>{{SubjectOccasion.subjectName}}</ion-label>
+				</ion-item>					
+			</ion-list>
+		</div>
+		<div class="filter-topics-list" *ngIf="poem_or_subject_occassion == 'by_subject_occassion'">
+			<ion-list class="filter-topic-item">
+				<ion-item class="filter-topic-title"><h3>Poem Type</h3></ion-item>
+				<ion-item class="filter-topic" *ngFor="let PoemType of resultPoemTypes;">
+					<ion-checkbox value="{{PoemType.id}}" (ionChange)="SelectedPoemType($event)"></ion-checkbox>
+					<ion-label>{{PoemType.PoemTypeName}}</ion-label>
 				</ion-item>					
 			</ion-list>
 		</div>

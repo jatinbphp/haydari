@@ -309,7 +309,7 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("user_id",data.user_id);
+			let dataToPost = new HttpParams().set("user_id",data.user_id).set("orderType",data.order);
 			this.http.post(this.api_url + "getBookmarkPoems",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)

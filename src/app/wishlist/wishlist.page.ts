@@ -36,7 +36,8 @@ export class WishlistPage
     //LOADER
     let objData = 
     {
-      user_id:this.id
+      user_id:this.id,
+      order:this.order,
     }
     await this.client.getBookmarkPoems(objData).then(result => 
     {	
@@ -49,6 +50,21 @@ export class WishlistPage
       loadingPoemType.dismiss();//DISMISS LOADER
       console.log();
     }); 
+  }
+
+  async changeOrder(order)
+  {
+    //this.order = order;
+    if(order=="desc")
+    {
+      this.order="asc";
+    }
+    if(order=="asc")
+    {
+      this.order="desc";
+    }
+    this.ionViewWillEnter();
+    
   }
   
   async showMyProfile()
