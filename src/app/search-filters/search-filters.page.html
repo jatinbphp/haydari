@@ -9,77 +9,41 @@
 		<div class="pg-title-main">
 			<h2>Filter</h2>
 			<ion-icon name="close" (click)="dismissModal()"></ion-icon>
-		</div>
+		</div>		
 		<div class="filter-topics-list">
 			<ion-list class="filter-topic-item">
 				<ion-item class="filter-topic-title"><h3>Subject/Occasion</h3></ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Prophet Muhammad</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Imam Ali</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Sayyida Fatima</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Imam Hasan</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Imam Husayn</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Hazrat Abbas</ion-label>
-				</ion-item>
+				<ion-item class="filter-topic" *ngFor="let SubjectOccasion of resultSubjectOccasion;">
+					<ion-checkbox value="{{SubjectOccasion.id}}" (ionChange)="SelectedSubOccassion($event)"></ion-checkbox>
+					<ion-label>{{SubjectOccasion.subjectName}}</ion-label>
+				</ion-item>					
 			</ion-list>
 		</div>
 		<div class="filter-topics-list">
 			<ion-list class="filter-topic-item">
 				<ion-item class="filter-topic-title"><h3>Language</h3></ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>English</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Kurdish</ion-label>
-				</ion-item>
+				<ion-item class="filter-topic" *ngFor="let Language of resultLanguages;">
+					<ion-checkbox value="{{Language.id}}" (ionChange)="SelectedLanguage($event)"></ion-checkbox>
+					<ion-label>{{Language.LanguageName}}</ion-label>
+				</ion-item>					
 			</ion-list>
 		</div>
 		<div class="filter-topics-list">
 			<ion-list class="filter-topic-item">
 				<ion-item class="filter-topic-title"><h3>Reciter</h3></ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Yes</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>No</ion-label>
-				</ion-item>
+				<ion-item class="filter-topic" *ngFor="let Reciters of resultReciters;">
+					<ion-checkbox value="{{Reciters.id}}" (ionChange)="SelectedReciters($event)"></ion-checkbox>
+					<ion-label>{{Reciters.ReciterName}}</ion-label>
+				</ion-item>					
 			</ion-list>
 		</div>
 		<div class="filter-topics-list">
 			<ion-list class="filter-topic-item">
 				<ion-item class="filter-topic-title"><h3>Poet</h3></ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Nauha</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Marsiya</ion-label>
-				</ion-item>
-				<ion-item class="filter-topic">
-					<ion-checkbox></ion-checkbox>
-					<ion-label>Manqabat</ion-label>
-				</ion-item>
+				<ion-item class="filter-topic" *ngFor="let Poets of resultPoets;">
+					<ion-checkbox value="{{Poets.id}}" (ionChange)="SelectedPoets($event)"></ion-checkbox>
+					<ion-label>{{Poets.PoetName}}</ion-label>
+				</ion-item>					
 			</ion-list>
 		</div>
 		<div class="filter-topics-list">
@@ -96,7 +60,7 @@
 			</ion-list>
 		</div>
 		<div class="filter-src-btn">
-			<ion-button>Search</ion-button>
+			<ion-button (click)="searchPoem()">Search</ion-button>
 		</div>
 	</div>
 </ion-content>

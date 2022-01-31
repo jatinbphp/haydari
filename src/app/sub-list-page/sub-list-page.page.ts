@@ -391,6 +391,27 @@ export class SubListPagePage implements OnInit
 			}
 		});
 
+    modal.onDidDismiss().then((data) => 
+		{
+      let poem_or_subject_occassion = data.data.searched.poem_or_subject_occassion;
+      let poem_subject_occassion_id = data.data.searched.poem_subject_occassion_id;
+      let selectedLanguage = data.data.searched.selectedLanguage;
+      let selectedPoets = data.data.searched.selectedPoets;
+      let selectedReciters = data.data.searched.selectedReciters;
+      let selectedSubjectOccassion = data.data.searched.selectedSubjectOccassion;
+      let advanceSearchObj = {
+        searched_text:this.searched_text,
+        order:this.order,
+        poem_or_subject_occassion:poem_or_subject_occassion,
+        poem_subject_occassion_id:poem_subject_occassion_id,
+        selectedLanguage:selectedLanguage,
+        selectedPoets:selectedPoets,
+        selectedReciters:selectedReciters,
+        selectedSubjectOccassion:selectedSubjectOccassion
+      }
+      console.log(advanceSearchObj);
+    });
+
 		return await modal.present();
   }
 }
