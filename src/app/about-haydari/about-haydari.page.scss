@@ -78,6 +78,19 @@ ion-content {
     --border: 0px;
 	.mainContent {
 		padding: 0px 24px 30px;
+		h3 {
+			font-size: 22px;
+			line-height: 26px;
+			font-family: var(--font-Poppins-SemiBold);
+			color: var(--White);
+			text-transform: capitalize;
+			word-break: break-word;
+			margin: 0px 0px 16px;
+			@media(max-width:374px) {
+				font-size: 20px;
+				line-height: 24px;
+			}
+		}
 		p {
 			font-family: var(--font-Poppins-Light);
 			font-size: 17px;
