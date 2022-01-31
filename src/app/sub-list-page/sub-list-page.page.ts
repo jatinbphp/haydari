@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { SearchFiltersPage } from '../search-filters/search-filters.page';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 @Component({
@@ -376,5 +377,20 @@ export class SubListPagePage implements OnInit
   {
     this.searched_text='';
     this.is_searched=false;
+  }
+
+  async OpenAdvanceFilter()
+  {
+    const modal = await this.modalCtrl.create({
+			component: SearchFiltersPage,
+      cssClass: 'advance-search-filter',
+      showBackdrop: false,
+			componentProps: 
+			{ 
+        id: 1
+			}
+		});
+
+		return await modal.present();
   }
 }

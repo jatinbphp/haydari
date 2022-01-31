@@ -56,6 +56,10 @@ const routes: Routes = [
   {
     path: 'about-haydari',
     loadChildren: () => import('./about-haydari/about-haydari.module').then( m => m.AboutHaydariPageModule)
+  },
+  {
+    path: 'search-filters',
+    loadChildren: () => import('./search-filters/search-filters.module').then( m => m.SearchFiltersPageModule)
   }
   /*,
   {
