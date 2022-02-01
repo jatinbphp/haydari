@@ -70,7 +70,7 @@ ion-header {
 ion-content {
 	--background: #041f1e;
 	.mainContent {
-		padding: 34px 24px 24px;
+		padding: calc(env(safe-area-inset-top) + 33px) 24px 24px;
 		.pg-title-main {
 			width: 100%;
 			padding: 0px 0px 32px 0px;
@@ -85,7 +85,7 @@ ion-content {
 				height: 50px !important;
 			}/*MAULIK::ADDED*/
 			h2 {
-				width: calc(100% - 22px);
+				width: calc(100% - 30px);
 				font-size: 22px;
 				line-height: 33px;
 				font-family: var(--font-Poppins-SemiBold);
@@ -117,7 +117,7 @@ ion-content {
 			}
 			ion-icon {
 			    color: #fff;
-				font-size: 22px;
+				font-size: 30px;
 			}
 		}
 		.filter-topics-list {
