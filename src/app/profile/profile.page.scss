@@ -18,7 +18,7 @@ ion-content {
 		display: flex;
 		flex-flow: column;
 		justify-content: flex-start;
-		padding: 50px 30px;
+		padding: calc(env(safe-area-inset-top) + 33px) 30px 50px;
 		form {
 			width: 100%;
 			padding: 10px 0px 0px;
@@ -61,14 +61,14 @@ ion-content {
 					}
 					h1 {
 						width: 100%;
-						font-size: 48px;
-						line-height: 40px;
+						font-size: 44px;
+						line-height: 36px;
 						font-family: var(--font-LTC-Californian);
 						color: var(--White);
 						margin: 0px 0px 38px;
 						@media(max-width:374px) {
-							font-size: 45px;
-							line-height: 38px;
+							font-size: 40px;
+							line-height: 31px;
 						}
 					}
 					h2 {
@@ -97,27 +97,27 @@ ion-content {
 					}
 					p {
 						font-family: var(--font-Poppins-Light);
-						font-size: 17px;
-						line-height: 19px;
+						font-size: 16px;
+						line-height: 18px;
 						color: #b9b7b7;
 						margin: 0px;
 						ion-router-link {
 							font-family: var(--font-Poppins-SemiBold);
 						}
 						@media(max-width:374px) {
-							font-size: 15px;
-							line-height: 17px;
+							font-size: 14px;
+							line-height: 16px;
 						}
 					}
 					ion-router-link {
 						font-family: var(--font-Poppins-SemiBold);
-						font-size: 17px;
-						line-height: 23px;
+						font-size: 16px;
+						line-height: 22px;
 						color: #b9b7b7;
 						margin: 0px;
 						@media(max-width:374px) {
-							font-size: 15px;
-							line-height: 21px;
+							font-size: 14px;
+							line-height: 20px;
 						}
 					}
 					ion-button {
@@ -129,32 +129,32 @@ ion-content {
 				        margin: 0;
 						&.border-btn {
 							width: 95%;
-							height: 54px;
+							height: 50px;
 							--background: transparent;
 				        	--color: var(--White);
 				        	border: 1px solid #b9b7b7;
 				        	border-radius: 6px;
 				        	@media(max-width:374px) {
-				        		height: 45px;
+				        		height: 42px;
 				        	}
 				        	img {
 							    max-width: 100%;
-							    width: 28px;
-							    height: 28px;
-							    line-height: 28px;
+							    width: 24px;
+							    height: 24px;
+							    line-height: 24px;
 							    object-fit: contain;
 							    object-position: center;
 							    @media(max-width:374px) {
-							    	width: 23px;
-								    height: 23px;
-								    line-height: 23px;
+							    	width: 21px;
+								    height: 21px;
+								    line-height: 21px;
 							    }
 							}
 						}
 						&.log-btn {
 							width: 100%;
-							height: 56px;
-							line-height: 56px;
+							height: 53px;
+							line-height: 53px;
 							--background: #7ea16b;
 							color: var(--White);
 							font-size: 20px;
@@ -185,7 +185,7 @@ ion-content {
 					ion-input {
 					    --background: transparent;
 					    border-bottom: 1px solid #b9b7b7;
-					    line-height: 33px;
+					    line-height: 25px;
 					    font-size: 17px;
 					    color: #b9b7b7;
 					    font-family: var(--font-Poppins-Light);
@@ -198,7 +198,8 @@ ion-content {
 					ion-icon {
 						position: absolute;
 					    right: 0px;
-					    bottom: 6px;
+					    // bottom: 6px;
+					    top: 32px;
 					    background: #021312;
 					    color: rgba(255, 255, 255, 0.4);
 					    width: 30px;
@@ -206,6 +207,19 @@ ion-content {
 					    line-height: 30px;
 					    padding: 1px 5px;
 						z-index: 1000;
+					}
+					svg.pw-show, svg.pw-hide {
+					    position: absolute;
+					    right: 0px;
+					    // bottom: 6px;
+					    top: 32px;
+					    background: #021312;
+					    fill: rgba(255, 255, 255, 0.4);
+					    width: 36px;
+					    height: 36px;
+					    line-height: 36px;
+					    padding: 1px 5px;
+					    z-index: 1000;
 					}
 					ion-checkbox {
 						width: 20px;
