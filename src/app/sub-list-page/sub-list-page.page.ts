@@ -31,6 +31,7 @@ export class SubListPagePage implements OnInit
   
   constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
+    localStorage.removeItem('searched_filters');
     this.keyboard.hideFormAccessoryBar(false);
     this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
     {

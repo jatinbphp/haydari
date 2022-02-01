@@ -46,18 +46,7 @@ export class SearchFiltersPage implements OnInit
     this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
     if(this.searched_filters)
     {
-      let selectedSubjectOccassion = (this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "";
-      let selectedPoemType = (this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "";
-      let selectedLanguage = (this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "";
-      let selectedReciters = (this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "";
-      let selectedPoets = (this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "";
       let translated = (this.searched_filters['translated']) ? this.searched_filters['translated'] : "";
-      
-      this.loginForm.controls['subject_occassion'].setValue(selectedSubjectOccassion);
-      this.loginForm.controls['poem_type'].setValue(selectedPoemType);
-      this.loginForm.controls['languages'].setValue(selectedLanguage);
-      this.loginForm.controls['reciters'].setValue(selectedReciters);
-      this.loginForm.controls['poets'].setValue(selectedPoets);
       this.loginForm.controls['translated'].setValue(translated);
     }
     console.log("SEARCHED FILTERS",this.searched_filters);
@@ -79,6 +68,11 @@ export class SearchFiltersPage implements OnInit
       loadingPoemType.dismiss();//DISMISS LOADER
       this.resultPoemTypes=result;
       console.log(this.resultPoemTypes);
+      if(this.searched_filters)
+      {
+        let selectedPoemType = (this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "";
+        this.loginForm.controls['poem_type'].setValue(selectedPoemType);
+      }//INITILIZE SEARCH FIELDS
     },
     error => 
     {
@@ -102,6 +96,11 @@ export class SearchFiltersPage implements OnInit
       loadingSubjectOccasion.dismiss();//DISMISS LOADER
       this.resultSubjectOccasion=result;      
       console.log(this.resultSubjectOccasion);
+      if(this.searched_filters)
+      {
+        let selectedSubjectOccassion = (this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "";
+        this.loginForm.controls['subject_occassion'].setValue(selectedSubjectOccassion);
+      }//INITILIZE SEARCH FIELDS
     },
     error => 
     {
@@ -123,8 +122,13 @@ export class SearchFiltersPage implements OnInit
     await this.client.getReciters().then(result => 
     {	
       loadingReceiters.dismiss();//DISMISS LOADER
-      this.resultReciters=result;      
+      this.resultReciters=result;
       console.log(this.resultReciters);
+      if(this.searched_filters)
+      {
+        let selectedReciters = (this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "";
+        this.loginForm.controls['reciters'].setValue(selectedReciters);
+      }//INITILIZE SEARCH FIELDS
     },
     error => 
     {
@@ -148,6 +152,11 @@ export class SearchFiltersPage implements OnInit
       loadingPoets.dismiss();//DISMISS LOADER
       this.resultPoets=result;      
       console.log(this.resultPoets);
+      if(this.searched_filters)
+      {
+        let selectedPoets = (this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "";
+        this.loginForm.controls['poets'].setValue(selectedPoets);
+      }//INITILIZE SEARCH FIELDS
     },
     error => 
     {
@@ -171,6 +180,11 @@ export class SearchFiltersPage implements OnInit
       loadingLanguages.dismiss();//DISMISS LOADER
       this.resultLanguages=result;      
       console.log(this.resultLanguages);
+      if(this.searched_filters)
+      {
+        let selectedLanguage = (this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "";
+        this.loginForm.controls['languages'].setValue(selectedLanguage);
+      }//INITILIZE SEARCH FIELDS
     },
     error => 
     {
