@@ -18,6 +18,7 @@ export class SubListPagePage implements OnInit
 {
   public queryString: any=[];
   public queryStringData: any=[];
+  public searched_filters:any=[];
   public show_in_view: any = 'list';
   public poem_subject_occassion_id:any = '';
   public poem_subject_occassion_nm:any = '';
@@ -127,6 +128,10 @@ export class SubListPagePage implements OnInit
     this.poem_subject_occassion_nm=this.queryStringData['poem_subject_occassion_nm'].replace("<br>", "");
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
 
+    //IF ALREADY SEARCHED FOUNDS
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
+    //IF ALREADY SEARCHED FOUNDS
+
     /*POEM TYPE*/
     //LOADER
 		const loadingPoemType = await this.loadingCtrl.create({
@@ -145,11 +150,12 @@ export class SubListPagePage implements OnInit
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
         searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
@@ -171,11 +177,12 @@ export class SubListPagePage implements OnInit
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
         searched_text:this.searched_text,//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -264,6 +271,9 @@ export class SubListPagePage implements OnInit
       this.order="desc";
     }
     console.log(this.order);
+    //IF ALREADY SEARCHED FOUNDS
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
+    //IF ALREADY SEARCHED FOUNDS
     if(poem_or_subject_occassion=="by_poem_type")
     {
       //LOADER
@@ -282,11 +292,12 @@ export class SubListPagePage implements OnInit
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
         searched_text:this.searched_text,
-        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -318,11 +329,12 @@ export class SubListPagePage implements OnInit
         poem_subject_occassion_id:this.poem_subject_occassion_id,
         order:this.order,
         searched_text:this.searched_text,
-        selectedLanguage:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -371,7 +383,8 @@ export class SubListPagePage implements OnInit
         selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsByPoemType(objData).then(result => 
       {	
@@ -396,7 +409,8 @@ export class SubListPagePage implements OnInit
         selectedPoets:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         selectedReciters:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
         selectedPoemType:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-        selectedSubjectOccassion:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        selectedSubjectOccassion:'',//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+        translated:''//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
       }
       await this.client.getPoemsBySubject(objData).then(result => 
       {	
@@ -448,6 +462,7 @@ export class SubListPagePage implements OnInit
       let selectedReciters = data.data.searched.selectedReciters;
       let selectedPoemType = data.data.searched.selectedPoemType;
       let selectedSubjectOccassion = data.data.searched.selectedSubjectOccassion;
+      let translated = data.data.searched.translated;
       let advanceSearchObj = {};
       if(poem_or_subject_occassion=="by_poem_type")
       {
@@ -461,7 +476,8 @@ export class SubListPagePage implements OnInit
           selectedPoets:selectedPoets,
           selectedReciters:selectedReciters,
           selectedPoemType:selectedPoemType,
-          selectedSubjectOccassion:selectedSubjectOccassion
+          selectedSubjectOccassion:selectedSubjectOccassion,
+          translated:translated
         }
       }
       if(poem_or_subject_occassion=="by_subject_occassion")
@@ -476,7 +492,8 @@ export class SubListPagePage implements OnInit
           selectedPoets:selectedPoets,
           selectedReciters:selectedReciters,
           selectedPoemType:selectedPoemType,
-          selectedSubjectOccassion:selectedSubjectOccassion
+          selectedSubjectOccassion:selectedSubjectOccassion,
+          translated:translated
         }
       }
       this.searchWithAdvanceFilters(advanceSearchObj);
@@ -487,6 +504,7 @@ export class SubListPagePage implements OnInit
 
   async searchWithAdvanceFilters(advanceSearchObj)
   {
+    this.resultPoemsByTypeORSubject=[];
     if(advanceSearchObj.poem_or_subject_occassion=="by_poem_type")
     {
       await this.client.getPoemsByPoemType(advanceSearchObj).then(result => 

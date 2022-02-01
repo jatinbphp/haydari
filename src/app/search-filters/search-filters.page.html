@@ -8,7 +8,7 @@
 	<div class="mainContent">
 		<div class="pg-title-main">
 			<h2>Filter</h2>
-			<ion-icon name="close" (click)="dismissModal()"></ion-icon>
+			<ion-icon name="close" (click)="dismissFilterModal()"></ion-icon>
 		</div>
 		<!--BEFORE::FORM::STARTS-->		
 		<!--<div class="filter-topics-list" *ngIf="poem_or_subject_occassion == 'by_poem_type'">
@@ -137,7 +137,7 @@
 			</div>
 			<div class="filter-src-btn">
 				<ion-button type="submit">Search</ion-button>
-				<ion-button color="danger" (click)="clearSearch()">Clear</ion-button>
+				<ion-button color="danger" (click)="clearAppliedFilters()">Clear</ion-button>
 			</div>
 		</form>		
 	</div>

@@ -410,3 +410,24 @@ ion-modal.advance-search-filter .modal-wrapper app-search-filters {
 app-search-filters ion-item .item-native .item-inner .input-wrapper {
     flex-direction: column !important;
 }
+
+/*MAULIK::ADDED::TO SHOW FULL CONTENT ON ION-SELECT-OPTION*/
+#ForRadioOptions
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+   white-space: normal;
+}
+.alert-tappable.alert-radio {
+   height: auto;
+   contain: content;
+}
+#ForCheckbox
+.alert-checkbox-label.sc-ion-alert-md,
+.alert-checkbox-label.sc-ion-alert-ios {
+   white-space: normal;
+}
+.alert-tappable.alert-checkbox {
+   height: auto;
+   contain: content;
+}
+/*MAULIK::ADDED::TO SHOW FULL CONTENT ON ION-SELECT-OPTION*/

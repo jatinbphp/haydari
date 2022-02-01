@@ -23,6 +23,8 @@ export class SearchFiltersPage implements OnInit
   public selectedReciters:any=[];
   public selectedPoets:any=[];
 
+  public searched_filters:any=[];
+
   public poem_or_subject_occassion:any='';
   public poem_subject_occassion_id:any='';
 
@@ -40,6 +42,27 @@ export class SearchFiltersPage implements OnInit
 
   async ngOnInit()
   { 
+    //INITILIZE SEARCH FIELDS
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
+    if(this.searched_filters)
+    {
+      let selectedSubjectOccassion = (this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "";
+      let selectedPoemType = (this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "";
+      let selectedLanguage = (this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "";
+      let selectedReciters = (this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "";
+      let selectedPoets = (this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "";
+      let translated = (this.searched_filters['translated']) ? this.searched_filters['translated'] : "";
+      
+      this.loginForm.controls['subject_occassion'].setValue(selectedSubjectOccassion);
+      this.loginForm.controls['poem_type'].setValue(selectedPoemType);
+      this.loginForm.controls['languages'].setValue(selectedLanguage);
+      this.loginForm.controls['reciters'].setValue(selectedReciters);
+      this.loginForm.controls['poets'].setValue(selectedPoets);
+      this.loginForm.controls['translated'].setValue(translated);
+    }
+    console.log("SEARCHED FILTERS",this.searched_filters);
+    //INITILIZE SEARCH FIELDS
+
     /*POEM TYPE*/
     //LOADER
 		const loadingPoemType = await this.loadingCtrl.create({
@@ -294,13 +317,91 @@ export class SearchFiltersPage implements OnInit
     */
   }
 
-  applyFilters(form)
+  dismissFilterModal()
   {
-    console.log(form);
+    let SearchType = JSON.parse(localStorage.getItem('choosen_option'));
+    let poem_or_subject_occassion = SearchType['poem_or_subject_occassion'];
+    let poem_subject_occassion_id = SearchType['poem_subject_occassion_id'];
+    
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
+    let selectedSubjectOccassion='';
+    let selectedPoemType = '';
+    let selectedLanguage = '';
+    let selectedReciters = '';
+    let selectedPoets = '';
+    let translated = '';
+    if(this.searched_filters)
+    {
+      selectedSubjectOccassion = (this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "";
+      selectedPoemType = (this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "";
+      selectedLanguage = (this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "";
+      selectedReciters = (this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "";
+      selectedPoets = (this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "";
+      translated = (this.searched_filters['translated']) ? this.searched_filters['translated'] : "";
+    }
+    
+    let dataToSearch = {
+      poem_or_subject_occassion:poem_or_subject_occassion,
+      poem_subject_occassion_id:poem_subject_occassion_id,
+      selectedPoemType:selectedPoemType,
+      selectedSubjectOccassion:selectedSubjectOccassion,
+      selectedLanguage:selectedLanguage,
+      selectedReciters:selectedReciters,
+      selectedPoets:selectedPoets,
+      translated:translated
+    }
+
+    this.modalCtrl.dismiss({
+			'dismissed': true,
+      'searched': dataToSearch
+		});
   }
 
-  clearSearch()
+  applyFilters(form)
   {
-    console.log("clear");
+    let SearchType = JSON.parse(localStorage.getItem('choosen_option'));
+    let poem_or_subject_occassion = SearchType['poem_or_subject_occassion'];
+    let poem_subject_occassion_id = SearchType['poem_subject_occassion_id'];
+    
+    let dataToSearch = {
+      poem_or_subject_occassion:poem_or_subject_occassion,
+      poem_subject_occassion_id:poem_subject_occassion_id,
+      selectedPoemType:(form.poem_type) ? form.poem_type.join(",") : "",
+      selectedSubjectOccassion:(form.subject_occassion) ? form.subject_occassion.join(",") : "",
+      selectedLanguage:(form.languages) ? form.languages.join(",") : "",
+      selectedReciters:(form.reciters) ? form.reciters.join(",") : "",
+      selectedPoets:(form.poets) ? form.poets.join(",") : "",
+      translated:(form.translated) ? form.translated : ""
+    }
+    localStorage.setItem('searched_filters',JSON.stringify(dataToSearch));
+    this.modalCtrl.dismiss({
+			'dismissed': true,
+      'searched': dataToSearch
+		});
+  }
+
+  clearAppliedFilters()
+  {
+    this.loginForm.reset();
+    localStorage.removeItem('searched_filters');
+    let SearchType = JSON.parse(localStorage.getItem('choosen_option'));
+    let poem_or_subject_occassion = SearchType['poem_or_subject_occassion'];
+    let poem_subject_occassion_id = SearchType['poem_subject_occassion_id'];
+    
+    let dataToSearch = {
+      poem_or_subject_occassion:poem_or_subject_occassion,
+      poem_subject_occassion_id:poem_subject_occassion_id,
+      selectedPoemType:"",
+      selectedSubjectOccassion:"",
+      selectedLanguage:"",
+      selectedReciters:"",
+      selectedPoets:"",
+      translated:""
+    }
+
+    this.modalCtrl.dismiss({
+			'dismissed': true,
+      'searched': dataToSearch
+		});
   }
 }
