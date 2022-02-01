@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { ClientService } from '../providers/client.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-search-filters',
@@ -25,7 +26,16 @@ export class SearchFiltersPage implements OnInit
   public poem_or_subject_occassion:any='';
   public poem_subject_occassion_id:any='';
 
-  constructor(public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public navParams: NavParams)
+  public loginForm = this.fb.group({
+		subject_occassion: [''],
+		poem_type: [''],
+    languages: [''],
+    reciters: [''],
+    poets: [''],
+    translated: [''],
+	});
+
+  constructor(public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public navParams: NavParams)
   { }
 
   async ngOnInit()
@@ -168,6 +178,7 @@ export class SearchFiltersPage implements OnInit
 
   SelectedSubOccassion(ev)
   {
+    console.log(ev);
     if(ev.detail.checked == true)
     {
       this.selectedSubjectOccassion.push(ev.detail.value);      
@@ -281,5 +292,15 @@ export class SearchFiltersPage implements OnInit
     console.log(this.selectedReciters);
     console.log(this.selectedPoets);
     */
+  }
+
+  applyFilters(form)
+  {
+    console.log(form);
+  }
+
+  clearSearch()
+  {
+    console.log("clear");
   }
 }
