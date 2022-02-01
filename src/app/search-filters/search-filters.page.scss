@@ -124,8 +124,8 @@ ion-content {
 			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
-			padding: 5px 0px 15px;
-    		margin: 0px 0px 15px;
+			padding: 0px 0px 20px;
+    		margin: 0px 0px 20px;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 			&:nth-last-child(1), &:nth-last-child(2) {
 				border-color: transparent;
@@ -149,6 +149,36 @@ ion-content {
 						@media(max-width:374px) {
 							font-size: 18px;
 							line-height: 20px;
+						}
+					}
+					ion-label {
+						width: 100%;
+					    min-width: 100%;
+					    max-width: 100%;
+						font-size: 20px;
+						line-height: 26px;
+						font-family: var(--font-Poppins-Medium);
+						color: var(--White);
+						margin: 0px 0px 12px;
+						@media(max-width:374px) {
+							font-size: 18px;
+							line-height: 20px;
+						}
+					}
+					ion-select {
+						width: 100%;
+					    min-width: 100%;
+					    max-width: 100%;
+						background-color: #1c392d;
+					    border-radius: 5px;
+					    color: #fff;
+					    font-size: 15px;
+					    line-height: 40px;
+					    height: 40px;
+					    font-family: var(--font-Poppins-Medium);
+					    --padding-start: 16px;
+						ion-select-option {
+							color: #fff;
 						}
 					}
 				}
@@ -189,20 +219,25 @@ ion-content {
 		}
 		.filter-src-btn {
 			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: flex-start;
 			margin: 20px 0px 40px;
 			ion-button {
 				height: 44px;
-			    --background: rgba(126,161,107,0.2);
+			    //--background: rgba(126,161,107,0.2);
+			    --background: #7ea16b;
 			    color: var(--White);
 			    font-size: 15px;
-			    font-family: var(--font-Poppins-Light);
+			    font-family: var(--font-Poppins-Regular);
 			    --border-radius: 30px;
 			    --padding-start: 40px;
 			    --padding-end: 40px;
 			    text-transform: capitalize;
 			    margin: 0px;
 			    --box-shadow: none;
-			    min-width: 160px;
+			    min-width: 135px;
 			}
 		}
 	}

@@ -61,6 +61,12 @@ html {
     margin: 0px;
 }
 
+:host(.item-label-stacked) .input-wrapper, 
+:host(.item-label-floating) .input-wrapper {
+    flex: 1 1 0% !important;
+    flex-direction: column !important;
+}
+
 ion-grid, ion-col {
 	padding: 0px;
 }
@@ -399,4 +405,8 @@ ion-modal.advance-search-filter .modal-wrapper app-search-filters {
     --background: transparent !important;
     width: 90% !important;
     margin-left: auto !important;
+}
+
+app-search-filters ion-item .item-native .item-inner .input-wrapper {
+    flex-direction: column !important;
 }

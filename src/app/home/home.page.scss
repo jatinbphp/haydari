@@ -261,6 +261,12 @@ ion-content {
 						// }
 						.img-nm-box-inner {
 							margin: 0px 8px 0px;
+							&.no-image {
+								h3 {
+									position: unset;
+									z-index: 0;
+								}
+							}
 							&::before {
 								background-color: #3c4343 !important;
     							opacity: 0.6;
