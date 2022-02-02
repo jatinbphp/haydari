@@ -25,7 +25,7 @@ export class SubListPagePage implements OnInit
   public poem_subject_occassion_nm:any = '';
   public poem_or_subject_occassion:any = '';
   public resultPoemsByTypeORSubject:any=[];
-  public order:any='asc';
+  public order:any='desc';
   public is_search_icon_clicked:boolean=false;
   public is_searched:boolean=false;
   public searched_text:any='';

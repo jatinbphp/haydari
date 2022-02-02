@@ -201,7 +201,7 @@ export class AppComponent
         presentationstyle : 'pagesheet',//iOS only 
         fullscreen : 'yes',//Windows only    
     };
-    let target = "_blank";//_blank
+    let target = "_system";
     const browser = this.inAppBrowser.create(targetUrl,target,options);
   }
 
