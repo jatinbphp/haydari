@@ -182,7 +182,7 @@ export class PoemDetailPage
           }
           if(is_to_insert == 0)
           {
-            this.client.showMessage("Poem is removed from bookmark!");
+            this.client.showMessage("Bookmark has been removed from Poem.");
           }
         }
         this.ionViewWillEnter();
