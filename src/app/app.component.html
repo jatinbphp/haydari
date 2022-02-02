@@ -16,7 +16,11 @@
                 <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.title!='Profile' && p.title!='Logout'" lines="full" lines="none" detail="false" (click)="showPoemByPoemTypeORSubjectOccassion(p.id,p.title,'by_poem_type')">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.title!='Profile' && p.title!='Logout' && p.title!='Submit A Poem'" lines="full" lines="none" detail="false" (click)="showPoemByPoemTypeORSubjectOccassion(p.id,p.title,'by_poem_type')">
+                <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+              <ion-item *ngIf="p.shouldFunction == 1 && p.title=='Submit A Poem'" lines="full" lines="none" detail="false" (click)="SubmitAPoem()">
                 <!--<ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>-->
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>

@@ -19,6 +19,7 @@ export class SubListPagePage implements OnInit
   public queryString: any=[];
   public queryStringData: any=[];
   public searched_filters:any=[];
+  public is_searched_filters_applied:boolean=false;
   public show_in_view: any = 'list';
   public poem_subject_occassion_id:any = '';
   public poem_subject_occassion_nm:any = '';
@@ -130,7 +131,7 @@ export class SubListPagePage implements OnInit
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
 
     //IF ALREADY SEARCHED FOUNDS
-    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));    
     //IF ALREADY SEARCHED FOUNDS
 
     /*POEM TYPE*/
@@ -505,6 +506,17 @@ export class SubListPagePage implements OnInit
 
   async searchWithAdvanceFilters(advanceSearchObj)
   {
+    //IF ALREADY SEARCHED FOUNDS
+    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));    
+    console.log(this.searched_filters);
+    this.is_searched_filters_applied=false;
+    if(this.searched_filters && this.searched_filters['poem_or_subject_occassion']!='')
+    {
+      this.is_searched_filters_applied=true;
+    }
+    console.log("is_searched_filters_applied",this.is_searched_filters_applied);
+    //IF ALREADY SEARCHED FOUNDS
+    
     this.resultPoemsByTypeORSubject=[];
     if(advanceSearchObj.poem_or_subject_occassion=="by_poem_type")
     {

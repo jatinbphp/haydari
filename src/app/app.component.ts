@@ -4,6 +4,7 @@ import { ClientService } from './providers/client.service';
 import { NavigationExtras } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from './profile/profile.page';
+import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent
     { title: 'Settings', url: '/tabs/home', icon: 'bag', categories: []},//[6]
   ];
   */
-  constructor(private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
+  constructor(public inAppBrowser: InAppBrowser, private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder)
   {
     /*
     this.platform.backButton.subscribeWithPriority(10, () => {
@@ -61,6 +62,12 @@ export class AppComponent
           title:'My Bookmarks',
           shouldFunction:0,
           url: '/tabs/wishlist'
+        },
+        {
+          id:0,
+          title:'Submit A Poem',
+          shouldFunction:1,
+          url: ''
         },
         {
           id:0,
@@ -171,6 +178,31 @@ export class AppComponent
     {
       this.client.router.navigate(['login']);  
     }
+  }
+
+  SubmitAPoem()
+  {
+    let targetUrl="https://app.thehaydariproject.com/submit-poem";
+    const options : InAppBrowserOptions = 
+    {
+        location : 'no',//Or 'no' 
+        hidden : 'no', //Or  'yes'
+        clearcache : 'yes',
+        clearsessioncache : 'yes',
+        zoom : 'no',//Android only ,shows browser zoom controls 
+        hardwareback : 'no',
+        mediaPlaybackRequiresUserAction : 'no',
+        shouldPauseOnSuspend : 'no', //Android only 
+        closebuttoncaption : 'Close', //iOS only
+        disallowoverscroll : 'no', //iOS only 
+        toolbar : 'yes', //iOS only 
+        enableViewportScale : 'no', //iOS only 
+        allowInlineMediaPlayback : 'no',//iOS only 
+        presentationstyle : 'pagesheet',//iOS only 
+        fullscreen : 'yes',//Windows only    
+    };
+    let target = "_blank";//_blank
+    const browser = this.inAppBrowser.create(targetUrl,target,options);
   }
 
   Logout()

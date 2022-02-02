@@ -65,7 +65,7 @@ export class SearchFiltersPage implements OnInit
 		//LOADER
     await this.client.getPoemTypes().then(result => 
     {	
-      loadingPoemType.dismiss();//DISMISS LOADER
+      //loadingPoemType.dismiss();//DISMISS LOADER
       this.resultPoemTypes=result;
       console.log(this.resultPoemTypes);
       if(this.searched_filters)
@@ -82,7 +82,8 @@ export class SearchFiltersPage implements OnInit
     /*POEM TYPE*/
     /*SUBJECT/OCCASION*/
     //LOADER
-		const loadingSubjectOccasion = await this.loadingCtrl.create({
+		/*
+    const loadingSubjectOccasion = await this.loadingCtrl.create({
 			spinner: null,
 			//duration: 5000,
 			message: 'Please wait...',
@@ -90,10 +91,11 @@ export class SearchFiltersPage implements OnInit
 			cssClass: 'custom-class custom-loading'
 		});
 		await loadingSubjectOccasion.present();
-		//LOADER
+		*/
+    //LOADER
     await this.client.getSubject().then(result => 
     {	
-      loadingSubjectOccasion.dismiss();//DISMISS LOADER
+      //loadingSubjectOccasion.dismiss();//DISMISS LOADER
       this.resultSubjectOccasion=result;      
       console.log(this.resultSubjectOccasion);
       if(this.searched_filters)
@@ -104,13 +106,15 @@ export class SearchFiltersPage implements OnInit
     },
     error => 
     {
-      loadingSubjectOccasion.dismiss();//DISMISS LOADER
+      loadingPoemType.dismiss();//DISMISS LOADER
+      //loadingSubjectOccasion.dismiss();//DISMISS LOADER
       console.log();
     });
     /*SUBJECT/OCCASION*/
     /*RECIETERS*/
     //LOADER
-		const loadingReceiters = await this.loadingCtrl.create({
+		/*
+    const loadingReceiters = await this.loadingCtrl.create({
 			spinner: null,
 			//duration: 5000,
 			message: 'Please wait...',
@@ -118,10 +122,11 @@ export class SearchFiltersPage implements OnInit
 			cssClass: 'custom-class custom-loading'
 		});
 		await loadingReceiters.present();
-		//LOADER
+		*/
+    //LOADER
     await this.client.getReciters().then(result => 
     {	
-      loadingReceiters.dismiss();//DISMISS LOADER
+      //loadingReceiters.dismiss();//DISMISS LOADER
       this.resultReciters=result;
       console.log(this.resultReciters);
       if(this.searched_filters)
@@ -132,13 +137,15 @@ export class SearchFiltersPage implements OnInit
     },
     error => 
     {
-      loadingReceiters.dismiss();//DISMISS LOADER
+      loadingPoemType.dismiss();//DISMISS LOADER
+      //loadingReceiters.dismiss();//DISMISS LOADER
       console.log();
     });
     /*RECIETERS*/
     /*POETS*/
     //LOADER
-		const loadingPoets = await this.loadingCtrl.create({
+		/*
+    const loadingPoets = await this.loadingCtrl.create({
 			spinner: null,
 			//duration: 5000,
 			message: 'Please wait...',
@@ -146,10 +153,11 @@ export class SearchFiltersPage implements OnInit
 			cssClass: 'custom-class custom-loading'
 		});
 		await loadingPoets.present();
-		//LOADER
+		*/
+    //LOADER
     await this.client.getPoets().then(result => 
     {	
-      loadingPoets.dismiss();//DISMISS LOADER
+      //loadingPoets.dismiss();//DISMISS LOADER
       this.resultPoets=result;      
       console.log(this.resultPoets);
       if(this.searched_filters)
@@ -160,13 +168,15 @@ export class SearchFiltersPage implements OnInit
     },
     error => 
     {
-      loadingPoets.dismiss();//DISMISS LOADER
+      //loadingPoets.dismiss();//DISMISS LOADER
+      loadingPoemType.dismiss();//DISMISS LOADER
       console.log();
     });
     /*POETS*/
     /*LANGUAGES*/
     //LOADER
-		const loadingLanguages = await this.loadingCtrl.create({
+		/*
+    const loadingLanguages = await this.loadingCtrl.create({
 			spinner: null,
 			//duration: 5000,
 			message: 'Please wait...',
@@ -174,10 +184,12 @@ export class SearchFiltersPage implements OnInit
 			cssClass: 'custom-class custom-loading'
 		});
 		await loadingLanguages.present();
-		//LOADER
+		*/
+    //LOADER
     await this.client.getLanguages().then(result => 
     {	
-      loadingLanguages.dismiss();//DISMISS LOADER
+      //loadingLanguages.dismiss();//DISMISS LOADER
+      loadingPoemType.dismiss();//DISMISS LOADER
       this.resultLanguages=result;      
       console.log(this.resultLanguages);
       if(this.searched_filters)
@@ -188,7 +200,8 @@ export class SearchFiltersPage implements OnInit
     },
     error => 
     {
-      loadingLanguages.dismiss();//DISMISS LOADER
+      loadingPoemType.dismiss();//DISMISS LOADER
+      //loadingLanguages.dismiss();//DISMISS LOADER
       console.log();
     });
     /*LANGUAGES*/
