@@ -238,6 +238,11 @@ ion-content {
 			    margin: 0px;
 			    --box-shadow: none;
 			    min-width: 135px;
+			    @media(max-width:366px) {
+			    	height: 42px;
+			    	font-size: 14px;
+			    	margin: 0px 0px 20px;
+			    }
 			}
 		}
 	}
