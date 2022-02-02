@@ -227,6 +227,12 @@ ion-content {
 					margin: 0px 5px 0px 0px;
 					fill: #364645;
 					opacity: 1;
+					&.youtube-svg {
+						fill: #E16670;
+					}
+					&.feedback-svg {
+						fill: #89B9BD;
+					}
 				}
 				p {
 					font-size: 13px;
