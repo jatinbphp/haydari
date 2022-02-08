@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
+import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,7 @@ export class LoginPage implements OnInit
 		]
 	};
 
-	constructor(private platform: Platform, private googlePlus: GooglePlus, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	constructor(private platform: Platform, private googlePlus: GooglePlus, private fbook: Facebook, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
 	{ 
 		this.keyboard.hideFormAccessoryBar(false);
 	}
@@ -178,6 +179,77 @@ export class LoginPage implements OnInit
 		{
 			loading.dismiss();//DISMISS LOADER	
 			//alert(JSON.stringify(err));
+			console.log(err);
+		});
+	}
+
+	async FaceBookLoginORSignup()
+	{
+		//LOADER
+		const loading = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loading.present();
+		//LOADER
+
+		this.fbook.login(['public_profile','email']).then(FacebookLoginResponse => 
+		{
+			let userId = FacebookLoginResponse.authResponse.userID;
+			this.fbook.api("/me?fields=name,email", ['public_profile','email'])
+			.then(user =>
+			{
+				let splitName = user.name.split(" ");
+				let firstName = splitName[0];
+				let lastName = splitName[1];
+				
+				let data={
+					username:user.email,
+					firstname:firstName,
+					lastname:lastName,
+				}
+				
+				this.client.FaceBookLoginORSignup(data).then(result => 
+				{	
+					loading.dismiss();//DISMISS LOADER			
+					this.resultDataSocialLoginOrSignup=result;
+					this.client.publishSomeDataWhenLogin({
+						is_user_login: true
+					});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+					if(this.resultDataSocialLoginOrSignup.status==true)
+					{
+						localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
+						localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
+						localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
+						localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
+						localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
+						localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+						this.client.router.navigate(['/tabs/home']);
+					}			
+				},
+				error => 
+				{
+					loading.dismiss();//DISMISS LOADER
+					console.log();
+				})
+				//user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+				//console.log(user.name);
+				//console.log(user.email);
+				//console.log(user.picture);
+			}, err => 
+			{
+				loading.dismiss();//DISMISS LOADER
+				alert(JSON.stringify(err));
+				console.log(err);
+			})                    
+		}, 
+		err => 
+		{
+			loading.dismiss();//DISMISS LOADER
+			alert(JSON.stringify(err));
 			console.log(err);
 		});
 	}
