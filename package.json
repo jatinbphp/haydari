@@ -98,11 +98,7 @@
         "WEB_APPLICATION_CLIENT_ID": "471452795402-92fmshstflp04eheg4r4sps4kuhdfrua.apps.googleusercontent.com"
       },
       "cordova-plugin-facebook-connect": {
-<<<<<<< HEAD
         "APP_ID": "1594156250917701",
-=======
-        "APP_ID": "785869795702280",
->>>>>>> e8c46f5adb2b54d8b9d90143904909dea7097dc3
         "APP_NAME": "com.haydari.app",
         "FACEBOOK_URL_SCHEME_SUFFIX": " ",
         "OTHER_APP_SCHEMES": " ",
