@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
     Keyboard,
     InAppBrowser,
     GooglePlus,
+    SocialSharing,
     Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     

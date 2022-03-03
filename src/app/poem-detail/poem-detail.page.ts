@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Media, MediaObject } from '@awesome-cordova-plugins/media/ngx';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
@@ -33,7 +33,7 @@ export class PoemDetailPage
   public MP3Link:string='';
   public queryString: any=[];
 
-  constructor(private inAppBrowser: InAppBrowser, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
+  constructor(private inAppBrowser: InAppBrowser, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
@@ -267,5 +267,74 @@ export class PoemDetailPage
   {
     this.togglePlayerInFullHeight = this.togglePlayerInFullHeight = !this.togglePlayerInFullHeight;
     console.log(this.togglePlayerInFullHeight);
+  }
+
+  async ShareOnSocialNetwork(poem_id,poem_nm)
+  {
+    let message = '';
+    let subject = '';
+    subject += poem_nm;
+    message += "Have you read this poem ?";
+    
+    let image = 'https://app.thehaydariproject.com/assets/images/logo-big.png';
+    let url_of_opem = 'https://app.thehaydariproject.com/poem/'+poem_id;
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'SHARE WITH',
+      cssClass: 'social-action-sheet',
+      buttons: [
+        {
+          text: "Share on Facebook",
+          role: "destructive",
+          cssClass: " action-facebook",
+          icon: "logo-facebook",
+          handler: () => {
+  
+            this.client.ShareOnSocialNetwork("com.facebook.katana","Facebook","facebook",
+            message,subject,image,url_of_opem);
+          }
+        },
+        {
+          text: "Share on WhatsApp",
+          role: "destructive",
+          cssClass: " action-whatsup",
+          icon: "logo-whatsapp",
+          handler: () => {
+            this.client.ShareOnSocialNetwork("com.whatsapp","Whatsapp","whatsapp",
+            message,subject,image,url_of_opem);
+          }
+        },
+        {
+          text: "Share on Instagram",
+          role: "destructive",
+          cssClass: " action-instagram",
+          icon: "logo-instagram",
+          handler: () => {
+            this.client.ShareOnSocialNetwork("com.instagram.android","Instagram","instagram",
+            message,subject,image,url_of_opem);
+          }
+        },
+        {
+          text: "Share on Twitter",
+          role: "destructive",
+          cssClass: " action-twitter",
+          icon: "logo-twitter",
+          handler: () => {
+            this.client.ShareOnSocialNetwork("com.twitter.android","Twitter","twitter",
+            message,subject,image,url_of_opem);
+          }
+        },
+        {
+          text: "More share options",
+          role: "destructive",
+          cssClass: " action-regular",
+          icon: "share",
+          handler: () => {
+            this.client.ShareOnSocialNetwork("none","Share","none",
+            message,subject,image,url_of_opem);
+          }
+        }
+    ]
+    });
+    await actionSheet.present();
   }
 }

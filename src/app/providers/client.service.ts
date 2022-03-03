@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ClientService
 	private fooSubjectWhenlOGIN = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 	private fooSubjectWhenPoemTypeClickedFromMenu = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
 
-	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router) 
+	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router, private socialSharing: SocialSharing) 
 	{ }
 
 	publishSomeDataWhenLogin(data: any) {
@@ -561,6 +562,76 @@ export class ClientService
 				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
+		});
+	}
+
+	ShareOnSocialNetwork(packageName: string, appName: string, social: string, message: string, subject: string, image: string, url:string) 
+	{		
+		return new Promise((reject) => {
+		if(social === "facebook")
+		{
+			this.socialSharing.canShareVia(packageName,message,subject,image,url).then(() => {
+				this.socialSharing.shareViaFacebook(message, image, url).catch(err => {
+					
+					let messageDisplay=this.showMessage("There was a problem please try later");
+					reject(messageDisplay);					
+				});
+			})
+			.catch(err => {
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(appName+" "+errorMessage);
+				reject(errorMessage);				
+			});
+		} 
+		else if(social === "whatsapp")
+		{
+			this.socialSharing.canShareVia(packageName,message,subject,image,url).then(() => {
+				this.socialSharing.shareViaWhatsApp(message, image, url).catch(err => {
+					let messageDisplay=this.showMessage("There was a problem please try later");
+					reject(messageDisplay);
+				});
+			})
+			.catch(err => {
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(appName+" "+errorMessage);
+				reject(errorMessage);
+			});
+		}
+		else if (social === "instagram") 
+		{
+			this.socialSharing.canShareVia(packageName,message,subject,image,url).then(() => {
+				this.socialSharing.shareViaInstagram(message, image).catch(err => {
+					let messageDisplay=this.showMessage("There was a problem please try later");
+					reject(messageDisplay);
+				});
+			})
+			.catch(err => {
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(appName+" "+errorMessage);
+				reject(errorMessage);
+			});
+		} 
+		else if (social === "twitter")
+		{
+			this.socialSharing.canShareVia(packageName,message,subject,image,url).then(() => {
+				this.socialSharing.shareViaTwitter(message, image, url).catch(err => {
+					let messageDisplay=this.showMessage("There was a problem please try later");
+					reject(messageDisplay);
+				});
+			})
+			.catch(err => {
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(appName+" "+errorMessage);
+				reject(errorMessage);
+			});
+		} 
+		else
+		{
+			this.socialSharing.share(message, subject, image, url).catch(err => {
+				let messageDisplay=this.showMessage("There was a problem please try later");
+				reject(messageDisplay);
+			});
+		}
 		});
 	}
 
