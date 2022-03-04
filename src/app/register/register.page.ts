@@ -5,6 +5,7 @@ import { ClientService } from '../providers/client.service';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
+import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebo
 
 export class RegisterPage implements OnInit 
 {
+	public AppleSignInSignupData:any=[];
 	public resultData:any={};
 	public resultDataSocialLoginOrSignup:any={};
 	public currentPlatform:string = '';
@@ -48,7 +50,7 @@ export class RegisterPage implements OnInit
 		],
 	};
 
-	constructor(private platform: Platform, private googlePlus: GooglePlus, private fbook: Facebook, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	constructor(private platform: Platform, private googlePlus: GooglePlus, private fbook: Facebook, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, private signInWithApple: SignInWithApple) 
 	{ 
 		this.keyboard.hideFormAccessoryBar(false);
 	}
@@ -58,6 +60,7 @@ export class RegisterPage implements OnInit
 
 	ionViewWillEnter()
 	{
+		this.AppleSignInSignupData=[];
 		this.platform.ready().then(() => 
 		{
 		if(this.platform.is("android"))
@@ -250,5 +253,54 @@ export class RegisterPage implements OnInit
 			alert(JSON.stringify(err));
 			console.log(err);
 		});
+	}
+
+	async AppleLoginORSignup()
+	{
+		await this.signInWithApple.signin({
+		requestedScopes: [ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail]}).then((res: AppleSignInResponse) => 
+		{
+			this.AppleSignInSignupData.push(res);			
+			console.log("Array",this.AppleSignInSignupData);
+			//https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+			//alert('Send token to apple for verification: ' + res.identityToken);
+			//console.log("APPLE SIGNIN RESPONSE 1",res);
+			//console.log("APPLE SIGNIN RESPONSE 2",JSON.stringify(res));
+		})
+		.catch((error: AppleSignInErrorResponse) => 
+		{
+			alert(error.code + ' ' + error.localizedDescription);
+			console.error("APPLE SIGNIN ERROR 1",error);
+			console.error("APPLE SIGNIN ERROR 2",JSON.stringify(error));
+		});
+		if(this.AppleSignInSignupData.length > 0)
+		{
+			let data=
+			{
+				identityToken:this.AppleSignInSignupData[0]['identityToken']
+			}
+
+			await this.client.AppleLoginORSignup(data).then(result => 
+			{	
+				this.resultDataSocialLoginOrSignup=result;
+				this.client.publishSomeDataWhenLogin({
+					is_user_login: true
+				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+				if(this.resultDataSocialLoginOrSignup.status==true)
+				{
+					localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
+					localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
+					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
+					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
+					localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
+					localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+					this.client.router.navigate(['/tabs/home']);
+				}			
+			},
+			error => 
+			{
+				console.log();
+			});
+		}
 	}
 }
