@@ -272,12 +272,9 @@ export class PoemDetailPage
   async ShareOnSocialNetwork(poem_id,poem_nm)
   {
     let message = '';
-    let subject = '';
-    subject += poem_nm;
+    let url_of_open = "https://app.thehaydariproject.com/poem/"+poem_id;
     message += "Have you read this poem ?";
     
-    let image = 'https://app.thehaydariproject.com/assets/images/logo-big.png';
-    let url_of_opem = 'https://app.thehaydariproject.com/poem/'+poem_id;
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'SHARE WITH',
       cssClass: 'social-action-sheet',
@@ -290,7 +287,7 @@ export class PoemDetailPage
           handler: () => {
   
             this.client.ShareOnSocialNetwork("com.facebook.katana","Facebook","facebook",
-            message,subject,image,url_of_opem);
+            message,null,null,url_of_open);
           }
         },
         {
@@ -300,7 +297,7 @@ export class PoemDetailPage
           icon: "logo-whatsapp",
           handler: () => {
             this.client.ShareOnSocialNetwork("com.whatsapp","Whatsapp","whatsapp",
-            message,subject,image,url_of_opem);
+            message,null,null,url_of_open);
           }
         },
         {
@@ -310,7 +307,7 @@ export class PoemDetailPage
           icon: "logo-instagram",
           handler: () => {
             this.client.ShareOnSocialNetwork("com.instagram.android","Instagram","instagram",
-            message,subject,image,url_of_opem);
+            message,null,null,url_of_open);
           }
         },
         {
@@ -320,7 +317,7 @@ export class PoemDetailPage
           icon: "logo-twitter",
           handler: () => {
             this.client.ShareOnSocialNetwork("com.twitter.android","Twitter","twitter",
-            message,subject,image,url_of_opem);
+            message,null,null,url_of_open);
           }
         },
         {
@@ -330,7 +327,7 @@ export class PoemDetailPage
           icon: "share",
           handler: () => {
             this.client.ShareOnSocialNetwork("none","Share","none",
-            message,subject,image,url_of_opem);
+            message,null,null,url_of_open);
           }
         }
     ]
