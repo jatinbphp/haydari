@@ -28,8 +28,11 @@
 					<ion-col size="6" class="ion-text-left ion-no-padding">
 						<ion-button class="border-btn" (click)="FaceBookLoginORSignup()"><img src="../assets/images/fb-icon1.png"></ion-button>
 					</ion-col>
-					<ion-col size="6" class="ion-text-right ion-no-padding">
+					<ion-col size="6" class="ion-text-right ion-no-padding" *ngIf="currentPlatform == 'android'">
 						<ion-button class="border-btn" (click)="GoogleLoginORSignup()"><img src="../assets/images/google-plus-icon1.png"></ion-button>
+					</ion-col>
+					<ion-col size="6" class="ion-text-right ion-no-padding" *ngIf="currentPlatform == 'ios'">
+						<ion-button class="border-btn"><img src="../assets/images/iphone-apple-icon1.png"></ion-button>
 					</ion-col>
 					<ion-col size="12" class="ion-text-left ion-no-padding mb-20 mt-25"><!--BEFORE::SECOND ONE IS mt-60-->
 						<ion-label position="stacked">First name</ion-label>

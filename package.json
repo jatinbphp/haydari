@@ -26,6 +26,7 @@
     "@awesome-cordova-plugins/in-app-browser": "^5.37.3",
     "@awesome-cordova-plugins/keyboard": "^5.37.3",
     "@awesome-cordova-plugins/media": "^5.37.1",
+    "@awesome-cordova-plugins/sign-in-with-apple": "^5.39.1",
     "@awesome-cordova-plugins/social-sharing": "^5.39.1",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/facebook": "^4.20.0",
@@ -61,6 +62,7 @@
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-media": "^5.0.3",
+    "cordova-plugin-sign-in-with-apple": "^0.1.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-x-socialsharing": "^6.0.3",
@@ -113,7 +115,8 @@
         "FACEBOOK_BROWSER_SDK_VERSION": "v11.0"
       },
       "cordova-plugin-androidx-adapter": {},
-      "cordova-plugin-x-socialsharing": {}
+      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-sign-in-with-apple": {}
     },
     "platforms": [
       "android"

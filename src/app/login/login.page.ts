@@ -5,6 +5,7 @@ import { ClientService } from '../providers/client.service';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
+import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,7 @@ export class LoginPage implements OnInit
 		]
 	};
 
-	constructor(private platform: Platform, private googlePlus: GooglePlus, private fbook: Facebook, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController) 
+	constructor(private platform: Platform, private googlePlus: GooglePlus, private fbook: Facebook, public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, private signInWithApple: SignInWithApple) 
 	{ 
 		this.keyboard.hideFormAccessoryBar(false);
 	}
@@ -251,6 +252,24 @@ export class LoginPage implements OnInit
 			loading.dismiss();//DISMISS LOADER
 			alert(JSON.stringify(err));
 			console.log(err);
+		});
+	}
+
+	async AppleLoginORSignup()
+	{
+		await this.signInWithApple.signin({
+		requestedScopes: [ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail]}).then((res: AppleSignInResponse) => 
+		{
+			// https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+			alert('Send token to apple for verification: ' + res.identityToken);
+			console.log("APPLE SIGNIN RESPONSE 1",res);
+			console.log("APPLE SIGNIN RESPONSE 2",JSON.stringify(res));
+		})
+		.catch((error: AppleSignInErrorResponse) => 
+		{
+			alert(error.code + ' ' + error.localizedDescription);
+			console.error("APPLE SIGNIN ERROR 1",error);
+			console.error("APPLE SIGNIN ERROR 2",JSON.stringify(error));
 		});
 	}
 }

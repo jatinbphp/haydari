@@ -13,6 +13,7 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
     GooglePlus,
     SocialSharing,
     Facebook,
+    SignInWithApple,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],
