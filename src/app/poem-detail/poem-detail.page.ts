@@ -274,7 +274,8 @@ export class PoemDetailPage
     let message = '';
     let url_of_open = "https://app.thehaydariproject.com/poem/"+poem_id;
     message += "Have you read this poem ?";
-    
+    this.client.ShareOnSocialNetwork("none","Share","none",message,null,null,url_of_open);
+    /*
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'SHARE WITH',
       cssClass: 'social-action-sheet',
@@ -333,5 +334,6 @@ export class PoemDetailPage
     ]
     });
     await actionSheet.present();
+    */
   }
 }
