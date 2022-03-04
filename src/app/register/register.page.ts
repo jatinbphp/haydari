@@ -158,12 +158,12 @@ export class RegisterPage implements OnInit
 				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 				if(this.resultDataSocialLoginOrSignup.status==true)
 				{
-					localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
-					localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
-					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
-					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
-					localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
-					localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+					localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
+					localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
+					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
+					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup['data'].lastname);
+					localStorage.setItem('email',this.resultDataSocialLoginOrSignup['data'].email);
+					localStorage.setItem('username',this.resultDataSocialLoginOrSignup['data'].username);
 					this.client.router.navigate(['/tabs/home']);
 				}			
 			},
@@ -222,12 +222,12 @@ export class RegisterPage implements OnInit
 					});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 					if(this.resultDataSocialLoginOrSignup.status==true)
 					{
-						localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
-						localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
-						localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
-						localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
-						localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
-						localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+						localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
+						localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
+						localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
+						localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup['data'].lastname);
+						localStorage.setItem('email',this.resultDataSocialLoginOrSignup['data'].email);
+						localStorage.setItem('username',this.resultDataSocialLoginOrSignup['data'].username);
 						this.client.router.navigate(['/tabs/home']);
 					}			
 				},
@@ -288,12 +288,12 @@ export class RegisterPage implements OnInit
 				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 				if(this.resultDataSocialLoginOrSignup.status==true)
 				{
-					localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
-					localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
-					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
-					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
-					localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
-					localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+					localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
+					localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
+					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
+					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup['data'].lastname);
+					localStorage.setItem('email',this.resultDataSocialLoginOrSignup['data'].email);
+					localStorage.setItem('username',this.resultDataSocialLoginOrSignup['data'].username);
 					this.client.router.navigate(['/tabs/home']);
 				}			
 			},
