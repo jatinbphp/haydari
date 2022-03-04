@@ -565,6 +565,26 @@ export class ClientService
 		});
 	}
 
+	AppleLoginORSignup(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("identityToken",data.identityToken);
+			this.http.post(this.api_url + "socialLoginApple",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				resolve(res);
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	ShareOnSocialNetwork(packageName: string, appName: string, social: string, message: string, subject: string, image: string, url:string) 
 	{		
 		return new Promise((reject) => {

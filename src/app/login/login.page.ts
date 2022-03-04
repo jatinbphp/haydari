@@ -14,6 +14,7 @@ import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAutho
 })
 export class LoginPage implements OnInit 
 {
+	public AppleSignInSignupData:any=[];
 	public resultData:any={};
 	public resultDataSocialLoginOrSignup:any={};
 	public currentPlatform:string = '';
@@ -49,6 +50,7 @@ export class LoginPage implements OnInit
 
 	ionViewWillEnter()
 	{
+		this.AppleSignInSignupData=[];
 		this.platform.ready().then(() => 
 		{
 		if(this.platform.is("android"))
@@ -260,10 +262,12 @@ export class LoginPage implements OnInit
 		await this.signInWithApple.signin({
 		requestedScopes: [ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail]}).then((res: AppleSignInResponse) => 
 		{
-			// https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
-			alert('Send token to apple for verification: ' + res.identityToken);
-			console.log("APPLE SIGNIN RESPONSE 1",res);
-			console.log("APPLE SIGNIN RESPONSE 2",JSON.stringify(res));
+			this.AppleSignInSignupData.push(res);			
+			console.log("Array",this.AppleSignInSignupData);
+			//https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+			//alert('Send token to apple for verification: ' + res.identityToken);
+			//console.log("APPLE SIGNIN RESPONSE 1",res);
+			//console.log("APPLE SIGNIN RESPONSE 2",JSON.stringify(res));
 		})
 		.catch((error: AppleSignInErrorResponse) => 
 		{
@@ -271,5 +275,34 @@ export class LoginPage implements OnInit
 			console.error("APPLE SIGNIN ERROR 1",error);
 			console.error("APPLE SIGNIN ERROR 2",JSON.stringify(error));
 		});
+		if(this.AppleSignInSignupData.length > 0)
+		{
+			let data=
+			{
+				identityToken:this.AppleSignInSignupData[0]['identityToken']
+			}
+
+			await this.client.AppleLoginORSignup(data).then(result => 
+			{	
+				this.resultDataSocialLoginOrSignup=result;
+				this.client.publishSomeDataWhenLogin({
+					is_user_login: true
+				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
+				if(this.resultDataSocialLoginOrSignup.status==true)
+				{
+					localStorage.setItem('token',this.resultDataSocialLoginOrSignup.token);
+					localStorage.setItem('id',this.resultDataSocialLoginOrSignup.id);
+					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup.firstname);
+					localStorage.setItem('lastname',this.resultDataSocialLoginOrSignup.lastname);
+					localStorage.setItem('email',this.resultDataSocialLoginOrSignup.email);
+					localStorage.setItem('username',this.resultDataSocialLoginOrSignup.username);
+					this.client.router.navigate(['/tabs/home']);
+				}			
+			},
+			error => 
+			{
+				console.log();
+			});
+		}
 	}
 }
