@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { ModalController, LoadingController, AnimationController, IonContent } from '@ionic/angular';
 import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-occasion-detail.page'
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
@@ -16,6 +16,8 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 export class SubListPagePage implements OnInit 
 {
+  @ViewChild('ionContent') ionContent: IonContent;
+
   public queryString: any=[];
   public queryStringData: any=[];
   public searched_filters:any=[];
@@ -29,7 +31,90 @@ export class SubListPagePage implements OnInit
   public is_search_icon_clicked:boolean=false;
   public is_searched:boolean=false;
   public searched_text:any='';
-  
+  //ANIMATION FOR SearchFiltersPage
+  /*OPTION-1* STARTS*/
+  public EnterModalAnimation_1 = (baseEl: HTMLElement) => {
+    const AnimationC = new AnimationController;
+    const baseAnimation = AnimationC.create();
+    const backdropAnimation = AnimationC.create();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    const wrapperAnimation = AnimationC.create();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'))
+    .keyframes([
+      { offset: 0, opacity: '0', transform: 'translateX(0%)' },
+      { offset: 1, opacity: '0.99', transform: 'translateX(0%)' }
+    ]);
+    backdropAnimation.fromTo('opacity', 0.01, 0.8);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('ease-in-out')
+        .duration(500)
+        .beforeAddClass('show-modal')
+        .addAnimation([backdropAnimation, wrapperAnimation])
+  }
+  public LeaveModalAnimation_1 = (baseEl: HTMLElement) => {
+    return this.EnterModalAnimation_1(baseEl).duration(600).direction('reverse');
+  }
+  /*OPTION-1* ENDS*/
+  /*OPTION-2* STARTS*/
+  public EnterModalAnimation_2 = (baseEl: HTMLElement) => {
+    const AnimationC = new AnimationController;
+    const baseAnimation = AnimationC.create();
+    const backdropAnimation = AnimationC.create();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    const wrapperAnimation = AnimationC.create();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
+    wrapperAnimation
+    .fromTo(
+      'transform',
+      'scaleX(0.1) scaleY(0.1)',
+      'translateX(0%) scaleX(1) scaleY(1)'
+    )
+    .fromTo('opacity', 0, 1);
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(400)
+        .beforeAddClass('show-modal')
+        .addAnimation(backdropAnimation)
+        .addAnimation(wrapperAnimation)
+    
+  }
+  public LeaveModalAnimation_2 = (baseEl: HTMLElement) => {
+    return this.EnterModalAnimation_2(baseEl).duration(600).direction('reverse');
+  }
+  /*OPTION-2* ENDS*/
+  /*OPTION-3* STARTS*/
+  public EnterModalAnimation_3 = (baseEl: HTMLElement) => {
+    const AnimationC = new AnimationController;
+    const baseAnimation = AnimationC.create();
+    const backdropAnimation = AnimationC.create();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    const wrapperAnimation = AnimationC.create();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
+    wrapperAnimation
+    .fromTo(
+      'transform',
+      'translateX(100%)',
+      'translateX(0)'
+    )
+    .fromTo('opacity', 0, 1);
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+    return baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.1, .7, .1, 1)')
+        .duration(400)
+        .beforeAddClass('show-modal')
+        .addAnimation(backdropAnimation)
+        .addAnimation(wrapperAnimation)
+    
+  }
+  public LeaveModalAnimation_3 = (baseEl: HTMLElement) => {
+    return this.EnterModalAnimation_3(baseEl).duration(600).direction('reverse');
+  }
+  /*OPTION-3* ENDS*/
+  //ANIMATION FOR SearchFiltersPage 
   constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
   { 
     localStorage.removeItem('searched_filters');
@@ -448,6 +533,10 @@ export class SubListPagePage implements OnInit
 			component: SearchFiltersPage,
       cssClass: 'advance-search-filter',
       showBackdrop: false,
+      swipeToClose:true,
+      animated: true,
+      enterAnimation: this.EnterModalAnimation_3,
+      leaveAnimation: this.LeaveModalAnimation_3,
 			componentProps: 
 			{ 
         poem_or_subject_occassion:this.poem_or_subject_occassion,

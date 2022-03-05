@@ -15,6 +15,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 export class HomePage 
 {
   public queryString: any=[];
+  public resultAllAndResent:any=[];
   public resultPoemTypes:any=[];
   public resultSubjectOccasion:any=[];
   public resultReciters:any=[];
@@ -30,6 +31,29 @@ export class HomePage
 	{ 
     this.searched_text = '';
     this.menu.enable(true);
+    /*ALL/RECENT*/
+    //LOADER
+		const loadingAllRecent = await this.loadingCtrl.create({
+			spinner: null,
+			//duration: 5000,
+			message: 'Please wait...',
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		});
+		await loadingAllRecent.present();
+		//LOADER
+    await this.client.getAllAndRecent().then(result => 
+    {	
+      loadingAllRecent.dismiss();//DISMISS LOADER
+      this.resultAllAndResent=result;
+      console.log(this.resultAllAndResent);
+    },
+    error => 
+    {
+      loadingAllRecent.dismiss();//DISMISS LOADER
+      console.log();
+    });
+    /*ALL/RECENT*/
     /*POEM TYPE*/
     //LOADER
 		const loadingPoemType = await this.loadingCtrl.create({
@@ -202,5 +226,15 @@ export class HomePage
   {
     this.showAllSubjects = !this.showAllSubjects;
     console.log(this.showAllSubjects);
+  }
+
+  showAllOrRecent(asked)
+  {
+    let objShowAllOrRecent = 
+    {
+      selected_option : asked
+    }
+    localStorage.setItem('show_all_or_recent',JSON.stringify(objShowAllOrRecent));
+    this.client.router.navigate(['tabs/home/library']);
   }
 }

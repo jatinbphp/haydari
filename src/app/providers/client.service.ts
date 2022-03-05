@@ -194,6 +194,33 @@ export class ClientService
 		});
 	}
 
+	getAllAndRecent()
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			this.http.get(this.api_url + "getSettings",headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+	
 	getPoemTypes()
 	{
 		let headers = this.getHeaderOptions();
@@ -652,6 +679,34 @@ export class ClientService
 				reject(messageDisplay);
 			});
 		}
+		});
+	}
+
+	getAllOrRecentRequested(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("filterType",data.filterType).set("keyword",data.keyword).set("orderType",data.order);
+			this.http.post(this.api_url + "getAllPoems",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				if(res.status == true)
+				{
+					resolve(res.data);					
+				}
+				else
+				{
+					let messageDisplay=this.showMessage(res.message);
+					reject(messageDisplay);
+				}
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
 		});
 	}
 

@@ -33,6 +33,22 @@
 		</ion-toolbar>
 	</ion-header>
   	<div class="mainContent">
+		<ion-grid class="img-cnt-sec poem-main" *ngIf="resultAllAndResent.length > 0">
+			<ion-row class="img-nm-box-list">
+				<ion-col class="img-nm-box-item" (click)="showAllOrRecent('recent')">
+					<div class="img-nm-box-inner" [style.background-color]="resultAllAndResent[0].recentColor">
+						<img src="{{resultAllAndResent[0].recentImage}}">
+						<h3>Recently Added</h3>
+					</div>
+				</ion-col>
+				<ion-col class="img-nm-box-item" (click)="showAllOrRecent('all')">
+					<div class="img-nm-box-inner" [style.background-color]="resultAllAndResent[0].allColor">
+						<img src="{{resultAllAndResent[0].allImage}}">
+						<h3>All Poems</h3>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
 		<ion-grid class="img-cnt-sec poem-main">
 			<ion-row class="title-main">
 				<ion-col>

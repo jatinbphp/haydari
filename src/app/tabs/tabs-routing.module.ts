@@ -74,6 +74,19 @@ const routes: Routes = [
             ]
           },
           {
+            path: 'library',
+            children:[
+              {
+                path:'',
+                loadChildren: () => import('../library/library.module').then(m => m.LibraryPageModule)
+              },
+              {
+                path: 'poem-detail',
+                loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+              }
+            ]
+          },
+          {
             path: 'search',
             children:[
               {
