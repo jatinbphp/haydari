@@ -70,7 +70,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -99,7 +99,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -129,7 +129,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -158,7 +158,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -188,7 +188,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -215,7 +215,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -242,7 +242,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -381,7 +381,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -436,7 +436,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -463,7 +463,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});
@@ -490,7 +490,7 @@ export class ClientService
 			{
 				console.log(err);
 				let errorMessage=this.getErrorMessage(err);
-				this.showMessage(errorMessage);
+				//this.showMessage(errorMessage);
 				reject(errorMessage);
 			});
 		});

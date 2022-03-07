@@ -60,6 +60,14 @@ const routes: Routes = [
   {
     path: 'search-filters',
     loadChildren: () => import('./search-filters/search-filters.module').then( m => m.SearchFiltersPageModule)
+  },
+  {
+    path: 'offline',
+    loadChildren: () => import('./offline/offline.module').then( m => m.OfflinePageModule)
+  },
+  {
+    path: 'offline-poem-detail',
+    loadChildren: () => import('./offline-poem-detail/offline-poem-detail.module').then( m => m.OfflinePoemDetailPageModule)
   }
   /*,
   {

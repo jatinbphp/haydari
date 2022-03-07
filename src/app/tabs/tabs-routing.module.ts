@@ -136,6 +136,19 @@ const routes: Routes = [
         loadChildren: () => import('../type-views/type-views.module').then( m => m.TypeViewsPageModule)
       },
       {
+        path: 'offline',
+        children:[
+          {
+            path:'',
+            loadChildren: () => import('../offline/offline.module').then(m => m.OfflinePageModule)
+          },
+          {
+            path: 'offline-poem-detail',
+            loadChildren: () => import('../offline-poem-detail/offline-poem-detail.module').then(m => m.OfflinePoemDetailPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         //redirectTo: '/login',

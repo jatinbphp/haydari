@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
+import { OfflineService } from '../providers/offline.service';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { PlayMediaPage } from '../play-media/play-media.page';
 
@@ -25,6 +26,7 @@ export class PoemDetailPage
   public isAudioPlayed: boolean = false;
   public togglePlayerInFullHeight:boolean = false;
   public has_mp3:boolean=false;
+  public resultPoemOffline: any=[];
   public resultPoemsDetailObject:any=[];
   public resultPoemsDetail:any=[];
   public poemsLine:any=[];
@@ -33,7 +35,7 @@ export class PoemDetailPage
   public MP3Link:string='';
   public queryString: any=[];
 
-  constructor(private inAppBrowser: InAppBrowser, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
+  constructor(private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
@@ -335,5 +337,39 @@ export class PoemDetailPage
     });
     await actionSheet.present();
     */
+  }
+
+  async makeItOffLine(poemObject)
+  {
+    //LOADER
+    const loadingPoemOffline = await this.loadingCtrl.create({
+      spinner: null,
+      //duration: 5000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    await loadingPoemOffline.present();
+    //LOADER
+    if(this.poemsLine.length > 0)
+    {
+      poemObject['poemsLine']=JSON.stringify(this.poemsLine);
+    }
+    else 
+    {
+      poemObject['poemsLine']=JSON.stringify([]);
+    }
+    await this.offline.addPoem(poemObject).then(result => 
+    {
+      loadingPoemOffline.dismiss();//DISMISS LOADER
+      this.resultPoemOffline=result;
+      this.client.showMessage("Poem is made OFFLINE!");
+      console.log(this.resultPoemOffline);
+    },
+    error => 
+    {
+      loadingPoemOffline.dismiss();//DISMISS LOADER
+      console.log();
+    });
   }
 }

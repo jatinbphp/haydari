@@ -14,7 +14,8 @@ import { GooglePlus } from '@awesome-cordova-plugins/google-plus/ngx';
 import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
-
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,6 +39,8 @@ import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx
     SocialSharing,
     Facebook,
     SignInWithApple,
+    Network,
+    SQLite,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],

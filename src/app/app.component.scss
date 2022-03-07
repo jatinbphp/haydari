@@ -105,6 +105,9 @@ ion-menu {
 					&:last-child {
 						border-bottom: 0px;
 					}
+					&.hideme{
+						display:none;
+					}
 				}
 			}
 			ion-item {
