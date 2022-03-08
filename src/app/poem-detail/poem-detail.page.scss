@@ -227,7 +227,7 @@ ion-content {
 					margin: 0px 5px 0px 0px;
 					fill: #364645;
 					opacity: 1;
-					&.youtube-svg {
+					&.youtube-svg, &.offline-svg {
 						fill: #E16670;
 					}
 					&.feedback-svg, &.share-svg {
