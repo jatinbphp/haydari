@@ -140,7 +140,13 @@ export class ProfilePage implements OnInit
 		this.client.publishSomeDataWhenLogin({
 			is_user_login: false
 		});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
-		localStorage.clear();
+		//localStorage.clear();
+		localStorage.removeItem('token');
+		localStorage.removeItem('id');
+		localStorage.removeItem('firstname');
+		localStorage.removeItem('lastname');
+		localStorage.removeItem('email');
+		localStorage.removeItem('username');
 		//this.menu.enable(false);
 		this.client.router.navigate(['tabs/home']);
 	}

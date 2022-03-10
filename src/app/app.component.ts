@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from './profile/profile.page';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,13 @@ export class AppComponent
   public token: string;
   public is_user_login: boolean = false;
   public is_network_connected: boolean = true;
+
+  //SETUP PUSH
+  public device_info: any=[];
+  public device_id : any = '';
+  public device_type : any = '';
+  public device_token : any = '';
+  //SETUP PUSH
   /*
   public appPages = [
     { title: 'Manqabat', url: '/tabs/sub-list-page', icon: 'home', categories: []},//[0]
@@ -31,10 +39,45 @@ export class AppComponent
     { title: 'Settings', url: '/tabs/home', icon: 'bag', categories: []},//[6]
   ];
   */
-  constructor(public inAppBrowser: InAppBrowser, private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder, private network: Network)
+  constructor(public inAppBrowser: InAppBrowser, private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder, private network: Network, private firebaseX: FirebaseX)
   {
     this.platform.ready().then(async () => 
     {
+      this.device_id = this.client.generateRandomString("50");
+      //SETUP PUSH
+      this.device_info = localStorage.getItem('device_info');
+      this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+      await this.firebaseX.getToken().then(token => 
+      { 
+        this.device_token = token;
+        console.log(`The token is ${token}`);
+      }).catch(error => 
+      {
+        console.error('Error getting token', error);
+      });
+      this.device_type = (this.platform.is("android") == true) ? "android" : "ios";
+      if(this.device_info!= null)
+      {
+        //console.log("Device Info", this.device_info);
+        let objDevice = 
+        {
+          device_id:this.device_info['device_id'],
+          device_type:(this.device_type) ? this.device_type : "",
+          device_token:(this.device_token) ? this.device_token : "",
+        }
+        localStorage.setItem('device_info',JSON.stringify(objDevice));
+      }
+      else 
+      {
+        let objDevice = 
+        {
+          device_id:this.device_id,
+          device_type:(this.device_type) ? this.device_type : "",
+          device_token:(this.device_token) ? this.device_token : "",
+        }
+        localStorage.setItem('device_info',JSON.stringify(objDevice));
+      }
+      //SETUP PUSH
       let disconnectSubscription = this.network.onDisconnect().subscribe(async () => 
       {
         //console.log('network was disconnected', disconnectSubscription);
@@ -154,6 +197,24 @@ export class AppComponent
       this.appPages.push(objOtherAction[o]);
     }
     console.log(this.appPages);
+    //SETUP PUSH
+    this.device_info = localStorage.getItem('device_info');
+    this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+    if(this.device_info['device_id']!='' && this.device_info['device_type']!='' && this.device_info['device_token']!='')
+    {
+      let dataToken = {
+        device_id:this.device_info['device_id'],
+        device_type:this.device_info['device_type'],
+        device_token:this.device_info['device_token']
+      }
+      await this.client.setPushNotificationToken(dataToken).then(result => 
+      {},
+      error => 
+      {
+        console.log();
+      });
+    }
+    //SETUP PUSH
   }
 
   ngOnInit() 
@@ -254,7 +315,13 @@ export class AppComponent
     this.client.publishSomeDataWhenLogin({
       is_user_login: false
     });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('firstname');
+    localStorage.removeItem('lastname');
+    localStorage.removeItem('email');
+    localStorage.removeItem('username');
+    //localStorage.clear();
     //this.menu.enable(false);
     this.client.router.navigate(['tabs/home']);
   }

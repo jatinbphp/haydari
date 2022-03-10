@@ -16,6 +16,8 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -41,6 +43,7 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
     SignInWithApple,
     Network,
     SQLite,
+    FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],
