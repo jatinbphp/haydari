@@ -177,15 +177,37 @@ export class LoginPage implements OnInit
 				lastname:lastName,
 			}
 			
-			this.client.GoogleLoginORSignup(data).then(result => 
+			this.client.GoogleLoginORSignup(data).then(async (result) => 
 			{	
 				loading.dismiss();//DISMISS LOADER			
-				this.resultDataSocialLoginOrSignup=result;
+				this.resultDataSocialLoginOrSignup=result;				
 				this.client.publishSomeDataWhenLogin({
 					is_user_login: true
 				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 				if(this.resultDataSocialLoginOrSignup.status==true)
 				{
+					//SETUP PUSH
+					this.device_info = localStorage.getItem('device_info');
+					this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+					if(this.device_info!= null)
+					{
+						this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+						this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+						this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+						let dataPush = {
+							device_id:this.device_id,
+							device_type:this.device_type,
+							device_token:this.device_token,
+							user_id:this.resultDataSocialLoginOrSignup['data'].id,
+						};
+						await this.client.updatePushInformation(dataPush).then(result => 
+						{},
+						error => 
+						{
+							console.log();
+						});
+					}
+
 					localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
 					localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
 					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
@@ -210,27 +232,7 @@ export class LoginPage implements OnInit
 			//alert(JSON.stringify(err));
 			console.log(err);
 		});
-		//SETUP PUSH
-		this.device_info = localStorage.getItem('device_info');
-    	this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
-		if(this.device_info!= null)
-      	{
-			this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
-			this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
-			this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
-			let dataPush = {
-				device_id:this.device_id,
-				device_type:this.device_type,
-				device_token:this.device_token,
-				user_id:this.resultDataSocialLoginOrSignup['data'].id,
-			};
-			await this.client.updatePushInformation(dataPush).then(result => 
-			{},
-			error => 
-			{
-				console.log();
-			});
-		}
+		
 	}
 
 	async FaceBookLoginORSignup()
@@ -262,7 +264,7 @@ export class LoginPage implements OnInit
 					lastname:lastName,
 				}
 				
-				this.client.FaceBookLoginORSignup(data).then(result => 
+				this.client.FaceBookLoginORSignup(data).then(async (result) => 
 				{	
 					loading.dismiss();//DISMISS LOADER			
 					this.resultDataSocialLoginOrSignup=result;
@@ -271,6 +273,29 @@ export class LoginPage implements OnInit
 					});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 					if(this.resultDataSocialLoginOrSignup.status==true)
 					{
+						//SETUP PUSH
+						this.device_info = localStorage.getItem('device_info');
+						this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+						let user_id = localStorage.getItem('id');
+						if(this.device_info!= null)
+						{
+							this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+							this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+							this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+							let dataPush = {
+								device_id:this.device_id,
+								device_type:this.device_type,
+								device_token:this.device_token,
+								user_id:this.resultDataSocialLoginOrSignup['data'].id,
+							};
+							await this.client.updatePushInformation(dataPush).then(result => 
+							{},
+							error => 
+							{
+								console.log();
+							});
+						}
+						
 						localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
 						localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
 						localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
@@ -302,27 +327,7 @@ export class LoginPage implements OnInit
 			alert(JSON.stringify(err));
 			console.log(err);
 		});
-		//SETUP PUSH
-		this.device_info = localStorage.getItem('device_info');
-    	this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
-		if(this.device_info!= null)
-      	{
-			this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
-			this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
-			this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
-			let dataPush = {
-				device_id:this.device_id,
-				device_type:this.device_type,
-				device_token:this.device_token,
-				user_id:this.resultDataSocialLoginOrSignup['data'].id,
-			};
-			await this.client.updatePushInformation(dataPush).then(result => 
-			{},
-			error => 
-			{
-				console.log();
-			});
-		}
+		
 	}
 
 	async AppleLoginORSignup()
@@ -350,7 +355,7 @@ export class LoginPage implements OnInit
 				identityToken:this.AppleSignInSignupData[0]['identityToken']
 			}
 
-			await this.client.AppleLoginORSignup(data).then(result => 
+			await this.client.AppleLoginORSignup(data).then(async (result) => 
 			{	
 				this.resultDataSocialLoginOrSignup=result;
 				this.client.publishSomeDataWhenLogin({
@@ -358,6 +363,29 @@ export class LoginPage implements OnInit
 				});//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 				if(this.resultDataSocialLoginOrSignup.status==true)
 				{
+					//SETUP PUSH
+					this.device_info = localStorage.getItem('device_info');
+					this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+					let user_id = localStorage.getItem('id');
+					if(this.device_info!= null)
+					{
+						this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+						this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+						this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+						let dataPush = {
+							device_id:this.device_id,
+							device_type:this.device_type,
+							device_token:this.device_token,
+							user_id:this.resultDataSocialLoginOrSignup['data'].id,
+						};
+						await this.client.updatePushInformation(dataPush).then(result => 
+						{},
+						error => 
+						{
+							console.log();
+						});
+					}
+
 					localStorage.setItem('token',this.resultDataSocialLoginOrSignup['data'].token);
 					localStorage.setItem('id',this.resultDataSocialLoginOrSignup['data'].id);
 					localStorage.setItem('firstname',this.resultDataSocialLoginOrSignup['data'].firstname);
@@ -371,6 +399,8 @@ export class LoginPage implements OnInit
 			{
 				console.log();
 			});
+
+			
 		}
 	}
 }
