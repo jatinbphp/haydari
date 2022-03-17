@@ -21,7 +21,12 @@ export class LoginPage implements OnInit
 	public postData:any=[];
 	public passwordType: string = 'password';
 	public passwordIcon: string = 'eye-off';
-
+	//SETUP PUSH
+	public device_info: any=[];
+	public device_id : any = '';
+	public device_type : any = '';
+	public device_token : any = '';
+	//SETUP PUSH
 	public loginForm = this.fb.group({
 		username: ['', Validators.required],
 		password: ['', Validators.required]
@@ -48,19 +53,19 @@ export class LoginPage implements OnInit
 	ngOnInit() 
 	{ }
 
-	ionViewWillEnter()
+	async ionViewWillEnter()
 	{
 		this.AppleSignInSignupData=[];
 		this.platform.ready().then(() => 
 		{
-		if(this.platform.is("android"))
-		{
-			this.currentPlatform="android";
-		}
-		if(this.platform.is("ios"))
-		{
-			this.currentPlatform="ios";
-		}
+			if(this.platform.is("android"))
+			{
+				this.currentPlatform="android";
+			}
+			if(this.platform.is("ios"))
+			{
+				this.currentPlatform="ios";
+			}
 		});
 	}
 
@@ -112,6 +117,27 @@ export class LoginPage implements OnInit
 			loading.dismiss();//DISMISS LOADER
 			console.log();
 		});
+		//SETUP PUSH
+		this.device_info = localStorage.getItem('device_info');
+    	this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+		if(this.device_info!= null)
+      	{
+			this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+			this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+			this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+			let dataPush = {
+				device_id:this.device_id,
+				device_type:this.device_type,
+				device_token:this.device_token,
+				user_id:this.resultData.id,
+			};
+			await this.client.updatePushInformation(dataPush).then(result => 
+			{},
+			error => 
+			{
+				console.log();
+			});
+		}
 	}
 
   	hideShowPassword()
@@ -184,6 +210,27 @@ export class LoginPage implements OnInit
 			//alert(JSON.stringify(err));
 			console.log(err);
 		});
+		//SETUP PUSH
+		this.device_info = localStorage.getItem('device_info');
+    	this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+		if(this.device_info!= null)
+      	{
+			this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+			this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+			this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+			let dataPush = {
+				device_id:this.device_id,
+				device_type:this.device_type,
+				device_token:this.device_token,
+				user_id:this.resultDataSocialLoginOrSignup['data'].id,
+			};
+			await this.client.updatePushInformation(dataPush).then(result => 
+			{},
+			error => 
+			{
+				console.log();
+			});
+		}
 	}
 
 	async FaceBookLoginORSignup()
@@ -255,6 +302,27 @@ export class LoginPage implements OnInit
 			alert(JSON.stringify(err));
 			console.log(err);
 		});
+		//SETUP PUSH
+		this.device_info = localStorage.getItem('device_info');
+    	this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
+		if(this.device_info!= null)
+      	{
+			this.device_id=(this.device_info['device_id']) ? this.device_info['device_id'] : "";
+			this.device_type=(this.device_info['device_type']) ? this.device_info['device_type'] : "";
+			this.device_token=(this.device_info['device_token']) ? this.device_info['device_token'] : "";
+			let dataPush = {
+				device_id:this.device_id,
+				device_type:this.device_type,
+				device_token:this.device_token,
+				user_id:this.resultDataSocialLoginOrSignup['data'].id,
+			};
+			await this.client.updatePushInformation(dataPush).then(result => 
+			{},
+			error => 
+			{
+				console.log();
+			});
+		}
 	}
 
 	async AppleLoginORSignup()

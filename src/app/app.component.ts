@@ -73,7 +73,7 @@ export class AppComponent
         {
           device_id:this.device_id,
           device_type:(this.device_type) ? this.device_type : "",
-          device_token:(this.device_token) ? this.device_token : "",
+          device_token:(this.device_token) ? this.device_token : "egPakiGwT0Seo0ScYEeMt-:APA91bEEiUfBO2JVdNpgRA8HTUy8AIoBdQeQum82T-D-PQfk7_i2CjmrN3CmhhDIT0uhlQAFXaRf-6RVN9IAFM0L24peh4LcWFi2XcvaFz2Qm2Fes5SlQh_qKqWGHp3aejQEdgB8ZsaF",
         }
         localStorage.setItem('device_info',JSON.stringify(objDevice));
       }

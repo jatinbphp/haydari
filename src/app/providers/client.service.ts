@@ -750,6 +750,26 @@ export class ClientService
 		});
 	}
 
+	updatePushInformation(data)
+	{
+		let headers = this.getHeaderOptions();
+		return new Promise((resolve, reject) => 
+		{
+			let dataToPost = new HttpParams().set("device_id",data.device_id).set("device_type",data.device_type).set("device_token",data.device_token).set("user_id",data.user_id);
+			this.http.post(this.api_url + "userDeviceDetailUpdate",  dataToPost , headers).subscribe((res: any) =>       
+			{
+				resolve(res);
+			},
+			err => 
+			{
+				console.log(err);
+				let errorMessage=this.getErrorMessage(err);
+				//this.showMessage(errorMessage);
+				reject(errorMessage);
+			});
+		});
+	}
+
 	getErrorMessage(err)
 	{	
 		if(err.error == null)
