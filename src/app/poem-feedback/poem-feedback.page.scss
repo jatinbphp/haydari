@@ -367,9 +367,11 @@ ion-content {
 					    	font-family: var(--font-Poppins-Regular);
 				    		color: #DBDDDD;
 				    		margin: 0px 0px 16px;
+				    		--padding-start: 10px;
+				    		border: 1px solid rgba(255, 255, 255, 0.5);
+				    		border-radius: 6px;
 				    		&.suggested-text-updated {
-				    			--padding-start: 10px;
-				    			border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+				    			border: 1px solid rgba(255, 255, 255, 0.8);
 				    			background-color: rgba(255, 255, 255, 0.1);
 				    		}
 				    	}
