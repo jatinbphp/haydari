@@ -69,7 +69,16 @@ const routes: Routes = [
               },
               {
                 path: 'poem-detail',
-                loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+                children:[
+                  {
+                    path:'',
+                    loadChildren: () => import('../poem-detail/poem-detail.module').then(m => m.PoemDetailPageModule)
+                  },
+                  {
+                    path: 'poem-feedback',
+                    loadChildren: () => import('../poem-feedback/poem-feedback.module').then(m => m.PoemFeedbackPageModule)
+                  }
+                ]
               }
             ]
           },

@@ -68,6 +68,10 @@ const routes: Routes = [
   {
     path: 'offline-poem-detail',
     loadChildren: () => import('./offline-poem-detail/offline-poem-detail.module').then( m => m.OfflinePoemDetailPageModule)
+  },
+  {
+    path: 'poem-feedback',
+    loadChildren: () => import('./poem-feedback/poem-feedback.module').then( m => m.PoemFeedbackPageModule)
   }
   /*,
   {

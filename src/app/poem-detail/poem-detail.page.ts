@@ -372,4 +372,21 @@ export class PoemDetailPage
       console.log();
     });
   }
+
+  PoemFeedBack(poem_id)
+  {
+    this.queryString = 
+    {
+      poem_id:poem_id
+    };
+
+    let navigationExtras: NavigationExtras = 
+    {
+      queryParams: 
+      {
+        special: JSON.stringify(this.queryString)
+      }
+    };
+    this.client.router.navigate(['tabs/home/sub-list-page/poem-detail/poem-feedback'], navigationExtras);
+  }
 }
