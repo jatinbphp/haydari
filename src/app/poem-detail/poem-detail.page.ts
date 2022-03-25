@@ -3,6 +3,7 @@ import { Media, MediaObject } from '@awesome-cordova-plugins/media/ngx';
 import { LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
+import { PoemFeedbackPage } from '../poem-feedback/poem-feedback.page';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { ClientService } from '../providers/client.service';
 import { OfflineService } from '../providers/offline.service';
@@ -373,20 +374,19 @@ export class PoemDetailPage
     });
   }
 
-  PoemFeedBack(poem_id)
+  async PoemFeedBack(poem_id)
   {
-    this.queryString = 
-    {
-      poem_id:poem_id
-    };
-
-    let navigationExtras: NavigationExtras = 
-    {
-      queryParams: 
-      {
-        special: JSON.stringify(this.queryString)
-      }
-    };
-    this.client.router.navigate(['tabs/home/sub-list-page/poem-detail/poem-feedback'], navigationExtras);
+    const modal = await this.modalCtrl.create({
+			component: PoemFeedbackPage,
+      cssClass: 'advance-search-filter',
+      showBackdrop: false,
+      swipeToClose:true,
+      animated: true,
+			componentProps: 
+			{ 
+        poem_id:poem_id
+			}
+		});
+    return await modal.present();
   }
 }

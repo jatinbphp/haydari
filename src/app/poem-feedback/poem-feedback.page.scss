@@ -12,6 +12,9 @@ ion-header {
 			@media(max-width:374px) {
 				padding: 24px;
 			}
+			ion-title{
+				color:#FFFFFF;
+			}
 		}
 		ion-buttons {
 			--background: transparent;
@@ -368,10 +371,10 @@ ion-content {
 				    		color: #DBDDDD;
 				    		margin: 0px 0px 16px;
 				    		--padding-start: 10px;
-				    		border: 1px solid rgba(255, 255, 255, 0.5);
+				    		border: 2px solid rgba(255, 255, 255, 0.5);
 				    		border-radius: 6px;
 				    		&.suggested-text-updated {
-				    			border: 1px solid rgba(255, 255, 255, 0.8);
+				    			border: 2px solid rgb(126 161 107);
 				    			background-color: rgba(255, 255, 255, 0.1);
 				    		}
 				    	}
