@@ -22,6 +22,7 @@ ion-header {
             --background-activated: transparent;
             --background-focused: transparent;
 	        --color: #98a886;
+	        color: #98a886;
 	        --padding-start: 0;
 	        --padding-end: 0;
 	        margin: 0;
@@ -356,8 +357,10 @@ ion-content {
 				    	}
 				    }
 				    .trans-lines {
-				    	padding: 0px 0px 0px 10px;
-				    	margin: 6px 0px 0px auto;
+				    	/*padding: 0px 0px 0px 10px;
+				    	margin: 6px 0px 0px auto;*/
+				    	padding: 6px 0px 6px 10px;
+    					margin: 6px 0px 0px auto;
 				    	border-left: 2px solid #40403f;
 				    	width: 100%;
 				    	h6 {
@@ -386,8 +389,8 @@ ion-content {
 						    font-size: 13px;
 						    font-family: var(--font-Poppins-Light);
 						    --border-radius: 30px;
-						    --padding-start: 40px;
-						    --padding-end: 40px;
+						    --padding-start: 25px;
+						    --padding-end: 25px;
 						    text-transform: capitalize;
 						    margin: 0px;
 						    --box-shadow: none;

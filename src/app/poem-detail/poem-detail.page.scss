@@ -174,14 +174,12 @@ ion-content {
 				}
 			}
 		}
-		.nm-icon-list {
+		.nm-icon-list-box {
 			width: 100%;
 			display: flex;
 			flex-flow: row;
 			align-items: center;
-			padding: 20px 0px 16px;/*BEFORE::2px 0px 16px*/
-		    /*margin: 0px 0px 20px;*//*BEFORE IT WAS NOT COMMENTED*/
-			/*border-bottom: 1px solid rgba(255,255,255,0.5);*/
+			padding: 20px 0px 10px;
 			border-top: 1px solid rgba(255,255,255,0.5);
 			@media(max-width:480px) {
 				flex-flow: unset;
@@ -202,9 +200,9 @@ ion-content {
 				// &:last-child {
 				// 	padding: 0px;
 				// }
-			    width: calc(33.33% - 8px);
+			    width: calc(50% - 8px);
 			    height: 48px;
-			    justify-content: flex-start;
+			    justify-content: center;
 			    align-items: center;
 			    padding: 10px 8px;
 			    border: 1px solid rgba(255, 255, 255, 0.4);
@@ -241,6 +239,80 @@ ion-content {
 				&.w-100{
 					width:100%;
 				}
+				img {
+					max-width: 100%;
+					max-height: 100%;
+					width: 22px;
+					height: 22px;
+					object-fit: contain;
+					margin: 0px 5px 0px 0px;
+					opacity: 0.6;
+				}
+				svg {
+					max-width: 100%;
+					max-height: 100%;
+					width: 13px;
+					height: 13px;
+					object-fit: contain;
+					margin: 0px 5px 0px 0px;
+					fill: #364645;
+					opacity: 1;
+					&.youtube-svg, &.offline-svg {
+						fill: #E16670;
+					}
+					&.feedback-svg, &.share-svg {
+						fill: #89B9BD;
+					}
+				}
+				p {
+					width: auto;
+					font-size: 13px;
+				    // line-height: 22px;
+				    line-height: 13px;
+				    font-family: var(--font-Poppins-Regular);
+				    color: #9f9f9f;
+				    padding: 0px;
+				    margin: 0px;
+				    overflow: unset;
+					text-overflow: unset;
+				    word-break: break-word;
+				}
+			}
+		}
+		.nm-icon-list {
+			width: 100%;
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+			padding: 0px 0px 20px;
+			@media(max-width:480px) {
+				flex-flow: unset;
+				flex-wrap: wrap;
+			}
+			.nm-icon-item {
+				/*width: fit-content;
+				width: -webkit-fit-content;
+				width: -moz-fit-content;
+				width: -ms-fit-content;
+				width: -o-fit-content;*/
+				// min-width: 90px;
+				display: flex;
+				flex-flow: row;
+				// justify-content:flex-start;
+				// align-items: flex-start;
+				// padding: 0px 20px 6px 0px;
+				// &:last-child {
+				// 	padding: 0px;
+				// }
+			    width: 100%;
+			    justify-content: flex-start;
+			    align-items: center;
+			    padding: 0px 0px;
+			    border-radius: 0px;
+			    margin: 0px auto 10px;
+			    &:last-child {
+			    	margin: 0px;
+			    }
 				img {
 					max-width: 100%;
 					max-height: 100%;
@@ -353,8 +425,10 @@ ion-content {
 				    	}
 				    }
 				    .trans-lines {
-				    	padding: 0px 0px 0px 10px;
-				    	margin: 6px 0px 0px auto;
+				    	// padding: 0px 0px 0px 10px;
+				    	// margin: 6px 0px 0px auto;
+				    	padding: 2px 10px 2px 10px;
+    					margin: 6px 0px;
 				    	border-left: 2px solid #40403f;
 				    	width: 100%;
 				    	h6 {

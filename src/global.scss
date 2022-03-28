@@ -480,3 +480,25 @@ app-search-filters ion-item .item-native .item-inner .input-wrapper {
         align-items: center;
     }
 }//SOCIAL SHARING ACTION SHEET
+
+ckeditor {
+    width: 100%;
+    float: left;
+    padding: 0px;
+    margin: 0px 0px 18px;
+}
+.ck-toolbar, .ck-editor__editable, .ck-content {
+    background: rgba(255,255,255,0.1) !important;
+}
+.ck-button, .ck-editor__editable p, .ck-content p {
+    color: #fff !important;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+    border-color: #7ea16b !important;
+}
+.ng-touched .ck-toolbar, .ng-touched .ck-editor__editable, .ng-touched .ck-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+.ng-touched .ck-button, .ng-touched .ck-editor__editable p, .ng-touched .ck-content p {
+    color: #fff !important;
+}
