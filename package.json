@@ -31,6 +31,8 @@
     "@awesome-cordova-plugins/sign-in-with-apple": "^5.39.1",
     "@awesome-cordova-plugins/social-sharing": "^5.39.1",
     "@awesome-cordova-plugins/sqlite": "^5.40.0",
+    "@ckeditor/ckeditor5-angular": "^3.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^33.0.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/facebook": "^4.20.0",
     "@ionic/angular": "^5.5.2",

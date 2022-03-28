@@ -17,6 +17,7 @@ import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
   [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule, 
+    HttpClientModule,
+    CKEditorModule, 
     IonicModule.forRoot({
       swipeBackEnabled: true // A better spot to set swipe enabled also…
     }), 

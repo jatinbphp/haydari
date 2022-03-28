@@ -22,7 +22,8 @@
 							<ion-input type="hidden" [(ngModel)]="ngFormSuggestion[l].array_index" name="array_index"></ion-input>
 							<ion-input type="hidden" [(ngModel)]="ngFormSuggestion[l].row_id" name="row_id"></ion-input>
 							<ion-input type="hidden" [(ngModel)]="ngFormSuggestion[l].poem_id" name="poem_id"></ion-input>
-							<ion-textarea [ngClass]="{'suggested-text-updated' : ngFormSuggestion[l].is_suggested_text_updated == true}" [(ngModel)]="ngFormSuggestion[l].suggested_text" name="suggested_text"></ion-textarea>
+							<ckeditor [editor]="Editor" [config]="{ toolbar: [ 'clipboard', '|', 'undo', '|', 'bold', 'italic' ] }" [ngClass]="{'suggested-text-updated' : ngFormSuggestion[l].is_suggested_text_updated == true}" [(ngModel)]="ngFormSuggestion[l].suggested_text" name="suggested_text"></ckeditor>
+							<!--<ion-textarea [ngClass]="{'suggested-text-updated' : ngFormSuggestion[l].is_suggested_text_updated == true}" [(ngModel)]="ngFormSuggestion[l].suggested_text" name="suggested_text"></ion-textarea>-->
 							<ion-button type="submit" [disabled]="ngFormSuggestion[l].is_suggested_text_updated || user_id == null">Save Suggestion</ion-button>
 						</form>
 					</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '../providers/client.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-poem-feedback',
@@ -11,6 +12,7 @@ import { ClientService } from '../providers/client.service';
 
 export class PoemFeedbackPage implements OnInit 
 {
+  public Editor = ClassicEditor;
   public user_id:any='';
   public poem_id:any='';
   public resultPoemsSuggestion:any=[];
