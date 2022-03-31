@@ -110,6 +110,7 @@ export class HomePage
     });
     /*SUBJECT/OCCASION*/
     /*RECIETERS*/
+    /*
     //LOADER
 		const loadingReceiters = await this.loadingCtrl.create({
 			spinner: null,
@@ -131,8 +132,10 @@ export class HomePage
       loadingReceiters.dismiss();//DISMISS LOADER
       console.log();
     });
+    */
     /*RECIETERS*/
     /*LANGUAGES*/
+    /*
     //LOADER
 		const loadingLanguages = await this.loadingCtrl.create({
 			spinner: null,
@@ -154,6 +157,7 @@ export class HomePage
       loadingLanguages.dismiss();//DISMISS LOADER
       console.log();
     });
+    */
     /*LANGUAGES*/
   }
 
