@@ -99,12 +99,30 @@ export class OfflineService
     */
   }
 
+  getData(query,data)
+  {
+    return new Promise((resolve, reject) => 
+    {
+      this.storage.open().then(() => 
+      {
+        //let query = "SELECT * FROM 'TESTINGDATA'";;
+        this.storage.executeSql(query,data).then((res) => 
+        {
+          resolve(res);
+        }).catch((err) => 
+        {
+          reject(err);
+        });
+      });
+    })
+  }
+
   addPoem(poemObject) 
   {
     return new Promise((resolve, reject) => 
     {
       let data = [poemObject.Email, poemObject.Fullname, poemObject.LanguageID, poemObject.LanguageName, poemObject.MP3Link, poemObject.PoemName, poemObject.PoemTypeID, poemObject.PoemTypeName, poemObject.PoetID, poemObject.PoetName, poemObject.ReciterID, poemObject.ReciterName, poemObject.SubjectID, poemObject.SubjectName, poemObject.TranslatedText, poemObject.UserID, poemObject.YouTubeURL, poemObject.addedBy, poemObject.bookmarkStatus, poemObject.colorCode, poemObject.createdAt, poemObject.id, poemObject.isVerified, poemObject.poemsLine];
-      console.log(data);
+      //console.log(data);
       this.storage.executeSql('INSERT INTO poems (Email,Fullname,LanguageID,LanguageName,MP3Link,PoemName,PoemTypeID,PoemTypeName,PoetID,PoetName,ReciterID,ReciterName,SubjectID,SubjectName,TranslatedText,UserID,YouTubeURL,addedBy,bookmarkStatus,colorCode,createdAt,id,isVerified,poemsLine) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data).then((res) => 
       {
         resolve(res);

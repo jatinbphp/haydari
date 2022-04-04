@@ -35,6 +35,7 @@ export class PoemDetailPage
   public resultPoem
   public MP3Link:string='';
   public queryString: any=[];
+  public does_poem_already_made_offline: boolean = false;
 
   constructor(private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
   { 
@@ -53,54 +54,74 @@ export class PoemDetailPage
     this.resultPoemsDetail=[];
     this.poemsLine=[];
     this.has_mp3=false;
+    this.does_poem_already_made_offline=false;
     
     this.route.queryParams.subscribe(params => 
+    {
+      if(params && params.special)
       {
-        if(params && params.special)
-        {
-          this.queryStringData = JSON.parse(params.special);        
-        }
-      });
-      
-      this.poem_id=this.queryStringData['poem_id'];
-      this.from_page=this.queryStringData['from_page'];
-      //LOADER
-      const loadingPoemDetail = await this.loadingCtrl.create({
-        spinner: null,
-        //duration: 5000,
-        message: 'Please wait...',
-        translucent: true,
-        cssClass: 'custom-class custom-loading'
-      });
-      await loadingPoemDetail.present();
-      //LOADER
-      let objData = {
-        poem_id:this.poem_id,
-        user_id:this.user_id
+        this.queryStringData = JSON.parse(params.special);        
       }
-      await this.client.getPoemsDetailById(objData).then(result => 
-      {	
-        loadingPoemDetail.dismiss();//DISMISS LOADER
-        this.resultPoemsDetailObject=result;
-        this.resultPoemsDetail=this.resultPoemsDetailObject['poemsDetail'][0];
-        this.poemsLine=this.resultPoemsDetailObject['poemsLine'];
+    });
+    
+    this.poem_id=this.queryStringData['poem_id'];
+    this.from_page=this.queryStringData['from_page'];
+    //LOADER
+    const loadingPoemDetail = await this.loadingCtrl.create({
+      spinner: null,
+      //duration: 5000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    await loadingPoemDetail.present();
+    //LOADER
+    let objData = {
+      poem_id:this.poem_id,
+      user_id:this.user_id
+    }
+    await this.client.getPoemsDetailById(objData).then(result => 
+    {	
+      loadingPoemDetail.dismiss();//DISMISS LOADER
+      this.resultPoemsDetailObject=result;
+      this.resultPoemsDetail=this.resultPoemsDetailObject['poemsDetail'][0];
+      this.poemsLine=this.resultPoemsDetailObject['poemsLine'];
 
-        if(this.resultPoemsDetailObject['poemsDetail'].length > 0)
-        {
-          this.MP3Link=(this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link']) ? this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link'] : "";
-          this.mediaFile = this.media.create(this.MP3Link);
-        }      
-        //console.log("MP3Link",this.MP3Link);
-        //console.log("Object",this.resultPoemsDetailObject);
-        //console.log("Detail",this.resultPoemsDetail);
-        //console.log("Lines",this.poemsLine);
-        this.has_mp3=(this.MP3Link!="") ? true : false;
-      },
-      error => 
+      if(this.resultPoemsDetailObject['poemsDetail'].length > 0)
       {
-        loadingPoemDetail.dismiss();//DISMISS LOADER
-        console.log();
-      });
+        this.MP3Link=(this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link']) ? this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link'] : "";
+        this.mediaFile = this.media.create(this.MP3Link);
+      }      
+      //console.log("MP3Link",this.MP3Link);
+      //console.log("Object",this.resultPoemsDetailObject);
+      //console.log("Detail",this.resultPoemsDetail);
+      //console.log("Lines",this.poemsLine);
+      this.has_mp3=(this.MP3Link!="") ? true : false;
+    },
+    error => 
+    {
+      loadingPoemDetail.dismiss();//DISMISS LOADER
+      console.log();
+    });
+    //CHECK IF POEM ALREADY MADE OFF-LINE
+    let idToExecute=[this.poem_id];
+    let queryToExecute = "SELECT * FROM poems WHERE id=?";
+    await this.offline.getData(queryToExecute,idToExecute).then((result:any) => 
+    {
+      if(result.rows.length > 0)
+      {
+        this.does_poem_already_made_offline = true;
+      }
+      else
+      {
+        this.does_poem_already_made_offline = false;
+      } 
+    },
+    error => 
+    {
+      console.log(error);
+    });
+    //CHECK IF POEM ALREADY MADE OFF-LINE
   }
 
   playAudio()
@@ -342,36 +363,44 @@ export class PoemDetailPage
 
   async makeItOffLine(poemObject)
   {
-    //LOADER
-    const loadingPoemOffline = await this.loadingCtrl.create({
-      spinner: null,
-      //duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    await loadingPoemOffline.present();
-    //LOADER
-    if(this.poemsLine.length > 0)
+    if(this.does_poem_already_made_offline == false)
     {
-      poemObject['poemsLine']=JSON.stringify(this.poemsLine);
+      //LOADER
+      const loadingPoemOffline = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemOffline.present();
+      //LOADER
+      if(this.poemsLine.length > 0)
+      {
+        poemObject['poemsLine']=JSON.stringify(this.poemsLine);
+      }
+      else 
+      {
+        poemObject['poemsLine']=JSON.stringify([]);
+      }
+      await this.offline.addPoem(poemObject).then(result => 
+      {
+        loadingPoemOffline.dismiss();//DISMISS LOADER
+        this.resultPoemOffline=result;
+        this.client.showMessage("Poem is made OFF LINE!");
+        this.does_poem_already_made_offline = true;
+        console.log(this.resultPoemOffline);
+      },
+      error => 
+      {
+        loadingPoemOffline.dismiss();//DISMISS LOADER
+        console.log();
+      });
     }
     else 
     {
-      poemObject['poemsLine']=JSON.stringify([]);
+      this.client.showMessage("You already have the poem OFF LINE!");
     }
-    await this.offline.addPoem(poemObject).then(result => 
-    {
-      loadingPoemOffline.dismiss();//DISMISS LOADER
-      this.resultPoemOffline=result;
-      this.client.showMessage("Poem is made OFFLINE!");
-      console.log(this.resultPoemOffline);
-    },
-    error => 
-    {
-      loadingPoemOffline.dismiss();//DISMISS LOADER
-      console.log();
-    });
   }
 
   async PoemFeedBack(poem_id)
