@@ -267,6 +267,7 @@ ion-content {
 						ion-label {
 							/*padding-left: 16px;*/
 							white-space: break-spaces;
+							min-width: 100%;
 							h6 {
 								font-size: 15px;
 								line-height: 21px;
@@ -297,6 +298,8 @@ ion-content {
 								flex-flow: row;
 								align-items: center;
 								justify-content: flex-start;
+								position: relative;
+								padding: 0px 25px 0px 0px;
 								@media(max-width:480px) {
 									flex-flow: unset;
 									flex-wrap: wrap;
@@ -331,7 +334,7 @@ ion-content {
 									svg {
 										max-width: 100%;
 										max-height: 100%;
-										width: auto;
+										width: 15px;
 										height: 13px;
 										object-fit: contain;
 										margin: 0px 5px 0px 0px;
@@ -339,6 +342,18 @@ ion-content {
 										opacity: 1;
 									}
 									p {}
+									&.translat-pos {
+										position: absolute;
+									    top: 2px;
+									    right: 0px;
+									    width: auto;
+									    min-width: 14px;
+									    padding: 0px;
+									    margin: 0px 5.5px;
+									    svg {
+									    	margin: 0px;
+									    }
+									}
 								}
 							}
 						}
