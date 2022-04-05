@@ -142,4 +142,22 @@ export class OfflineService
     });
     */
   }
+
+  deleteData(poem_id)
+  {
+  	return new Promise((resolve, reject) => 
+    {
+  		this.storage.open().then(() => 
+      {
+        let query = "DELETE FROM poems WHERE id='" + poem_id + "'";
+        this.storage.executeSql(query, []).then((res) => 
+        {
+          resolve(res);
+        }).catch((err) => 
+        {
+          reject(err);
+        });
+      });
+    });
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { ClientService } from '../providers/client.service';
 import { OfflineService } from '../providers/offline.service';
 
@@ -13,7 +13,7 @@ export class OfflinePage implements OnInit
 {
   public resultPoemOffline:any = [];
   public limitedResultPoemOffline:any = [];
-  constructor(public client: ClientService, public offline: OfflineService, public loadingCtrl: LoadingController)
+  constructor(public client: ClientService, public offline: OfflineService, public loadingCtrl: LoadingController, public alertController: AlertController)
   { }
 
   ngOnInit()
@@ -68,5 +68,43 @@ export class OfflinePage implements OnInit
     offLinePoem = this.resultPoemOffline[arrayIndex];
     localStorage.setItem('read_offline_poem',JSON.stringify(offLinePoem));
     this.client.router.navigate(['/tabs/offline/offline-poem-detail']);
+  }
+
+  async ConfirmRemovingFromOFFLINE(poem_id)
+  {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Please confirm:',
+      message: 'Are you sure to remove poem?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => 
+          {
+            console.log('Confirm Cancel: blah');
+          }
+        }, 
+        {
+          text: 'Okay',
+          handler: () => 
+          {
+            this.RemoveFromOFFLINE(poem_id);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async RemoveFromOFFLINE(poem_id)
+  {
+    await this.offline.deleteData(poem_id).then(result => 
+    {
+      this.client.showMessage("Poem is removed!");
+      this.ionViewWillEnter();      
+    });
   }
 }
