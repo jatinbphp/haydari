@@ -262,6 +262,7 @@ ion-content {
 				    max-width: 100%;
 				    min-width: 100%;
 				    width: 100%;
+				    position: relative;
 					&.btns-sec {
 						margin: 14px 0px;
 						padding: 0px;
@@ -290,6 +291,38 @@ ion-content {
 						ion-label {
 							/*padding-left: 16px;*/
 							white-space: break-spaces;
+						    min-width: 100%;
+						    position: unset;
+						    padding: 0px 45px 0px 0px;
+							.pos-icons {
+								position: absolute;
+								top: 0px;
+								bottom: 0px;
+								right: 0px;
+								margin: auto 0px;
+								width: auto;
+								display: flex;
+							    justify-content: center;
+							    align-items: center;
+								svg {
+								    max-width: 100%;
+								    max-height: 100%;
+								    width: 15px;
+								    height: 13px;
+								    object-fit: contain;
+								    margin: 0px;
+								    opacity: 1;
+								    fill: #364645;
+								}
+								.offline {
+									width: auto;
+									margin: 0px 5.5px 0px 0px;
+								}
+								.translat {
+									width: auto;
+									margin: 0px 5.5px 0px 0px;
+								}
+							}
 							h6 {
 								font-size: 15px;
 								line-height: 21px;
