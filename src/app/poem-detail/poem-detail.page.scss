@@ -419,6 +419,10 @@ ion-content {
 				    	line-height: 28px;
 				    	font-family: var(--font-Poppins-Regular);
 				    	color: #9f9f9f;
+				    	-webkit-user-select: text;
+					    -moz-user-select: text;
+					    -ms-user-select: text;
+					    user-select: text;
 				    	@media(max-width:374px) {
 				    		font-size: 15px;
 				    		line-height: 25px;
@@ -432,6 +436,10 @@ ion-content {
 				    	border-left: 2px solid #40403f;
 				    	width: 100%;
 				    	h6 {
+				    		-webkit-user-select: text;
+						    -moz-user-select: text;
+						    -ms-user-select: text;
+						    user-select: text;
 				    		// color: #e1515f;
 				    		color: #DBDDDD;
 				    	}
