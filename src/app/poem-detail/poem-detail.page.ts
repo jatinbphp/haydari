@@ -387,7 +387,7 @@ export class PoemDetailPage
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
         this.resultPoemOffline=result;
-        this.client.showMessage("Poem is made OFF LINE!");
+        this.client.showMessage("Poem is made OFFLINE!");
         this.does_poem_already_made_offline = true;
         console.log(this.resultPoemOffline);
       },
@@ -399,7 +399,7 @@ export class PoemDetailPage
     }
     else 
     {
-      this.client.showMessage("You already have the poem OFF LINE!");
+      this.client.showMessage("You already have the poem OFFLINE!");
     }
   }
 
