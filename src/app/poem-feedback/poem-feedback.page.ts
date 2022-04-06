@@ -94,7 +94,9 @@ export class PoemFeedbackPage implements OnInit
     let remove_tags_from_suggested_text = suggested_text.replace( /(<([^>]+)>)/ig, '')
     let user_id = this.user_id;
     this.ngFormSuggestion[array_index]['is_suggested_text_updated']=true;
-    
+    //console.log("B=",suggested_text);
+    //console.log("A=",remove_tags_from_suggested_text);
+    //return false;
     //LOADER
     const loadingSuggestion = await this.loadingCtrl.create({
       spinner: null,
@@ -108,7 +110,8 @@ export class PoemFeedbackPage implements OnInit
     let objData = {
       row_id:row_id,
       poem_id:poem_id,
-      suggested_text:remove_tags_from_suggested_text,
+      //suggested_text:remove_tags_from_suggested_text,
+      suggested_text:suggested_text,
       user_id:user_id
     }
     await this.client.SaveSuggestion(objData).then(resultSuggestion => 

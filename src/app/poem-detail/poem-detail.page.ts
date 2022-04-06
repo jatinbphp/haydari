@@ -363,6 +363,7 @@ export class PoemDetailPage
 
   async makeItOffLine(poemObject)
   {
+    console.log(poemObject);
     if(this.does_poem_already_made_offline == false)
     {
       //LOADER
@@ -387,7 +388,7 @@ export class PoemDetailPage
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
         this.resultPoemOffline=result;
-        this.client.showMessage("Poem is made OFFLINE!");
+        this.client.showMessage("Poem is made Offline!");
         this.does_poem_already_made_offline = true;
         console.log(this.resultPoemOffline);
       },
@@ -399,7 +400,55 @@ export class PoemDetailPage
     }
     else 
     {
-      this.client.showMessage("You already have the poem OFFLINE!");
+      this.client.showMessage("You already have the poem Offline!");
+    }
+  }
+
+  async ToggleOffLine(poemObject,what_to_do)
+  {
+    let actionToTake = (what_to_do == 1) ? "insert" : "delete";
+    if(actionToTake == "insert")
+    {
+      //LOADER
+      const loadingPoemOffline = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingPoemOffline.present();
+      //LOADER
+      if(this.poemsLine.length > 0)
+      {
+        poemObject['poemsLine']=JSON.stringify(this.poemsLine);
+      }
+      else 
+      {
+        poemObject['poemsLine']=JSON.stringify([]);
+      }
+      await this.offline.addPoem(poemObject).then(result => 
+      {
+        loadingPoemOffline.dismiss();//DISMISS LOADER
+        this.resultPoemOffline=result;
+        this.client.showMessage("Poem is made Offline!");
+        this.does_poem_already_made_offline = true;
+        this.ionViewWillEnter();
+      },
+      error => 
+      {
+        loadingPoemOffline.dismiss();//DISMISS LOADER
+        console.log();
+      });
+    }
+    if(actionToTake == "delete")
+    {
+      await this.offline.deleteData(poemObject.id).then(result => 
+      {
+        this.client.showMessage("Poem is removed!");
+        this.does_poem_already_made_offline = false;
+        this.ionViewWillEnter();      
+      });
     }
   }
 

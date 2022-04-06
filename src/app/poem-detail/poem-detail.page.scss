@@ -277,6 +277,19 @@ ion-content {
 					text-overflow: unset;
 				    word-break: break-word;
 				}
+				ion-label {
+					width: auto;
+					font-size: 13px;
+				    // line-height: 22px;
+				    line-height: 13px;
+				    font-family: var(--font-Poppins-Regular);
+				    color: #9f9f9f;
+				    padding: 0px;
+				    margin: 0px;
+				    overflow: unset;
+					text-overflow: unset;
+				    word-break: break-word;
+				}
 			}
 		}
 		.nm-icon-list {

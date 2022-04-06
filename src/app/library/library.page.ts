@@ -17,7 +17,9 @@ export class LibraryPage implements OnInit
   public resultData:any=[];
   public showingOfResult:any='';
   public numberOfRecords:number=0;
-  public order:any='desc';
+  public order_for_all:any='asc';
+  public order_for_recent:any='desc';
+  public order:any='';
   public keyword:any='';
   public is_searched:boolean=false;
   public show_in_view: any = 'list';
@@ -32,6 +34,7 @@ export class LibraryPage implements OnInit
     this.showAllOrRecent = localStorage.getItem('show_all_or_recent');
     this.showAllOrRecent = (this.showAllOrRecent) ? JSON.parse(this.showAllOrRecent) : [];
     this.showingOfResult = (this.showAllOrRecent['selected_option']=='all') ? "All Poems" : "Recently Added";
+    this.order = (this.showAllOrRecent['selected_option']=='all') ? "asc" : "desc";
     //LOADER
 		const loading = await this.loadingCtrl.create({
 			spinner: null,

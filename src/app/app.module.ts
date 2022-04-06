@@ -18,9 +18,10 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ExpandableComponent } from "./components/expandable/expandable.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,ExpandableComponent],
   entryComponents: [],
   imports: 
   [

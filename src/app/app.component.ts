@@ -17,6 +17,8 @@ export class AppComponent
 {
   public queryString: any=[];
   public resultPoemTypes:any=[];
+  public resultPoemTypesExpandable:any=[];
+  public expanded:boolean=false;
   public appPages:any=[];  
   public token: string;
   public is_user_login: boolean = false;
@@ -125,15 +127,27 @@ export class AppComponent
         for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
         {
           let checkSlashInString = this.resultPoemTypes[p]['PoemTypeName'].replace("/ ", "/");
-          let objPoemType = {
+          let objPoemType = 
+          {
             id:this.resultPoemTypes[p]['id'],
             title:checkSlashInString,
             shouldFunction:1,
             to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
             url:''
           }
+          let objPoemTypeExpandable = 
+          {
+            id:this.resultPoemTypes[p]['id'],
+            title:checkSlashInString,
+            shouldFunction:1,
+            to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
+            url:'',
+            expanded:false
+          }
+          this.resultPoemTypesExpandable.push(objPoemTypeExpandable);
           this.appPages.push(objPoemType);
         }
+        console.log(this.resultPoemTypesExpandable);
       }
       
     },
@@ -241,6 +255,7 @@ export class AppComponent
 
   showPoemByPoemTypeORSubjectOccassion(id,poem_subject_occassion,type)
   {
+    this.menu.close();
     this.client.publishSomeDataWhenPoemTypeClickedFromMenu({
       poem_subject_occassion_id:id,
       poem_subject_occassion_nm:poem_subject_occassion,
@@ -308,6 +323,12 @@ export class AppComponent
     };
     let target = "_system";
     const browser = this.inAppBrowser.create(targetUrl,target,options);
+  }
+
+  expandPoemTypes()
+  {
+    this.expanded = !this.expanded;
+    return this.expanded;
   }
 
   Logout()
