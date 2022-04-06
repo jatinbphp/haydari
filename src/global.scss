@@ -438,9 +438,9 @@ app-expandable {
   font-size: 20px;
   line-height: 24px;
   color: var(--Black);
-  font-family: var(--font-Poppins-Medium);
+  font-family: var(--font-Poppins-Reguler);/*BEFORE::--font-Poppins-Medium*/
   padding: 0px 0px;
-  margin: 0px 0px 8px 0px;
+  margin: 5px 0px 15px 0px;/*BEFORE::0px 0px 8px 0px*/
   &:last-child {
     margin: 0px;
   }

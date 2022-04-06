@@ -299,10 +299,10 @@ ion-content {
 				    --handle-height: calc(12px - (2px * 2));
 				    --handle-max-height: calc(100% - (var(--handle-spacing) * 2));
 				    --handle-width: calc(12px - (2px * 2));
-				    --handle-spacing: 2px;
+				    --handle-spacing: 5px;/*BEFORE::2px*/
 				    --background: #e64258;
-				    width: 20px;
-				    height: 12px;
+				    width: 30px;/*BEFORE::20px*/
+				    height: 20px;/*BEFORE::12px*/
 				    margin: 0px 0px 0px 5px;
     				padding: 0px;
 				}
