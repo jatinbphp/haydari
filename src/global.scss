@@ -369,16 +369,35 @@ ion-header {
     ion-menu {
         ion-content {
             ion-list {
-                padding-top: calc(env(safe-area-inset-top) + 45px) !important;
-                ion-list-header {
-                    ion-icon {
-                        top: calc(env(safe-area-inset-top) + -26px) !important;
+                &#inbox-list {
+                    padding-top: calc(env(safe-area-inset-top) + 45px) !important;
+                    ion-list-header {
+                        ion-icon {
+                            top: calc(env(safe-area-inset-top) + -26px) !important;
+                        }
                     }
                 }
             }
         }
     }
 }
+
+/*.md {
+    ion-menu {
+        ion-content {
+            ion-list {
+                &.poem-type-list {
+                    padding-top: 24px !important;
+                    ion-list-header {
+                        ion-icon {
+                            top: unset !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}*/
 
 .header-md::after {
     background: none !important;
