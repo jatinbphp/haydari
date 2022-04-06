@@ -103,7 +103,7 @@ export class OfflinePage implements OnInit
   {
     await this.offline.deleteData(poem_id).then(result => 
     {
-      this.client.showMessage("Poem is removed!");
+      this.client.showMessage("Poem is removed from offline!");
       this.ionViewWillEnter();      
     });
   }

@@ -431,7 +431,7 @@ export class PoemDetailPage
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
         this.resultPoemOffline=result;
-        this.client.showMessage("Poem is made Offline!");
+        this.client.showMessage("Poem is added to offline!");
         this.does_poem_already_made_offline = true;
         this.ionViewWillEnter();
       },
@@ -445,7 +445,7 @@ export class PoemDetailPage
     {
       await this.offline.deleteData(poemObject.id).then(result => 
       {
-        this.client.showMessage("Poem is removed!");
+        this.client.showMessage("Poem is removed from offline!");
         this.does_poem_already_made_offline = false;
         this.ionViewWillEnter();      
       });
