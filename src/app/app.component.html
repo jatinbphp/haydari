@@ -36,9 +36,9 @@
               </ion-item>              
             </ion-menu-toggle>
             <!--COLLEPS/EXPAND STARTS-->
-            <ion-list *ngIf="is_network_connected == 1">
+            <ion-list *ngIf="is_network_connected == 1" class="poem-type-list">
               <ion-list-header (click)="expandPoemTypes()">
-                Poem Types
+                <ion-text>Poem Types</ion-text>
                 <span>
                   <ion-img src="../assets/images/Sort_Descending-Icon.svg" *ngIf="expanded == false"></ion-img>
                   <ion-img src="../assets/images/Sort_Ascending-Icon.svg" *ngIf="expanded == true"></ion-img>
@@ -50,7 +50,7 @@
                 </app-expandable>
               </ion-item>
             </ion-list>
-            <!--COLLEPS/EXPAND STARTS-->
+            <!--COLLEPS/EXPAND END-->
             <ion-menu-toggle auto-hide="false">
               <ion-item lines="full" routerDirection="root" routerLink="/tabs/offline" lines="none" detail="false">
                 <ion-label>Offline</ion-label>

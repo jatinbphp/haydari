@@ -82,6 +82,32 @@ ion-menu {
 				@media(max-width:374px) {
 					padding: 45px 0px;
 				}
+				ion-list {
+					&.poem-type-list {
+					    width: 100%;
+					    height: auto;
+					    padding: 24px 0px;
+					    border-bottom: 1px solid #768268;
+					    ion-list-header {
+					    	ion-text {
+					    		width: 100%;
+							    font-size: 22px;
+							    line-height: 26px;
+							    color: var(--Black);
+							    font-family: var(--font-Poppins-Medium);
+							    padding: 0px;
+							    margin: 0px;
+					    	}
+					    	span {
+					    		margin: 0px 10px;
+					    		ion-img {
+					    			filter: invert(52%) sepia(12%) saturate(568%) hue-rotate(45deg) brightness(92%) contrast(91%);
+    								filter: brightness(0.8) invert(1);
+					    		}
+					    	}
+					    }
+					}
+				}
 				ion-menu-toggle {
 					width: 100%;
 					ion-item {

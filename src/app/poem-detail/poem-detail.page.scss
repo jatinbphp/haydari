@@ -290,6 +290,22 @@ ion-content {
 					text-overflow: unset;
 				    word-break: break-word;
 				}
+				ion-toggle {
+					--border-radius: 16px;
+				    --handle-background: #ffffff;
+				    --handle-background-checked: #ffffff;
+				    --handle-border-radius: 25.5px;
+				    --handle-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 1px rgba(0, 0, 0, 0.1);
+				    --handle-height: calc(12px - (2px * 2));
+				    --handle-max-height: calc(100% - (var(--handle-spacing) * 2));
+				    --handle-width: calc(12px - (2px * 2));
+				    --handle-spacing: 2px;
+				    --background: #e64258;
+				    width: 20px;
+				    height: 12px;
+				    margin: 0px 0px 0px 5px;
+    				padding: 0px;
+				}
 			}
 		}
 		.nm-icon-list {

@@ -411,6 +411,26 @@ app-search-filters ion-item .item-native .item-inner .input-wrapper {
     flex-direction: column !important;
 }
 
+app-expandable {
+    width: 100%;
+}
+.expand-wrapper p {
+  width: 100%;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--Black);
+  font-family: var(--font-Poppins-Medium);
+  padding: 0px 0px;
+  margin: 0px 0px 8px 0px;
+  &:last-child {
+    margin: 0px;
+  }
+  @media(max-width:374px) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 /*MAULIK::ADDED::TO SHOW FULL CONTENT ON ION-SELECT-OPTION*/
 #ForRadioOptions
 .alert-radio-label.sc-ion-alert-md,
