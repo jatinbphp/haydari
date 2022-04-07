@@ -13,6 +13,12 @@ export class OfflinePage implements OnInit
 {
   public resultPoemOffline:any = [];
   public limitedResultPoemOffline:any = [];
+  public resultPoemBookMarked:any = [];
+  public limitedResultBookMarked:any = [];
+
+  public ResultUnique:any = [];
+  public LimitedResultUnique:any = [];
+
   constructor(public client: ClientService, public offline: OfflineService, public loadingCtrl: LoadingController, public alertController: AlertController)
   { }
 
@@ -36,7 +42,7 @@ export class OfflinePage implements OnInit
     {
       loading.dismiss();//DISMISS LOADER
       this.resultPoemOffline=result; 
-      console.log("OFFLINE POEMS",this.resultPoemOffline);
+      //console.log("OFFLINE POEMS",this.resultPoemOffline);
       this.limitedResultPoemOffline=[];
       if(this.resultPoemOffline.length > 0)
       {
@@ -60,6 +66,94 @@ export class OfflinePage implements OnInit
       loading.dismiss();//DISMISS LOADER
       console.log();
     });
+
+    await this.offline.getBookmarks().then(result => 
+    {
+      loading.dismiss();//DISMISS LOADER
+      this.resultPoemBookMarked=result; 
+      //console.log("OFFLINE POEMS",this.resultPoemBookMarked);
+      this.limitedResultBookMarked=[];
+      if(this.resultPoemBookMarked.length > 0)
+      {
+        for(let p = 0 ; p < this.resultPoemBookMarked.length; p ++)
+        {
+          let objPoemLimited = {
+            arrayIndex:p,
+            id:this.resultPoemBookMarked[p]['id'],
+            PoemName:this.resultPoemBookMarked[p]['PoemName'],
+            colorCode:this.resultPoemBookMarked[p]['colorCode'],
+            LanguageName:this.resultPoemBookMarked[p]['LanguageName'],
+            ReciterName:this.resultPoemBookMarked[p]['ReciterName'],
+            PoetName:this.resultPoemBookMarked[p]['PoetName'],
+          }
+          this.limitedResultBookMarked.push(objPoemLimited);
+        }
+      }
+    },
+    error => 
+    {
+      loading.dismiss();//DISMISS LOADER
+      console.log();
+    });
+
+    await this.CheckAndRemoveDuplicates();
+  }
+
+  async CheckAndRemoveDuplicates()
+  {
+    for (var i = 0, len = this.resultPoemOffline.length; i < len; i++) 
+    { 
+      for (var j = 0, len2 = this.resultPoemBookMarked.length; j < len2; j++) 
+      { 
+        if (this.resultPoemOffline[i].id === this.resultPoemBookMarked[j].id)
+        {
+          this.resultPoemBookMarked.splice(j, 1);
+          len2=this.resultPoemBookMarked.length;
+        } 
+      }
+    }
+    Array.prototype.push.apply(this.resultPoemOffline,this.resultPoemBookMarked);
+    this.limitedResultPoemOffline=[];
+    if(this.resultPoemOffline.length > 0)
+    {
+      for(let p = 0 ; p < this.resultPoemOffline.length; p ++)
+      {
+        let objPoemLimited = {
+          arrayIndex:p,
+          id:this.resultPoemOffline[p]['id'],
+          PoemName:this.resultPoemOffline[p]['PoemName'],
+          colorCode:this.resultPoemOffline[p]['colorCode'],
+          LanguageName:this.resultPoemOffline[p]['LanguageName'],
+          ReciterName:this.resultPoemOffline[p]['ReciterName'],
+          PoetName:this.resultPoemOffline[p]['PoetName'],
+        }
+        this.limitedResultPoemOffline.push(objPoemLimited);
+      }
+    }
+    
+    
+    /*
+    var a = [{'name':'bob', 'age':22}, {'name':'alice', 'age':12}, {'name':'mike', 'age':13}];
+    var b = [{'name':'bob', 'age':62}, {'name':'kevin', 'age':32}, {'name':'alice', 'age':32}];
+
+    function remove_duplicates(a, b) {
+        let c = [];
+        for (var i = 0, len = a.length; i < len; i++) { 
+            for (var j = 0, len2 = b.length; j < len2; j++) { 
+                if (a[i].name === b[j].name) {
+                    b.splice(j, 1);
+                    len2=b.length;
+                      
+                }
+                
+            }
+        }
+        Array.prototype.push.apply(a,b);
+        console.log(a);
+
+    }
+    remove_duplicates(a,b);
+    */
   }
 
   getPoemsDetail(arrayIndex)

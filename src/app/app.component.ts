@@ -124,6 +124,7 @@ export class AppComponent
       this.resultPoemTypes=result; 
       if(this.resultPoemTypes.length > 0)
       { 
+        this.resultPoemTypesExpandable=[];
         for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
         {
           let checkSlashInString = this.resultPoemTypes[p]['PoemTypeName'].replace("/ ", "/");

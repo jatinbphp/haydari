@@ -51,8 +51,8 @@
               </ion-item>
             </ion-list>
             <!--COLLEPS/EXPAND END-->            
-            <ion-menu-toggle auto-hide="false" [ngClass]="{'hideme' : is_network_connected == 0}">
-              <ion-item *ngIf="is_network_connected == 1" lines="full" routerDirection="root" routerLink="/tabs/wishlist" lines="none" detail="false">
+            <ion-menu-toggle auto-hide="false">
+              <ion-item lines="full" routerDirection="root" routerLink="/tabs/wishlist" lines="none" detail="false">
                 <ion-label>My Bookmarks</ion-label>
               </ion-item>              
             </ion-menu-toggle>

@@ -27,6 +27,7 @@ export class PoemDetailPage
   public isAudioPlayed: boolean = false;
   public togglePlayerInFullHeight:boolean = false;
   public has_mp3:boolean=false;
+  public resultPoemBookMark: any=[];
   public resultPoemOffline: any=[];
   public resultPoemsDetailObject:any=[];
   public resultPoemsDetail:any=[];
@@ -36,13 +37,14 @@ export class PoemDetailPage
   public MP3Link:string='';
   public queryString: any=[];
   public does_poem_already_made_offline: boolean = false;
+  public does_poem_already_made_bookmark: boolean = false;
 
   constructor(private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
 
-  ngOnInit()
+  async ngOnInit()
   {}
 
   async ionViewWillEnter()
@@ -55,6 +57,7 @@ export class PoemDetailPage
     this.poemsLine=[];
     this.has_mp3=false;
     this.does_poem_already_made_offline=false;
+    this.does_poem_already_made_bookmark=false;
     
     this.route.queryParams.subscribe(params => 
     {
@@ -122,6 +125,25 @@ export class PoemDetailPage
       console.log(error);
     });
     //CHECK IF POEM ALREADY MADE OFF-LINE
+    //CHECK IF POEM ALREADY MADE BOOKMARK
+    let idToExecute_1=[this.poem_id];
+    let queryToExecute_1 = "SELECT * FROM bookmarks WHERE id=?";
+    await this.offline.getData(queryToExecute_1,idToExecute_1).then((result:any) => 
+    {
+      if(result.rows.length > 0)
+      {
+        this.does_poem_already_made_bookmark = true;
+      }
+      else
+      {
+        this.does_poem_already_made_bookmark = false;
+      } 
+    },
+    error => 
+    {
+      console.log(error);
+    });
+    //CHECK IF POEM ALREADY MADE BOOKMARK
   }
 
   playAudio()
@@ -447,6 +469,70 @@ export class PoemDetailPage
       {
         this.client.showMessage("Poem is removed from offline!");
         this.does_poem_already_made_offline = false;
+        this.ionViewWillEnter();      
+      });
+    }
+  }
+
+  async BookmarkThisPoem(poemObject,what_to_do)
+  {
+    let actionToTake = (what_to_do == 1) ? "insert" : "delete";
+    if(actionToTake == "insert")
+    {
+      let idToExecute_1=[poemObject.id];
+      let queryToExecute_1 = "SELECT * FROM bookmarks WHERE id=?";
+      await this.offline.getData(queryToExecute_1,idToExecute_1).then(async (result:any) => 
+      {
+        if(result.rows.length > 0)
+        {
+          this.client.showMessage("You already have bookmarked this poem!");
+        }
+        else
+        {
+          //LOADER
+          const loadingPoemBookmark = await this.loadingCtrl.create({
+            spinner: null,
+            //duration: 5000,
+            message: 'Please wait...',
+            translucent: true,
+            cssClass: 'custom-class custom-loading'
+          });
+          await loadingPoemBookmark.present();
+          //LOADER
+          if(this.poemsLine.length > 0)
+          {
+            poemObject['poemsLine']=JSON.stringify(this.poemsLine);
+          }
+          else 
+          {
+            poemObject['poemsLine']=JSON.stringify([]);
+          }
+          await this.offline.addBookmark(poemObject).then(result => 
+          {
+            loadingPoemBookmark.dismiss();//DISMISS LOADER
+            this.client.showMessage("Poem is added to bookmark!");
+            this.does_poem_already_made_bookmark = true;
+            this.ionViewWillEnter();
+          },
+          error => 
+          {
+            loadingPoemBookmark.dismiss();//DISMISS LOADER
+            console.log();
+          });
+        } 
+      },
+      error => 
+      {
+        console.log(error);
+      });
+      
+    }
+    if(actionToTake == "delete")
+    {
+      await this.offline.deleteBookmarkData(poemObject.id).then(result => 
+      {
+        this.client.showMessage("Poem is removed from bookmark!");
+        this.does_poem_already_made_bookmark = false;
         this.ionViewWillEnter();      
       });
     }
