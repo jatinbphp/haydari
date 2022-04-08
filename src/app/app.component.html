@@ -12,7 +12,7 @@
           </ion-list-header>
           <div class="menu-list">
             <!--DYNAMIC MENU STARTS-->
-            <!--<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index" [ngClass]="{'hideme' : p.to_show_when_network_is_on == 0}">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index" [ngClass]="{'hideme' : p.to_show_when_network_is_on == 0}">
               <ion-item *ngIf="p.shouldFunction == 0 && p.to_show_when_network_is_on == 1" lines="full" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
@@ -28,14 +28,14 @@
               <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Logout' && is_user_login==true" lines="full" lines="none" detail="false" (click)="Logout()">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>            
-            </ion-menu-toggle>-->            
+            </ion-menu-toggle>
             <!--DYNAMIC MENU ENDS-->
-            <ion-menu-toggle auto-hide="false" [ngClass]="{'hideme' : is_network_connected == 0}">
+            <!--FIX MENU WITH COLLEPS/EXPAND STARTS-->
+            <!--<ion-menu-toggle auto-hide="false" [ngClass]="{'hideme' : is_network_connected == 0}">
               <ion-item lines="full" routerDirection="root" routerLink="/tabs/home" lines="none" detail="false">
                 <ion-label>Home</ion-label>
               </ion-item>              
-            </ion-menu-toggle>
-            <!--COLLEPS/EXPAND STARTS-->
+            </ion-menu-toggle>            
             <ion-list *ngIf="is_network_connected == 1" class="poem-type-list">
               <ion-list-header (click)="expandPoemTypes()">
                 <ion-text>Poem Types</ion-text>
@@ -49,8 +49,7 @@
                   <p *ngFor="let item of resultPoemTypesExpandable" (click)="showPoemByPoemTypeORSubjectOccassion(item.id,item.title,'by_poem_type')">{{item.title}}</p>
                 </app-expandable>
               </ion-item>
-            </ion-list>
-            <!--COLLEPS/EXPAND END-->            
+            </ion-list>            
             <ion-menu-toggle auto-hide="false">
               <ion-item lines="full" routerDirection="root" routerLink="/tabs/wishlist" lines="none" detail="false">
                 <ion-label>My Bookmarks</ion-label>
@@ -80,7 +79,8 @@
               <ion-item lines="full" lines="none" detail="false" (click)="Logout()">
                 <ion-label>Logout</ion-label>
               </ion-item>              
-            </ion-menu-toggle>
+            </ion-menu-toggle>-->
+            <!--FIX MENU WITH COLLEPS/EXPAND ENDS-->
           </div>
           <ion-item class="btm-cpr-cnt">© Copyright 2021 The Haydari Project</ion-item>
         </ion-list>        

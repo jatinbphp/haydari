@@ -12,7 +12,7 @@
 		<div class="pg-title-main">
 			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>			
 		</div>
-		<p class="no-records" *ngIf="user_id == null">You must be login to give your suggestion.</p>		
+		<p class="no-records" *ngIf="user_id == null">You must be logged in.</p>		
 		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
 			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">
 				<div class="lines-sec">

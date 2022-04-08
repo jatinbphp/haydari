@@ -190,7 +190,8 @@ export class AppComponent
         id:0,
         title:'Offline',
         shouldFunction:0,
-        to_show_when_network_is_on:(this.is_network_connected == false) ? 1 : 0,
+        //to_show_when_network_is_on:(this.is_network_connected == false) ? 1 : 0,//BEFORE::
+        to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,//BEFORE::
         url: '/tabs/offline'
       },/*
       {

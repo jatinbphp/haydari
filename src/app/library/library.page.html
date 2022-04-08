@@ -48,6 +48,10 @@
 				<!--<img class="grid-icon1" src="../../assets/images/grid-icon1.png" (click)="showGridView()">-->
         		<!--<img class="list-icon1" src="../../assets/images/list-icon1.png" (click)="showListView()">-->
 			</div>
+			<div class="filter-sec" (click)="OpenAdvanceFilter()">
+				<img class="grid-icon1" src="../../assets/images/Filter_Unselected-Icon.svg" *ngIf="is_searched_filters_applied == false">
+				<img class="grid-icon1" src="../../assets/images/Filter_Selected-Icon.svg" *ngIf="is_searched_filters_applied == true">
+			</div>
 		</div>
 		<p class="no-records" *ngIf="resultData.length == 0">No records available</p>
 		<ion-row *ngIf="resultData.length > 0" class="list-boxes-main" [ngClass]="{'grid-view' : show_in_view == 'grid'}">

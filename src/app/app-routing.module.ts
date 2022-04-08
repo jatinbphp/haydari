@@ -72,6 +72,10 @@ const routes: Routes = [
   {
     path: 'poem-feedback',
     loadChildren: () => import('./poem-feedback/poem-feedback.module').then( m => m.PoemFeedbackPageModule)
+  },
+  {
+    path: 'search-filters-all-recent',
+    loadChildren: () => import('./search-filters-all-recent/search-filters-all-recent.module').then( m => m.SearchFiltersAllRecentPageModule)
   }
   /*,
   {

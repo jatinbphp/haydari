@@ -687,7 +687,8 @@ export class ClientService
 		let headers = this.getHeaderOptions();
 		return new Promise((resolve, reject) => 
 		{
-			let dataToPost = new HttpParams().set("filterType",data.filterType).set("keyword",data.keyword).set("orderType",data.order);
+			//let dataToPost = new HttpParams().set("filterType",data.filterType).set("keyword",data.keyword).set("orderType",data.order);
+			let dataToPost = new HttpParams().set("filterType",data.filterType).set("subjectID",data.selectedSubjectOccassion).set("orderType",data.order).set("keyword",(data.keyword) ? data.keyword : '').set("poemTypeId",data.selectedPoemType).set("languageId",data.selectedLanguage).set("receiterId",data.selectedReciters).set("poetId",data.selectedPoets).set("translatedStatus",data.translated);
 			this.http.post(this.api_url + "getAllPoems",  dataToPost , headers).subscribe((res: any) =>       
 			{
 				if(res.status == true)
