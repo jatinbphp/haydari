@@ -444,6 +444,7 @@ export class SearchFiltersAllRecentPage implements OnInit
     {
       this.search_with_poem_type=true;
       this.search_with_subject_occassion=false;
+      this.loginForm.controls['selected_search_by'].setValue("by_poem_type");
       this.loginForm.get('poem_type').setValidators([Validators.required]);     
       this.loginForm.get('poem_type').updateValueAndValidity();
       this.loginForm.controls['subject_occassion'].setValue("");
@@ -452,6 +453,7 @@ export class SearchFiltersAllRecentPage implements OnInit
     {
       this.search_with_subject_occassion=true;
       this.search_with_poem_type=false;
+      this.loginForm.controls['selected_search_by'].setValue("by_subject_occassion");
       this.loginForm.get('subject_occassion').setValidators([Validators.required]);     
       this.loginForm.get('subject_occassion').updateValueAndValidity();
       this.loginForm.controls['poem_type'].setValue("");
