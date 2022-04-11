@@ -449,6 +449,7 @@ export class PoemDetailPage
       {
         poemObject['poemsLine']=JSON.stringify([]);
       }
+      poemObject['FromTableNM']="Poems";
       await this.offline.addPoem(poemObject).then(result => 
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
@@ -478,7 +479,7 @@ export class PoemDetailPage
   {
     let actionToTake = (what_to_do == 1) ? "insert" : "delete";
     if(actionToTake == "insert")
-    {
+    { 
       let idToExecute_1=[poemObject.id];
       let queryToExecute_1 = "SELECT * FROM bookmarks WHERE id=?";
       await this.offline.getData(queryToExecute_1,idToExecute_1).then(async (result:any) => 
@@ -507,6 +508,7 @@ export class PoemDetailPage
           {
             poemObject['poemsLine']=JSON.stringify([]);
           }
+          poemObject['FromTableNM']="bookmarks";
           await this.offline.addBookmark(poemObject).then(result => 
           {
             loadingPoemBookmark.dismiss();//DISMISS LOADER

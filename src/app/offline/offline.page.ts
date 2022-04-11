@@ -56,6 +56,7 @@ export class OfflinePage implements OnInit
             LanguageName:this.resultPoemOffline[p]['LanguageName'],
             ReciterName:this.resultPoemOffline[p]['ReciterName'],
             PoetName:this.resultPoemOffline[p]['PoetName'],
+            FromTableNM:this.resultPoemOffline[p]['FromTableNM'],
           }
           this.limitedResultPoemOffline.push(objPoemLimited);
         }
@@ -85,6 +86,7 @@ export class OfflinePage implements OnInit
             LanguageName:this.resultPoemBookMarked[p]['LanguageName'],
             ReciterName:this.resultPoemBookMarked[p]['ReciterName'],
             PoetName:this.resultPoemBookMarked[p]['PoetName'],
+            FromTableNM:this.resultPoemOffline[p]['FromTableNM'],
           }
           this.limitedResultBookMarked.push(objPoemLimited);
         }
@@ -126,11 +128,12 @@ export class OfflinePage implements OnInit
           LanguageName:this.resultPoemOffline[p]['LanguageName'],
           ReciterName:this.resultPoemOffline[p]['ReciterName'],
           PoetName:this.resultPoemOffline[p]['PoetName'],
+          FromTableNM:this.resultPoemOffline[p]['FromTableNM'],
         }
         this.limitedResultPoemOffline.push(objPoemLimited);
       }
     }
-    
+    console.log("1",this.limitedResultPoemOffline);
     
     /*
     var a = [{'name':'bob', 'age':22}, {'name':'alice', 'age':12}, {'name':'mike', 'age':13}];
@@ -164,15 +167,16 @@ export class OfflinePage implements OnInit
     this.client.router.navigate(['/tabs/offline/offline-poem-detail']);
   }
 
-  async ConfirmRemovingFromOFFLINE(poem_id)
+  async ConfirmRemovingFromOFFLINE(poem_id,FromTableNM)
   {
+    let messageToRemove = (FromTableNM == "Poems") ? "Remove this from Offline poems?" : "Remove this from Bookmarked Poems?";
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Please confirm:',
-      message: 'Are you sure to remove poem?',
+      message: messageToRemove,
       buttons: [
         {
-          text: 'Cancel',
+          text: 'NO',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => 
@@ -181,10 +185,10 @@ export class OfflinePage implements OnInit
           }
         }, 
         {
-          text: 'Okay',
+          text: 'YES',
           handler: () => 
           {
-            this.RemoveFromOFFLINE(poem_id);
+            this.RemoveFromOFFLINE(poem_id,FromTableNM);
             console.log('Confirm Okay');
           }
         }
@@ -193,12 +197,24 @@ export class OfflinePage implements OnInit
     await alert.present();
   }
 
-  async RemoveFromOFFLINE(poem_id)
+  async RemoveFromOFFLINE(poem_id,FromTableNM)
   {
-    await this.offline.deleteData(poem_id).then(result => 
+    if(FromTableNM == "Poems")
     {
-      this.client.showMessage("Poem is removed from offline!");
-      this.ionViewWillEnter();      
-    });
+      await this.offline.deleteData(poem_id).then(result => 
+      {
+        this.client.showMessage("Poem is removed from offline!");
+        this.ionViewWillEnter();      
+      });
+    }
+    if(FromTableNM == "bookmarks")
+    {
+      await this.offline.deleteBookmarkData(poem_id).then(result => 
+      {
+        this.client.showMessage("Poem is removed from bookmark!");
+        this.ionViewWillEnter();      
+      });
+    }
+    
   }
 }

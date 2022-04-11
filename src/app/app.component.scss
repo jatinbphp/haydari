@@ -116,6 +116,20 @@ ion-menu {
 				ion-menu-toggle {
 					width: 100%;
 					ion-item {
+						&.poem-type{
+							padding:0 0 24px 0;
+							ion-label {
+								width: 100%;
+								font-size: 17px;
+								line-height: 26px;
+								color: rgba(0, 0, 0, 0.3);
+								font-family: var(--font-Poppins-Medium);
+								@media(max-width:374px) {
+									font-size: 20px;
+									line-height: 22px;
+								}
+							}
+						}
 						ion-label {
 							width: 100%;
 							font-size: 22px;

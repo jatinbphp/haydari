@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { ClientService } from '../providers/client.service';
 import { OfflineService } from '../providers/offline.service';
 import { ProfilePage } from '../profile/profile.page';
@@ -19,7 +19,7 @@ export class WishlistPage
   public limitedResultDataBookMark:any = [];
   public queryString: any=[];
   public order:any='desc';
-  constructor(public client: ClientService, public offline: OfflineService, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
+  constructor(public client: ClientService, public offline: OfflineService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public alertController: AlertController)
   {
   }
 
@@ -69,6 +69,7 @@ export class WishlistPage
 
     await this.offline.getBookmarks().then(result => 
     {
+      console.log("1",result);
       loading.dismiss();//DISMISS LOADER
       this.resultDataBookMark=result; 
       this.limitedResultDataBookMark=[];
@@ -84,9 +85,11 @@ export class WishlistPage
             LanguageName:this.resultDataBookMark[p]['LanguageName'],
             ReciterName:this.resultDataBookMark[p]['ReciterName'],
             PoetName:this.resultDataBookMark[p]['PoetName'],
+            FromTableNM:this.resultDataBookMark[p]['FromTableNM'],
           }
           this.limitedResultDataBookMark.push(objPoemLimited);
         }
+        console.log("2",this.limitedResultDataBookMark);
       }
     },
     error => 
@@ -151,6 +154,57 @@ export class WishlistPage
     let offLinePoem = [];
     offLinePoem = this.resultDataBookMark[arrayIndex];
     localStorage.setItem('read_offline_poem',JSON.stringify(offLinePoem));
-    this.client.router.navigate(['/tabs/offline/offline-poem-detail']);
+    this.client.router.navigate(['/tabs/wishlist/offline-poem-detail']);
+  }
+
+  async ConfirmRemovingFromBookMark(poem_id,FromTableNM)
+  {
+    let messageToRemove = (FromTableNM == "Poems") ? "Remove this from Offline poems?" : "Remove this from Bookmarked Poems?";
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Please confirm:',
+      message: messageToRemove,
+      buttons: [
+        {
+          text: 'NO',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => 
+          {
+            console.log('Confirm Cancel: blah');
+          }
+        }, 
+        {
+          text: 'YES',
+          handler: () => 
+          {
+            this.RemoveBookmark(poem_id,FromTableNM);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async RemoveBookmark(poem_id,FromTableNM)
+  {
+    if(FromTableNM == "Poems")
+    {
+      await this.offline.deleteData(poem_id).then(result => 
+      {
+        this.client.showMessage("Poem is removed from offline!");
+        this.ionViewWillEnter();      
+      });
+    }
+    if(FromTableNM == "bookmarks")
+    {
+      await this.offline.deleteBookmarkData(poem_id).then(result => 
+      {
+        this.client.showMessage("Poem is removed from bookmark!");
+        this.ionViewWillEnter();      
+      });
+    }
+    
   }
 }
