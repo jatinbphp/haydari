@@ -65,12 +65,14 @@ export class SearchFiltersAllRecentPage implements OnInit
       if(selected_search_by=="by_poem_type")
       {
         this.loginForm.controls['selected_search_by'].setValue("by_poem_type");
+        this.selected_search_by="by_poem_type";
         this.search_with_poem_type=true;
         this.search_with_subject_occassion=false;
       }
       if(selected_search_by=="by_subject_occassion")
       {
         this.loginForm.controls['selected_search_by'].setValue("by_subject_occassion");
+        this.selected_search_by="by_subject_occassion";
         this.search_with_poem_type=false;
         this.search_with_subject_occassion=true;
       }
