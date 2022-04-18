@@ -27,15 +27,32 @@ export class OfflineService
           .then(() => console.log('Executed SQL'))
           .catch(e => console.log(e));
           console.log(db);
-
+          
           await db.executeSql('CREATE TABLE bookmarks(Email varchar(255),Fullname varchar(255),LanguageID int(11),LanguageName varchar(255),MP3Link text CHARACTER,PoemName varchar(255),PoemTypeID int(11),PoemTypeName varchar(255),PoetID int(11),PoetName varchar(255),ReciterID int(11),ReciterName varchar(255),SubjectID int(11),SubjectName varchar(255),TranslatedText text CHARACTER,UserID int(11),YouTubeURL varchar(255),addedBy int(11),bookmarkStatus int(11),colorCode varchar(255),createdAt timestamp,id int(11),isVerified tinyint(1),poemsLine json,FromTableNM varchar(255))', [])
           .then(() => console.log('Executed SQL'))
           .catch(e => console.log(e));
           console.log(db);
-
         });
       }
     });
+  }
+
+  alterTable(query)
+  {
+    return new Promise((resolve, reject) => 
+    {
+      this.storage.open().then((res) => 
+      {
+        this.storage.executeSql(query,[]).then((res) => 
+        {
+          resolve(res);
+        }).catch((err) => 
+        {
+          console.log(err);
+          reject(err);
+        });
+      });
+    })
   }
 
   createTable(query) 

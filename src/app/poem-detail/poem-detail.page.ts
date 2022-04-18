@@ -555,4 +555,46 @@ export class PoemDetailPage
 		});
     return await modal.present();
   }
+
+  async ionViewDidEnter()
+  {
+    //ALTER TABLE
+    await this.offline.getData('SELECT FromTableNM FROM Poems LIMIT 1',[]).then((resultToAlter:any) => 
+    {
+      //COLUMN EXISTS :: NOT NEED TO DO ANYTHING
+    },async (error) => 
+    {
+      //console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `Poems` ADD `FromTableNM` VARCHAR(255) NOT NULL DEFAULT `Poems` AFTER `poemsLine`').then(resultAlter => 
+      {
+        //COLUMN ADDED :: NOT NEED TO DO ANYTHING
+        //console.log("column created 1",resultAlter);
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        //console.log("column created 1 error",error);
+      });
+      
+    });//TO CHECK COLUMN FromTableNM EXISTS IN Poems table if not then add
+    
+    await this.offline.getData('SELECT FromTableNM FROM bookmarks LIMIT 1',[]).then((resultToAlter:any) => 
+    {
+      //COLUMN EXISTS :: NOT NEED TO DO ANYTHING
+    },async (error) => 
+    {
+      //console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `bookmarks` ADD `FromTableNM` VARCHAR(255) NOT NULL DEFAULT `bookmarks`').then(resultAlter => 
+      {
+        //COLUMN ADDED :: NOT NEED TO DO ANYTHING
+        //console.log("column created 2",resultAlter);
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        //console.log("column created 2 error",error);
+      });
+    });//TO CHECK COLUMN FromTableNM EXISTS IN bookmarks table if not then add    
+    //ALTER TABLE
+  }
 }
