@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, LoadingController, ModalController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 import { ClientService } from '../providers/client.service';
+import { OfflineService } from '../providers/offline.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
@@ -22,7 +23,7 @@ export class HomePage
   public resultLanguages:any=[];
   public searched_text:string='';
   public showAllSubjects:boolean=false;
-  constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
+  constructor(public keyboard:Keyboard, public fb: FormBuilder, public offline: OfflineService, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { 
     this.keyboard.hideFormAccessoryBar(false);
   }
@@ -240,5 +241,92 @@ export class HomePage
     }
     localStorage.setItem('show_all_or_recent',JSON.stringify(objShowAllOrRecent));
     this.client.router.navigate(['tabs/home/library']);
+  }
+
+  async ionViewDidEnter()
+  {
+    //ALTER TABLE
+    await this.offline.getData('SELECT FromTableNM FROM Poems LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("Field exists - 1");
+      
+      //UPDATE ALL COLUMN VALUE WITH DEFAULT
+      let idToExecute_1=['Poems'];
+      let queryToExecute_1 = "UPDATE Poems SET FromTableNM = ?";
+      await this.offline.updateData(queryToExecute_1,idToExecute_1).then((res) => 
+      {
+        console.log("Field updated - 1"); 
+        //console.log(res);
+      }).catch((err) => 
+      { 
+        console.log(err);
+      });
+      
+    },async (error) => 
+    {
+      console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `Poems` ADD `FromTableNM` VARCHAR(255) NOT NULL DEFAULT `Poems`').then(resultAlter => 
+      {
+        console.log("Field altered - 1");
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        console.log("column created 1 error",error);
+      });
+      
+      //UPDATE ALL COLUMN VALUE WITH DEFAULT
+      let idToExecute_1=['Poems'];
+      let queryToExecute_1 = "UPDATE Poems SET FromTableNM = ?";
+      await this.offline.updateData(queryToExecute_1,idToExecute_1).then((res) => 
+      { 
+        console.log("Field altered updated - 1");
+      }).catch((err) => 
+      { 
+        console.log(err);
+      });
+
+    });//TO CHECK COLUMN FromTableNM EXISTS IN Poems table if not then add
+    
+    await this.offline.getData('SELECT FromTableNM FROM bookmarks LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("Field exists - 2");
+      
+      //UPDATE ALL COLUMN VALUE WITH DEFAULT
+      let idToExecute_1=['bookmarks'];
+      let queryToExecute_1 = "UPDATE bookmarks SET FromTableNM = ?";
+      await this.offline.updateData(queryToExecute_1,idToExecute_1).then((res) => 
+      { 
+        console.log("Field updated - 2");
+        //console.log(res);
+      }).catch((err) => 
+      { 
+        console.log(err);
+      });
+    },async (error) => 
+    {
+      console.log("ERROR-2",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `bookmarks` ADD `FromTableNM` VARCHAR(255) NOT NULL DEFAULT `bookmarks`').then(resultAlter => 
+      {
+        console.log("Field altered - 2");
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        //console.log("column created 2 error",error);
+      });
+
+      //UPDATE ALL COLUMN VALUE WITH DEFAULT
+      let idToExecute_1=['bookmarks'];
+      let queryToExecute_1 = "UPDATE bookmarks SET FromTableNM = ?";
+      await this.offline.updateData(queryToExecute_1,idToExecute_1).then((res) => 
+      { 
+        console.log("Field altered updated - 2");
+      }).catch((err) => 
+      { 
+        console.log(err);
+      });
+    });//TO CHECK COLUMN FromTableNM EXISTS IN bookmarks table if not then add    
+    //ALTER TABLE
   }
 }
