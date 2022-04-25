@@ -230,6 +230,16 @@ export class AppComponent
         console.log();
       });
     }
+    this.firebaseX.onMessageReceived().subscribe(data => 
+    {
+      //console.log(`User opened a notification ${data}`);
+      let objShowAllOrRecent = 
+      {
+        selected_option : 'recent'
+      }
+      localStorage.setItem('show_all_or_recent',JSON.stringify(objShowAllOrRecent));
+      this.client.router.navigate(['tabs/home/library']);
+    });
     //SETUP PUSH
   }
 

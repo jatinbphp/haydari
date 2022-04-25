@@ -11,7 +11,7 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 export class ClientService 
 {
-	public site_url: string ="https://haydari.ecnetsolutions.dev/";
+	public site_url: string ="https://app.thehaydariproject.com/";
 	public api_url: string = "https://app.thehaydariproject.com/api/";//https://haydari.ecnetsolutions.dev/api/
 	public token: string;
 	public serverResponse: any=[];
