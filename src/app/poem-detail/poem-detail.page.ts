@@ -38,7 +38,6 @@ export class PoemDetailPage
   public queryString: any=[];
   public does_poem_already_made_offline: boolean = false;
   public does_poem_already_made_bookmark: boolean = false;
-
   constructor(private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
