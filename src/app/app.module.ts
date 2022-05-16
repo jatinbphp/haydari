@@ -19,6 +19,11 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ExpandableComponent } from "./components/expandable/expandable.component";
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
+import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { Deeplinks } from '@awesome-cordova-plugins/deeplinks/ngx';
 
 @NgModule({
   declarations: [AppComponent,ExpandableComponent],
@@ -47,6 +52,11 @@ import { ExpandableComponent } from "./components/expandable/expandable.componen
     Network,
     SQLite,
     FirebaseX,
+    File,
+    FilePath,
+    FileTransfer,
+    AndroidPermissions,
+    Deeplinks,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],

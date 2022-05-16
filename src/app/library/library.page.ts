@@ -27,7 +27,7 @@ export class LibraryPage implements OnInit
   public is_searched:boolean=false;
   public show_in_view: any = 'list';
   public is_searched_filters_applied: boolean = false;
-  public searched_filters:any=[];
+  public searched_filters_library:any=[];
   //ANIMATION FOR SearchFiltersPage
   /*OPTION-1* STARTS*/
   public EnterModalAnimation_1 = (baseEl: HTMLElement) => {
@@ -115,17 +115,31 @@ export class LibraryPage implements OnInit
   constructor(public client: ClientService, private router: Router, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
   { 
     localStorage.removeItem('searched_filters_all_recent');
+    this.client.getObservableWhenClearSearch().subscribe((dataClearSearch) => 
+    {
+      this.is_searched_filters_applied=false;
+      localStorage.removeItem('searched_filters_all_recent');
+      this.shoeHomeContent();
+      console.log('Search is cleared', dataClearSearch);
+    });//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
   }
 
   ngOnInit()
-  { }
+  { 
+    this.shoeHomeContent();
+  }
 
   async ionViewWillEnter() 
+  { }
+
+  async shoeHomeContent()
   {
     this.keyword='';
     this.resultData=[];
     //IF ALREADY SEARCHED FOUNDS
-    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters_all_recent'));    
+    this.searched_filters_library=[];
+    this.searched_filters_library = JSON.parse(localStorage.getItem('searched_filters_all_recent'));   
+    console.log("1",this.searched_filters_library);
     //IF ALREADY SEARCHED FOUNDS
 
     this.showAllOrRecent = localStorage.getItem('show_all_or_recent');
@@ -146,13 +160,14 @@ export class LibraryPage implements OnInit
       filterType:this.showAllOrRecent['selected_option'].toUpperCase(),
       order:this.order,
       keyword:this.keyword,
-      selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedLanguage:(this.searched_filters_library && this.searched_filters_library['selectedLanguage']) ? this.searched_filters_library['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedPoets:(this.searched_filters_library && this.searched_filters_library['selectedPoets']) ? this.searched_filters_library['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedReciters:(this.searched_filters_library && this.searched_filters_library['selectedReciters']) ? this.searched_filters_library['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedPoemType:(this.searched_filters_library && this.searched_filters_library['selectedPoemType']) ? this.searched_filters_library['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedSubjectOccassion:(this.searched_filters_library && this.searched_filters_library['selectedSubjectOccassion']) ? this.searched_filters_library['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      translated:(this.searched_filters_library && this.searched_filters_library['translated']) ? this.searched_filters_library['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
     }
+    console.log("2",data);
     await this.client.getAllOrRecentRequested(data).then(result => 
     {	
       loading.dismiss();//DISMISS LOADER
@@ -203,12 +218,12 @@ export class LibraryPage implements OnInit
       filterType:this.showAllOrRecent['selected_option'].toUpperCase(),
       order:this.order,
       keyword:this.keyword,
-      selectedLanguage:(this.searched_filters && this.searched_filters['selectedLanguage']) ? this.searched_filters['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedPoets:(this.searched_filters && this.searched_filters['selectedPoets']) ? this.searched_filters['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedReciters:(this.searched_filters && this.searched_filters['selectedReciters']) ? this.searched_filters['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedPoemType:(this.searched_filters && this.searched_filters['selectedPoemType']) ? this.searched_filters['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      selectedSubjectOccassion:(this.searched_filters && this.searched_filters['selectedSubjectOccassion']) ? this.searched_filters['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
-      translated:(this.searched_filters && this.searched_filters['translated']) ? this.searched_filters['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedLanguage:(this.searched_filters_library && this.searched_filters_library['selectedLanguage']) ? this.searched_filters_library['selectedLanguage'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedPoets:(this.searched_filters_library && this.searched_filters_library['selectedPoets']) ? this.searched_filters_library['selectedPoets'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedReciters:(this.searched_filters_library && this.searched_filters_library['selectedReciters']) ? this.searched_filters_library['selectedReciters'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedPoemType:(this.searched_filters_library && this.searched_filters_library['selectedPoemType']) ? this.searched_filters_library['selectedPoemType'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      selectedSubjectOccassion:(this.searched_filters_library && this.searched_filters_library['selectedSubjectOccassion']) ? this.searched_filters_library['selectedSubjectOccassion'].split(",") : "",//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
+      translated:(this.searched_filters_library && this.searched_filters_library['translated']) ? this.searched_filters_library['translated'] : ""//FORCED TO BE ADDED BECAUSE OF ADVANCE SEARCHC
     }
     await this.client.getAllOrRecentRequested(data).then(result => 
     {	
@@ -303,7 +318,7 @@ export class LibraryPage implements OnInit
   {
     this.keyword = '';
     this.is_searched = false;
-    this.ionViewWillEnter();
+    this.shoeHomeContent();
   }
 
   ionViewDidLeave()
@@ -326,7 +341,7 @@ export class LibraryPage implements OnInit
 
     modal.onDidDismiss().then((data) => 
 		{
-      let selected_search_by = data.data.searched.selected_search_by
+      let selected_search_by = data.data.searched.selected_search_by;
       let selectedLanguage = data.data.searched.selectedLanguage;
       let selectedPoets = data.data.searched.selectedPoets;
       let selectedReciters = data.data.searched.selectedReciters;
@@ -345,7 +360,10 @@ export class LibraryPage implements OnInit
         selectedSubjectOccassion:selectedSubjectOccassion,
         translated:translated
       };
-      this.searchWithAdvanceFilters(advanceSearchObj);
+      if(localStorage.getItem('searched_filters_all_recent'))
+      {
+        this.searchWithAdvanceFilters(advanceSearchObj);
+      }
     });
 		return await modal.present();
   }
@@ -353,9 +371,9 @@ export class LibraryPage implements OnInit
   async searchWithAdvanceFilters(advanceSearchObj:any)
   {
     //IF ALREADY SEARCHED FOUNDS
-    this.searched_filters = JSON.parse(localStorage.getItem('searched_filters_all_recent'));    
+    this.searched_filters_library = JSON.parse(localStorage.getItem('searched_filters_all_recent'));    
     this.is_searched_filters_applied=false;
-    if(this.searched_filters)
+    if(this.searched_filters_library)
     {
       this.is_searched_filters_applied=true;
     }
@@ -372,5 +390,14 @@ export class LibraryPage implements OnInit
     {
       console.log();
     });
+  }
+
+  doRefresh(ev)
+  {
+    setTimeout(() => 
+    {
+      this.shoeHomeContent();
+      ev.target.complete();
+    }, 2000);
   }
 }

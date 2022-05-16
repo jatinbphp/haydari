@@ -4,7 +4,9 @@
     <description>The Haydari Project mobile application was developed for those who hold religious poetry close to their hearts.</description>
     <author email="info@thehaydariproject.com" href="https://www.thehaydariproject.com">Ionic Framework Team</author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="*" subdomains="true" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

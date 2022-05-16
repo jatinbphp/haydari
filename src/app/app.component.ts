@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { MenuController, ModalController, Platform } from '@ionic/angular';
 import { ClientService } from './providers/client.service';
-import { NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from './profile/profile.page';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { FirebaseX } from '@awesome-cordova-plugins/firebase-x/ngx';
+import { Deeplinks } from '@awesome-cordova-plugins/deeplinks/ngx';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,7 @@ export class AppComponent
     { title: 'Settings', url: '/tabs/home', icon: 'bag', categories: []},//[6]
   ];
   */
-  constructor(public inAppBrowser: InAppBrowser, private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder, private network: Network, private firebaseX: FirebaseX)
+  constructor(public inAppBrowser: InAppBrowser, private platform: Platform, public client: ClientService, public menu: MenuController, public modalCtrl: ModalController, public fb: FormBuilder, private network: Network, private firebaseX: FirebaseX, public zone: NgZone, private deeplinks: Deeplinks, private router: Router)
   {
     this.platform.ready().then(async () => 
     {
@@ -241,6 +242,33 @@ export class AppComponent
       this.client.router.navigate(['tabs/home/library']);
     });
     //SETUP PUSH
+    //DEEP LINK
+    this.deeplinks.route({'/poem-detail/:poem_id':'ResetPasswordPage'}).subscribe(match =>       
+    {        
+      //console.log('Successfully matched route', match);                
+      this.queryString = 
+      {
+        poem_id:match.$args.poem_id
+      };
+
+      let navigationExtras: NavigationExtras = 
+      {
+        queryParams: 
+        {
+          special: JSON.stringify(this.queryString)
+        }
+      };
+
+      this.zone.run(() => 
+      {
+        this.client.router.navigate(['/poem-detail/:'+match.$args.poem_id], navigationExtras)
+      });
+    },nomatch => 
+    {
+      // nomatch.$link - the full link data
+      console.log('NoMatch POEM DETAIL = ', nomatch);
+    });//POEM DETAIL
+    //DEEP LINK
   }
 
   ngOnInit() 

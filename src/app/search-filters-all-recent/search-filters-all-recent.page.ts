@@ -27,7 +27,7 @@ export class SearchFiltersAllRecentPage implements OnInit
   public selected_search_by:any='';
   public search_with_subject_occassion: boolean = false;
   public search_with_poem_type: boolean = false;
-
+  public is_anything_have_been_searched: boolean = false;
 
   public loginForm = this.fb.group({
 		selected_search_by:[''],
@@ -58,6 +58,7 @@ export class SearchFiltersAllRecentPage implements OnInit
     this.searched_filters = JSON.parse(localStorage.getItem('searched_filters_all_recent'));
     if(this.searched_filters)
     {
+      this.is_anything_have_been_searched=true;
       let translated = (this.searched_filters['translated']) ? this.searched_filters['translated'] : "";
       this.loginForm.controls['translated'].setValue(translated);
 
@@ -421,6 +422,11 @@ export class SearchFiltersAllRecentPage implements OnInit
 
   clearAppliedFilters()
   {
+    this.client.publishSomeDataWhenClearSearch({
+      is_search_clear: true
+    });//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
+
+    this.is_anything_have_been_searched=false;
     this.loginForm.reset();
     localStorage.removeItem('searched_filters_all_recent');
     let dataToSearch = {
@@ -439,8 +445,45 @@ export class SearchFiltersAllRecentPage implements OnInit
 		});
   }
 
+  LanguageHaveBeenSelected(ev)
+  {
+    let anything = ev.detail.value;
+    if(anything.length > 0)
+    {
+      this.is_anything_have_been_searched=true;
+    }
+  }//THIS IS JUST TO ENABLE/DISABLE SUBMIT BUTTON ONLY
+
+  ReciterHaveBeenSelected(ev)
+  {
+    let anything = ev.detail.value;
+    if(anything.length > 0)
+    {
+      this.is_anything_have_been_searched=true;
+    }
+  }//THIS IS JUST TO ENABLE/DISABLE SUBMIT BUTTON ONLY
+
+  PoetHaveBeenSelected(ev)
+  {
+    let anything = ev.detail.value;
+    if(anything.length > 0)
+    {
+      this.is_anything_have_been_searched=true;
+    }
+  }//THIS IS JUST TO ENABLE/DISABLE SUBMIT BUTTON ONLY
+
+  TranslatedHaveBeenSelected(ev)
+  { 
+    let anything = ev.detail.value;
+    if(anything!=undefined)
+    {
+      this.is_anything_have_been_searched=true;
+    }
+  }//THIS IS JUST TO ENABLE/DISABLE SUBMIT BUTTON ONLY
+
   SelectedOption(ev)
   {
+    this.is_anything_have_been_searched=true;
     this.selected_search_by = ev.detail.value;
     if(this.selected_search_by == 'by_poem_type')
     {

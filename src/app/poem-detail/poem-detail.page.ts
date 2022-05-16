@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Media, MediaObject } from '@awesome-cordova-plugins/media/ngx';
-import { LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
+import { Platform, LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { PoemFeedbackPage } from '../poem-feedback/poem-feedback.page';
@@ -9,6 +9,10 @@ import { ClientService } from '../providers/client.service';
 import { OfflineService } from '../providers/offline.service';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { PlayMediaPage } from '../play-media/play-media.page';
+import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 
 @Component({
   selector: 'app-poem-detail',
@@ -38,7 +42,11 @@ export class PoemDetailPage
   public queryString: any=[];
   public does_poem_already_made_offline: boolean = false;
   public does_poem_already_made_bookmark: boolean = false;
-  constructor(private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController)
+  private fileTransfer: FileTransferObject;
+  public currentPlatform:any='';
+  public PDFFileToBeShared:any=''; 
+  public downloadPath:any=''; 
+  constructor(private platform: Platform, private filePath: FilePath, private file: File, private transfer: FileTransfer, private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController, private androidPermissions: AndroidPermissions)
   { 
     //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
   }
@@ -314,72 +322,96 @@ export class PoemDetailPage
     console.log(this.togglePlayerInFullHeight);
   }
 
-  async ShareOnSocialNetwork(poem_id,poem_nm)
+  async ShareURLOnSocialNetwork(poem_id,poem_nm)
   {
     let message = '';
     let url_of_open = "https://app.thehaydariproject.com/poem/"+poem_id;
     message += "Have you read this poem ?";
     this.client.ShareOnSocialNetwork("none","Share","none",message,null,null,url_of_open);
-    /*
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'SHARE WITH',
-      cssClass: 'social-action-sheet',
-      buttons: [
-        {
-          text: "Share on Facebook",
-          role: "destructive",
-          cssClass: " action-facebook",
-          icon: "logo-facebook",
-          handler: () => {
-  
-            this.client.ShareOnSocialNetwork("com.facebook.katana","Facebook","facebook",
-            message,null,null,url_of_open);
-          }
-        },
-        {
-          text: "Share on WhatsApp",
-          role: "destructive",
-          cssClass: " action-whatsup",
-          icon: "logo-whatsapp",
-          handler: () => {
-            this.client.ShareOnSocialNetwork("com.whatsapp","Whatsapp","whatsapp",
-            message,null,null,url_of_open);
-          }
-        },
-        {
-          text: "Share on Instagram",
-          role: "destructive",
-          cssClass: " action-instagram",
-          icon: "logo-instagram",
-          handler: () => {
-            this.client.ShareOnSocialNetwork("com.instagram.android","Instagram","instagram",
-            message,null,null,url_of_open);
-          }
-        },
-        {
-          text: "Share on Twitter",
-          role: "destructive",
-          cssClass: " action-twitter",
-          icon: "logo-twitter",
-          handler: () => {
-            this.client.ShareOnSocialNetwork("com.twitter.android","Twitter","twitter",
-            message,null,null,url_of_open);
-          }
-        },
-        {
-          text: "More share options",
-          role: "destructive",
-          cssClass: " action-regular",
-          icon: "share",
-          handler: () => {
-            this.client.ShareOnSocialNetwork("none","Share","none",
-            message,null,null,url_of_open);
-          }
-        }
-    ]
+  }
+
+  async SharePDFOnSocialNetwork(poem_id,poem_url)
+  {
+    //LOADER
+    const loadingDownloadingPDF = await this.loadingCtrl.create({
+      spinner: null,
+      //duration: 5000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
     });
-    await actionSheet.present();
-    */
+    await loadingDownloadingPDF.present();
+    //LOADER
+    this.PDFFileToBeShared='';
+    await this.platform.ready().then(async () => 
+    {
+      this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";
+    });
+    this.fileTransfer = this.transfer.create();
+    let fileName = this.client.generateRandomString(5);
+    this.downloadPath = "";
+    if(this.currentPlatform == "android")
+    {
+      this.downloadPath = this.file.externalRootDirectory+"/Download/"+fileName+".pdf";      
+    }
+    else
+    {
+      this.downloadPath = this.file.externalRootDirectory+fileName+".pdf";
+      this.PDFFileToBeShared = this.downloadPath;
+    }
+    await this.fileTransfer.download(encodeURI(poem_url),this.downloadPath,true).then(result => 
+    {
+      loadingDownloadingPDF.dismiss();//DISMISS LOADER
+      this.PDFFileToBeShared = result.toURL();
+      console.log('download completed: ' + result.toURL());
+    },(error) => 
+    {  
+      loadingDownloadingPDF.dismiss();//DISMISS LOADER
+      //here logging our error its easier to find out what type of error occured.  
+      console.log('download failed: ' + JSON.stringify(error));  
+    });    
+    //COULD HELP::https://stackoverflow.com/questions/65768839/get-selected-file-size-from-chooser-plugin-cordova-ionic
+
+    await this.platform.ready().then(async () => 
+    {
+      if(this.platform.is("android") == true)
+      {
+        await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(result => 
+        {
+          if(result.hasPermission) 
+          {
+            this.ShareMediaOnSocialNetwork();
+          } 
+          else 
+          {
+            this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(() => 
+            {
+              this.ShareMediaOnSocialNetwork();
+            },
+            error => 
+            {
+              alert("2="+error)
+            });
+          }
+        },error => 
+        {
+          alert("1="+error);
+        });
+      }
+      else 
+      {
+        this.ShareMediaOnSocialNetwork();
+      }
+    });
+  }
+
+  async ShareMediaOnSocialNetwork()
+  {
+    let message = '';
+    let url_of_open = this.PDFFileToBeShared;
+    console.log("Download Path Device",url_of_open);
+    message += "Have you read this poem ?";
+    this.client.ShareOnSocialNetwork("none","Share","none",message,null,url_of_open,null);
   }
 
   async makeItOffLine(poemObject)

@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'poem-detail',
+    path: 'poem-detail/:poem_id',
     loadChildren: () => import('./poem-detail/poem-detail.module').then( m => m.PoemDetailPageModule)
   },
   {

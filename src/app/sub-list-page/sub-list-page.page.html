@@ -16,6 +16,14 @@
 </ion-header>
 
 <ion-content>
+	<!--REFRESHER-->
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content
+		  pullingIcon="arrow-dropdown"		  
+		  refreshingSpinner="circles">
+		</ion-refresher-content>
+	</ion-refresher>
+	<!--REFRESHER-->
 	<div class="mainContent">
 		<!--<div class="src-box">
 			<form #searchPoemForm="ngForm" novalidate class="search-form">

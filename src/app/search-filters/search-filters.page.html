@@ -78,7 +78,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Subject/Occasion</ion-label>
-						<ion-select formControlName="subject_occassion" multiple="true">
+						<ion-select formControlName="subject_occassion" multiple="true" (ionChange)="SelectedSubjectOccassion($event)">
 							<ion-select-option *ngFor="let SubjectOccasion of resultSubjectOccasion;" value="{{SubjectOccasion.id}}">{{SubjectOccasion.subjectName}}</ion-select-option>
 						</ion-select>
 					</ion-item>					
@@ -88,7 +88,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Poem Type</ion-label>
-						<ion-select formControlName="poem_type" multiple="true">
+						<ion-select formControlName="poem_type" multiple="true" (ionChange)="SelectedSubjectOccassion($event)">
 							<ion-select-option *ngFor="let PoemType of resultPoemTypes;" value="{{PoemType.id}}">{{PoemType.PoemTypeName}}</ion-select-option>
 						</ion-select>
 					</ion-item>										
@@ -98,7 +98,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Language</ion-label>
-						<ion-select formControlName="languages" multiple="true">
+						<ion-select formControlName="languages" multiple="true" (ionChange)="LanguageHaveBeenSelected($event)">
 							<ion-select-option *ngFor="let Language of resultLanguages;" value="{{Language.id}}">{{Language.LanguageName}}</ion-select-option>
 						</ion-select>
 					</ion-item>										
@@ -108,7 +108,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Reciter</ion-label>
-						<ion-select formControlName="reciters" multiple="true">
+						<ion-select formControlName="reciters" multiple="true" (ionChange)="ReciterHaveBeenSelected($event)">
 							<ion-select-option *ngFor="let Reciters of resultReciters;" value="{{Reciters.id}}">{{Reciters.ReciterName}}</ion-select-option>
 						</ion-select>
 					</ion-item>										
@@ -118,7 +118,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Poet</ion-label>
-						<ion-select formControlName="poets" multiple="true">
+						<ion-select formControlName="poets" multiple="true" (ionChange)="PoetHaveBeenSelected($event)">
 							<ion-select-option *ngFor="let Poets of resultPoets;" value="{{Poets.id}}">{{Poets.PoetName}}</ion-select-option>
 						</ion-select>
 					</ion-item>										
@@ -128,7 +128,7 @@
 				<ion-list class="filter-topic-item">
 					<ion-item class="filter-topic-title">
 						<ion-label position="stacked">Translated</ion-label>
-						<ion-select formControlName="translated">
+						<ion-select formControlName="translated" (ionChange)="TranslatedHaveBeenSelected($event)">
 							<ion-select-option value="yes">Yes</ion-select-option>
 							<ion-select-option value="no">No</ion-select-option>
 						</ion-select>
@@ -136,7 +136,7 @@
 				</ion-list>
 			</div>
 			<div class="filter-src-btn">
-				<ion-button type="submit">Search</ion-button>
+				<ion-button type="submit" [disabled]="!loginForm.valid || is_anything_have_been_searched != true">Search</ion-button>
 				<ion-button color="danger" (click)="clearAppliedFilters()">Clear</ion-button>
 			</div>
 		</form>		

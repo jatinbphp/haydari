@@ -17,7 +17,7 @@ export class ClientService
 	public serverResponse: any=[];
 	private fooSubjectWhenlOGIN = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 	private fooSubjectWhenPoemTypeClickedFromMenu = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
-
+	private fooSubjectWhenClearSearch = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
 	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router, private socialSharing: SocialSharing) 
 	{ }
 
@@ -38,6 +38,14 @@ export class ClientService
 	{
 		return this.fooSubjectWhenPoemTypeClickedFromMenu;
 	}//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
+
+	publishSomeDataWhenClearSearch(data: any) {
+        this.fooSubjectWhenClearSearch.next(data);
+    }//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
+
+    getObservableWhenClearSearch(): Subject<any> {
+        return this.fooSubjectWhenClearSearch;
+	}//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
 
   	getHeaderOptions(): any 
 	{	

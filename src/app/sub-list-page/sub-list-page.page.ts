@@ -119,6 +119,13 @@ export class SubListPagePage implements OnInit
   { 
     localStorage.removeItem('searched_filters');
     this.keyboard.hideFormAccessoryBar(false);
+    this.client.getObservableWhenClearSearch().subscribe((dataClearSearch) => 
+    {
+      this.is_searched_filters_applied=false;
+      localStorage.removeItem('searched_filters');
+      this.shoeHomeContent();
+      console.log('Search is cleared', dataClearSearch);
+    });//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
     this.client.getObservableWhenPoemTypeClickedFromMenu().subscribe(async (data) => 
     {
       console.log(data);
@@ -192,9 +199,13 @@ export class SubListPagePage implements OnInit
   }
 
   ngOnInit()
-  { }
+  { 
+    this.shoeHomeContent();
+  }
   
   async ionViewWillEnter()
+  { }
+  async shoeHomeContent()
   {
     this.searched_text='';
     this.is_searched=false;
@@ -216,6 +227,7 @@ export class SubListPagePage implements OnInit
     this.poem_or_subject_occassion=this.queryStringData['poem_or_subject_occassion'];
 
     //IF ALREADY SEARCHED FOUNDS
+    this.searched_filters=[];
     this.searched_filters = JSON.parse(localStorage.getItem('searched_filters'));    
     //IF ALREADY SEARCHED FOUNDS
 
@@ -518,7 +530,7 @@ export class SubListPagePage implements OnInit
   {
     this.searched_text='';
     this.is_searched=false;
-    this.ionViewWillEnter();
+    this.shoeHomeContent();
   }
 
   ionViewDidLeave()
@@ -587,7 +599,10 @@ export class SubListPagePage implements OnInit
           translated:translated
         }
       }
-      this.searchWithAdvanceFilters(advanceSearchObj);
+      if(localStorage.getItem('searched_filters'))
+      {
+        this.searchWithAdvanceFilters(advanceSearchObj);
+      }
       //console.log(advanceSearchObj);
     });
 		return await modal.present();
@@ -631,5 +646,14 @@ export class SubListPagePage implements OnInit
         console.log();
       });
     }
+  }
+
+  doRefresh(ev)
+  {
+    setTimeout(() => 
+    {
+      this.shoeHomeContent();
+      ev.target.complete();
+    }, 2000);
   }
 }
