@@ -356,7 +356,7 @@ export class PoemDetailPage
     }
     else
     {
-      this.downloadPath = this.file.externalRootDirectory+fileName+".pdf";
+      this.downloadPath = this.file.documentsDirectory+fileName+".pdf";
       this.PDFFileToBeShared = this.downloadPath;
     }
     await this.fileTransfer.download(encodeURI(poem_url),this.downloadPath,true).then(result => 
