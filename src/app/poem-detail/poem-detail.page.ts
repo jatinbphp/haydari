@@ -45,11 +45,11 @@ export class PoemDetailPage
   private fileTransfer: FileTransferObject;
   public currentPlatform:any='';
   public PDFFileToBeShared:any=''; 
-  public downloadPath:any=''; 
+  public downloadPDFPath:any='';
+  public MP3FileToBeSave:any=''; 
+  public downloadMP3Path:any=''; 
   constructor(private platform: Platform, private filePath: FilePath, private file: File, private transfer: FileTransfer, private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController, private androidPermissions: AndroidPermissions)
-  { 
-    //this.mediaFile = this.media.create('https://haydari.ecnetsolutions.dev/uploads/mp3File/1639467512azan1.mp3');
-  }
+  {}
 
   async ngOnInit()
   {}
@@ -100,7 +100,8 @@ export class PoemDetailPage
       if(this.resultPoemsDetailObject['poemsDetail'].length > 0)
       {
         this.MP3Link=(this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link']) ? this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link'] : "";
-        this.mediaFile = this.media.create(this.MP3Link);
+        //this.mediaFile = this.media.create(this.MP3Link);WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
+        //localStorage.setItem("MP3Link",this.MP3Link);
       }      
       //console.log("MP3Link",this.MP3Link);
       //console.log("Object",this.resultPoemsDetailObject);
@@ -152,9 +153,12 @@ export class PoemDetailPage
     });
     //CHECK IF POEM ALREADY MADE BOOKMARK
   }
-
+  
+  /*
+  WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
   playAudio()
-  {
+  { 
+    BEFORE WE WERE PLAYING FROM HERE NOW WE ARE PLAYING FROM COMPONENT STARTS
     if(this.mediaFileCurrentPosition > 0)
     {
       //console.log("SEEK");
@@ -164,12 +168,14 @@ export class PoemDetailPage
     }
     else 
     {
-      //console.log("PLAY");
+      console.log("PLAY");
       this.mediaFile.play();
       this.isAudioPlayed=true;
     }
+    BEFORE WE WERE PLAYING FROM HERE NOW WE ARE PLAYING FROM COMPONENT ENDS
+    
   }
-
+  
   pauseAudio()
   {
     //console.log("PAUSE");
@@ -181,6 +187,8 @@ export class PoemDetailPage
       console.log(this.mediaFileCurrentPosition);
     });
   }
+  WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
+  */
 
   async showMyProfile()
   {
@@ -278,7 +286,7 @@ export class PoemDetailPage
 
   ionViewDidLeave()
   {
-    this.mediaFile.release();
+    //this.mediaFile.release();WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
   }
   
   async playMediaInPOPUP(poem_id)
@@ -343,23 +351,23 @@ export class PoemDetailPage
     await loadingDownloadingPDF.present();
     //LOADER
     this.PDFFileToBeShared='';
+    this.downloadPDFPath = "";
     await this.platform.ready().then(async () => 
     {
       this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";
     });
     this.fileTransfer = this.transfer.create();
     let fileName = this.client.generateRandomString(5);
-    this.downloadPath = "";
     if(this.currentPlatform == "android")
     {
-      this.downloadPath = this.file.externalRootDirectory+"/Download/"+fileName+".pdf";      
+      this.downloadPDFPath = this.file.externalRootDirectory+"/Download/"+fileName+".pdf";      
     }
     else
     {
-      this.downloadPath = this.file.documentsDirectory+fileName+".pdf";
-      this.PDFFileToBeShared = this.downloadPath;
+      this.downloadPDFPath = this.file.documentsDirectory+fileName+".pdf";
+      this.PDFFileToBeShared = this.downloadPDFPath;
     }
-    await this.fileTransfer.download(encodeURI(poem_url),this.downloadPath,true).then(result => 
+    await this.fileTransfer.download(encodeURI(poem_url),this.downloadPDFPath,true).then(result => 
     {
       loadingDownloadingPDF.dismiss();//DISMISS LOADER
       this.PDFFileToBeShared = result.toURL();
@@ -462,6 +470,46 @@ export class PoemDetailPage
     let actionToTake = (what_to_do == 1) ? "insert" : "delete";
     if(actionToTake == "insert")
     {
+      //DOWNLOADING MP3 TO THE DEVICE STARTS
+      //LOADER
+      const loadingDownloadingMP3 = await this.loadingCtrl.create({
+        spinner: null,
+        //duration: 5000,
+        message: 'Please wait...',
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      await loadingDownloadingMP3.present();
+      //LOADER
+      this.MP3FileToBeSave='';
+      this.downloadMP3Path = "";
+      await this.platform.ready().then(async () => 
+      {
+        this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";
+      });
+      this.fileTransfer = this.transfer.create();
+      let fileName = this.client.generateRandomString(5);
+      if(this.currentPlatform == "android")
+      {
+        this.downloadMP3Path = this.file.externalRootDirectory+"/Download/"+fileName+".mp3";      
+      }
+      else
+      {
+        this.downloadMP3Path = this.file.documentsDirectory+fileName+".mp3";
+        this.MP3FileToBeSave = this.downloadMP3Path;
+      }
+      await this.fileTransfer.download(encodeURI(poemObject['MP3Link']),this.downloadMP3Path,true).then(result => 
+      {
+        loadingDownloadingMP3.dismiss();//DISMISS LOADER
+        this.MP3FileToBeSave = result.toURL();
+        console.log('download completed: ' + result.toURL());
+      },(error) => 
+      {  
+        loadingDownloadingMP3.dismiss();//DISMISS LOADER
+        //here logging our error its easier to find out what type of error occured.  
+        console.log('download failed: ' + JSON.stringify(error));  
+      });
+      //DOWNLOADING MP3 TO THE DEVICE ENDS
       //LOADER
       const loadingPoemOffline = await this.loadingCtrl.create({
         spinner: null,
@@ -481,6 +529,7 @@ export class PoemDetailPage
         poemObject['poemsLine']=JSON.stringify([]);
       }
       poemObject['FromTableNM']="Poems";
+      poemObject['MP3Link']=(this.MP3FileToBeSave) ? this.MP3FileToBeSave : null;
       await this.offline.addPoem(poemObject).then(result => 
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
@@ -521,6 +570,47 @@ export class PoemDetailPage
         }
         else
         {
+          //DOWNLOADING MP3 TO THE DEVICE STARTS
+          //LOADER
+          const loadingDownloadingMP3 = await this.loadingCtrl.create({
+            spinner: null,
+            //duration: 5000,
+            message: 'Please wait...',
+            translucent: true,
+            cssClass: 'custom-class custom-loading'
+          });
+          await loadingDownloadingMP3.present();
+          //LOADER
+          this.MP3FileToBeSave='';
+          this.downloadMP3Path = "";
+          await this.platform.ready().then(async () => 
+          {
+            this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";
+          });
+          this.fileTransfer = this.transfer.create();
+          let fileName = this.client.generateRandomString(5);
+          if(this.currentPlatform == "android")
+          {
+            this.downloadMP3Path = this.file.externalRootDirectory+"/Download/"+fileName+".mp3";      
+          }
+          else
+          {
+            this.downloadMP3Path = this.file.documentsDirectory+fileName+".mp3";
+            this.MP3FileToBeSave = this.downloadMP3Path;
+          }
+          await this.fileTransfer.download(encodeURI(poemObject['MP3Link']),this.downloadMP3Path,true).then(result => 
+          {
+            loadingDownloadingMP3.dismiss();//DISMISS LOADER
+            this.MP3FileToBeSave = result.toURL();
+            console.log('download completed: ' + result.toURL());
+          },(error) => 
+          {  
+            loadingDownloadingMP3.dismiss();//DISMISS LOADER
+            //here logging our error its easier to find out what type of error occured.  
+            console.log('download failed: ' + JSON.stringify(error));  
+          });
+          //DOWNLOADING MP3 TO THE DEVICE ENDS
+
           //LOADER
           const loadingPoemBookmark = await this.loadingCtrl.create({
             spinner: null,
@@ -540,6 +630,7 @@ export class PoemDetailPage
             poemObject['poemsLine']=JSON.stringify([]);
           }
           poemObject['FromTableNM']="bookmarks";
+          poemObject['MP3Link']=(this.MP3FileToBeSave) ? this.MP3FileToBeSave : null;
           await this.offline.addBookmark(poemObject).then(result => 
           {
             loadingPoemBookmark.dismiss();//DISMISS LOADER
@@ -609,6 +700,26 @@ export class PoemDetailPage
       
     });//TO CHECK COLUMN FromTableNM EXISTS IN Poems table if not then add
     
+    //ALTER TABLE FOR MP3 STARTS
+    await this.offline.getData('SELECT MP3Link FROM Poems LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      //COLUMN EXISTS :: NOT NEED TO DO ANYTHING
+    },async (error) => 
+    {
+      //console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `Poems` ADD `MP3Link` text CHARACTER').then(resultAlter => 
+      {
+        //console.log("Field altered - 1");
+        //COLUMN ADDED :: NOT NEED TO DO ANYTHING
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        //console.log("column created 1 error",error);
+      });
+    });//TO CHECK COLUMN MP3Link EXISTS IN Poems table if not then add
+    //ALTER TABLE FOR MP3 ENDS
+
     await this.offline.getData('SELECT FromTableNM FROM bookmarks LIMIT 1',[]).then((resultToAlter:any) => 
     {
       //COLUMN EXISTS :: NOT NEED TO DO ANYTHING
@@ -625,7 +736,27 @@ export class PoemDetailPage
         //COLUMN CREATING ERROR
         //console.log("column created 2 error",error);
       });
-    });//TO CHECK COLUMN FromTableNM EXISTS IN bookmarks table if not then add    
+    });//TO CHECK COLUMN FromTableNM EXISTS IN bookmarks table if not then add 
+    
+    //ALTER TABLE FOR MP3 STARTS
+    await this.offline.getData('SELECT MP3Link FROM bookmarks LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      //COLUMN EXISTS :: NOT NEED TO DO ANYTHING
+    },async (error) => 
+    {
+      console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `bookmarks` ADD `MP3Link` VARCHAR(255) NULL').then(resultAlter => 
+      {
+        //console.log("Field altered - 1");
+        //COLUMN ADDED :: NOT NEED TO DO ANYTHING
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        //console.log("column created 1 error",error);
+      });
+    });//TO CHECK COLUMN MP3Link EXISTS IN bookmarks table if not then add
+    //ALTER TABLE FOR MP3 ENDS
     //ALTER TABLE
   }
 }

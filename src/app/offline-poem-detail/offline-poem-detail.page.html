@@ -8,9 +8,15 @@
 </ion-header>
 
 <ion-content>
-	<div class="mainContent">
+	<div class="mainContent" [ngClass]="{'has-mp3' : has_mp3 == true, 'has-not-mp3' : has_mp3 == false}">
 		<div class="pg-title-main">
-			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>			
+			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>	
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
+				<ion-icon name="pause-outline"></ion-icon>
+			</ion-button>
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()"><!--BEFORE::playMediaInPOPUP(resultPoemsDetail.id)-->
+				<ion-icon name="play-outline"></ion-icon>
+			</ion-button>		
 		</div>		
 		<div class="list-of-lines" *ngIf="resultPoemsDetailLines.length > 0">
 			<div class="item-of-line" *ngFor="let line of resultPoemsDetailLines;let l = index;">

@@ -273,6 +273,23 @@ export class OfflineService
     });
   }
 
+  insertData(query,data) 
+  {
+  	return new Promise((resolve, reject) => 
+    {
+      this.storage.open().then(() => 
+      { 
+        this.storage.executeSql(query, data).then((res) => 
+        {
+          resolve(res);
+        }).catch((err) => 
+        {
+          reject(err);
+        });
+      });
+    })  
+  }
+
   updateData(query,data) 
   {
   	 return new Promise((resolve,reject)=> 

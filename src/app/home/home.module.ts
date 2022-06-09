@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { HomePageRoutingModule } from './home-routing.module';
-
+//import { PlaymusicComponent } from "../components/playmusic/playmusic.component";
 @NgModule({
   imports: [
     IonicModule,
@@ -16,6 +15,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     ExploreContainerComponentModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage]//,PlaymusicComponent::PUT IT HERE WHEN ENABLE PlaymusicComponent
 })
 export class HomePageModule {}

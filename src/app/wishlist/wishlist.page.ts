@@ -86,6 +86,7 @@ export class WishlistPage
             ReciterName:this.resultDataBookMark[p]['ReciterName'],
             PoetName:this.resultDataBookMark[p]['PoetName'],
             FromTableNM:this.resultDataBookMark[p]['FromTableNM'],
+            MP3Link:this.resultDataBookMark[p]['MP3Link'],
           }
           this.limitedResultDataBookMark.push(objPoemLimited);
         }

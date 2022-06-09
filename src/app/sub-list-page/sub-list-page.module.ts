@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SubListPagePageRoutingModule } from './sub-list-page-routing.module';
 import { SubListPagePage } from './sub-list-page.page';
-
+//import { PlaymusicComponent } from "../components/playmusic/playmusic.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +13,6 @@ import { SubListPagePage } from './sub-list-page.page';
     IonicModule,
     SubListPagePageRoutingModule
   ],
-  declarations: [SubListPagePage]
+  declarations: [SubListPagePage]//,PlaymusicComponent::PUT IT HERE WHEN ENABLE PlaymusicComponent
 })
 export class SubListPagePageModule {}

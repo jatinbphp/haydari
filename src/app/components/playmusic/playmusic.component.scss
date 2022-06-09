@@ -1,0 +1,59 @@
+
+.player{
+    
+    .player-control {
+        h2 {
+            width: 100%;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 28px;
+            font-family: var(--font-Poppins-SemiBold);
+            color: var(--White);
+            text-transform: capitalize;
+            padding: 0px 6px 0px 0px;
+            margin: 0px;
+            @media(max-width:374px) {
+                font-size: 22px;
+                line-height: 24px;
+            }
+        }
+        ion-button {
+            &.play-btn {
+                --background-activated: #c5cfba;
+                --background-focused: #c5cfba;
+                --background-hover: #c5cfba;
+                --background-activated-opacity: 1;
+                --background-focused-opacity: 1;
+                --background-hover-opacity: 1;
+                --color-activated: var(--Black);
+                --color-focused: var(--Black);
+                --color-hover: var(--Black);
+                --background: #c5cfba;
+                --color: var(--Black);
+                --border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
+                margin: 0px;
+                @media(max-width:374px) {
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                }
+                // padding: 0;
+                // --padding-start: 0;
+                // --padding-end: 0;
+                ion-icon {
+                    width: 100%;
+                    height: 100%;
+                    min-width: 25px;
+                    min-height: 10px;
+                    @media(max-width:374px) {
+                        min-width: 21px;
+                        min-height: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -18,6 +18,8 @@ export class ClientService
 	private fooSubjectWhenlOGIN = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
 	private fooSubjectWhenPoemTypeClickedFromMenu = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF POEM TYPE CLICKED FROM MENU
 	private fooSubjectWhenClearSearch = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
+	private fooSubjectWhenOnLine = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN
+	private fooSubjectWhenAudioPlayed = new Subject<any>();//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
 	constructor(public http: HttpClient, private alertCtrl: AlertController, public router: Router, private socialSharing: SocialSharing) 
 	{ }
 
@@ -46,6 +48,22 @@ export class ClientService
     getObservableWhenClearSearch(): Subject<any> {
         return this.fooSubjectWhenClearSearch;
 	}//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
+
+	publishSomeDataWhenOnLine(data: any) {
+        this.fooSubjectWhenOnLine.next(data);
+    }//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN
+
+    getObservableWhenOnLine(): Subject<any> {
+        return this.fooSubjectWhenOnLine;
+	}//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN
+
+	publishSomeDataWhenAudioPlayed(data: any) {
+        this.fooSubjectWhenAudioPlayed.next(data);
+    }//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
+
+    getObservableWhenAudioPlayed(): Subject<any> {
+        return this.fooSubjectWhenAudioPlayed;
+	}//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
 
   	getHeaderOptions(): any 
 	{	

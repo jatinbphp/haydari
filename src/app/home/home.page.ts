@@ -6,7 +6,7 @@ import { OfflineService } from '../providers/offline.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
-
+import { MediaObject } from '@awesome-cordova-plugins/media/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -23,9 +23,19 @@ export class HomePage
   public resultLanguages:any=[];
   public searched_text:string='';
   public showAllSubjects:boolean=false;
+  public is_network_connected:boolean=false;
+  public MP3Link:string='';
+
+  public isAudioPlayedComponent: boolean = false;
+  public mediaFileComponent: MediaObject;
   constructor(public keyboard:Keyboard, public fb: FormBuilder, public offline: OfflineService, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
   { 
     this.keyboard.hideFormAccessoryBar(false);
+    this.client.getObservableWhenOnLine().subscribe((data) => {
+      this.is_network_connected = data.is_network_connected; 
+      this.ngOnInit();     
+      console.log('Data received', data);
+    });//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN
   }
 
   async ngOnInit() 
@@ -162,6 +172,18 @@ export class HomePage
     /*LANGUAGES*/
   }
 
+  async ionViewWillEnter()
+  {
+    this.MP3Link = localStorage.getItem('MP3LinkComponent');
+    await this.offline.getData('SELECT FromTableNM FROM Poems LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("JUST TO INITILIZE TABLE");
+    },async (error) => 
+    {
+      console.log("ERROR-JUST TO INITILIZE TABLE",error);
+    });//JUST TO INITILIZE TABLE ONLY
+  }
+
   library()
   {
     //BEFORE::this.client.router.navigateByUrl('/tabs/search');
@@ -288,6 +310,25 @@ export class HomePage
 
     });//TO CHECK COLUMN FromTableNM EXISTS IN Poems table if not then add
     
+    //ALTER TABLE FOR MP3 STARTS
+    await this.offline.getData('SELECT MP3Link FROM Poems LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("Field exists - 1");
+    },async (error) => 
+    {
+      console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `Poems` ADD `MP3Link` text CHARACTER').then(resultAlter => 
+      {
+        console.log("Field altered - 1");
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        console.log("column created 1 error",error);
+      });
+    });//TO CHECK COLUMN MP3Link EXISTS IN Poems table if not then add
+    //ALTER TABLE FOR MP3 ENDS
+
     await this.offline.getData('SELECT FromTableNM FROM bookmarks LIMIT 1',[]).then(async (resultToAlter:any) => 
     {
       console.log("Field exists - 2");
@@ -327,6 +368,43 @@ export class HomePage
         console.log(err);
       });
     });//TO CHECK COLUMN FromTableNM EXISTS IN bookmarks table if not then add    
+    
+    //ALTER TABLE FOR MP3 STARTS
+    await this.offline.getData('SELECT MP3Link FROM bookmarks LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("Field exists - 1");
+    },async (error) => 
+    {
+      console.log("ERROR-1",error);
+      //NO COLUMN FOUND ADD TO THE TABLE
+      await this.offline.alterTable('ALTER TABLE `bookmarks` ADD `MP3Link` VARCHAR(255) NULL').then(resultAlter => 
+      {
+        console.log("Field altered - 1");
+      },error => 
+      {
+        //COLUMN CREATING ERROR
+        console.log("column created 1 error",error);
+      });
+    });//TO CHECK COLUMN MP3Link EXISTS IN bookmarks table if not then add
+    //ALTER TABLE FOR MP3 ENDS
     //ALTER TABLE
+    
+    await this.offline.getData('SELECT id FROM mediaobject LIMIT 1',[]).then(async (resultToAlter:any) => 
+    {
+      console.log("just to initilize table mediaobject");
+    },async (error) => 
+    {
+      console.log("ERROR-just to initilize table mediaobject",error);
+      let queryToExecute_1="CREATE TABLE `mediaobject` (id INTEGER PRIMARY KEY AUTOINCREMENT,mediaobject blob)";
+      await this.offline.createTable(queryToExecute_1).then(result => 
+      {
+        console.log("mediaobject table created");
+      }).
+      catch(err=>
+      {
+        console.log("error creating table",err);
+      });
+    });//JUST TO INITILIZE TABLE OR CREATING
+    
   }
 }

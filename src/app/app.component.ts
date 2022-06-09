@@ -23,7 +23,8 @@ export class AppComponent
   public appPages:any=[];  
   public token: string;
   public is_user_login: boolean = false;
-  public is_network_connected: boolean = true;
+  public is_network_connected: boolean = false;
+  public available_network_type:any='';
 
   //SETUP PUSH
   public device_info: any=[];
@@ -81,24 +82,23 @@ export class AppComponent
         localStorage.setItem('device_info',JSON.stringify(objDevice));
       }
       //SETUP PUSH
-      let disconnectSubscription = this.network.onDisconnect().subscribe(async () => 
+      this.network.onDisconnect().subscribe(async () => 
       {
-        //console.log('network was disconnected', disconnectSubscription);
-        this.client.showMessage('network was disconnected');
         this.is_network_connected = false;
-        this.initializeAPP();
+        localStorage.clear();
+        this.client.showMessage('network was disconnected');
+        await this.initializeAPP();
         this.client.router.navigate(['/tabs/offline']);
       });
       
-      let connectSubscription = this.network.onConnect().subscribe(async () => 
+      this.network.onConnect().subscribe(async () => 
       {
-        console.log('network connected!',connectSubscription);
         this.client.showMessage('network connected!');
         this.is_network_connected = true;
-        this.initializeAPP();
-        this.client.router.navigate(['/tabs/home']);
+        await this.initializeAPP();
+        //this.client.router.navigate(['/tabs/home']);
       });
-      this.initializeAPP();
+      await this.initializeAPP();
       console.log("Check Network");
     });
     
@@ -114,56 +114,76 @@ export class AppComponent
     });//THIS OBSERVABLE IS USED TO KNOW IS USER LOGGEDIN
   }
 
+  async checkNetworkType()
+  {
+    this.available_network_type='';
+    this.is_network_connected=false;
+    this.available_network_type = (this.network.type!='none') ? this.network.type : null;
+    this.is_network_connected = (this.available_network_type != null) ? true : false;
+    if(this.is_network_connected == true)
+    {
+      this.client.publishSomeDataWhenOnLine({
+        is_network_connected: true
+      });//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN 
+      this.client.router.navigate(['/tabs/home']);
+    }
+  }
+
   async initializeAPP()
   {
+    await this.checkNetworkType();
+    console.log("Network Type",this.available_network_type);
+    console.log("Network Status",this.is_network_connected);
     this.token=localStorage.getItem('token');
     this.appPages=[];
     this.appPages.push({id:0,title:'Home',shouldFunction:0,to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,url: '/tabs/home'});
     /*POEM TYPE*/
-    await this.client.getPoemTypes().then(result => 
-    {	
-      this.resultPoemTypes=result; 
-      if(this.resultPoemTypes.length > 0)
-      { 
-        this.resultPoemTypesExpandable=[];
-        for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
-        {
-          let checkSlashInString = this.resultPoemTypes[p]['PoemTypeName'].replace("/ ", "/");
-          let objPoemType = 
-          {
-            id:this.resultPoemTypes[p]['id'],
-            title:checkSlashInString,
-            shouldFunction:1,
-            to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
-            url:''
-          }
-          let objPoemTypeExpandable = 
-          {
-            id:this.resultPoemTypes[p]['id'],
-            title:checkSlashInString,
-            shouldFunction:1,
-            to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
-            url:'',
-            expanded:false
-          }
-          this.resultPoemTypesExpandable.push(objPoemTypeExpandable);
-          this.appPages.push(objPoemType);
-        }
-        console.log(this.resultPoemTypesExpandable);
-      }
-      
-    },
-    error => 
+    if(this.is_network_connected == true)
     {
-      console.log();
-    });
+      await this.client.getPoemTypes().then(result => 
+      {	
+        this.resultPoemTypes=result; 
+        if(this.resultPoemTypes.length > 0)
+        { 
+          this.resultPoemTypesExpandable=[];
+          for(let p = 0 ; p < this.resultPoemTypes.length; p ++)
+          {
+            let checkSlashInString = this.resultPoemTypes[p]['PoemTypeName'].replace("/ ", "/");
+            let objPoemType = 
+            {
+              id:this.resultPoemTypes[p]['id'],
+              title:checkSlashInString,
+              shouldFunction:1,
+              to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
+              url:''
+            }
+            let objPoemTypeExpandable = 
+            {
+              id:this.resultPoemTypes[p]['id'],
+              title:checkSlashInString,
+              shouldFunction:1,
+              to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
+              url:'',
+              expanded:false
+            }
+            this.resultPoemTypesExpandable.push(objPoemTypeExpandable);
+            this.appPages.push(objPoemType);
+          }
+          console.log(this.resultPoemTypesExpandable);
+        }
+      },
+      error => 
+      {
+        console.log();
+      });
+    }
     /*POEM TYPE*/
     let objOtherAction=[
       {
         id:0,
         title:'My Bookmarks',
         shouldFunction:0,
-        to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
+        to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
         url: '/tabs/wishlist'
       },
       {
@@ -191,8 +211,7 @@ export class AppComponent
         id:0,
         title:'Offline',
         shouldFunction:0,
-        //to_show_when_network_is_on:(this.is_network_connected == false) ? 1 : 0,//BEFORE::
-        to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,//BEFORE::
+        to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
         url: '/tabs/offline'
       },/*
       {
@@ -217,7 +236,8 @@ export class AppComponent
     //SETUP PUSH
     this.device_info = localStorage.getItem('device_info');
     this.device_info = (this.device_info) ? JSON.parse(this.device_info) : null;
-    if(this.device_info['device_id']!='' && this.device_info['device_type']!='' && this.device_info['device_token']!='')
+    //if(this.device_info['device_id']!='' && this.device_info['device_type']!='' && this.device_info['device_token']!='')
+    if(this.is_network_connected == true && this.device_info != null)
     {
       let dataToken = {
         device_id:this.device_info['device_id'],

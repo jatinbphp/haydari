@@ -17,7 +17,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 export class SubListPagePage implements OnInit 
 {
   @ViewChild('ionContent') ionContent: IonContent;
-
+  public MP3Link:string='';
   public queryString: any=[];
   public queryStringData: any=[];
   public searched_filters:any=[];
@@ -204,7 +204,10 @@ export class SubListPagePage implements OnInit
   }
   
   async ionViewWillEnter()
-  { }
+  { 
+    this.MP3Link = localStorage.getItem('MP3LinkComponent');
+  }
+
   async shoeHomeContent()
   {
     this.searched_text='';

@@ -1,0 +1,10 @@
+<div class="player">
+  <div class="player-control">
+    <ion-button class="play-btn" *ngIf="isAudioPlayedComponent == true" (click)="pauseAudio()">
+      <ion-icon name="pause-outline"></ion-icon>
+    </ion-button>
+    <ion-button class="play-btn" *ngIf="isAudioPlayedComponent == false && MP3LinkComponent!=''" (click)="playAudio()">
+      <ion-icon name="play-outline"></ion-icon>
+    </ion-button>
+  </div>
+</div>
