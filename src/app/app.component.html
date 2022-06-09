@@ -13,22 +13,25 @@
           <div class="menu-list">
             <!--DYNAMIC MENU STARTS-->
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index" [ngClass]="{'hideme' : p.to_show_when_network_is_on == 0}">
-              <ion-item *ngIf="p.shouldFunction == 0 && p.to_show_when_network_is_on == 1" lines="full" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-item *ngIf="p.shouldFunction == 0 && p.to_show_when_network_is_on == 1 && p.is_contribution_link==0" lines="full" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
               <ion-item *ngIf="is_network_connected == 1 && i == 1" lines="full" lines="none" detail="false" class="poem-type">
                 <ion-label>Poem Types</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title!='Profile' && p.title!='Logout' && p.title!='Submit A Poem'" lines="full" lines="none" detail="false" (click)="showPoemByPoemTypeORSubjectOccassion(p.id,p.title,'by_poem_type')">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title!='Profile' && p.title!='Logout' && p.title!='Submit A Poem' && p.is_contribution_link==0" lines="full" lines="none" detail="false" (click)="showPoemByPoemTypeORSubjectOccassion(p.id,p.title,'by_poem_type')">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Submit A Poem'" lines="full" lines="none" detail="false" (click)="SubmitAPoem()">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Submit A Poem' && p.is_contribution_link==0" lines="full" lines="none" detail="false" (click)="SubmitAPoem()">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Profile'" lines="full" lines="none" detail="false" (click)="showMyProfile()">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Profile' && p.is_contribution_link==0" lines="full" lines="none" detail="false" (click)="showMyProfile()">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
-              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Logout' && is_user_login==true" lines="full" lines="none" detail="false" (click)="Logout()">
+              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.is_contribution_link==1" lines="full" lines="none" detail="false" (click)="OpenContributionURL(p.url)">
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+              <ion-item *ngIf="p.shouldFunction == 1 && p.to_show_when_network_is_on == 1 && p.title=='Logout' && is_user_login==true && p.is_contribution_link==0" lines="full" lines="none" detail="false" (click)="Logout()">
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>            
             </ion-menu-toggle>

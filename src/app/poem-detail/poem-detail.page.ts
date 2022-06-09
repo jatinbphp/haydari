@@ -48,6 +48,8 @@ export class PoemDetailPage
   public downloadPDFPath:any='';
   public MP3FileToBeSave:any=''; 
   public downloadMP3Path:any=''; 
+  public show_hide_translation:boolean=true;
+  public does_poem_has_translated_text:boolean=false;
   constructor(private platform: Platform, private filePath: FilePath, private file: File, private transfer: FileTransfer, private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController, private androidPermissions: AndroidPermissions)
   {}
 
@@ -102,11 +104,21 @@ export class PoemDetailPage
         this.MP3Link=(this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link']) ? this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link'] : "";
         //this.mediaFile = this.media.create(this.MP3Link);WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
         //localStorage.setItem("MP3Link",this.MP3Link);
-      }      
+      } 
+      if(this.poemsLine.length > 0)
+      {
+        for(let i = 0; i < this.poemsLine.length; i ++)
+        {
+          if(this.poemsLine[i]['TranslatedText']!="")
+          {
+            this.does_poem_has_translated_text = true;
+          }
+        }
+      }     
       //console.log("MP3Link",this.MP3Link);
       //console.log("Object",this.resultPoemsDetailObject);
       //console.log("Detail",this.resultPoemsDetail);
-      //console.log("Lines",this.poemsLine);
+      console.log("Lines",this.poemsLine);
       this.has_mp3=(this.MP3Link!="") ? true : false;
     },
     error => 
@@ -286,7 +298,7 @@ export class PoemDetailPage
 
   ionViewDidLeave()
   {
-    //this.mediaFile.release();WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
+    this.mediaFile.release();
   }
   
   async playMediaInPOPUP(poem_id)
@@ -758,5 +770,10 @@ export class PoemDetailPage
     });//TO CHECK COLUMN MP3Link EXISTS IN bookmarks table if not then add
     //ALTER TABLE FOR MP3 ENDS
     //ALTER TABLE
+  }
+
+  ToogleTranslation()
+  {
+    this.show_hide_translation = this.show_hide_translation ? false : true;
   }
 }

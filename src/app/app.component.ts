@@ -17,6 +17,7 @@ import { Deeplinks } from '@awesome-cordova-plugins/deeplinks/ngx';
 export class AppComponent 
 {
   public queryString: any=[];
+  public resultContributionLinks:any=[];
   public resultPoemTypes:any=[];
   public resultPoemTypesExpandable:any=[];
   public expanded:boolean=false;
@@ -136,8 +137,9 @@ export class AppComponent
     console.log("Network Status",this.is_network_connected);
     this.token=localStorage.getItem('token');
     this.appPages=[];
-    this.appPages.push({id:0,title:'Home',shouldFunction:0,to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,url: '/tabs/home'});
-    /*POEM TYPE*/
+    this.resultContributionLinks=[];
+    this.appPages.push({id:0,title:'Home',shouldFunction:0,to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,url: '/tabs/home',is_contribution_link:0});
+    //this.is_network_connected = true;//REMOVE THIS LINE WHEN BUILDING APP
     if(this.is_network_connected == true)
     {
       await this.client.getPoemTypes().then(result => 
@@ -155,7 +157,8 @@ export class AppComponent
               title:checkSlashInString,
               shouldFunction:1,
               to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
-              url:''
+              url:'',
+              is_contribution_link:0
             }
             let objPoemTypeExpandable = 
             {
@@ -164,7 +167,8 @@ export class AppComponent
               shouldFunction:1,
               to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
               url:'',
-              expanded:false
+              expanded:false,
+              is_contribution_link:0
             }
             this.resultPoemTypesExpandable.push(objPoemTypeExpandable);
             this.appPages.push(objPoemType);
@@ -175,62 +179,93 @@ export class AppComponent
       error => 
       {
         console.log();
-      });
+      });/*POEM TYPE*/
     }
-    /*POEM TYPE*/
-    let objOtherAction=[
+    
+    let objOtherAction_1=[
       {
         id:0,
         title:'My Bookmarks',
         shouldFunction:0,
         to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
-        url: '/tabs/wishlist'
+        url: '/tabs/wishlist',
+        is_contribution_link:0
       },
       {
         id:0,
         title:'Submit A Poem',
         shouldFunction:1,
         to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
-        url: ''
+        url: '',
+        is_contribution_link:0
       },
       {
         id:0,
         title:'About',
         shouldFunction:0,
         to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
-        url: '/about-haydari'
+        url: '/about-haydari',
+        is_contribution_link:0
       },
       {
         id:0,
         title:'Profile',
         shouldFunction:1,
         to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
-        url: ''
+        url: '',
+        is_contribution_link:0
       },
       {
         id:0,
         title:'Offline',
         shouldFunction:0,
         to_show_when_network_is_on:(this.is_network_connected == true || this.is_network_connected == false) ? 1 : 0,
-        url: '/tabs/offline'
-      },/*
+        url: '/tabs/offline',
+        is_contribution_link:0
+      }
+    ];
+    for(let o = 0 ; o < objOtherAction_1.length; o ++)
+    {
+      this.appPages.push(objOtherAction_1[o]);
+    }
+    //CONTRIBUTION LINKS
+    await this.client.getContributionLinks().then(result => 
+    {	
+      this.resultContributionLinks = result;
+      if(this.resultContributionLinks.length > 0)
       {
-        id:0,
-        title:'Settings',
-        shouldFunction:0,
-        url: '/tabs/home'
-      },*/
+        for(let l = 0; l < this.resultContributionLinks.length; l++)
+        {
+          let objContributionLinks = {
+            id:this.resultContributionLinks[l]['id'],
+            title:this.resultContributionLinks[l]['title'],
+            shouldFunction:1,
+            to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
+            url:this.resultContributionLinks[l]['link'],
+            is_contribution_link:1
+          }
+          this.appPages.push(objContributionLinks);
+        }
+      }
+    },
+    error => 
+    {
+      console.log();
+    });
+    //CONTRIBUTION LINKS
+    let objOtherAction_2=[
       {
         id:0,
         title:'Logout',
         shouldFunction:1,
         to_show_when_network_is_on:(this.is_network_connected == true) ? 1 : 0,
-        url: ''
+        url: '',
+        is_contribution_link:0
       }
     ];
-    for(let o = 0 ; o < objOtherAction.length; o ++)
+    for(let o = 0 ; o < objOtherAction_2.length; o ++)
     {
-      this.appPages.push(objOtherAction[o]);
+      this.appPages.push(objOtherAction_2[o]);
     }
     console.log(this.appPages);
     //SETUP PUSH
@@ -363,6 +398,31 @@ export class AppComponent
   SubmitAPoem()
   {
     let targetUrl="https://app.thehaydariproject.com/submit-poem";
+    const options : InAppBrowserOptions = 
+    {
+        location : 'no',//Or 'no' 
+        hidden : 'no', //Or  'yes'
+        clearcache : 'yes',
+        clearsessioncache : 'yes',
+        zoom : 'no',//Android only ,shows browser zoom controls 
+        hardwareback : 'no',
+        mediaPlaybackRequiresUserAction : 'no',
+        shouldPauseOnSuspend : 'no', //Android only 
+        closebuttoncaption : 'Close', //iOS only
+        disallowoverscroll : 'no', //iOS only 
+        toolbar : 'yes', //iOS only 
+        enableViewportScale : 'no', //iOS only 
+        allowInlineMediaPlayback : 'no',//iOS only 
+        presentationstyle : 'pagesheet',//iOS only 
+        fullscreen : 'yes',//Windows only    
+    };
+    let target = "_system";
+    const browser = this.inAppBrowser.create(targetUrl,target,options);
+  }
+
+  OpenContributionURL(contributionURL)
+  {
+    let targetUrl=contributionURL;
     const options : InAppBrowserOptions = 
     {
         location : 'no',//Or 'no' 

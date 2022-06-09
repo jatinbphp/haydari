@@ -34,5 +34,12 @@
       <ion-item><ion-icon name="ellipse-sharp"></ion-icon><ion-label text-wrap>Recordings database to upload your own audio files that are attached to their respective write-ups</ion-label></ion-item>
       <ion-item><ion-icon name="ellipse-sharp"></ion-icon><ion-label text-wrap>And many more Insha'Allah!</ion-label></ion-item>
     </ion-list>
+    <ion-list *ngIf="resultContributionLinks.length > 0">
+      <ion-list-header>Contribute to our App</ion-list-header>
+      <ion-item *ngFor="let contributionLink of resultContributionLinks;" (click)="OpenContributionURL(contributionLink.link)">
+        <ion-text>{{contributionLink.title}}</ion-text>
+        <p [innerHTML]="contributionLink.description"></p>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
