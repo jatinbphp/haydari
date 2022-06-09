@@ -35,10 +35,10 @@
       <ion-item><ion-icon name="ellipse-sharp"></ion-icon><ion-label text-wrap>And many more Insha'Allah!</ion-label></ion-item>
     </ion-list>
     <ion-list class="contributionLink" *ngIf="resultContributionLinks.length > 0">
-      <ion-list-header>Contribute to our App</ion-list-header>
+      <!--<ion-list-header>Contribute to our App</ion-list-header>-->
       <ion-item *ngFor="let contributionLink of resultContributionLinks;" (click)="OpenContributionURL(contributionLink.link)">
         <ion-label>
-          <p>{{contributionLink.title}}</p>
+          <p class="contributionLink-Title">{{contributionLink.title}}</p>
           <p [innerHTML]="contributionLink.description"></p>
         </ion-label>
       </ion-item>

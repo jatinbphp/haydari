@@ -135,6 +135,9 @@ ion-content {
 				padding: 20px 0px 0px;
 				ion-label {
 					p {
+						&.contributionLink-Title{
+							color:#98a886;
+						}
 						margin: 0px 0px 6px;
 						text-overflow: unset;
 					    white-space: break-spaces;
