@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PoemDetailPageRoutingModule } from './poem-detail-routing.module';
 import { PoemDetailPage } from './poem-detail.page';
-//import { PlaymusicComponent } from "../components/playmusic/playmusic.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +12,6 @@ import { PoemDetailPage } from './poem-detail.page';
     IonicModule,
     PoemDetailPageRoutingModule
   ],
-  declarations: [PoemDetailPage]//,PlaymusicComponent::PUT IT HERE WHEN ENABLE PlaymusicComponent
+  declarations: [PoemDetailPage]
 })
 export class PoemDetailPageModule {}

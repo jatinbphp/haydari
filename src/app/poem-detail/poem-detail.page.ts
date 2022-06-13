@@ -102,8 +102,7 @@ export class PoemDetailPage
       if(this.resultPoemsDetailObject['poemsDetail'].length > 0)
       {
         this.MP3Link=(this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link']) ? this.resultPoemsDetailObject['poemsDetail'][0]['MP3Link'] : "";
-        //this.mediaFile = this.media.create(this.MP3Link);WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
-        //localStorage.setItem("MP3Link",this.MP3Link);
+        this.mediaFile = this.media.create(this.MP3Link);//WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
       } 
       if(this.poemsLine.length > 0)
       {
@@ -166,11 +165,8 @@ export class PoemDetailPage
     //CHECK IF POEM ALREADY MADE BOOKMARK
   }
   
-  /*
-  WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
   playAudio()
   { 
-    BEFORE WE WERE PLAYING FROM HERE NOW WE ARE PLAYING FROM COMPONENT STARTS
     if(this.mediaFileCurrentPosition > 0)
     {
       //console.log("SEEK");
@@ -184,9 +180,7 @@ export class PoemDetailPage
       this.mediaFile.play();
       this.isAudioPlayed=true;
     }
-    BEFORE WE WERE PLAYING FROM HERE NOW WE ARE PLAYING FROM COMPONENT ENDS
-    
-  }
+  }//WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
   
   pauseAudio()
   {
@@ -198,9 +192,8 @@ export class PoemDetailPage
       this.mediaFileCurrentPosition = position;
       console.log(this.mediaFileCurrentPosition);
     });
-  }
-  WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
-  */
+  }//WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
+  
 
   async showMyProfile()
   {
@@ -299,7 +292,7 @@ export class PoemDetailPage
   ionViewDidLeave()
   {
     this.mediaFile.release();
-  }
+  }//WORKING CODE :: PLAY/PAUSE AUDIO FROM POEM DETAIL
   
   async playMediaInPOPUP(poem_id)
   {

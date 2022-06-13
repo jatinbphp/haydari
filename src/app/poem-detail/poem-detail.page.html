@@ -41,7 +41,6 @@
 	<div class="mainContent" [ngClass]="{'has-mp3' : has_mp3 == true, 'has-not-mp3' : has_mp3 == false}">
 		<div class="pg-title-main">
 			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>
-			<!--<app-playmusic MP3ToPlay="'{{MP3Link}}'"></app-playmusic>-->
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
