@@ -470,12 +470,15 @@ export class PoemDetailPage
     }
   }
 
-  async ToggleOffLine(poemObject,what_to_do)
+  async ToggleOffLine(poemObject,what_to_do,has_mp3)
   {
     let actionToTake = (what_to_do == 1) ? "insert" : "delete";
     if(actionToTake == "insert")
     {
       //DOWNLOADING MP3 TO THE DEVICE STARTS
+      this.MP3FileToBeSave='';
+      this.downloadMP3Path = "";
+      
       //LOADER
       const loadingDownloadingMP3 = await this.loadingCtrl.create({
         spinner: null,
@@ -485,9 +488,7 @@ export class PoemDetailPage
         cssClass: 'custom-class custom-loading'
       });
       await loadingDownloadingMP3.present();
-      //LOADER
-      this.MP3FileToBeSave='';
-      this.downloadMP3Path = "";
+      //LOADER      
       await this.platform.ready().then(async () => 
       {
         this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";
@@ -533,8 +534,8 @@ export class PoemDetailPage
       {
         poemObject['poemsLine']=JSON.stringify([]);
       }
-      poemObject['FromTableNM']="Poems";
-      poemObject['MP3Link']=(this.MP3FileToBeSave) ? this.MP3FileToBeSave : null;
+      poemObject['FromTableNM']="Poems";      
+      poemObject['MP3Link']=(this.MP3FileToBeSave!='') ? this.MP3FileToBeSave : null;
       await this.offline.addPoem(poemObject).then(result => 
       {
         loadingPoemOffline.dismiss();//DISMISS LOADER
@@ -560,7 +561,7 @@ export class PoemDetailPage
     }
   }
 
-  async BookmarkThisPoem(poemObject,what_to_do)
+  async BookmarkThisPoem(poemObject,what_to_do,has_mp3)
   {
     let actionToTake = (what_to_do == 1) ? "insert" : "delete";
     if(actionToTake == "insert")
@@ -576,6 +577,9 @@ export class PoemDetailPage
         else
         {
           //DOWNLOADING MP3 TO THE DEVICE STARTS
+          this.MP3FileToBeSave='';
+          this.downloadMP3Path = "";
+          
           //LOADER
           const loadingDownloadingMP3 = await this.loadingCtrl.create({
             spinner: null,
@@ -586,8 +590,7 @@ export class PoemDetailPage
           });
           await loadingDownloadingMP3.present();
           //LOADER
-          this.MP3FileToBeSave='';
-          this.downloadMP3Path = "";
+          
           await this.platform.ready().then(async () => 
           {
             this.currentPlatform = (this.platform.is("android") == true) ? "android" : "ios";

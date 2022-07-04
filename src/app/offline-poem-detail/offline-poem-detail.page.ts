@@ -41,7 +41,10 @@ export class OfflinePoemDetailPage implements OnInit
     this.resultPoemsDetail=(localStorage.getItem('read_offline_poem')) ? JSON.parse(localStorage.getItem('read_offline_poem')) : [];
     this.resultPoemsDetailLines=JSON.parse(this.resultPoemsDetail['poemsLine']);
     this.MP3Link=(this.resultPoemsDetail['MP3Link']) ? this.resultPoemsDetail['MP3Link'] : null;
-    this.mediaFile = this.media.create(this.MP3Link);
+    if(this.MP3Link!=null)
+    {
+      this.mediaFile = this.media.create(this.MP3Link);
+    }
     this.has_mp3=(this.MP3Link!=null) ? true : false;
     loadingPoemDetail.dismiss();//DISMISS LOADER
   }
@@ -77,6 +80,9 @@ export class OfflinePoemDetailPage implements OnInit
 
   ionViewDidLeave()
   {
-    this.mediaFile.release();
+    if(this.MP3Link!=null)
+    {
+      this.mediaFile.release();
+    }
   }
 }

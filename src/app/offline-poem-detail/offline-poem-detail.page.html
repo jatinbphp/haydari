@@ -14,7 +14,7 @@
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()"><!--BEFORE::playMediaInPOPUP(resultPoemsDetail.id)-->
+			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && has_mp3 == true" (click)="playAudio()"><!--BEFORE::playMediaInPOPUP(resultPoemsDetail.id)-->
 				<ion-icon name="play-outline"></ion-icon>
 			</ion-button>		
 		</div>		
