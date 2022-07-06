@@ -13,7 +13,7 @@ import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
-
+import { MediaControlsService } from '../providers/media-controls.service';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 @Component({
   selector: 'app-poem-detail',
   templateUrl: './poem-detail.page.html',
@@ -50,7 +50,7 @@ export class PoemDetailPage
   public downloadMP3Path:any=''; 
   public show_hide_translation:boolean=true;
   public does_poem_has_translated_text:boolean=false;
-  constructor(private platform: Platform, private filePath: FilePath, private file: File, private transfer: FileTransfer, private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController, private androidPermissions: AndroidPermissions)
+  constructor(private platform: Platform, private filePath: FilePath, private file: File, private transfer: FileTransfer, private inAppBrowser: InAppBrowser, public offline: OfflineService, public client: ClientService, private media: Media, public fb: FormBuilder, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, public actionSheetCtrl: ActionSheetController, private androidPermissions: AndroidPermissions, private readonly mediaControllerService: MediaControlsService)
   {}
 
   async ngOnInit()
@@ -165,7 +165,18 @@ export class PoemDetailPage
     //CHECK IF POEM ALREADY MADE BOOKMARK
   }
   
-  playAudio()
+  playAudio(ev:any)
+  { 
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.client.publishSomeDataWhenAudioPlayed({
+      music_object : this.resultPoemsDetail
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT 
+    localStorage.setItem('current_playing_audio',JSON.stringify(this.resultPoemsDetail));
+    this.mediaControllerService.playPause(this.resultPoemsDetail);
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  }
+  
+  playAudioOriginal()
   { 
     if(this.mediaFileCurrentPosition > 0)
     {

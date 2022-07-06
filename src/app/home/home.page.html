@@ -15,7 +15,12 @@
 		<ion-chip slot="end" (click)="showMyProfile()">
 			<ion-img src="../assets/images/Profile-Icon.svg"></ion-img>
 		</ion-chip>
-		<!--<app-playmusic></app-playmusic>-->
+		<app-qbyte-card 			 
+		[qbyte]="resultPoemsDetail" 
+		[isDisabled]="true"
+		(play)="playAudio($event)"
+		(detail)="onDetail($event)" *ngIf="is_audio_played == true">
+		</app-qbyte-card>
 	</ion-toolbar>
 </ion-header>
 

@@ -7,6 +7,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { MediaObject } from '@awesome-cordova-plugins/media/ngx';
+import { MediaControlsService } from '../providers/media-controls.service';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Qbyte } from '../models/qbyte.interface';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Observable } from 'rxjs';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,7 +32,11 @@ export class HomePage
 
   public isAudioPlayedComponent: boolean = false;
   public mediaFileComponent: MediaObject;
-  constructor(public keyboard:Keyboard, public fb: FormBuilder, public offline: OfflineService, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) 
+
+  public resultPoemsDetail:any=[];//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public qbytes$: Observable<Qbyte[]>;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public is_audio_played:boolean=false;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  constructor(public keyboard:Keyboard, public fb: FormBuilder, public offline: OfflineService, public client: ClientService, public menu: MenuController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private readonly mediaControllerService: MediaControlsService) 
   { 
     this.keyboard.hideFormAccessoryBar(false);
     this.client.getObservableWhenOnLine().subscribe((data) => {
@@ -36,6 +44,14 @@ export class HomePage
       this.ngOnInit();     
       console.log('Data received', data);
     });//THIS OBSERVABLE IS USED TO KNOW IF NETWORK CONNECTED THEN RELOAD THE HOME SCREEN
+
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.client.getObservableWhenAudioPlayed().subscribe((data) => {
+      this.resultPoemsDetail = data.music_object; 
+      this.qbytes$ = this.resultPoemsDetail;
+      this.is_audio_played = data.is_audio_played; 
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
   }
 
   async ngOnInit() 
@@ -174,6 +190,12 @@ export class HomePage
 
   async ionViewWillEnter()
   {
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.is_audio_played=(localStorage.getItem('is_audio_played')) ? Boolean(localStorage.getItem('is_audio_played')) : this.is_audio_played;
+    let current_playing_audio : any = localStorage.getItem('current_playing_audio');
+    this.resultPoemsDetail=JSON.parse(current_playing_audio);
+    this.qbytes$=this.resultPoemsDetail;
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
     this.MP3Link = localStorage.getItem('MP3LinkComponent');
     await this.offline.getData('SELECT FromTableNM FROM Poems LIMIT 1',[]).then(async (resultToAlter:any) => 
     {
@@ -183,6 +205,15 @@ export class HomePage
       console.log("ERROR-JUST TO INITILIZE TABLE",error);
     });//JUST TO INITILIZE TABLE ONLY
   }
+
+  playAudio(ev:any)
+  { 
+    this.client.publishSomeDataWhenAudioPlayed({
+      music_object : this.resultPoemsDetail,
+      is_audio_played:true
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT 
+    this.mediaControllerService.playPause(this.resultPoemsDetail);
+  }//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 
   library()
   {

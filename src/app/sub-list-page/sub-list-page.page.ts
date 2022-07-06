@@ -7,6 +7,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProfilePage } from '../profile/profile.page';
 import { SearchFiltersPage } from '../search-filters/search-filters.page';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
+import { MediaControlsService } from '../providers/media-controls.service';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Qbyte } from '../models/qbyte.interface';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Observable } from 'rxjs';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 
 @Component({
   selector: 'app-sub-list-page',
@@ -115,8 +118,19 @@ export class SubListPagePage implements OnInit
   }
   /*OPTION-3* ENDS*/
   //ANIMATION FOR SearchFiltersPage 
-  constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router)
+  public resultPoemsDetail:any=[];//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public qbytes$: Observable<Qbyte[]>;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public is_audio_played:boolean=false;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  constructor(public keyboard:Keyboard, public fb: FormBuilder, public client: ClientService, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private route: ActivatedRoute, private router: Router, private readonly mediaControllerService: MediaControlsService)
   { 
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.client.getObservableWhenAudioPlayed().subscribe((data) => {
+      this.resultPoemsDetail = data.music_object; 
+      this.qbytes$ = this.resultPoemsDetail;
+      this.is_audio_played = data.is_audio_played; 
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+
     localStorage.removeItem('searched_filters');
     this.keyboard.hideFormAccessoryBar(false);
     this.client.getObservableWhenClearSearch().subscribe((dataClearSearch) => 
@@ -205,7 +219,22 @@ export class SubListPagePage implements OnInit
   
   async ionViewWillEnter()
   { 
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.is_audio_played=(localStorage.getItem('is_audio_played')) ? Boolean(localStorage.getItem('is_audio_played')) : this.is_audio_played;
+    let current_playing_audio : any = localStorage.getItem('current_playing_audio');
+    this.resultPoemsDetail=JSON.parse(current_playing_audio);
+    this.qbytes$=this.resultPoemsDetail;
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
     this.MP3Link = localStorage.getItem('MP3LinkComponent');
+  }
+
+  playAudio(ev:any)
+  { 
+    this.client.publishSomeDataWhenAudioPlayed({
+      music_object : this.resultPoemsDetail,
+      is_audio_played:true
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT 
+    this.mediaControllerService.playPause(this.resultPoemsDetail);
   }
 
   async shoeHomeContent()

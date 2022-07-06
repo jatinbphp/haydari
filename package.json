@@ -32,6 +32,7 @@
     "@awesome-cordova-plugins/in-app-browser": "^5.37.3",
     "@awesome-cordova-plugins/keyboard": "^5.37.3",
     "@awesome-cordova-plugins/media": "^5.37.1",
+    "@awesome-cordova-plugins/music-controls": "^5.44.0",
     "@awesome-cordova-plugins/network": "^5.40.0",
     "@awesome-cordova-plugins/sign-in-with-apple": "^5.39.1",
     "@awesome-cordova-plugins/social-sharing": "^5.39.1",
@@ -76,6 +77,7 @@
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-media": "^5.0.3",
+    "cordova-plugin-music-controls2": "^3.0.6",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-sign-in-with-apple": "^0.1.2",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -168,7 +170,8 @@
         "URL_SCHEME": "haydari",
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "com.haydari.app"
-      }
+      },
+      "cordova-plugin-music-controls2": {}
     },
     "platforms": [
       "android"

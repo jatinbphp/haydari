@@ -135,6 +135,7 @@ export class AppComponent
     await this.checkNetworkType();
     console.log("Network Type",this.available_network_type);
     console.log("Network Status",this.is_network_connected);
+    localStorage.removeItem('is_audio_played');//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
     this.token=localStorage.getItem('token');
     this.appPages=[];
     this.resultContributionLinks=[];

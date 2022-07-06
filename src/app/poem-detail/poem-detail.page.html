@@ -41,12 +41,13 @@
 	<div class="mainContent" [ngClass]="{'has-mp3' : has_mp3 == true, 'has-not-mp3' : has_mp3 == false}">
 		<div class="pg-title-main">
 			<h2 [innerHTML]="resultPoemsDetail.PoemName"></h2>
-			<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
+			<!--<ion-button class="play-btn" *ngIf="isAudioPlayed == true" (click)="pauseAudio()">
 				<ion-icon name="pause-outline"></ion-icon>
 			</ion-button>
 			<ion-button class="play-btn" *ngIf="isAudioPlayed == false && MP3Link!=''" (click)="playAudio()">
 				<ion-icon name="play-outline"></ion-icon>
-			</ion-button>
+			</ion-button>-->			
+			<app-qbyte-card *ngIf="has_mp3 == true" [qbyte]="resultPoemsDetail" [isDisabled]="true" (play)="playAudio($event)" (detail)="onDetail($event)"></app-qbyte-card>
 		</div>		
 		<div class="list-of-lines" *ngIf="poemsLine.length > 0">
 			<div class="item-of-line" *ngFor="let line of poemsLine;let l = index;">

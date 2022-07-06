@@ -4,6 +4,10 @@ import { SubjectOccasionDetailPage } from '../subject-occasion-detail/subject-oc
 import { ProfilePage } from '../profile/profile.page';
 import { ClientService } from '../providers/client.service';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
+import { MediaControlsService } from '../providers/media-controls.service';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Qbyte } from '../models/qbyte.interface';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Observable } from 'rxjs';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.page.html',
@@ -18,15 +22,32 @@ export class SearchResultPage implements OnInit
   public queryStringData: any=[];
   public searched_text:any='';
   public is_search_icon_clicked:boolean=false;
-
-  constructor(public client: ClientService, public modalCtrl: ModalController, public loadingCtrl: LoadingController, private route: ActivatedRoute, private router: Router)
-  { }
+  public resultPoemsDetail:any=[];//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public qbytes$: Observable<Qbyte[]>;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public is_audio_played:boolean=false;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  constructor(public client: ClientService, public modalCtrl: ModalController, public loadingCtrl: LoadingController, private route: ActivatedRoute, private router: Router, private readonly mediaControllerService: MediaControlsService)
+  { 
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.client.getObservableWhenAudioPlayed().subscribe((data) => {
+      this.resultPoemsDetail = data.music_object; 
+      this.qbytes$ = this.resultPoemsDetail;
+      this.is_audio_played = data.is_audio_played; 
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  }
 
   ngOnInit()
   { }
 
   async ionViewWillEnter() 
   {
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.is_audio_played=(localStorage.getItem('is_audio_played')) ? Boolean(localStorage.getItem('is_audio_played')) : this.is_audio_played;
+    let current_playing_audio : any = localStorage.getItem('current_playing_audio');
+    this.resultPoemsDetail=JSON.parse(current_playing_audio);
+    this.qbytes$=this.resultPoemsDetail;
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    
     //IF SEARCHED THEN SHOW RESULT
     this.route.queryParams.subscribe(params => 
     {
@@ -151,4 +172,13 @@ export class SearchResultPage implements OnInit
   {
     this.is_search_icon_clicked = !this.is_search_icon_clicked;    
   }
+
+  playAudio(ev:any)
+  { 
+    this.client.publishSomeDataWhenAudioPlayed({
+      music_object : this.resultPoemsDetail,
+      is_audio_played:true
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT 
+    this.mediaControllerService.playPause(this.resultPoemsDetail);
+  }//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 }

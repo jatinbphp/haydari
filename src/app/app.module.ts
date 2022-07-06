@@ -24,6 +24,7 @@ import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
 import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { Deeplinks } from '@awesome-cordova-plugins/deeplinks/ngx';
+import { MusicControls } from '@awesome-cordova-plugins/music-controls/ngx';
 
 @NgModule({
   declarations: [AppComponent,ExpandableComponent],
@@ -57,6 +58,7 @@ import { Deeplinks } from '@awesome-cordova-plugins/deeplinks/ngx';
     FileTransfer,
     AndroidPermissions,
     Deeplinks,
+    MusicControls,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
   ],

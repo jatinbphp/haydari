@@ -5,6 +5,9 @@ import { ProfilePage } from '../profile/profile.page';
 import { ClientService } from '../providers/client.service';
 import { NavigationExtras } from "@angular/router";
 import { SearchFiltersAllRecentPage } from '../search-filters-all-recent/search-filters-all-recent.page';
+import { MediaControlsService } from '../providers/media-controls.service';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Qbyte } from '../models/qbyte.interface';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+import { Observable } from 'rxjs';//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 
 @Component({
   selector: 'app-library',
@@ -112,7 +115,11 @@ export class LibraryPage implements OnInit
   }
   /*OPTION-3* ENDS*/
   //ANIMATION FOR SearchFiltersPage
-  constructor(public client: ClientService, private router: Router, public loadingCtrl: LoadingController, public modalCtrl: ModalController)
+
+  public resultPoemsDetail:any=[];//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public qbytes$: Observable<Qbyte[]>;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  public is_audio_played:boolean=false;//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  constructor(public client: ClientService, private router: Router, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private readonly mediaControllerService: MediaControlsService)
   { 
     localStorage.removeItem('searched_filters_all_recent');
     this.client.getObservableWhenClearSearch().subscribe((dataClearSearch) => 
@@ -122,6 +129,14 @@ export class LibraryPage implements OnInit
       this.shoeHomeContent();
       console.log('Search is cleared', dataClearSearch);
     });//THIS OBSERVABLE IS USED TO KNOW IS CLEAR SEARCH BUTTON CLICKED
+
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.client.getObservableWhenAudioPlayed().subscribe((data) => {
+      this.resultPoemsDetail = data.music_object; 
+      this.qbytes$ = this.resultPoemsDetail;
+      this.is_audio_played = data.is_audio_played; 
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
   }
 
   ngOnInit()
@@ -130,7 +145,14 @@ export class LibraryPage implements OnInit
   }
 
   async ionViewWillEnter() 
-  { }
+  { 
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+    this.is_audio_played=(localStorage.getItem('is_audio_played')) ? Boolean(localStorage.getItem('is_audio_played')) : this.is_audio_played;
+    let current_playing_audio : any = localStorage.getItem('current_playing_audio');
+    this.resultPoemsDetail=JSON.parse(current_playing_audio);
+    this.qbytes$=this.resultPoemsDetail;
+    //THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
+  }
 
   async shoeHomeContent()
   {
@@ -400,4 +422,13 @@ export class LibraryPage implements OnInit
       ev.target.complete();
     }, 2000);
   }
+
+  playAudio(ev:any)
+  { 
+    this.client.publishSomeDataWhenAudioPlayed({
+      music_object : this.resultPoemsDetail,
+      is_audio_played:true
+    });//THIS OBSERVABLE IS USED TO KNOW IF AUDIO PLAYED FROM PLAY MUSIC COMPONENT 
+    this.mediaControllerService.playPause(this.resultPoemsDetail);
+  }//THIS PORTION IS USED FOR PLAYING AUDIO THROUGH THE APP
 }
